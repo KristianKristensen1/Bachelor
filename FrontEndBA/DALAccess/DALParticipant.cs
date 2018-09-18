@@ -14,6 +14,7 @@ namespace FrontEndBA.DALAccess
         {
             ParticipantDAO = new ParticipantDAOImp();
         }
+
         public void SaveRegisterDto(BachelorBackEnd.Participants participantobj)
         {
             ParticipantDAO.AddParticipant(participantobj);

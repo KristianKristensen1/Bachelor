@@ -20,13 +20,12 @@ namespace BachelorBackEnd
             participant.Pause = 1;
             */
             
-            
             using (var db = new mydbContext())
             {
-
                 db.Participants.Add(participant);
                 db.SaveChanges();
             }
+            
         }
 
         public void DeleteParticipant()

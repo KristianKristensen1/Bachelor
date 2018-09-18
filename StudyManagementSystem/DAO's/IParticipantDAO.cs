@@ -9,7 +9,7 @@ namespace BachelorBackEnd
 {
     public interface IParticipantDAO
     {
-        void AddParticipant(Participants participant);
+        void AddParticipant(Participants participants);
 
         void DeleteParticipant();
 

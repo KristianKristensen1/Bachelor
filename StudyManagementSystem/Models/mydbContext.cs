@@ -16,7 +16,6 @@ namespace BachelorBackEnd
         }
 
         public virtual DbSet<Participants> Participants { get; set; }
-        public virtual DbSet<TestTable> TestTable { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -62,36 +61,6 @@ namespace BachelorBackEnd
                 entity.Property(e => e.Pause)
                     .HasColumnName("pause")
                     .HasColumnType("tinyint(4)");
-            });
-
-            modelBuilder.Entity<TestTable>(entity =>
-            {
-                entity.ToTable("test_table");
-
-                entity.HasIndex(e => e.Id)
-                    .HasName("id_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Age)
-                    .HasColumnName("age")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasColumnType("varchar(45)");
-
-                entity.Property(e => e.Smoker)
-                    .HasColumnName("smoker")
-                    .HasColumnType("tinyint(4)");
-
-                entity.Property(e => e.Timestamp)
-                    .HasColumnName("timestamp")
-                    .HasColumnType("datetime");
             });
         }
     }
