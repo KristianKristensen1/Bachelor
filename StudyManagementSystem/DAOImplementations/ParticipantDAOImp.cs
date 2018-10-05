@@ -22,6 +22,10 @@ namespace BachelorBackEnd
             
             using (var db = new mydbContext())
             {
+                if(db.Participants.Any( x => x.Email == participant.Email))
+                {
+                    //The email allready exists in database
+                }
                 db.Participants.Add(participant);
                 db.SaveChanges();
             }
@@ -40,7 +44,15 @@ namespace BachelorBackEnd
 
         public void GetParticipant()
         {
-            throw new NotImplementedException();
+            using (var db = new mydbContext())
+            {
+                var parti = from b in db.Participants
+                            where b.Firstname.StartsWith("h")
+                            select b.Firstname;
+
+                Console.WriteLine(parti);
+
+            }
         }
 
         public void VerifyParticipant()

@@ -141,12 +141,10 @@
     <Compile Include="DAO%27s\IResearcherDAO.cs" />
     <Compile Include="Models\mydbContext.cs" />
     <Compile Include="Models\Participants.cs" />
-    <Compile Include="ParticipantDAOImp.cs" />
+    <Compile Include="DAOimps\ParticipantDAOImp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DAOimps\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />

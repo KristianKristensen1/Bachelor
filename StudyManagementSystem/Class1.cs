@@ -8,5 +8,10 @@ namespace BachelorBackEnd
 {
     public class Class1
     {
+        public static void Main(string[] args)
+        {
+            ParticipantDAOImp imp = new ParticipantDAOImp();
+            imp.GetParticipant();
+        }
     }
 }
