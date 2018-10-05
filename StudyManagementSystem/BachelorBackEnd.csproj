@@ -137,11 +137,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class1.cs" />
-    <Compile Include="DAO%27s\IParticipantDAO.cs" />
-    <Compile Include="DAO%27s\IResearcherDAO.cs" />
+    <Compile Include="DAOInterfaces\IParticipantDAO.cs" />
+    <Compile Include="DAOInterfaces\IResearcherDAO.cs" />
     <Compile Include="Models\mydbContext.cs" />
     <Compile Include="Models\Participants.cs" />
-    <Compile Include="DAOimps\ParticipantDAOImp.cs" />
+    <Compile Include="DAOImplementations\ParticipantDAOImp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
