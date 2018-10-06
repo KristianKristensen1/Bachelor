@@ -49,7 +49,7 @@ namespace FrontEndBA.Controllers
         public ActionResult ParticipentRegister([Bind("Email,Firstname,Lastname,Password")] ParticipantRegisterViewModel participantRegisterobj)
         {
 
-            BachelorBackEnd.Participants currentParticipants = RegisterConverter.ParticipantobjFromViewToDto(participantRegisterobj);
+            BachelorBackEnd.Participant currentParticipants = RegisterConverter.ParticipantobjFromViewToDto(participantRegisterobj);
             DataAcess = new DalParticipant();
             DataAcess.SaveRegisterDto(currentParticipants);
 

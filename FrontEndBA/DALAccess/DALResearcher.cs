@@ -8,14 +8,14 @@ namespace FrontEndBA.DALAccess
 {
     public class DALResearcher
     {
-        private BachelorBackEnd.IResearcherDAO ResearcherDAO;
+        //private BachelorBackEnd.IResearcherDAO ResearcherDAO;
         public DALResearcher()
         {
             
             //ResearcherDAO = new ResearcherDAOImp();
         }
 
-        public void SaveRegisterDto(BachelorBackEnd.Participants participantobj)
+        public void SaveRegisterDto(BachelorBackEnd.Participant participantobj)
         {
             //ResearcherDAO.AddParticipant(participantobj);
         }

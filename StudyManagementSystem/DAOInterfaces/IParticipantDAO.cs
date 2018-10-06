@@ -7,9 +7,10 @@ using BachelorBackEnd;
 
 namespace BachelorBackEnd
 {
+    /*
     public interface IParticipantDAO
     {
-        void AddParticipant(Participants participants);
+        void AddParticipant();
 
         void DeleteParticipant();
 
@@ -19,4 +20,5 @@ namespace BachelorBackEnd
 
         void VerifyParticipant();
     }
+    */
 }

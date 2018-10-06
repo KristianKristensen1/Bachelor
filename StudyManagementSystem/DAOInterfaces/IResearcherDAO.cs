@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
+    /*
     public interface IResearcherDAO
     {
         void AddResearcher();
@@ -18,4 +19,5 @@ namespace BachelorBackEnd
 
         void VerifyResearcher();
     }
+    */
 }

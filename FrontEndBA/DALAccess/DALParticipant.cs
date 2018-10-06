@@ -9,15 +9,13 @@ namespace FrontEndBA.DALAccess
 {
     public class DalParticipant:IDALParticipant
     {
-        private BachelorBackEnd.IParticipantDAO ParticipantDAO;
+        //private BachelorBackEnd.IParticipantDAO ParticipantDAO;
         public DalParticipant()
         {
-            ParticipantDAO = new ParticipantDAOImp();
         }
 
-        public void SaveRegisterDto(BachelorBackEnd.Participants participantobj)
+        public void SaveRegisterDto(BachelorBackEnd.Participant participantobj)
         {
-            ParticipantDAO.AddParticipant(participantobj);
         }
     }
 }

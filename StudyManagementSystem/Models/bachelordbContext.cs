@@ -1,0 +1,227 @@
+﻿using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+using System.Configuration;
+
+namespace BachelorBackEnd
+{
+    public partial class bachelordbContext : DbContext
+    {
+        public bachelordbContext()
+        {
+        }
+
+        public bachelordbContext(DbContextOptions<bachelordbContext> options)
+            : base(options)
+        {
+        }
+
+        public virtual DbSet<Participant> Participant { get; set; }
+        public virtual DbSet<Questionnaire> Questionnaire { get; set; }
+        public virtual DbSet<Researcher> Researcher { get; set; }
+        public virtual DbSet<Study> Study { get; set; }
+        public virtual DbSet<Studyparticipant> Studyparticipant { get; set; }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                /*
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                optionsBuilder.UseMySql("Server=DESKTOP-4G1FLIU;Database=bachelordb;user=admin;pwd=admin1234;");
+                */
+
+                optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["BachelorDB"].ConnectionString);
+            }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Participant>(entity =>
+            {
+                entity.HasKey(e => e.IdParticipant);
+
+                entity.ToTable("participant");
+
+                entity.HasIndex(e => e.IdParticipant)
+                    .HasName("idParticipant_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.IdParticipant)
+                    .HasColumnName("id_participant")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email")
+                    .HasColumnType("varchar(45)");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasColumnType("varchar(45)");
+            });
+
+            modelBuilder.Entity<Questionnaire>(entity =>
+            {
+                entity.HasKey(e => e.IdQuestionnaire);
+
+                entity.ToTable("questionnaire");
+
+                entity.HasIndex(e => e.IdParticipant)
+                    .HasName("id_participant_idx");
+
+                entity.HasIndex(e => e.IdQuestionnaire)
+                    .HasName("id_questionnaire_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.IdQuestionnaire)
+                    .HasColumnName("id_questionnaire")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Age)
+                    .HasColumnName("age")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Gender)
+                    .HasColumnName("gender")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.IdParticipant)
+                    .HasColumnName("id_participant")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Medicin)
+                    .HasColumnName("medicin")
+                    .HasColumnType("tinyint(4)");
+
+                entity.HasOne(d => d.IdParticipantNavigation)
+                    .WithMany(p => p.Questionnaire)
+                    .HasForeignKey(d => d.IdParticipant)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("id_participant");
+            });
+
+            modelBuilder.Entity<Researcher>(entity =>
+            {
+                entity.HasKey(e => e.IdResearcher);
+
+                entity.ToTable("researcher");
+
+                entity.HasIndex(e => e.IdResearcher)
+                    .HasName("id_researcher_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.IdResearcher)
+                    .HasColumnName("id_researcher")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasColumnName("email")
+                    .HasColumnType("varchar(45)");
+
+                entity.Property(e => e.Isadmin)
+                    .HasColumnName("isadmin")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.Isverified)
+                    .HasColumnName("isverified")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasColumnType("varchar(45)");
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasColumnType("varchar(45)");
+            });
+
+            modelBuilder.Entity<Study>(entity =>
+            {
+                entity.HasKey(e => e.IdStudy);
+
+                entity.ToTable("study");
+
+                entity.HasIndex(e => e.IdResearcher)
+                    .HasName("id_researcher_idx");
+
+                entity.HasIndex(e => e.IdStudy)
+                    .HasName("id_study_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.IdStudy)
+                    .HasColumnName("id_study")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasColumnName("description")
+                    .HasColumnType("varchar(45)");
+
+                entity.Property(e => e.IdResearcher)
+                    .HasColumnName("id_researcher")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Isdraft)
+                    .HasColumnName("isdraft")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.Tag)
+                    .IsRequired()
+                    .HasColumnName("tag")
+                    .HasColumnType("varchar(45)");
+
+                entity.HasOne(d => d.IdResearcherNavigation)
+                    .WithMany(p => p.Study)
+                    .HasForeignKey(d => d.IdResearcher)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("id_researcher");
+            });
+
+            modelBuilder.Entity<Studyparticipant>(entity =>
+            {
+                entity.HasKey(e => e.IdStudyParticipant);
+
+                entity.ToTable("studyparticipant");
+
+                entity.HasIndex(e => e.IdParticipant)
+                    .HasName("id_Participant_idx");
+
+                entity.HasIndex(e => e.IdStudy)
+                    .HasName("id_study_idx");
+
+                entity.HasIndex(e => e.IdStudyParticipant)
+                    .HasName("id_studyParticipant_UNIQUE")
+                    .IsUnique();
+
+                entity.Property(e => e.IdStudyParticipant)
+                    .HasColumnName("id_studyParticipant")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IdParticipant)
+                    .HasColumnName("id_participant")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.IdStudy)
+                    .HasColumnName("id_study")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.IdParticipantNavigation)
+                    .WithMany(p => p.Studyparticipant)
+                    .HasForeignKey(d => d.IdParticipant)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("id_participantstudy");
+
+                entity.HasOne(d => d.IdStudyNavigation)
+                    .WithMany(p => p.Studyparticipant)
+                    .HasForeignKey(d => d.IdStudy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("id_study");
+            });
+        }
+    }
+}

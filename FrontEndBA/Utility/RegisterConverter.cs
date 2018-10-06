@@ -10,16 +10,18 @@ namespace FrontEndBA.Utility
 {
     public class RegisterConverter
     {
-        public static BachelorBackEnd.Participants ParticipantobjFromViewToDto(ParticipantRegisterViewModel registerobj)
+        public static BachelorBackEnd.Participant ParticipantobjFromViewToDto(ParticipantRegisterViewModel registerobj)
         {
-            BachelorBackEnd.Participants currentParticipants = new Participants();
+            BachelorBackEnd.Participant currentParticipants = new Participant();
             if (registerobj != null)
             {
+                /*
                 currentParticipants.Firstname = registerobj.Firstname;
                 currentParticipants.Email = registerobj.Email;
                 currentParticipants.Lastname = registerobj.Lastname;
                 currentParticipants.Password = registerobj.Password;
                 currentParticipants.Pause = 0;
+                */
 
             }
 
