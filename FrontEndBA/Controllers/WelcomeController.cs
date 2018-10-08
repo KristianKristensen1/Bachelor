@@ -2,61 +2,50 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FrontEndBA.DALAccess;
-using FrontEndBA.Models.ParticipantModel.AccountViewModels;
-using FrontEndBA.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 
 namespace FrontEndBA.Controllers
 {
-    public class ParticipantController : Controller
+    public class WelcomeController : Controller
     {
-        public IDALAccess.IDALParticipant DataAcess;
-        // GET: ParticipantLogin
+        // GET: Welcome
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: ParticipantLogin/Details/5
+        // GET: Welcome/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: ParticipantLogin/Create
+        // GET: Welcome/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult LoginParticipent()
+        public ActionResult WelcomePage()
         {
             return View();
         }
 
-        public ActionResult ParticipentRegister()
+        public ActionResult Researcher()
         {
-
-
             return View();
         }
 
-        // POST: ParticipantLogin/Create
+        // POST: Welcome/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ParticipentRegister([Bind("Email,Firstname,Lastname,Password")] ParticipantRegisterViewModel participantRegisterobj)
+        public ActionResult Create(IFormCollection collection)
         {
-
-            BachelorBackEnd.Participant currentParticipants = RegisterConverter.ParticipantobjFromViewToDto(participantRegisterobj);
-            DataAcess = new DalParticipant();
-            DataAcess.SaveRegisterDto(currentParticipants);
-
-
             try
             {
-                
+                // TODO: Add insert logic here
 
                 return RedirectToAction(nameof(Index));
             }
@@ -66,13 +55,13 @@ namespace FrontEndBA.Controllers
             }
         }
 
-        // GET: ParticipantLogin/Edit/5
+        // GET: Welcome/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: ParticipantLogin/Edit/5
+        // POST: Welcome/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -89,13 +78,13 @@ namespace FrontEndBA.Controllers
             }
         }
 
-        // GET: ParticipantLogin/Delete/5
+        // GET: Welcome/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: ParticipantLogin/Delete/5
+        // POST: Welcome/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
