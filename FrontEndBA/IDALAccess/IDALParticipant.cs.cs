@@ -7,6 +7,6 @@ namespace FrontEndBA.IDALAccess
 {
     public interface IDALParticipant
     {
-        void SaveRegisterDto(BachelorBackEnd.Participants participantobj);
+        void SaveRegisterDto(BachelorBackEnd.Participant participantobj);
     }
 }
