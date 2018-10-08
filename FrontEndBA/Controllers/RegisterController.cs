@@ -2,43 +2,49 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FrontEndBA.Models.ResearcherModel.AccountViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
 
 namespace FrontEndBA.Controllers
 {
-    public class WelcomeController : Controller
+    public class RegisterController : Controller
     {
-        // GET: Welcome
+        // GET: Register
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Welcome/Details/5
+        // GET: Register/Details/5
         public ActionResult Details(int id)
         {
             return View();
         }
 
-        // GET: Welcome/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterPageParticipant([Bind("Email,Firstname,Lastname,Password")] ResearcherRegisterViewModel researcherRegisterModel)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+            return View();
+        }
+
+        public ActionResult RegisterPageResearcher()
+        {
+            return View();
+        }
+
+        // GET: Register/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        public ActionResult WelcomePageParticipant()
-        {
-            return View();
-        }
-
-        public ActionResult WelcomePageResearcher()
-        {
-            return View();
-        }
-
-        // POST: Welcome/Create
+        // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(IFormCollection collection)
@@ -55,13 +61,13 @@ namespace FrontEndBA.Controllers
             }
         }
 
-        // GET: Welcome/Edit/5
+        // GET: Register/Edit/5
         public ActionResult Edit(int id)
         {
             return View();
         }
 
-        // POST: Welcome/Edit/5
+        // POST: Register/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, IFormCollection collection)
@@ -78,13 +84,13 @@ namespace FrontEndBA.Controllers
             }
         }
 
-        // GET: Welcome/Delete/5
+        // GET: Register/Delete/5
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: Welcome/Delete/5
+        // POST: Register/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, IFormCollection collection)
