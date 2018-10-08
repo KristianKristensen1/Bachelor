@@ -78,8 +78,6 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                
-
                     IRegisterHandler registerHandler = new RegisterHandler();
                     Participant currentp = new Participant();
                     currentp.Email = researcherRegisterModel.Email;
