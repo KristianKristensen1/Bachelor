@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BachelorBackEnd
 {
@@ -34,6 +35,14 @@ namespace BachelorBackEnd
                 optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["BachelorDB"].ConnectionString);
             }
         }
+
+        /*
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<bachelordbContext>(options =>
+                options.UseMySql(ConfigurationManager.ConnectionStrings["BachelorDB"].ConnectionString));
+        }
+        */
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
