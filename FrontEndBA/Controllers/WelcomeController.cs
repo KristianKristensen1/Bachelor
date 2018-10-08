@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
@@ -10,27 +11,57 @@ namespace FrontEndBA.Controllers
 {
     public class WelcomeController : Controller
     {
-        // GET: Welcome
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-        // GET: Welcome/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Welcome/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+       
+  
 
         public ActionResult WelcomePageParticipant()
         {
-            return View();
+            return View(("WelcomePageParticipant"));
+        }
+
+        // POST: Welcome/LoginParticipant
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("LoginParticipant")]
+        [Route("Welcome/LoginParticipant")]
+        public ActionResult LoginParticipant([Bind("Email,Password")] Participant participant)
+        {
+           
+            LoginHandler loginhandler = new LoginHandler();
+            var status = loginhandler.LoginParticipantDB(participant.Email, participant.Password);
+            if (status.OperationStatus.IsSuccess)
+            {
+                return View("../HomePage/index",loginhandler.OperationStatus.participant);
+            }
+            else
+            {
+                // Handle error jacob
+                return View("WelcomePageParticipant");
+            }
+            
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("LoginResearcher")]
+        [Route("Welcome/LoginResearcher")]
+        public ActionResult LoginResearcher([Bind("Email,Password")] Researcher researcher)
+        {
+
+            LoginHandler loginhandler = new LoginHandler();
+            var status = loginhandler.LoginResearcherDB(researcher.Email, researcher.Password);
+            if (status.OperationStatus.IsSuccess)
+            {
+                return View("../HomePage/index", status.OperationStatus.researcher);
+            }
+            else
+            {
+                // Handle error jacob
+                return View("WelcomePageParticipant");
+            }
+
         }
 
         public ActionResult WelcomePageResearcher()
@@ -39,21 +70,21 @@ namespace FrontEndBA.Controllers
         }
 
         // POST: Welcome/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create(IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add insert logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Welcome/Edit/5
         public ActionResult Edit(int id)
@@ -62,21 +93,21 @@ namespace FrontEndBA.Controllers
         }
 
         // POST: Welcome/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add update logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
 
         // GET: Welcome/Delete/5
         public ActionResult Delete(int id)
@@ -85,20 +116,20 @@ namespace FrontEndBA.Controllers
         }
 
         // POST: Welcome/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

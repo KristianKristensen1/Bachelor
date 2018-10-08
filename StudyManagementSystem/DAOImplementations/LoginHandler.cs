@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    class LoginHandler : BaseEntity, ILoginHandler
+    public class LoginHandler : BaseEntity, ILoginHandler
     {
         public LoginHandler LoginParticipantDB(string email, string password)
         {

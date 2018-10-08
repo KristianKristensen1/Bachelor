@@ -44,8 +44,9 @@ namespace FrontEndBA
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
+                    name: "root",
                     template: "{controller=Welcome}/{action=WelcomePageParticipant}/{id?}");
+                
             });
         }
     }
