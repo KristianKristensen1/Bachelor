@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using FrontEndBA.Models.ResearcherModel.AccountViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using BachelorBackEnd;
+using FrontEndBA.Models.ParticipantModel.AccountViewModels;
 
 namespace FrontEndBA.Controllers
 {
@@ -22,36 +24,68 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RegisterPageParticipant([Bind("Email,Firstname,Lastname,Password")] ResearcherRegisterViewModel researcherRegisterModel)
+        public ActionResult RegisterPageParticipant()
         {
-            if (ModelState.IsValid)
-            {
-                
-            }
             return View();
         }
+
 
         public ActionResult RegisterPageResearcher()
         {
+         
             return View();
         }
 
-        // GET: Register/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+
+
+        // POST: Register/Create
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind("Email,Password")] ResearcherRegisterViewModel researcherRegisterModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        IRegisterHandler registerHandler = new RegisterHandler();
+        //        Participant currentp = new Participant();
+        //        currentp.Email = researcherRegisterModel.Email;
+        //        currentp.Password = researcherRegisterModel.Password;
+        //        registerHandler.RegisterParticipantDB(currentp);
+        //    }
+        //    return View();
+        //}
+        // not done
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind("Email,Password")] ParticipantRegisterViewModel participantRegisterModel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+
+        //        IRegisterHandler registerHandler = new RegisterHandler();
+        //        Participant currentp = new Participant();
+        //        currentp.Email = participantRegisterModel.Email;
+        //        currentp.Password = researcherRegisterModel.Password;
+        //        registerHandler.RegisterParticipantDB(currentp);
+        //    }
+        //    return View();
+        //}
 
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CreateResearcher([Bind("Email,Password")] ResearcherRegisterViewModel researcherRegisterModel)
         {
             try
             {
-                // TODO: Add insert logic here
+                
+
+                    IRegisterHandler registerHandler = new RegisterHandler();
+                    Participant currentp = new Participant();
+                    currentp.Email = researcherRegisterModel.Email;
+                    currentp.Password = researcherRegisterModel.Password;
+                    registerHandler.RegisterParticipantDB(currentp);
+                
 
                 return RedirectToAction(nameof(Index));
             }

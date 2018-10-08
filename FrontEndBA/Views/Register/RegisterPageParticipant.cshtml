@@ -1,30 +1,20 @@
-﻿@model FrontEndBA.Models.ParticipantModel.AccountViewModels.ParticipantRegisterViewModel
+﻿@model FrontEndBA.Models.ResearcherModel.AccountViewModels.ResearcherRegisterViewModel
 
 @{
-    ViewData["Title"] = "ParticipantPageParticipant";
+    ViewData["Title"] = "RegisterPageParticipant";
 }
 
-<h2>Participant Register here</h2>
+<h2>RegisterPageParticipant</h2>
 
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="ParticipantPageParticipant">
+        <form asp-action="RegisterPageParticipant">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Firstname" class="control-label"></label>
-                <input asp-for="Firstname" class="form-control" />
-                <span asp-validation-for="Firstname" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Lastname" class="control-label"></label>
-                <input asp-for="Lastname" class="form-control" />
-                <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
@@ -37,7 +27,7 @@
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create Participant account" class="btn btn-default" />
+                <input type="submit" value="Create Researcher" class="btn btn-default" />
             </div>
         </form>
     </div>
