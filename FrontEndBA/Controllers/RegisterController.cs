@@ -18,11 +18,7 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-        // GET: Register/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+      
 
         public ActionResult RegisterPageParticipant()
         {
@@ -39,37 +35,7 @@ namespace FrontEndBA.Controllers
 
 
         // POST: Register/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind("Email,Password")] ResearcherRegisterViewModel researcherRegisterModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        IRegisterHandler registerHandler = new RegisterHandler();
-        //        Participant currentp = new Participant();
-        //        currentp.Email = researcherRegisterModel.Email;
-        //        currentp.Password = researcherRegisterModel.Password;
-        //        registerHandler.RegisterParticipantDB(currentp);
-        //    }
-        //    return View();
-        //}
-        // not done
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind("Email,Password")] ParticipantRegisterViewModel participantRegisterModel)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-
-        //        IRegisterHandler registerHandler = new RegisterHandler();
-        //        Participant currentp = new Participant();
-        //        currentp.Email = participantRegisterModel.Email;
-        //        currentp.Password = researcherRegisterModel.Password;
-        //        registerHandler.RegisterParticipantDB(currentp);
-        //    }
-        //    return View();
-        //}
+        
 
         // POST: Register/Create
         [HttpPost]
@@ -81,17 +47,44 @@ namespace FrontEndBA.Controllers
                 
 
                     IRegisterHandler registerHandler = new RegisterHandler();
-                    Participant currentp = new Participant();
-                    currentp.Email = researcherRegisterModel.Email;
-                    currentp.Password = researcherRegisterModel.Password;
-                    registerHandler.RegisterParticipantDB(currentp);
-                
+                    Researcher currentr = new Researcher();
+                    currentr.Email = researcherRegisterModel.Email;
+                    currentr.Password = researcherRegisterModel.Password;
+                    currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname;
+                    registerHandler.RegisterResearcherDB(currentr);
 
-                return RedirectToAction(nameof(Index));
+
+                return View("../HomePage/index", currentr);
             }
             catch
             {
-                return View();
+                //Skal sende en fejlmeddelse med her.
+                return View("./RegisterPageResearcher");
+            }
+        }
+
+        // POST: Register/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateParticipant([Bind("Email,Password")] ParticipantRegisterViewModel participantRegisterModel)
+        {
+            try
+            {
+
+
+                IRegisterHandler registerHandler = new RegisterHandler();
+                Participant currentp = new Participant();
+                currentp.Email = participantRegisterModel.Email;
+                currentp.Password = participantRegisterModel.Password;
+                registerHandler.RegisterParticipantDB(currentp);
+
+
+                return View("../HomePage/index", currentp);
+            }
+            catch
+            {
+                //Skal sende en fejlmeddelse med her.
+                return View("./RegisterPageParticipant");
             }
         }
 
