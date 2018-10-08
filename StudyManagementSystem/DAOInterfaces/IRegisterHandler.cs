@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    interface IRegisterHandler
+    public interface IRegisterHandler
     {
         void RegisterParticipantDB(Participant participant);
 

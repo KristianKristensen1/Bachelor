@@ -28,12 +28,12 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-        public ActionResult WelcomePage()
+        public ActionResult WelcomePageParticipant()
         {
             return View();
         }
 
-        public ActionResult Researcher()
+        public ActionResult WelcomePageResearcher()
         {
             return View();
         }

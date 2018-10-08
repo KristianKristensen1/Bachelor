@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    class RegisterHandler : IRegisterHandler
+    public class RegisterHandler : IRegisterHandler
     {
         public void RegisterParticipantDB(Participant participant)
         {
