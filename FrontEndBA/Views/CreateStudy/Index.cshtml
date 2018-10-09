@@ -1,0 +1,46 @@
+﻿@model BachelorBackEnd.Study
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+
+<h4>Study</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdStudy" class="control-label"></label>
+                <input asp-for="IdStudy" class="form-control" />
+                <span asp-validation-for="IdStudy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Isdraft" class="control-label"></label>
+                <input asp-for="Isdraft" class="form-control" />
+                <span asp-validation-for="Isdraft" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Tag" class="control-label"></label>
+                <input asp-for="Tag" class="form-control" />
+                <span asp-validation-for="Tag" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdResearcher" class="control-label"></label>
+                <input asp-for="IdResearcher" class="form-control" />
+                <span asp-validation-for="IdResearcher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

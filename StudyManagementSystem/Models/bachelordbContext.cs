@@ -29,7 +29,7 @@ namespace BachelorBackEnd
             {
                 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=10.192.69.99;Database=bachelordb;user=admin;pwd=admin1234;");
+                optionsBuilder.UseMySql("Server=10.192.69.148;Database=bachelordb;user=admin;pwd=admin1234;");
                 
 
                 //optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["BachelorDB"].ConnectionString);
