@@ -42,23 +42,22 @@ namespace FrontEndBA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateResearcher([Bind("Email,Password")] ResearcherRegisterViewModel researcherRegisterModel)
         {
-            try
-            {
-                    IRegisterHandler registerHandler = new RegisterHandler();
-                    Researcher currentr = new Researcher();
-                    currentr.Email = researcherRegisterModel.Email;
-                    currentr.Password = researcherRegisterModel.Password;
-                    currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname;
-                    registerHandler.RegisterResearcherDB(currentr);
+            string Error;
 
+            IRegisterHandler registerHandler = new RegisterHandler();
+            Researcher currentr = new Researcher();
+            currentr.Email = researcherRegisterModel.Email;
+            currentr.Password = researcherRegisterModel.Password;
+            currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname;
+            bool success = registerHandler.RegisterResearcherDB(currentr, out Error);
 
-                return View("../HomePage/index", currentr);
-            }
-            catch
+            if (!success)
             {
-                //Skal sende en fejlmeddelse med her.
-                return View("./RegisterPageResearcher");
+                //Email allready exists. Error message stored in Error.
+
             }
+            return View("../HomePage/index", currentr);
+            
         }
 
         // POST: Register/Create
@@ -66,24 +65,20 @@ namespace FrontEndBA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateParticipant([Bind("Email,Password")] ParticipantRegisterViewModel participantRegisterModel)
         {
-            try
-            {
+            string Error;
 
+            IRegisterHandler registerHandler = new RegisterHandler();
+            Participant currentp = new Participant();
+            currentp.Email = participantRegisterModel.Email;
+            currentp.Password = participantRegisterModel.Password;
+            bool success = registerHandler.RegisterParticipantDB(currentp, out Error);
 
-                IRegisterHandler registerHandler = new RegisterHandler();
-                Participant currentp = new Participant();
-                currentp.Email = participantRegisterModel.Email;
-                currentp.Password = participantRegisterModel.Password;
-                registerHandler.RegisterParticipantDB(currentp);
-
-
-                return View("../HomePage/index", currentp);
-            }
-            catch
-            {
-                //Skal sende en fejlmeddelse med her.
-                return View("./RegisterPageParticipant");
-            }
+            if (!success)
+             {
+                //Email all ready exists. This message is stored in Error. 
+                
+             }
+            return View("../HomePage/index", currentp);
         }
 
         // GET: Register/Edit/5

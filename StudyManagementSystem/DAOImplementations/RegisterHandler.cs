@@ -8,29 +8,43 @@ namespace BachelorBackEnd
 {
     public class RegisterHandler : IRegisterHandler
     {
-        public void RegisterParticipantDB(Participant participant)
+        public bool RegisterParticipantDB(Participant participant, out string ErrorMessage)
         {
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
                 if(DBmodel.Participant.Any(part => part.Email == participant.Email))
                 {
                     //Email allready exists
+                    ErrorMessage = "Email allready exists in database";
+                    return false;
                 }
-                DBmodel.Participant.Add(participant);
-                DBmodel.SaveChanges();
+                else
+                {
+                    DBmodel.Participant.Add(participant);
+                    DBmodel.SaveChanges();
+                    ErrorMessage = "No problems";
+                    return true;
+                }
             }
         }
 
-        public void RegisterResearcherDB(Researcher researcher)
+        public bool RegisterResearcherDB(Researcher researcher, out string ErrorMessage)
         {
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
-                if (DBmodel.Participant.Any(part => part.Email == researcher.Email))
+                if (DBmodel.Participant.Any(res => res.Email == researcher.Email))
                 {
                     //Email allready exists
+                    ErrorMessage = "Email allready exists in database";
+                    return false;
                 }
-                DBmodel.Researcher.Add(researcher);
-                DBmodel.SaveChanges();
+                else
+                {
+                    DBmodel.Researcher.Add(researcher);
+                    DBmodel.SaveChanges();
+                    ErrorMessage = "No problems";
+                    return true;
+                }
             }
         }
 

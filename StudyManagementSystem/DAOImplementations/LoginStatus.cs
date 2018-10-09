@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-
-    public class OperationStatus
+    public class LoginStatus
     {
         public bool IsSuccess { set; get; }
         public string ErrorMessage { set; get; }
@@ -15,16 +14,14 @@ namespace BachelorBackEnd
         public Participant participant { get; set; }
     }
 
-
-
-    public class BaseEntity
+    public class LoginEntity
     {
-        public OperationStatus OperationStatus { set; get; }
+        public LoginStatus LoginStatus { set; get; }
 
-        public BaseEntity()
+        public LoginEntity()
         {
-            if (OperationStatus == null)
-                OperationStatus = new OperationStatus();
+            if (LoginStatus == null)
+                LoginStatus = new LoginStatus();
         }
     }
 }

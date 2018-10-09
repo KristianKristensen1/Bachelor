@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    public class LoginHandler : BaseEntity, ILoginHandler
+    public class LoginHandler : LoginEntity, ILoginHandler
     {
         public LoginHandler LoginParticipantDB(string email, string password)
         {
@@ -19,19 +19,19 @@ namespace BachelorBackEnd
                     if (participant.Password == password)
                     {
                         //Successfull login
-                        ParticipantHandler.OperationStatus.IsSuccess = true;
-                        ParticipantHandler.OperationStatus.participant = participant;
+                        ParticipantHandler.LoginStatus.IsSuccess = true;
+                        ParticipantHandler.LoginStatus.participant = participant;
                     }
                     else
                     {
                         //Wrong password
-                        ParticipantHandler.OperationStatus.ErrorMessage = "Wrong password";
+                        ParticipantHandler.LoginStatus.ErrorMessage = "Wrong password";
                     }
                 }
                 else
                 {
                     //No participant with this email exists in database
-                    ParticipantHandler.OperationStatus.ErrorMessage = "No participant with this email exists";
+                    ParticipantHandler.LoginStatus.ErrorMessage = "No participant with this email exists";
                 }
             }
             return ParticipantHandler;
@@ -48,19 +48,19 @@ namespace BachelorBackEnd
                     if (researcher.Password == password)
                     {
                         //Successfull login
-                        ResearcherHandler.OperationStatus.IsSuccess = true;
-                        ResearcherHandler.OperationStatus.researcher = researcher;
+                        ResearcherHandler.LoginStatus.IsSuccess = true;
+                        ResearcherHandler.LoginStatus.researcher = researcher;
                     }
                     else
                     {
                         //Wrong password
-                        ResearcherHandler.OperationStatus.ErrorMessage = "Wrong password";
+                        ResearcherHandler.LoginStatus.ErrorMessage = "Wrong password";
                     }
                 }
                 else
                 {
                     //No researcher with this email exists in database
-                    ResearcherHandler.OperationStatus.ErrorMessage = "No researcher with this email exists";
+                    ResearcherHandler.LoginStatus.ErrorMessage = "No researcher with this email exists";
                 }
             }
             return ResearcherHandler;
