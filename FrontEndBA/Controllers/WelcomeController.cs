@@ -30,9 +30,9 @@ namespace FrontEndBA.Controllers
            
             LoginHandler loginhandler = new LoginHandler();
             var status = loginhandler.LoginParticipantDB(participant.Email, participant.Password);
-            if (status.OperationStatus.IsSuccess)
+            if (status.LoginStatus.IsSuccess)
             {
-                return View("../HomePage/index",loginhandler.OperationStatus.participant);
+                return View("../HomePage/index",loginhandler.LoginStatus.participant);
             }
             else
             {
@@ -52,9 +52,9 @@ namespace FrontEndBA.Controllers
 
             LoginHandler loginhandler = new LoginHandler();
             var status = loginhandler.LoginResearcherDB(researcher.Email, researcher.Password);
-            if (status.OperationStatus.IsSuccess)
+            if (status.LoginStatus.IsSuccess)
             {
-                return View("../HomePage/index", status.OperationStatus.researcher);
+                return View("../HomePage/index", status.LoginStatus.researcher);
             }
             else
             {
