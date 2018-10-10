@@ -33,6 +33,12 @@ namespace FrontEndBA.Controllers
             return View(fakelist);
         }
 
+
+        public ActionResult AddStudyView()
+        {
+            return RedirectToAction("Index", "CreateStudy");
+        }
+
         // GET: HomePage/Details/5
         public ActionResult Details(int id)
         {

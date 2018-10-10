@@ -1,6 +1,6 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-top: 70px;
+    padding-bottom: 40px;
 }
 
 /* Wrapping element */
@@ -42,10 +42,22 @@
     margin: 15px;
 }
 
-/* Hide/rearrange for smaller screens */
-@media screen and (max-width: 767px) {
-    /* Hide captions */
-    .carousel-caption {
-        display: none;
-    }
+
+#footer {
+    position: fixed;
+    text-align: center;
+    width: 100%;
 }
+.table {
+    width: 100%;
+}
+
+.th { height: 50px; }
+
+    /* Hide/rearrange for smaller screens */
+    @media screen and (max-width: 767px) {
+        /* Hide captions */
+        .carousel-caption {
+            display: none;
+        }
+    }
