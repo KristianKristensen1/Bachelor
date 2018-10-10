@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,28 +22,29 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-        // GET: CreateStudy/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //// GET: CreateStudy/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
        
 
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel)
         {
             try
             {
-                // TODO: Add insert logic here
+                ManageStudyHandler manageStudyHandler = new ManageStudyHandler();
+                manageStudyHandler.CreateStudyDB(studymodel);
 
-                return RedirectToAction(nameof(Index));
+                return View("../HomePage/index");
             }
             catch
             {
-                return View();
+                return View("./Participant");
             }
         }
 

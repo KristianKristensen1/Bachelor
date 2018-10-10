@@ -12,6 +12,7 @@ namespace FrontEndBA.Controllers
     {
         public IActionResult Index()
         {
+
             return View();
         }
 

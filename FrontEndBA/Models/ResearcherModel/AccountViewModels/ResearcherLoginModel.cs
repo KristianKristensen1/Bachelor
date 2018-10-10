@@ -4,7 +4,7 @@ namespace FrontEndBA.Models.ResearcherModel.AccountViewModels
 {
     public class ResearcherLoginModel
     {
-        [Required(ErrorMessage = "Mangler Email")]
+        [Required(ErrorMessage = "Missing Email")]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

@@ -12,21 +12,16 @@ namespace FrontEndBA.Controllers
 {
     public class RegisterController : Controller
     {
-        // GET: Register
-        public ActionResult Index()
-        {
-            return View();
-        }
 
-      
-
-        public ActionResult RegisterPageParticipant()
+     
+        public ActionResult Participant()
         {
-            return View();
+            
+            return View("Participant");
         }
 
 
-        public ActionResult RegisterPageResearcher()
+        public ActionResult Researcher()
         {
          
             return View();
@@ -53,10 +48,12 @@ namespace FrontEndBA.Controllers
 
             if (!success)
             {
-                //Email allready exists. Error message stored in Error.
+                this.ModelState.AddModelError("Email", "Email already exists");
+                return View("Researcher");
 
             }
-            return View("../HomePage/index", currentr);
+            return RedirectToAction("Researcher", "Homepage", currentr);
+         
             
         }
 
@@ -75,56 +72,16 @@ namespace FrontEndBA.Controllers
 
             if (!success)
              {
-                //Email all ready exists. This message is stored in Error. 
-                
-             }
-            return View("../HomePage/index", currentp);
-        }
+                 this.ModelState.AddModelError("Email", "Email already exists");
+                 return View("Participant");
 
-        // GET: Register/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Register/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Participant", "Homepage", currentp);
+           
         }
 
-        // GET: Register/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+   
 
-        // POST: Register/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+       
     }
 }

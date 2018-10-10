@@ -45,7 +45,7 @@ namespace FrontEndBA
             {
                 routes.MapRoute(
                     name: "root",
-                    template: "{controller=Welcome}/{action=WelcomePageParticipant}/{id?}");
+                    template: "{controller=Welcome}/{action=Participant}/");
                 
             });
         }
