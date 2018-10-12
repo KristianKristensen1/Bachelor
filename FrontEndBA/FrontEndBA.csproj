@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JwtAuthenticationHelper\JwtAuthenticationHelper.csproj" />
     <ProjectReference Include="..\StudyManagementSystem\BachelorBackEnd.csproj" />
   </ItemGroup>
 

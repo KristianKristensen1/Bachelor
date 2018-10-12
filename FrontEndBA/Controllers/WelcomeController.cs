@@ -1,20 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BachelorBackEnd;
-using Microsoft.AspNetCore.Http;
+﻿using BachelorBackEnd;
+using JwtAuthenticationHelper.Abstractions;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View;
+using System;
+using System.Collections.Generic;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace FrontEndBA.Controllers
 {
     public class WelcomeController : Controller
     {
-
-       
-  
-
+        private readonly IJwtTokenGenerator tokenGenerator;
+        public WelcomeController(IJwtTokenGenerator tokenGenerator)
+        {
+            this.tokenGenerator = tokenGenerator;
+        }
         public ActionResult WelcomePageParticipant()
         {
             return View(("WelcomePageParticipant"));
@@ -25,23 +28,38 @@ namespace FrontEndBA.Controllers
         [ValidateAntiForgeryToken]
         [Route("LoginParticipant")]
         [Route("Welcome/LoginParticipant")]
-        public ActionResult LoginParticipant([Bind("Email,Password")] Participant participant)
-        {
-           
-            LoginHandler loginhandler = new LoginHandler();
+        public async Task<IActionResult> LoginParticipant([Bind("Email,Password")] Participant participant)
+        {             
+            ILoginHandler loginhandler = new LoginHandler();
+            //Checks whether or not the participant is in the database
             var status = loginhandler.LoginParticipantDB(participant.Email, participant.Password);
             if (status.LoginStatus.IsSuccess)
             {
-                return View("../HomePage/index",loginhandler.LoginStatus.participant);
+                //Create an object with userinfo about the participant.
+                var userInfo = new UserInfo
+                {
+                    Email = participant.Email,
+                    Id = participant.IdParticipant,
+                    isAdmin = false
+                };
+
+                //Generates token with claims defined from the userinfo object.
+                var accessTokenResult = tokenGenerator.GenerateAccessTokenWithClaimsPrincipal(
+                participant.Email,
+                AddMyClaims(userInfo));
+                await HttpContext.SignInAsync(accessTokenResult.ClaimsPrincipal,
+                    accessTokenResult.AuthProperties);
             }
             else
             {
+                /*
                 // Handle error jacob
                 return View("WelcomePageParticipant");
+                */
             }
-            
-        }
+            return RedirectToAction("Index", "Homepage");
 
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -131,5 +149,16 @@ namespace FrontEndBA.Controllers
         //        return View();
         //    }
         //}
+
+        private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
+        {
+            var myClaims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Email, userInfo.Email),
+                new Claim("HasAdminRights", userInfo.isAdmin ? "Y" : "N")
+            };
+
+            return myClaims;
+        }
     }
 }

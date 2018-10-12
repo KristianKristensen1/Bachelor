@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    interface ILoginHandler
+    public interface ILoginHandler
     {
         LoginHandler LoginParticipantDB(string email, string password);
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,8 @@ namespace FrontEndBA.Controllers
     public class HomePageController : Controller
     {
         // GET: HomePage
+        [Authorize(Policy = "RequiresAdmin")]
+        [HttpGet]
         public ActionResult Index()
         {
             return View();
@@ -20,7 +23,7 @@ namespace FrontEndBA.Controllers
         {
             return View();
         }
-
+        [Authorize]
         // GET: HomePage/Create
         public ActionResult Create()
         {
