@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace BachelorBackEnd
@@ -12,11 +13,12 @@ namespace BachelorBackEnd
 
         public int IdStudy { get; set; }
         public string Description { get; set; }
-        public sbyte Isdraft { get; set; }
+        public bool Isdraft { get; set; }
         public string Tag { get; set; }
         public int IdResearcher { get; set; }
 
         public Researcher IdResearcherNavigation { get; set; }
         public ICollection<Studyparticipant> Studyparticipant { get; set; }
+     
     }
 }

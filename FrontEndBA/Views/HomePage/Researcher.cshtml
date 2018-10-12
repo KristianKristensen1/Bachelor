@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BachelorBackEnd.Study>
+
+@{
+    ViewData["Title"] = "Researcher";
+}
+
+<h2>Researcher</h2>
+
+<h3>All studies</h3>
+<table class="table">    
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Isdraft)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Tag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Isdraft)
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+<h3>My studies</h3>
+<table class="table">    
+    <thead>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tag)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Isdraft)
+        </th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td >
+                @Html.DisplayFor(modelItem => item.Tag)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Isdraft)
+            </td>
+        </tr>
+    }
+
+    </tbody>
+</table>
+
+<form method="GET">
+    <button asp-route-data="Homepage" asp-action="AddStudyView">Add study</button>
+</form>
+
+
+
+

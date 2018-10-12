@@ -69,7 +69,7 @@ namespace FrontEndBA
             {
                 routes.MapRoute(
                     name: "root",
-                    template: "{controller=Welcome}/{action=WelcomePageParticipant}");
+                    template: "{controller=Welcome}/{action=Participant}");
                 
             });
         }

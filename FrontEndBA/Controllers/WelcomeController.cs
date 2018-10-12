@@ -18,9 +18,9 @@ namespace FrontEndBA.Controllers
         {
             this.tokenGenerator = tokenGenerator;
         }
-        public ActionResult WelcomePageParticipant()
+        public ActionResult Participant()
         {
-            return View(("WelcomePageParticipant"));
+            return View();
         }
 
         // POST: Welcome/LoginParticipant
@@ -57,7 +57,7 @@ namespace FrontEndBA.Controllers
                 return View("WelcomePageParticipant");
                 */
             }
-            return RedirectToAction("Index", "Homepage");
+            return RedirectToAction("Researcher", "Homepage");
 
         }
 
@@ -72,63 +72,25 @@ namespace FrontEndBA.Controllers
             var status = loginhandler.LoginResearcherDB(researcher.Email, researcher.Password);
             if (status.LoginStatus.IsSuccess)
             {
-                return View("../HomePage/index", status.LoginStatus.researcher);
+                return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
+             
             }
             else
             {
-                // Handle error jacob
-                return View("WelcomePageParticipant");
+                var err = status.LoginStatus.ErrorMessage;
+                if (err == "Wrong password")
+                    this.ModelState.AddModelError("Password", err.ToString());
+                else
+                {
+                    this.ModelState.AddModelError("Email", err.ToString());
+                }
+                
             }
+            return View("Researcher");
 
         }
 
-        public ActionResult WelcomePageResearcher()
-        {
-            return View();
-        }
-
-        // POST: Welcome/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add insert logic here
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        // GET: Welcome/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Welcome/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add update logic here
-
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        // GET: Welcome/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Researcher()
         {
             return View();
         }
