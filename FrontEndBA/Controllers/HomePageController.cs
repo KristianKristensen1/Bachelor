@@ -12,14 +12,14 @@ namespace FrontEndBA.Controllers
     public class HomepageController : Controller
     {
         // GET: HomePage
-        //[Authorize(Policy = "RequiresAdmin")]
         [HttpGet]
         public ActionResult Index()
         {
-     
             return View();
         }
 
+        [Authorize]
+        //[Authorize(Policy = "RequiresVerified")]
         public ActionResult Researcher()
         {
             List<Study> fakelist = new List<Study>();
@@ -37,6 +37,7 @@ namespace FrontEndBA.Controllers
         }
 
 
+        [Authorize]
         public ActionResult AddStudyView()
         {
             return RedirectToAction("Index", "CreateStudy");
@@ -86,7 +87,6 @@ namespace FrontEndBA.Controllers
             try
             {
                 // TODO: Add update logic here
-
                 return RedirectToAction(nameof(Participant));
             }
             catch

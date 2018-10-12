@@ -13,5 +13,7 @@ namespace BachelorBackEnd
         public int Id { get; set; }
 
         public bool isAdmin { get; set; }
+
+        public bool isVerified { get; set; }
     }
 }
