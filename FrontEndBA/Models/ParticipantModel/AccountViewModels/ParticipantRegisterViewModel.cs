@@ -34,14 +34,20 @@ namespace FrontEndBA.Models.ParticipantModel.AccountViewModels
         [Required(ErrorMessage = "Must enter if you speak English or not")]
         public Boolean Language { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:MM/dd/yyyy}")]
+        [Required(ErrorMessage = "Must enter a Age")]
+        public DateTime Age { get; set; }
+
 
 
 
     }
-
     public enum Gender
     {
-        Male=1,
-        Female=0
+        Male = 1,
+        Female = 0
     }
+
+
 }
