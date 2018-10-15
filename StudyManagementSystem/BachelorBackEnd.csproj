@@ -161,12 +161,10 @@
     <Compile Include="DAOInterfaces\ILoginHandler.cs" />
     <Compile Include="DAOInterfaces\IManageStudyHandler.cs" />
     <Compile Include="DAOInterfaces\IProfileHandler.cs" />
-    <Compile Include="DAOInterfaces\IQuestionnaireHandler.cs" />
     <Compile Include="DAOInterfaces\IRegisterHandler.cs" />
     <Compile Include="DAOInterfaces\IVerifyHandler.cs" />
     <Compile Include="Models\bachelordbContext.cs" />
     <Compile Include="Models\Participant.cs" />
-    <Compile Include="Models\Questionnaire.cs" />
     <Compile Include="Models\Researcher.cs" />
     <Compile Include="Models\Study.cs" />
     <Compile Include="Models\Studyparticipant.cs" />

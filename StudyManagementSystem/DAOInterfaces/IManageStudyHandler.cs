@@ -21,5 +21,7 @@ namespace BachelorBackEnd
         void SaveAsDraftDB(Study study);
 
         void ShowStudyDB(string studyID);
+
+        void GetAllStudies();
     }
 }

@@ -30,6 +30,14 @@ namespace BachelorBackEnd
             }
         }
 
+        public void GetAllStudies()
+        {
+            using (bachelordbContext DBmodel = new bachelordbContext())
+            {
+                
+            }
+        }
+
         public void GetStudyDB(string studyID)
         {
             throw new NotImplementedException();

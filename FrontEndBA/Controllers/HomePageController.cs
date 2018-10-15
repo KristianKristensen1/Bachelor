@@ -49,7 +49,6 @@ namespace FrontEndBA.Controllers
 
             return View();
         }
-        [Authorize]
         // GET: HomePage/Create
         public ActionResult Create()
         {
