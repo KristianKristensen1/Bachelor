@@ -27,9 +27,6 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-
-
-        // POST: Register/Create
         
 
         // POST: Register/Create

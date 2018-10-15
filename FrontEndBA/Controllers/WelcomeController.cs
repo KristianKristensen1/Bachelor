@@ -11,10 +11,6 @@ namespace FrontEndBA.Controllers
 {
     public class WelcomeController : Controller
     {
-
-       
-  
-
         public ActionResult Participant()
         {
             return View();
