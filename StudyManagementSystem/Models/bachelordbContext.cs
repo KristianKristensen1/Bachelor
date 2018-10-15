@@ -1,8 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace BachelorBackEnd
 {
@@ -18,7 +16,6 @@ namespace BachelorBackEnd
         }
 
         public virtual DbSet<Participant> Participant { get; set; }
-        public virtual DbSet<Questionnaire> Questionnaire { get; set; }
         public virtual DbSet<Researcher> Researcher { get; set; }
         public virtual DbSet<Study> Study { get; set; }
         public virtual DbSet<Studyparticipant> Studyparticipant { get; set; }
@@ -27,24 +24,10 @@ namespace BachelorBackEnd
         {
             if (!optionsBuilder.IsConfigured)
             {
-                
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySql("Server=DESKTOP-4G1FLIU;Database=bachelordb;user=admin;pwd=admin1234;");
-                
-
-                //optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["BachelorDB"].ConnectionString);
-
             }
         }
-
-        /*
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddDbContext<bachelordbContext>(options =>
-                options.UseMySql(ConfigurationManager.ConnectionStrings["BachelorDB"].ConnectionString));
-        }
-        */
-        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -62,55 +45,27 @@ namespace BachelorBackEnd
                     .HasColumnName("id_participant")
                     .HasColumnType("int(11)");
 
+                entity.Property(e => e.Age)
+                    .HasColumnName("age")
+                    .HasColumnType("datetime");
+
                 entity.Property(e => e.Email)
                     .IsRequired()
                     .HasColumnName("email")
                     .HasColumnType("varchar(45)");
 
-                entity.Property(e => e.Password)
-                    .IsRequired()
-                    .HasColumnName("password")
-                    .HasColumnType("varchar(45)");
-            });
-
-            modelBuilder.Entity<Questionnaire>(entity =>
-            {
-                entity.HasKey(e => e.IdQuestionnaire);
-
-                entity.ToTable("questionnaire");
-
-                entity.HasIndex(e => e.IdParticipant)
-                    .HasName("id_participant_idx");
-
-                entity.HasIndex(e => e.IdQuestionnaire)
-                    .HasName("id_questionnaire_UNIQUE")
-                    .IsUnique();
-
-                entity.Property(e => e.IdQuestionnaire)
-                    .HasColumnName("id_questionnaire")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Age)
-                    .HasColumnName("age")
-                    .HasColumnType("int(11)");
+                entity.Property(e => e.English)
+                    .HasColumnName("english")
+                    .HasColumnType("tinyint(4)");
 
                 entity.Property(e => e.Gender)
                     .HasColumnName("gender")
                     .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.IdParticipant)
-                    .HasColumnName("id_participant")
-                    .HasColumnType("int(11)");
-
-                entity.Property(e => e.Medicin)
-                    .HasColumnName("medicin")
-                    .HasColumnType("tinyint(4)");
-
-                entity.HasOne(d => d.IdParticipantNavigation)
-                    .WithMany(p => p.Questionnaire)
-                    .HasForeignKey(d => d.IdParticipant)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("id_participant");
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasColumnName("password")
+                    .HasColumnType("varchar(45)");
             });
 
             modelBuilder.Entity<Researcher>(entity =>
@@ -200,7 +155,7 @@ namespace BachelorBackEnd
                 entity.ToTable("studyparticipant");
 
                 entity.HasIndex(e => e.IdParticipant)
-                    .HasName("id_Participant_idx");
+                    .HasName("id_participantstudy_idx");
 
                 entity.HasIndex(e => e.IdStudy)
                     .HasName("id_study_idx");
@@ -225,7 +180,7 @@ namespace BachelorBackEnd
                     .WithMany(p => p.Studyparticipant)
                     .HasForeignKey(d => d.IdParticipant)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("id_participantstudy");
+                    .HasConstraintName("id_participant1");
 
                 entity.HasOne(d => d.IdStudyNavigation)
                     .WithMany(p => p.Studyparticipant)

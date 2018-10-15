@@ -8,7 +8,6 @@ namespace BachelorBackEnd
     {
         public Participant()
         {
-            Questionnaire = new HashSet<Questionnaire>();
             Studyparticipant = new HashSet<Studyparticipant>();
         }
 
@@ -16,7 +15,12 @@ namespace BachelorBackEnd
         public string Email { get; set; }
         public string Password { get; set; }
 
-        public ICollection<Questionnaire> Questionnaire { get; set; }
+        public DateTime Age { get; set; }
+
+        public bool Gender { get; set; }
+
+        public bool English { get; set; }
+
         public ICollection<Studyparticipant> Studyparticipant { get; set; }
     }
 }

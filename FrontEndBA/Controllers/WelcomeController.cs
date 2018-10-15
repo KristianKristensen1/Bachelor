@@ -93,8 +93,6 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        Email = researcher.Email,
-                        Id = researcher.IdResearcher,
                         isAdmin = researcher.Isadmin,
                         isVerified = researcher.Isverified
                     };

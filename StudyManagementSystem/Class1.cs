@@ -17,11 +17,14 @@ namespace BachelorBackEnd
                 //Test of register participant
                 RegisterHandler rh = new RegisterHandler();
                 Participant part = new Participant();
+                part.Age = DateTime.Parse("1994-01-01");
+                part.English = true;
+                part.Gender = true;
                 Console.WriteLine("Input email: ");
                 part.Email = Console.ReadLine();
                 Console.WriteLine("Input password: ");
                 part.Password = Console.ReadLine();
-                //rh.RegisterParticipantDB(part);
+                rh.RegisterParticipantDB(part, out string ErrorMessage);
             }
             if (x == "r")
             {
