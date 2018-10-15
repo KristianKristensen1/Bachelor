@@ -170,6 +170,7 @@
     <Compile Include="Models\Researcher.cs" />
     <Compile Include="Models\Study.cs" />
     <Compile Include="Models\Studyparticipant.cs" />
+    <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
