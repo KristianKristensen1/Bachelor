@@ -11,9 +11,8 @@ namespace FrontEndBA.Controllers
 {
     public class HomepageController : Controller
     {
-        // GET: HomePage
-        [HttpGet]
-        public ActionResult Index()
+        [Authorize]
+        public ActionResult Participant()
         {
             return View();
         }
@@ -41,81 +40,6 @@ namespace FrontEndBA.Controllers
         public ActionResult AddStudyView()
         {
             return RedirectToAction("Index", "CreateStudy");
-        }
-
-        // GET: HomePage/Details/5
-        public ActionResult Details(int id)
-        {
-
-            return View();
-        }
-        [Authorize]
-        // GET: HomePage/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: HomePage/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Participant));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HomePage/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: HomePage/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                return RedirectToAction(nameof(Participant));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: HomePage/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: HomePage/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Participant));
-            }
-            catch
-            {
-                return View();
-            }
         }
     }
 }

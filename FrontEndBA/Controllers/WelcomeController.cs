@@ -134,22 +134,7 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-        // POST: Welcome/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        // TODO: Add delete logic here
 
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
 
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
         {

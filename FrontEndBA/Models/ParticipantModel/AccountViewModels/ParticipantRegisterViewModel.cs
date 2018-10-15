@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace FrontEndBA.Models.ParticipantModel.AccountViewModels
 {
@@ -23,5 +24,24 @@ namespace FrontEndBA.Models.ParticipantModel.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required(ErrorMessage = "Must pick a gender")]
+        [Display(Name = "Pick a gender")]
+        [EnumDataType(typeof(Gender))]
+        public Gender GenderType { get; set; }
+
+        [Display(Name = "Do you speak English?")]
+        [Required(ErrorMessage = "Must enter if you speak English or not")]
+        public Boolean Language { get; set; }
+
+
+
+
+    }
+
+    public enum Gender
+    {
+        Male=1,
+        Female=0
     }
 }

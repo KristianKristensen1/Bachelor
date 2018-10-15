@@ -57,7 +57,8 @@ namespace FrontEndBA.Controllers
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateParticipant([Bind("Email,Password")] ParticipantRegisterViewModel participantRegisterModel)
+        [Route("CreateParticipant")]
+        public ActionResult CreateParticipant([Bind("Email,Password,GenderType,Language")] ParticipantRegisterViewModel participantRegisterModel)
         {
             string Error;
 
