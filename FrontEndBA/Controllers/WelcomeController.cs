@@ -41,10 +41,9 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        Email = participant.Email,
-                        Id = participant.IdParticipant,
-                        isAdmin = false,
-                        isVerified = true
+                        hasAdminRights = false,
+                        hasParticipantRights = true,
+                        hasResearcherRights = false
                     };
 
                     //Generates token with claims defined from the userinfo object.
@@ -93,8 +92,9 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        isAdmin = researcher.Isadmin,
-                        isVerified = researcher.Isverified
+                        hasAdminRights = researcher.Isadmin,
+                        hasResearcherRights = researcher.Isverified,
+                        hasParticipantRights = false
                     };
 
                     //Generates token with claims defined from the userinfo object.
@@ -153,9 +153,9 @@ namespace FrontEndBA.Controllers
         {
             var myClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Email, userInfo.Email),
-                new Claim("HasAdminRights", userInfo.isAdmin ? "Y" : "N"),
-                new Claim("IsVerified", userInfo.isVerified ? "Y" : "N")
+                new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
+                new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),
+                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N")
             };
 
             return myClaims;

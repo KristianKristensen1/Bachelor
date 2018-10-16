@@ -7,6 +7,7 @@ using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+
 namespace FrontEndBA.Controllers
 {
     public class HomepageController : Controller
