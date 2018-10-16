@@ -85,12 +85,23 @@ namespace BachelorBackEnd
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
                 List<Study> relevantStudies = new List<Study>();
+                int participantAge = participant.Age.Year - DateTime.Now.Year;
 
-                List<int> relevantStudyIDs = DBmodel.InclusionCriteria.Where(crit =>
-                    crit.minAge >= participant.Age <= crit.maxAge &&
-                    (crit.male == participant.Gender || crit.female != participant.Gender) &&
-                    ((participant.English == false) ? crit.english == false : crit.english == false || crit.english == true)).ToList()
-                    .Select(studID => studID.IdStudy).ToList();
+                //BEHOLD! The Sorterings-Algorithm!
+                List<int> relevantStudyIDs = DBmodel.Inclusioncriteria.Where(crit =>
+                    //Sorts by age
+                    (crit.MinAge >= participantAge &&
+                    participantAge <= crit.MaxAge) &&
+                    //Sorts by gender
+                    (crit.Male == Convert.ToSByte(participant.Gender) ||
+                    crit.Female != Convert.ToSByte(participant.Gender)) &&
+                    //Sorts by english language
+                    ((participant.English == true) ?
+                    crit.English == Convert.ToSByte(participant.English) ||
+                    crit.English != Convert.ToSByte(participant.English) :
+                    crit.English != Convert.ToSByte(participant.English)))
+                    //Saves the relevant IDs to a list
+                    .ToList().Select(studID => studID.IdStudy).ToList();
 
                 foreach (var id in relevantStudyIDs)
                 {

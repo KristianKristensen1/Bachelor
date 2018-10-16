@@ -14,7 +14,7 @@ namespace FrontEndBA.Controllers
     {
         // GET: HomePage
         [HttpGet]
-        public ActionResult Participant()
+        public ActionResult Participant() //Similar to the reseachers?
         {
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
