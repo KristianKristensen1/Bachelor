@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace BachelorBackEnd
@@ -8,6 +7,7 @@ namespace BachelorBackEnd
     {
         public Study()
         {
+            Inclusioncriteria = new HashSet<Inclusioncriteria>();
             Studyparticipant = new HashSet<Studyparticipant>();
         }
 
@@ -18,7 +18,7 @@ namespace BachelorBackEnd
         public int IdResearcher { get; set; }
 
         public Researcher IdResearcherNavigation { get; set; }
+        public ICollection<Inclusioncriteria> Inclusioncriteria { get; set; }
         public ICollection<Studyparticipant> Studyparticipant { get; set; }
-     
     }
 }

@@ -164,6 +164,7 @@
     <Compile Include="DAOInterfaces\IRegisterHandler.cs" />
     <Compile Include="DAOInterfaces\IVerifyHandler.cs" />
     <Compile Include="Models\bachelordbContext.cs" />
+    <Compile Include="Models\Inclusioncriteria.cs" />
     <Compile Include="Models\Participant.cs" />
     <Compile Include="Models\Researcher.cs" />
     <Compile Include="Models\Study.cs" />

@@ -15,6 +15,7 @@ namespace BachelorBackEnd
         {
         }
 
+        public virtual DbSet<Inclusioncriteria> Inclusioncriteria { get; set; }
         public virtual DbSet<Participant> Participant { get; set; }
         public virtual DbSet<Researcher> Researcher { get; set; }
         public virtual DbSet<Study> Study { get; set; }
@@ -25,12 +26,60 @@ namespace BachelorBackEnd
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=10.192.78.71;Database=bachelordb;user=admin;pwd=admin1234;");
+                optionsBuilder.UseMySql("Server=DESKTOP-4G1FLIU;Database=bachelordb;user=admin;pwd=admin1234;Convert Zero Datetime = true");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Inclusioncriteria>(entity =>
+            {
+                entity.HasKey(e => e.IdInclusionCriteria);
+
+                entity.ToTable("inclusioncriteria");
+
+                entity.HasIndex(e => e.IdInclusionCriteria)
+                    .HasName("id_inclusionCriteria_UNIQUE")
+                    .IsUnique();
+
+                entity.HasIndex(e => e.IdStudy)
+                    .HasName("id_study_idx");
+
+                entity.Property(e => e.IdInclusionCriteria)
+                    .HasColumnName("id_inclusionCriteria")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.English)
+                    .HasColumnName("english")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.Female)
+                    .HasColumnName("female")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.IdStudy)
+                    .HasColumnName("id_study")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.Male)
+                    .HasColumnName("male")
+                    .HasColumnType("tinyint(4)");
+
+                entity.Property(e => e.MaxAge)
+                    .HasColumnName("max_age")
+                    .HasColumnType("int(11)");
+
+                entity.Property(e => e.MinAge)
+                    .HasColumnName("min_age")
+                    .HasColumnType("int(11)");
+
+                entity.HasOne(d => d.IdStudyNavigation)
+                    .WithMany(p => p.Inclusioncriteria)
+                    .HasForeignKey(d => d.IdStudy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("id_study1");
+            });
+
             modelBuilder.Entity<Participant>(entity =>
             {
                 entity.HasKey(e => e.IdParticipant);

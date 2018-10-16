@@ -1,10 +1,125 @@
-﻿@{
+﻿@model IEnumerable<BachelorBackEnd.Study>
+
+@{
     ViewData["Title"] = "Participant";
 }
 
+<div>
+    <img src="~/images/AU.jpg" alt="AU Logo" width="350" height="100">
+</div>
+
+<html>
+<head>
+    <style>
+        ul {
+            list-style-type: none;
+            margin: 10;
+            padding: 5;
+            overflow: hidden;
+            background-color: #333;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: white;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #111;
+                }
+    </style>
+</head>
+<body style="background-color:whitesmoke">
+    <ul>
+        <li><a class="active" href="#home">My studies</a></li>
+        <li><a href="#news">All studies</a></li>
+        <li><a href="#contact">Add New Study</a></li>
+        <li style="float:right"><a href="#contact">My Profile</a></li>
+        <li style="float:right"><a href="#contact">Log Out</a></li>
+    </ul>
 
 
-<h2>Index</h2>
+    <div class="col-md-5" style="background-color:white">
+        <h3>All studies</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Isdraft)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Isdraft)
+                        </td>
+                    </tr>
+                }
 
-<button type="button" onclick="window.location.href='http://localhost:61728/CreateStudy'">Create study</button>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-5" style="background-color:white">
+        <h3>My studies</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Tag)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Isdraft)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Tag)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Isdraft)
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
 
