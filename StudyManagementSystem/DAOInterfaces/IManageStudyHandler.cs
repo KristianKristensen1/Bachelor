@@ -12,16 +12,18 @@ namespace BachelorBackEnd
 
         void DeleteStudyDB(Study study);
 
-        void RemoveParticipantDB(Participant participant, Study study);
-
-        void GetStudyDB(string studyID);
+        void RemoveParticipantDB(Participant participant, Study study);        
 
         void CreateStudyDB(Study study);
 
         void SaveAsDraftDB(Study study);
 
-        void ShowStudyDB(string studyID);
+        List<Study> GetRelevantStudiesDB(Participant participant);
 
-        void GetAllStudies();
+        List<Study> GetMyParticipantStudiesDB(int participantID);
+
+        List<Study> GetMyResearcherStudiesDB(int reseacherID);
+
+        List<Study> GetAllStudiesDB();
     }
 }

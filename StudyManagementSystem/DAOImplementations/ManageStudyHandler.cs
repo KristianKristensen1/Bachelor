@@ -30,19 +30,6 @@ namespace BachelorBackEnd
             }
         }
 
-        public void GetAllStudies()
-        {
-            using (bachelordbContext DBmodel = new bachelordbContext())
-            {
-                
-            }
-        }
-
-        public void GetStudyDB(string studyID)
-        {
-            throw new NotImplementedException();
-        }
-
         public void RemoveParticipantDB(Participant participant, Study study)
         {
             throw new NotImplementedException();
@@ -53,9 +40,64 @@ namespace BachelorBackEnd
             throw new NotImplementedException();
         }
 
-        public void ShowStudyDB(string studyID)
+        //OBS! Change diagrams to match changes.
+        public List<Study> GetAllStudiesDB()
         {
-            throw new NotImplementedException();
+            using (bachelordbContext DBmodel = new bachelordbContext())
+            {
+                List<Study> allStudies = DBmodel.Study.ToList();
+                return allStudies;
+            }
+        }
+
+        //OBS! Change diagrams to match changes.
+        public List<Study> GetMyParticipantStudiesDB(int participantID)
+        {
+            using (bachelordbContext DBmodel = new bachelordbContext())
+            {
+                List<Study> myStudies = new List<Study>();
+                List<int> myStudyIDs = DBmodel.Studyparticipant.Where
+                    (studpart => studpart.IdParticipant == participantID).ToList()
+                    .Select(partID => partID.IdStudy).ToList();
+
+                foreach (var id in myStudyIDs)
+                {
+                    myStudies.Add(DBmodel.Study.FirstOrDefault(stud => stud.IdStudy == id));
+                }
+                return myStudies;
+            }
+        }
+
+        //OBS! Change diagrams to match changes.
+        public List<Study> GetMyResearcherStudiesDB(int reseacherID)
+        {
+            using (bachelordbContext DBmodel = new bachelordbContext())
+            {
+                List<Study> myStudies = new List<Study>();
+                myStudies = DBmodel.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
+                return myStudies;
+            }
+        }
+
+        //OBS! Change diagrams to match changes.
+        public List<Study> GetRelevantStudiesDB(Participant participant)
+        {
+            using (bachelordbContext DBmodel = new bachelordbContext())
+            {
+                List<Study> relevantStudies = new List<Study>();
+
+                List<int> relevantStudyIDs = DBmodel.InclusionCriteria.Where(crit =>
+                    crit.minAge >= participant.Age <= crit.maxAge &&
+                    (crit.male == participant.Gender || crit.female != participant.Gender) &&
+                    ((participant.English == false) ? crit.english == false : crit.english == false || crit.english == true)).ToList()
+                    .Select(studID => studID.IdStudy).ToList();
+
+                foreach (var id in relevantStudyIDs)
+                {
+                    relevantStudies.Add(DBmodel.Study.FirstOrDefault(stud => stud.IdStudy == id));
+                }
+                return relevantStudies;
+            }
         }
     }
 }
