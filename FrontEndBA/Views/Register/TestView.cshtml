@@ -1,16 +1,16 @@
 ﻿@model FrontEndBA.Models.ParticipantModel.AccountViewModels.ParticipantRegisterViewModel
-@using FrontEndBA.Models.ParticipantModel.AccountViewModels;
 
 @{
-    ViewData["Title"] = "Participant";
+    ViewData["Title"] = "TestView";
 }
 
-<h2>Participant Register</h2>
+<h2>TestView</h2>
 
+<h4>ParticipantRegisterViewModel</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="RegisterPageParticipant">
+        <form asp-action="TestView">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
@@ -27,20 +27,16 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
-            <label text="Pick a Gender" class="control-label">
-                <label asp-for="GenderType" class="control-label"></label>
-                <select asp-for="GenderType" asp-items="Html.GetEnumSelectList<Gender>()" class="form-control"></select>
-            </label>
-            
             <div class="form-group">
-                <label asp-for="Language" class="control-label"></label>
+                <label asp-for="GenderType" class="control-label"></label>
+                <input asp-for="GenderType" class="form-control" />
+                <span asp-validation-for="GenderType" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <div class="checkbox">
-
-                    <label class="control-label">
-                        @Html.RadioButtonFor(model => model.Language, true) Yes
-                        @Html.RadioButtonFor(model => model.Language, true) No
+                    <label>
+                        <input asp-for="Language" /> @Html.DisplayNameFor(model => model.Language)
                     </label>
-                    <span asp-validation-for="Language" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
@@ -49,12 +45,13 @@
                 <span asp-validation-for="Age" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-default" formaction="CreateParticipant" />
+                <input type="submit" value="Create" class="btn btn-default" />
             </div>
         </form>
     </div>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

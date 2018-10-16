@@ -27,9 +27,6 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
-
-
-        // POST: Register/Create
         
 
         // POST: Register/Create
@@ -60,7 +57,8 @@ namespace FrontEndBA.Controllers
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateParticipant([Bind("Email,Password")] ParticipantRegisterViewModel participantRegisterModel)
+        [Route("CreateParticipant")]
+        public ActionResult CreateParticipant([Bind("Email,Password,GenderType,Language,Age")] ParticipantRegisterViewModel participantRegisterModel)
         {
             string Error;
 
@@ -68,6 +66,16 @@ namespace FrontEndBA.Controllers
             Participant currentp = new Participant();
             currentp.Email = participantRegisterModel.Email;
             currentp.Password = participantRegisterModel.Password;
+            currentp.Age = participantRegisterModel.Age;
+            currentp.English = participantRegisterModel.Language;
+            if (participantRegisterModel.GenderType == Gender.Male)
+                currentp.Gender = true;
+            else
+            {
+                currentp.Gender = false;
+            }
+            
+            
             bool success = registerHandler.RegisterParticipantDB(currentp, out Error);
 
             if (!success)

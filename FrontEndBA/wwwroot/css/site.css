@@ -52,7 +52,18 @@
     width: 100%;
 }
 
-.th { height: 50px; }
+.bottomdivwrapper {
+    text-align: center;
+}
+.button {
+    position: absolute;
+    bottom:0;
+}
+
+
+.th {
+    height: 50px;
+}
 
     /* Hide/rearrange for smaller screens */
     @media screen and (max-width: 767px) {
