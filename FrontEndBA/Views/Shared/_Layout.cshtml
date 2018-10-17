@@ -31,8 +31,17 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        if (User.Claims.ElementAt(1).Value == "Y")
+                        {
+
+                        }
+                    }
                     <li><a asp-area="" asp-controller="Welcome" asp-action="Researcher">Login as a Researcher</a></li>
                 </ul>
+                
+
             </div>
         </div>
     </nav>

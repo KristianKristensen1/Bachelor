@@ -92,11 +92,12 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        hasAdminRights = researcher.Isadmin,
-                        hasResearcherRights = researcher.Isverified,
+                        hasAdminRights = status.LoginStatus.researcher.Isadmin,
+                        hasResearcherRights = status.LoginStatus.researcher.Isverified,
                         hasParticipantRights = false
                     };
 
+                   
                     //Generates token with claims defined from the userinfo object.
                     var accessTokenResult = tokenGenerator.GenerateAccessTokenWithClaimsPrincipal(
                     researcher.Email,

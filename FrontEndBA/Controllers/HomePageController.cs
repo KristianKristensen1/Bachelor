@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using BachelorBackEnd;
@@ -16,6 +17,7 @@ namespace FrontEndBA.Controllers
         [HttpGet]
         public ActionResult Participant() //Similar to the reseachers?
         {
+            
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
@@ -34,6 +36,13 @@ namespace FrontEndBA.Controllers
         //[Authorize(Policy = "RequiresVerified")]
         public ActionResult Researcher()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+              
+                var kktest = User.Claims.ElementAt(1).Value;
+            
+            }
+
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
