@@ -14,7 +14,7 @@ namespace BachelorBackEnd
 
         void RemoveParticipantDB(Participant participant, Study study);        
 
-        void CreateStudyDB(Study study);
+        void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria);
 
         void SaveAsDraftDB(Study study);
 

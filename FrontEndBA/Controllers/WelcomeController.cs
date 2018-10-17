@@ -106,7 +106,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the participant homepage
-                    return RedirectToAction("Researcher", "Homepage");
+                    return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
                 }
                 else
                 {
@@ -141,7 +141,7 @@ namespace FrontEndBA.Controllers
             {
                 new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
                 new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),
-                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N")
+                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N"),
             };
 
             return myClaims;

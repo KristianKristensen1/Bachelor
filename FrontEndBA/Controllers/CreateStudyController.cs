@@ -14,22 +14,19 @@ namespace FrontEndBA.Controllers
         public ActionResult Index()
         {
             return View();
-        }
-
-
-       
+        }       
 
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel)
+        public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel, [Bind("Male,Female,MinAge,MaxAge,English,IdStudy")] Inclusioncriteria criteriamodel)
         {
             try
             {
                 ManageStudyHandler manageStudyHandler = new ManageStudyHandler();
-                manageStudyHandler.CreateStudyDB(studymodel);
+                manageStudyHandler.CreateStudyDB(studymodel, criteriamodel);
 
-                return View("../Homepage/Participant");
+                return View("../Homepage/Participant"); //Researcher, no?
             }
             catch
             {

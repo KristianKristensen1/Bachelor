@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using BachelorBackEnd;
@@ -17,16 +16,17 @@ namespace FrontEndBA.Controllers
         [HttpGet]
         public ActionResult Participant() //Similar to the reseachers?
         {
-            
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
             fakestudy.Tag = "Tag";
             fakestudy.Isdraft = true;
+            fakestudy.Name = "This is a name of study1";
             Study fakestudy2 = new Study();
             fakestudy2.Description = "2Test";
             fakestudy2.Tag = "2Tag";
             fakestudy2.Isdraft = false;
+            fakestudy2.Name = "This is a name of study2";
             fakelist.Add(fakestudy2);
             fakelist.Add(fakestudy);
             return View(fakelist);
@@ -34,27 +34,20 @@ namespace FrontEndBA.Controllers
 
         [Authorize]
         //[Authorize(Policy = "RequiresVerified")]
-        public ActionResult Researcher()
+        public ActionResult Researcher(Researcher researcher)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-              
-                var kktest = User.Claims.ElementAt(1).Value;
-            
-            }
+            ManageStudyHandler mst = new ManageStudyHandler();
 
-            List<Study> fakelist = new List<Study>();
-            Study fakestudy = new Study();
-            fakestudy.Description = "Test";
-            fakestudy.Tag = "Tag";
-            fakestudy.Isdraft = true;
-            Study fakestudy2 = new Study();
-            fakestudy2.Description = "2Test";
-            fakestudy2.Tag = "2Tag";
-            fakestudy2.Isdraft = false;
-            fakelist.Add(fakestudy2);
-            fakelist.Add(fakestudy);
-            return View(fakelist);
+            //MY RESEARCHER STUDIES TEST //IMPEDED
+            //List<Study> myResearcherStudies = new List<Study>();
+            //int id = researcher.IdResearcher;
+            //myResearcherStudies = mst.GetMyResearcherStudiesDB(id);
+            //return View(myResearcherStudies);
+
+            List<Study> allStudies = new List<Study>();
+            int id = researcher.IdResearcher;
+            allStudies = mst.GetAllStudiesDB();
+            return View(allStudies);
         }
 
         [Authorize]
