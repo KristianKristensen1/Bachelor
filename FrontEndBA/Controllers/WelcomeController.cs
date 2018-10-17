@@ -54,7 +54,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the participant homepage
-                    return RedirectToAction("Participant", "Homepage");
+                    return RedirectToAction("Participant", "Homepage", status.LoginStatus.participant);
                 }
                 else
                 {
@@ -92,8 +92,8 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        hasAdminRights = researcher.Isadmin,
-                        hasResearcherRights = researcher.Isverified,
+                        hasAdminRights = status.LoginStatus.researcher.Isadmin,
+                        hasResearcherRights = status.LoginStatus.researcher.Isverified,
                         hasParticipantRights = false
                     };
 
@@ -104,8 +104,8 @@ namespace FrontEndBA.Controllers
                     await HttpContext.SignInAsync(accessTokenResult.ClaimsPrincipal,
                         accessTokenResult.AuthProperties);
 
-                    //Redirects to the participant homepage
-                    return RedirectToAction("Researcher", "Homepage");
+                    //Redirects to the researcher homepage
+                    return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
                 }
                 else
                 {

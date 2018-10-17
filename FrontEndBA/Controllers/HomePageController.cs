@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FrontEndBA.Models;
 
 
 namespace FrontEndBA.Controllers
@@ -14,38 +15,24 @@ namespace FrontEndBA.Controllers
     {
         // GET: HomePage
         [HttpGet]
-        public ActionResult Participant() //Similar to the reseachers?
+        public ActionResult Participant(Participant participant)
         {
-            List<Study> fakelist = new List<Study>();
-            Study fakestudy = new Study();
-            fakestudy.Description = "Test";
-            fakestudy.Tag = "Tag";
-            fakestudy.Isdraft = true;
-            Study fakestudy2 = new Study();
-            fakestudy2.Description = "2Test";
-            fakestudy2.Tag = "2Tag";
-            fakestudy2.Isdraft = false;
-            fakelist.Add(fakestudy2);
-            fakelist.Add(fakestudy);
-            return View(fakelist);
+            ManageStudyHandler mst = new ManageStudyHandler();
+            Studies studiesCollection = new Studies();
+            studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
+            studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);
+            return View(studiesCollection);
         }
 
         [Authorize]
         //[Authorize(Policy = "RequiresVerified")]
-        public ActionResult Researcher()
+        public ActionResult Researcher(Researcher researcher)
         {
-            List<Study> fakelist = new List<Study>();
-            Study fakestudy = new Study();
-            fakestudy.Description = "Test";
-            fakestudy.Tag = "Tag";
-            fakestudy.Isdraft = true;
-            Study fakestudy2 = new Study();
-            fakestudy2.Description = "2Test";
-            fakestudy2.Tag = "2Tag";
-            fakestudy2.Isdraft = false;
-            fakelist.Add(fakestudy2);
-            fakelist.Add(fakestudy);
-            return View(fakelist);
+            ManageStudyHandler mst = new ManageStudyHandler();
+            Studies studiesCollection = new Studies();
+            studiesCollection.allStudies = mst.GetAllStudiesDB();
+            studiesCollection.myResearcherStudies = mst.GetMyResearcherStudiesDB(researcher.IdResearcher);
+            return View(studiesCollection);
         }
 
         [Authorize]
