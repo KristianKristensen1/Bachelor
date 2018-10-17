@@ -18,10 +18,13 @@ namespace FrontEndBA.Controllers
         public ActionResult Participant(Participant participant)
         {
             ManageStudyHandler mst = new ManageStudyHandler();
-            Studies studiesCollection = new Studies();
-            studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
-            studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);
-            return View(studiesCollection);
+            Studies studiesCollection = new Studies();            
+            studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
+
+            //NOT YET IMPLEMENTED
+            //studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
+
+            //INSTEAD FAKE
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
@@ -35,7 +38,10 @@ namespace FrontEndBA.Controllers
             fakestudy2.Name = "This is a name of study2";
             fakelist.Add(fakestudy2);
             fakelist.Add(fakestudy);
-            return View(fakelist);
+
+            studiesCollection.myParticipantStudies = fakelist;
+
+            return View(studiesCollection);
         }
 
         [Authorize]
