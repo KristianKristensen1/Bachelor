@@ -18,6 +18,7 @@ namespace FrontEndBA.Controllers
         {
             this.tokenGenerator = tokenGenerator;
         }
+
         public ActionResult Participant()
         {
             return View();
@@ -131,6 +132,13 @@ namespace FrontEndBA.Controllers
         public ActionResult Researcher()
         {
             return View();
+        }
+
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Participant", "Welcome");
         }
 
 

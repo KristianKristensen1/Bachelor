@@ -51,20 +51,22 @@
         <div>
             <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100">
         </div>
+        //Checks if the user has researcher rights
         if (User.Claims.ElementAt(1).Value == "Y")
         {
         <ul class="menu">
             <li style="float: left"><a class="menuItems" href="#Home">Home</a></li>
             <li style="float: left"><a class="menuItems" href="#Addstudy">AddStudy</a></li>
-            <li style="float: right"><a class="menuItems" href="#LogOut">Log Out</a></li>
+            <li style="float: right"><a class="menuItems" href="@Url.Action("Logout", "Welcome")">Log Out</a></li>
             <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
         </ul>
         }
+        //Checks if the user has participant rights
         else if (User.Claims.ElementAt(2).Value == "Y")
         {
             <ul class="menu">
                 <li style="float: left"><a class="menuItems" href="#Home">Home</a></li>
-                <li style="float: right"><a class="menuItems" href="#LogOut">Log Out</a></li>
+                <li style="float: right"><a class="menuItems" href="@Url.Action("Logout", "Welcome")">Log Out</a></li>
                 <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
             </ul>
         }
