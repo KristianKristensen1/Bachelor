@@ -1,4 +1,4 @@
-﻿@model IEnumerable<BachelorBackEnd.Study>
+﻿@model FrontEndBA.Models.Studies
 
 @{
     ViewData["Title"] = "Participant";
@@ -23,16 +23,16 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.IdStudy)
+                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().IdStudy)
                             </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.myParticipantStudies)
                         {
                         <tr>
                             <td>
@@ -55,19 +55,19 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Name)
+                                @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Description)
+                                @Html.DisplayNameFor(model => model.relevantStudies.First().Description)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tag)
+                                @Html.DisplayNameFor(model => model.relevantStudies.First().Tag)
                             </th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model)
+                        @foreach (var item in Model.relevantStudies)
                         {
                             <tr>
                                 <td>
