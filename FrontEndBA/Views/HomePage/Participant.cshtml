@@ -5,7 +5,7 @@
 }
 
 <div>
-    <img src="~/images/AU.jpg" alt="AU Logo" width="350" height="100">
+    <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100">
 </div>
 
 <html>
@@ -13,8 +13,9 @@
     <style>
         ul {
             list-style-type: none;
-            margin: 10;
-            padding: 5;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            padding: 0px;
             overflow: hidden;
             background-color: #333;
         }
@@ -22,103 +23,97 @@
         li {
             float: left;
         }
-
-            li a {
-                display: block;
-                color: white;
-                text-align: center;
-                padding: 14px 16px;
-                text-decoration: none;
+        li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+            li a:hover {
+                background-color: #111;
             }
-
-                li a:hover {
-                    background-color: #111;
-                }
     </style>
 </head>
+
 <body style="background-color:whitesmoke">
-    <ul>
-        <li><a class="active" href="#home">My studies</a></li>
-        <li><a href="#news">All studies</a></li>
-        <li><a href="#contact">Add New Study</a></li>
-        <li style="float:right"><a href="#contact">My Profile</a></li>
-        <li style="float:right"><a href="#contact">Log Out</a></li>
+    <ul class="menu">
+        <li style="float:left"><a href="#Home">Home</a></li>
+        <li style="float:right"><a href="#LogOut">Log Out</a></li>
+        <li style="float:right"><a href="#Profile">My Profile</a></li>
     </ul>
 
+    <div class="container">
+        <div class="row">
 
-    <div class="col-md-5" style="background-color:white">
-        <h3>All studies</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Tag)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Isdraft)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tag)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Isdraft)
-                        </td>
-                    </tr>
-                }
+            <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+                <h3>My studies</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdStudy)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdStudy)
+                            </td>
+                        </tr>
+                        }
 
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+                <h3>Relevant studies</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Tag)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tag)
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <div class="col-md-5" style="background-color:white">
-        <h3>My studies</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Tag)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Isdraft)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Tag)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Isdraft)
-                        </td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
-    </div>
 
 </body>
 </html>

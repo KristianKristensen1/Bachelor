@@ -17,6 +17,8 @@ namespace BachelorBackEnd
         public string Tag { get; set; }
         public int IdResearcher { get; set; }
 
+        public string Name { get; set; }
+
         public Researcher IdResearcherNavigation { get; set; }
         public ICollection<Inclusioncriteria> Inclusioncriteria { get; set; }
         public ICollection<Studyparticipant> Studyparticipant { get; set; }

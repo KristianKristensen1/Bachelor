@@ -140,7 +140,7 @@ namespace FrontEndBA.Controllers
             {
                 new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
                 new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),
-                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N")
+                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N"),
             };
 
             return myClaims;
