@@ -49,9 +49,16 @@
     text-align: center;
     width: 100%;
 }
-.table {
-    width: 100%;
+table {
+    border: groove;
 }
+
+td, th {
+    border: 1px solid #999;
+    padding: 0.5rem;
+    text-align: left;
+}
+
 
 .bottomdivwrapper {
     text-align: center;
@@ -78,6 +85,32 @@
     .menuItems:hover {
         background-color: #111;
     }
+
+
+.studyheader {
+    background-color: darken($baseColor, 5%);
+    color: white;
+    font-size: 1.5em;
+    padding: 1rem;
+    text-align: center;
+    text-transform: uppercase;
+}
+.table-study {
+    text-align: left;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    display: table;
+    padding: 0 0 8em 0;
+}
+h1 {
+    font-size:3em; 
+    font-weight: 300;
+    line-height:1em;
+    text-align: center;
+    color: #4DC3FA;
+}
+
 
 
 
