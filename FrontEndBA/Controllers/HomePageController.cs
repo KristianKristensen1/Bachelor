@@ -22,6 +22,20 @@ namespace FrontEndBA.Controllers
             studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
             studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);
             return View(studiesCollection);
+            List<Study> fakelist = new List<Study>();
+            Study fakestudy = new Study();
+            fakestudy.Description = "Test";
+            fakestudy.Tag = "Tag";
+            fakestudy.Isdraft = true;
+            fakestudy.Name = "This is a name of study1";
+            Study fakestudy2 = new Study();
+            fakestudy2.Description = "2Test";
+            fakestudy2.Tag = "2Tag";
+            fakestudy2.Isdraft = false;
+            fakestudy2.Name = "This is a name of study2";
+            fakelist.Add(fakestudy2);
+            fakelist.Add(fakestudy);
+            return View(fakelist);
         }
 
         [Authorize]
