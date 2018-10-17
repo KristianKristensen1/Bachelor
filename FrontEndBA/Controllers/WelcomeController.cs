@@ -92,8 +92,8 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        hasAdminRights = status.LoginStatus.researcher.Isadmin,
-                        hasResearcherRights = status.LoginStatus.researcher.Isverified,
+                        hasAdminRights = researcher.Isadmin,
+                        hasResearcherRights = researcher.Isverified,
                         hasParticipantRights = false
                     };
 
@@ -105,7 +105,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the participant homepage
-                    return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
+                    return RedirectToAction("Researcher", "Homepage");
                 }
                 else
                 {

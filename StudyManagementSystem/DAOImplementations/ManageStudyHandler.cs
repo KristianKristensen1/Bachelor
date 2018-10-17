@@ -13,12 +13,11 @@ namespace BachelorBackEnd
             throw new NotImplementedException();
         }
 
-        public void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria)
+        public void CreateStudyDB(Study study)
         {
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
                 DBmodel.Study.Add(study);
-                DBmodel.Inclusioncriteria.Add(inclusioncriteria);
                 DBmodel.SaveChanges();
             }
         }
