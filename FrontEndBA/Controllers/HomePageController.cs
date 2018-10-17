@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using FrontEndBA.Models;
 
 
 namespace FrontEndBA.Controllers
@@ -14,8 +15,16 @@ namespace FrontEndBA.Controllers
     {
         // GET: HomePage
         [HttpGet]
-        public ActionResult Participant() //Similar to the reseachers?
+        public ActionResult Participant(Participant participant)
         {
+            ManageStudyHandler mst = new ManageStudyHandler();
+            Studies studiesCollection = new Studies();            
+            studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
+
+            //NOT YET IMPLEMENTED
+            //studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
+
+            //INSTEAD FAKE
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
@@ -29,7 +38,10 @@ namespace FrontEndBA.Controllers
             fakestudy2.Name = "This is a name of study2";
             fakelist.Add(fakestudy2);
             fakelist.Add(fakestudy);
-            return View(fakelist);
+
+            studiesCollection.myParticipantStudies = fakelist;
+
+            return View(studiesCollection);
         }
 
         [Authorize]
@@ -37,17 +49,10 @@ namespace FrontEndBA.Controllers
         public ActionResult Researcher(Researcher researcher)
         {
             ManageStudyHandler mst = new ManageStudyHandler();
-
-            //MY RESEARCHER STUDIES TEST //IMPEDED
-            //List<Study> myResearcherStudies = new List<Study>();
-            //int id = researcher.IdResearcher;
-            //myResearcherStudies = mst.GetMyResearcherStudiesDB(id);
-            //return View(myResearcherStudies);
-
-            List<Study> allStudies = new List<Study>();
-            int id = researcher.IdResearcher;
-            allStudies = mst.GetAllStudiesDB();
-            return View(allStudies);
+            Studies studiesCollection = new Studies();
+            studiesCollection.allStudies = mst.GetAllStudiesDB();
+            studiesCollection.myResearcherStudies = mst.GetMyResearcherStudiesDB(researcher.IdResearcher);
+            return View(studiesCollection);
         }
 
         [Authorize]

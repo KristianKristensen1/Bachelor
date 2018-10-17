@@ -1,5 +1,5 @@
-﻿@model IEnumerable<BachelorBackEnd.Study>
-
+﻿@model FrontEndBA.Models.Studies
+    
 @{
     ViewData["Title"] = "Researcher";
 }
@@ -9,23 +9,23 @@
 <h3>All studies</h3>
 <div class="col-md-5">
     <h3>All studies</h3>
-    <table class="table table-striped">
+    <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.allStudies.First().Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tag)
+                    @Html.DisplayNameFor(model => model.allStudies.First().Tag)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Isdraft)
+                    @Html.DisplayNameFor(model => model.allStudies.First().Isdraft)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.allStudies)
             {
                 <tr>
                     <td>
@@ -53,19 +53,19 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Description)
+                    @Html.DisplayNameFor(model => model.myResearcherStudies.First().Description)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Tag)
+                    @Html.DisplayNameFor(model => model.myResearcherStudies.First().Tag)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Isdraft)
+                    @Html.DisplayNameFor(model => model.myResearcherStudies.First().Isdraft)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model)
+            @foreach (var item in Model.myResearcherStudies)
             {
                 <tr>
                     <td>
@@ -83,4 +83,7 @@
         </tbody>
     </table>
 </div>
+
+
+
 

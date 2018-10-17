@@ -19,21 +19,20 @@ namespace FrontEndBA.Controllers
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel, [Bind("Male,Female,MinAge,MaxAge,English,IdStudy")] Inclusioncriteria criteriamodel)
+        public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel,
+                                   [Bind("Male,Female,MinAge,MaxAge,English,IdReseacher")] Inclusioncriteria criteriamodel)
         {
             try
             {
                 ManageStudyHandler manageStudyHandler = new ManageStudyHandler();
-                manageStudyHandler.CreateStudyDB(studymodel, criteriamodel);
+                manageStudyHandler.CreateStudyDB(studymodel,criteriamodel);
 
-                return View("../Homepage/Participant"); //Researcher, no?
+                return View("../Homepage/Participant");
             }
             catch
             {
                 return View("./Index");
             }
-        }
-
-       
+        }       
     }
 }
