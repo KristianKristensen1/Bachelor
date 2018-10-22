@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using StudyManagementSystem.Models;
 
 namespace BachelorBackEnd
 {
@@ -27,12 +26,8 @@ namespace BachelorBackEnd
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-<<<<<<< HEAD
                 optionsBuilder.UseMySql("Server=10.192.79.2;Database=bachelordb;user=admin;pwd=admin1234;Convert Zero Datetime = true");
               //  DESKTOP - 4G1FLIU
-=======
-                optionsBuilder.UseMySql("Server=10.192.72.19;Database=bachelordb;user=admin;pwd=admin1234;");
->>>>>>> master
             }
         }
 

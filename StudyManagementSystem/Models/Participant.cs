@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BachelorBackEnd;
 
-namespace StudyManagementSystem.Models
+
+namespace BachelorBackEnd
 {
     public partial class Participant
     {
