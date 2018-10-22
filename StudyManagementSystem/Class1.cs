@@ -24,7 +24,7 @@ namespace BachelorBackEnd
                 part.Email = Console.ReadLine();
                 Console.WriteLine("Input password: ");
                 part.Password = Console.ReadLine();
-                rh.RegisterParticipantDB(part, out string ErrorMessage);
+                rh.RegisterParticipantDB(part);
             }
             if (x == "r")
             {

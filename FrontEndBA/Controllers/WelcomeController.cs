@@ -142,8 +142,6 @@ namespace FrontEndBA.Controllers
             return RedirectToAction("Participant", "Welcome");
         }
 
-
-
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
         {
             var myClaims = new List<Claim> //Hvorfor Y/N i stedet for en bool? Skal det være string?
