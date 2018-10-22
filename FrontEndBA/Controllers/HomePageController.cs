@@ -7,7 +7,8 @@ using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Models;
-
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace FrontEndBA.Controllers
 {
@@ -15,6 +16,7 @@ namespace FrontEndBA.Controllers
     {
         // GET: HomePage
         [HttpGet]
+        [Authorize]
         public ActionResult Participant(Participant participant)
         {
             ManageStudyHandler mst = new ManageStudyHandler();
@@ -58,7 +60,7 @@ namespace FrontEndBA.Controllers
         [Authorize]
         public ActionResult AddStudyView()
         {
-            return RedirectToAction("Index", "CreateStudy");
+           return RedirectToAction("Index", "CreateStudy");
         }
 
         // GET: HomePage/Details/5
