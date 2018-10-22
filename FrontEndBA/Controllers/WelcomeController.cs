@@ -130,14 +130,15 @@ namespace FrontEndBA.Controllers
 
         public ActionResult Researcher()
         {
-            return View();
+            return View(); //Jacob, hva' gør'n?
+                            //Bare return view i ovenstående metode? (Samme for participant)
         }
 
 
 
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
         {
-            var myClaims = new List<Claim>
+            var myClaims = new List<Claim> //Hvorfor Y/N i stedet for en bool? Skal det være string?
             {
                 new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
                 new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),

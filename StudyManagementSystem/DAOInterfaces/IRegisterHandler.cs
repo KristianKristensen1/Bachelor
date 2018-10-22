@@ -8,9 +8,9 @@ namespace BachelorBackEnd
 {
     public interface IRegisterHandler
     {
-        bool RegisterParticipantDB(Participant participant, out string ErrorMessage);
+        bool RegisterParticipantDB(Participant participant);
 
-        bool RegisterResearcherDB(Researcher researcher, out string ErrorMessage);
+        bool RegisterResearcherDB(Researcher researcher);
 
         void VerifyResearcherDB(Researcher researcher);
     }
