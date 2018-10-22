@@ -4,9 +4,6 @@
     ViewData["Title"] = "Participant";
 }
 
-
-
-
 <body style="background-color:whitesmoke">
     @*<ul class="menu">
         <li style="float:left"><a href="#Home">Home</a></li>
@@ -18,17 +15,16 @@
         <div class="row">
 
             <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
-                <h3>My studies</h3>
+                <h3 class="tableTitle">My studies</h3>
                 <table class="table">
                     <thead>
                         <tr>
+                            <th class="col-md-1">
+                                ID
+                            </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
                             </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().IdStudy)
-                            </th>
-                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,10 +32,12 @@
                         {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => item.IdStudy)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IdStudy)
+                                @Html.DisplayFor(modelItem => item.Name)
+                                <br />
+                                @Html.DisplayFor(modelItem => item.Description)
                             </td>
                         </tr>
                         }
@@ -50,34 +48,32 @@
 
 
             <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
-                <h3>Relevant studies</h3>
+                <h3 class="tableTitle">Relevant studies</h3>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.relevantStudies.First().Description)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.relevantStudies.First().Tag)
-                            </th>
-                            <th></th>
-                        </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            ID
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
+                        </th>
+                    </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.relevantStudies)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Tag)
-                                </td>
-                            </tr>
-                        }
+                    @foreach (var item in Model.relevantStudies)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdStudy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                <br />
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                        </tr>
+                    }
 
                     </tbody>
                 </table>

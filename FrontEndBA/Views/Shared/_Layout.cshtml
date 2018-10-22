@@ -33,10 +33,10 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Welcome" asp-action="Researcher">Login as a Researcher</a></li>
+                        <li><a asp-area="" asp-controller="Welcome" asp-action="Participant">Login as a Participant</a></li>
                     </ul>
                     <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Welcome" asp-action="Participant">Login as a Participant</a></li>
+                        <li><a asp-area="" asp-controller="Welcome" asp-action="Researcher">Login as a Researcher</a></li>
                     </ul>
 
 
@@ -54,12 +54,16 @@
         //Checks if the user has researcher rights
         if (User.Claims.ElementAt(1).Value == "Y")
         {
-        <ul class="menu">
-            <li style="float: left"><a class="menuItems" href="#Home">Home</a></li>
-            <li style="float: left"><a class="menuItems" href="#Addstudy">AddStudy</a></li>
-            <li style="float: right"><a class="menuItems" href="@Url.Action("Logout", "Welcome")">Log Out</a></li>
-            <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
-        </ul>
+            <ul class="menu">
+                @{
+                    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+                    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+                }
+                <li style="float: left"><a class="menuItems" href="#Home">Home</a></li>
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
+                <li style="float: right"><a class="menuItems" href="#LogOut">Log Out</a></li>
+                <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
+            </ul>
         }
         //Checks if the user has participant rights
         else if (User.Claims.ElementAt(2).Value == "Y")
