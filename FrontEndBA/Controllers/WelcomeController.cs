@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace FrontEndBA.Controllers
 {
@@ -55,7 +58,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the participant homepage
-                    return RedirectToAction("Participant", "Homepage", status.LoginStatus.participant);
+                    return RedirectToAction("Participant", "Homepage", new { id = status.LoginStatus.participant.IdParticipant});
                 }
                 else
                 {
@@ -107,7 +110,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the researcher homepage
-                    return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
+                    return RedirectToAction("Researcher", "Homepage", new { id = status.LoginStatus.researcher.IdResearcher});
                 }
                 else
                 {

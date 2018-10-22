@@ -34,8 +34,6 @@ namespace FrontEndBA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult CreateResearcher([Bind("Email,Password")] ResearcherRegisterViewModel researcherRegisterModel)
         {
-            string Error;
-
             IRegisterHandler registerHandler = new RegisterHandler();
             Researcher currentr = new Researcher();
             currentr.Email = researcherRegisterModel.Email;
@@ -60,8 +58,6 @@ namespace FrontEndBA.Controllers
         [Route("CreateParticipant")]
         public ActionResult CreateParticipant([Bind("Email,Password,GenderType,Language,Age")] ParticipantRegisterViewModel participantRegisterModel)
         {
-            string Error;
-
             IRegisterHandler registerHandler = new RegisterHandler();
             Participant currentp = new Participant();
             currentp.Email = participantRegisterModel.Email;
