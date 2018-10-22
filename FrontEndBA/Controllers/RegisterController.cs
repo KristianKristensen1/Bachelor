@@ -40,8 +40,8 @@ namespace FrontEndBA.Controllers
             Researcher currentr = new Researcher();
             currentr.Email = researcherRegisterModel.Email;
             currentr.Password = researcherRegisterModel.Password;
-            currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname;
-            bool success = registerHandler.RegisterResearcherDB(currentr, out Error);
+            currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname; //TODO - First name og Last name i DB
+            bool success = registerHandler.RegisterResearcherDB(currentr); 
 
             if (!success)
             {
@@ -67,7 +67,7 @@ namespace FrontEndBA.Controllers
             currentp.Email = participantRegisterModel.Email;
             currentp.Password = participantRegisterModel.Password;
             currentp.Age = participantRegisterModel.Age;
-            currentp.English = participantRegisterModel.Language;
+            currentp.English = participantRegisterModel.Language; //Lidt misvisende navn i databasen, men intet kritisk (lyder bare som om der er flere valgmuligheder)
             if (participantRegisterModel.GenderType == Gender.Male)
                 currentp.Gender = true;
             else
@@ -76,7 +76,7 @@ namespace FrontEndBA.Controllers
             }
             
             
-            bool success = registerHandler.RegisterParticipantDB(currentp, out Error);
+            bool success = registerHandler.RegisterParticipantDB(currentp); //Samme som ved Researcher
 
             if (!success)
              {
