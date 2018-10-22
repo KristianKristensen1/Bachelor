@@ -1,88 +1,97 @@
-﻿@model IEnumerable<BachelorBackEnd.Study> 
-
+﻿@model FrontEndBA.Models.Studies
+    
 @{
     ViewData["Title"] = "Researcher";
 }
 
 <h2>Researcher</h2>
 
-<h3>All studies</h3>
-<div class="col-md-5">
-    <h3>All studies</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Tag)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Isdraft)
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
+<div class="container">
+    <div class="row">
+        <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+            <h3 class="tableTitle">All studies</h3>
+            <table class="table">
+                <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Tag)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Isdraft)
-                    </td>
+                    <th class="col-md-1">
+                        ID
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.allStudies.First().Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.allStudies.First().Isdraft)
+                    </th>
                 </tr>
-            }
+                </thead>
+                <tbody>
+                @foreach (var item in Model.allStudies)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdStudy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                            <br />
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem=>item.Isdraft)
+                        </td>
+                    </tr>
+                }
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+            <h3 class="tableTitle">My studies</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="col-md-1">
+                        ID
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.myResearcherStudies.First().Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.allStudies.First().Isdraft)
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (var item in Model.myResearcherStudies)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IdStudy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                            <br />
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelitem=>item.Isdraft)
+                        </td>
+                    </tr>
+                }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
     <form method="GET">
         <button asp-route-data="Homepage" asp-action="AddStudyView" class="btn-default">Add study</button>
+        
     </form>
 </div>
 
-<div class="col-md-5">
-    <h3>My studies</h3>
-    <table class="table" >    
-        <thead>
-        <tr >
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Tag)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Isdraft)
-            </th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody >
-        @foreach (var item in Model)
-        {
-            <tr >
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td >
-                    @Html.DisplayFor(modelItem => item.Tag)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Isdraft)
-                </td>
-            </tr>
-        }
 
-        </tbody>
-    </table>
-</div>
 
 
 

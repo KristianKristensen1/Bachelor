@@ -1,10 +1,87 @@
-﻿@{
+﻿@model FrontEndBA.Models.Studies
+
+@{
     ViewData["Title"] = "Participant";
 }
 
+<body style="background-color:whitesmoke">
+    @*<ul class="menu">
+        <li style="float:left"><a href="#Home">Home</a></li>
+        <li style="float:right"><a href="#LogOut">Log Out</a></li>
+        <li style="float:right"><a href="#Profile">My Profile</a></li>
+    </ul>*@
+
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+                <h3 class="tableTitle">My studies</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                ID
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.myParticipantStudies)
+                        {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdStudy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                <br />
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                        </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
 
 
-<h2>Index</h2>
+            <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+                <h3 class="tableTitle">Relevant studies</h3>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            ID
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model.relevantStudies)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdStudy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                                <br />
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                        </tr>
+                    }
 
-<button type="button" onclick="window.location.href='http://localhost:61728/CreateStudy'">Create study</button>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
 

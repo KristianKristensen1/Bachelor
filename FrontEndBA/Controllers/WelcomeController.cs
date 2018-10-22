@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using StudyManagementSystem.Models;
 
 namespace FrontEndBA.Controllers
 {
@@ -34,8 +33,7 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                bachelordbContext db = new bachelordbContext();
-                ILoginHandler loginhandler = new LoginHandler(db);
+                ILoginHandler loginhandler = new LoginHandler();
                 //Checks whether or not the participant is in the database
                 var status = loginhandler.LoginParticipantDB(participant.Email, participant.Password);
                 if (status.LoginStatus.IsSuccess)
@@ -43,10 +41,9 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        Email = participant.Email,
-                        Id = participant.IdParticipant,
-                        isAdmin = false,
-                        isVerified = true
+                        hasAdminRights = false,
+                        hasParticipantRights = true,
+                        hasResearcherRights = false
                     };
 
                     //Generates token with claims defined from the userinfo object.
@@ -57,7 +54,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the participant homepage
-                    return RedirectToAction("Participant", "Homepage");
+                    return RedirectToAction("Participant", "Homepage", status.LoginStatus.participant);
                 }
                 else
                 {
@@ -87,8 +84,7 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                bachelordbContext db = new bachelordbContext();
-                ILoginHandler loginhandler = new LoginHandler(db);
+                ILoginHandler loginhandler = new LoginHandler();
                 //Checks whether or not the participant is in the database
                 var status = loginhandler.LoginResearcherDB(researcher.Email, researcher.Password);
                 if (status.LoginStatus.IsSuccess)
@@ -96,10 +92,12 @@ namespace FrontEndBA.Controllers
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        isAdmin = researcher.Isadmin,
-                        isVerified = researcher.Isverified
+                        hasAdminRights = status.LoginStatus.researcher.Isadmin,
+                        hasResearcherRights = status.LoginStatus.researcher.Isverified,
+                        hasParticipantRights = false
                     };
 
+                   
                     //Generates token with claims defined from the userinfo object.
                     var accessTokenResult = tokenGenerator.GenerateAccessTokenWithClaimsPrincipal(
                     researcher.Email,
@@ -107,8 +105,8 @@ namespace FrontEndBA.Controllers
                     await HttpContext.SignInAsync(accessTokenResult.ClaimsPrincipal,
                         accessTokenResult.AuthProperties);
 
-                    //Redirects to the participant homepage
-                    return RedirectToAction("Researcher", "Homepage");
+                    //Redirects to the researcher homepage
+                    return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
                 }
                 else
                 {
@@ -141,8 +139,9 @@ namespace FrontEndBA.Controllers
         {
             var myClaims = new List<Claim>
             {
-                new Claim("HasAdminRights", userInfo.isAdmin ? "Y" : "N"),
-                new Claim("IsVerified", userInfo.isVerified ? "Y" : "N")
+                new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
+                new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),
+                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N"),
             };
 
             return myClaims;

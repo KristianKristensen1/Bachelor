@@ -8,12 +8,10 @@ namespace BachelorBackEnd
 {
     public class UserInfo
     {
-        public string Email { get; set; }
+        public bool hasAdminRights { get; set; }
 
-        public int Id { get; set; }
+        public bool hasResearcherRights { get; set; }
 
-        public bool isAdmin { get; set; }
-
-        public bool isVerified { get; set; }
+        public bool hasParticipantRights { get; set; }
     }
 }

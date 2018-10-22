@@ -44,7 +44,9 @@ namespace FrontEndBA
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("RequiresAdmin", policy => policy.RequireClaim("HasAdminRights", "Y"));
-                options.AddPolicy("RequiresVerified", policy => policy.RequireClaim("IsVerified", "Y"));
+                options.AddPolicy("RequiresResearcher", policy => policy.RequireClaim("HasResearcherRights", "Y"));
+                options.AddPolicy("RequiresParticipant", policy => policy.RequireClaim("HasParticipantRights", "Y"));
+
             });
 
             services.AddMvc();
