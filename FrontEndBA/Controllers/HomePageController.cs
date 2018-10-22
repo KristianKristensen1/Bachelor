@@ -7,6 +7,7 @@ using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Models;
+using StudyManagementSystem.Models;
 
 
 namespace FrontEndBA.Controllers

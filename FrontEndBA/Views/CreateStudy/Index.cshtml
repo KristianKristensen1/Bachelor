@@ -1,4 +1,5 @@
-﻿@model BachelorBackEnd.Study
+﻿@using BachelorBackEnd
+@model FrontEndBA.Models.CreateStudy.CreateStudy
 
 @{
     ViewData["Title"] = "Index";
@@ -9,27 +10,126 @@
 <hr />
 <div class="container">
     <div class="row">
-        <div class="col-md-5" id="right" style="background-color: white; overflow-y: scroll; height: 200px; width: 100%; margin-bottom: 20px">
+        <div class="col-md-5" id="right" style="background-color: white; width: 100%;">
             <h3 class="tableTitle">Create a Study</h3>
             <table class="table">
                 <thead>
+                    <tr>
+                        <th class="col-md-2">
+                            Study Name
+                        </th>
+                        <th>
+                            Test Study
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            Study Description
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input asp-for="currentStudy.Description" class="form-control" />
+                                <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            Include Male
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <div class="checkbox">
+
+                                    <label class="control-label">
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.Male, true) Yes
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.Male, true) No
+                                    </label>
+                                    <span asp-validation-for="inclusioncriteria.Male" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            Include Female
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <div class="checkbox">
+
+                                    <label class="control-label">
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.Female, true) Yes
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.Female, true) No
+                                    </label>
+                                    <span asp-validation-for="inclusioncriteria.Female" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
                 <tr>
                     <th class="col-md-1">
-                        Study Name
+                        Participants minimum age
                     </th>
                     <th>
-                        Test Study
+                        <div class="form-group">
+                            <input asp-for="inclusioncriteria.MinAge" class="form-control" />
+                            <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                        </div>
                     </th>
                 </tr>
                 <tr>
                     <th class="col-md-1">
-                        Study Type
+                        Participants maximum age
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="inclusioncriteria.MaxAge" class="form-control" />
+                            <span asp-validation-for="inclusioncriteria.MaxAge" class="text-danger"></span>
+                        </div>
                     </th>
                 </tr>
+                <tr>
+                    <th class="col-md-1">
+                        Does the participant have to speak english?
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <div class="checkbox">
+
+                                <label class="control-label">
+                                    @Html.RadioButtonFor(model => model.inclusioncriteria.English, true) Yes
+                                    @Html.RadioButtonFor(model => model.inclusioncriteria.English, true) No
+                                </label>
+                                <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </th>
+                </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            Create as Draft
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    <label class="control-label">
+                                        @Html.RadioButtonFor(model => model.currentStudy.Isdraft, true) Yes
+                                    </label>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+
                 </thead>
             </table>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
+           
+                <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
+            </div>
         </div>
-
+      
     </div>
 </div>
 
@@ -38,7 +138,7 @@
 
 
 
-    <div class="row">
+    @*<div class="row">
         <div class="col-md-4">
             <form asp-action="Index">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -64,6 +164,6 @@
                 </div>
             </form>
         </div>
-    </div>
+    </div>*@
 
 

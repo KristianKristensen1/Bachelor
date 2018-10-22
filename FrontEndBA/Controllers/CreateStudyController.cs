@@ -14,7 +14,13 @@ namespace FrontEndBA.Controllers
         public ActionResult Index()
         {
             return View();
-        }       
+        }
+
+
+        public ActionResult ReturnToHomePage()
+        {
+            return View("../Homepage/Researcher");
+        }
 
         // POST: CreateStudy/Create
         [HttpPost]
