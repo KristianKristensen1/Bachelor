@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using StudyManagementSystem.Models;
 
 namespace FrontEndBA.Controllers
 {
@@ -37,7 +38,8 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                ILoginHandler loginhandler = new LoginHandler();
+                bachelordbContext db = new bachelordbContext();
+                ILoginHandler loginhandler = new LoginHandler(db);
                 //Checks whether or not the participant is in the database
                 var status = loginhandler.LoginParticipantDB(participant.Email, participant.Password);
                 if (status.LoginStatus.IsSuccess)
@@ -88,7 +90,8 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                ILoginHandler loginhandler = new LoginHandler();
+                bachelordbContext db = new bachelordbContext();
+                ILoginHandler loginhandler = new LoginHandler(db);
                 //Checks whether or not the participant is in the database
                 var status = loginhandler.LoginResearcherDB(researcher.Email, researcher.Password);
                 if (status.LoginStatus.IsSuccess)
@@ -144,8 +147,6 @@ namespace FrontEndBA.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Participant", "Welcome");
         }
-
-
 
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
         {

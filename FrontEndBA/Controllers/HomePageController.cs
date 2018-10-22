@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using StudyManagementSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 
