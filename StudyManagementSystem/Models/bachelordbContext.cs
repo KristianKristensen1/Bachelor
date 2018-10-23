@@ -187,11 +187,6 @@ namespace BachelorBackEnd
                     .HasColumnName("isdraft")
                     .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.Tag)
-                    .IsRequired()
-                    .HasColumnName("tag")
-                    .HasColumnType("varchar(45)");
-
                 entity.HasOne(d => d.IdResearcherNavigation)
                     .WithMany(p => p.Study)
                     .HasForeignKey(d => d.IdResearcher)

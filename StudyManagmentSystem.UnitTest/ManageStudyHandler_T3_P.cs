@@ -4,7 +4,6 @@ using System.Text;
 using System.Linq;
 using NUnit.Framework;
 using Microsoft.EntityFrameworkCore;
-using StudyManagementSystem.Models;
 using Moq;
 using BachelorBackEnd;
 
@@ -39,7 +38,6 @@ namespace Tests
                     IdStudy = 5,
                     Description = "Ladies and gentlemen, this is study no. 5",
                     Isdraft = true,
-                    Tag ="draftforno5",
                     IdResearcher = 1,
                 }
             }.AsQueryable();

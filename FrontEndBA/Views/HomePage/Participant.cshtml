@@ -13,13 +13,7 @@
 
     <div class="container">
         <div class="row">
-            <style>
-                tr:hover {
-                    background-color: lightgrey;
-                    color: white;
-                    cursor: pointer;
-                }
-            </style>
+           
             <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 300px; width:100%; margin-bottom:20px">
                 <h3 class="tableTitle">My studies</h3>
                 <table class="table" id="MyStudies">
@@ -36,8 +30,8 @@
                     <tbody>
                         @foreach (var study in Model.myParticipantStudies)
                         {
-                        <tr onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
-                            <td>
+                        <tr class="parantHover" id="" onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
+                            <td >
                                 @Html.DisplayFor(modelItem => study.IdStudy)
                             </td>
                             <td>
@@ -69,7 +63,7 @@
                     <tbody>
                         @foreach (var study in Model.relevantStudies)
                         {
-                            <tr onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
+                            <tr class="parantHover" onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => study.IdStudy)
                                 </td>
