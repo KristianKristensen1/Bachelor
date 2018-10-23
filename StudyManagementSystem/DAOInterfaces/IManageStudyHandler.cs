@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    interface IManageStudyHandler
+    public interface IManageStudyHandler
     {
         void AddParticipantDB(string email, Study study);
 

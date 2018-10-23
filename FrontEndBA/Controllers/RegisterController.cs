@@ -58,6 +58,7 @@ namespace FrontEndBA.Controllers
         [Route("CreateParticipant")]
         public ActionResult CreateParticipant([Bind("Email,Password,GenderType,Language,Age")] ParticipantRegisterViewModel participantRegisterModel)
         {
+
             IRegisterHandler registerHandler = new RegisterHandler();
             Participant currentp = new Participant();
             currentp.Email = participantRegisterModel.Email;

@@ -18,8 +18,6 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-
-
             researchers = new List<Researcher>
             {
                 new Researcher
@@ -50,11 +48,8 @@ namespace Tests
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginResearcherDB("test@testo.com", "bla");
 
-
             //Assert - Checking Loginstatus.ErrorMessage.
             Assert.AreEqual(actual.LoginStatus.ErrorMessage, "Wrong password");
-
-
         }
 
         [Test]
@@ -62,16 +57,12 @@ namespace Tests
         {
             //Setup
 
-
             //Act - trying to log in 
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginResearcherDB("bla", "123456");
 
-
             //Assert - Checking Loginstatus.ErrorMessage.
             Assert.AreEqual(actual.LoginStatus.ErrorMessage, "No researcher with this email exists");
-
-
         }
 
         [Test]
@@ -79,16 +70,12 @@ namespace Tests
         {
             //Setup
 
-
             //Act - trying to log in 
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginResearcherDB("test@testo.com", "123456");
 
-
             //Assert - Checking Loginstatus.IsSuccess.
             Assert.IsTrue(actual.LoginStatus.IsSuccess);
-
-
         }
 
         [Test]
@@ -96,17 +83,12 @@ namespace Tests
         {
             //Setup
 
-
             //Act - trying to log in 
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginResearcherDB("bla", "bla");
 
-
             //Assert - Checking Loginstatus.IsSuccess.
             Assert.IsFalse(actual.LoginStatus.IsSuccess);
-
-
         }
-
     }
 }

@@ -9,6 +9,15 @@ namespace BachelorBackEnd
 {
     public class ManageStudyHandler : IManageStudyHandler
     {
+        private bachelordbContext _context;
+        public ManageStudyHandler()
+        {
+        }
+        public ManageStudyHandler(bachelordbContext context)
+        {
+            _context = context;
+        }
+
         public void AddParticipantDB(string email, Study study)
         {
             throw new NotImplementedException();
@@ -45,9 +54,19 @@ namespace BachelorBackEnd
         //OBS! Change diagrams to match changes.
         public List<Study> GetAllStudiesDB()
         {
+            List<Study> allStudies;
+
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
-                List<Study> allStudies = DBmodel.Study.ToList();
+                if (_context != null)
+                {
+                    allStudies = _context.Study.ToList();
+                }
+                else
+                {
+                    allStudies = DBmodel.Study.ToList();
+                }
+
                 return allStudies;
             }
         }
@@ -75,8 +94,15 @@ namespace BachelorBackEnd
         {
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
-                List<Study> myStudies = new List<Study>();
-                myStudies = DBmodel.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
+                List<Study> myStudies;
+                if (_context != null)
+                {
+                    myStudies = _context.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
+                }
+                else
+                {
+                    myStudies = DBmodel.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
+                }                
                 return myStudies;
             }
         }
