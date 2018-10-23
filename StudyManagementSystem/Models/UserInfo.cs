@@ -13,5 +13,7 @@ namespace BachelorBackEnd
         public bool hasResearcherRights { get; set; }
 
         public bool hasParticipantRights { get; set; }
+
+        public string userID { get; set; }
     }
 }

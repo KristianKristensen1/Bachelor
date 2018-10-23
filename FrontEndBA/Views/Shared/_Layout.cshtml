@@ -59,7 +59,7 @@
                     var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
                     var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
                 }
-                <li style="float: left"><a class="menuItems" href="#Home">Home</a></li>
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
                 <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
                 <li style="float: right"><a class="menuItems" href="@Url.Action("logout","welcome")">Log Out</a></li>
                 <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
@@ -69,7 +69,7 @@
         else if (User.Claims.ElementAt(2).Value == "Y")
         {
             <ul class="menu">
-                <li style="float: left"><a class="menuItems" href="#Home">Home</a></li>
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Participant","Homepage")">Home</a></li>
                 <li style="float: right"><a class="menuItems" href="@Url.Action("logout","welcome")">Log Out</a></li>
                 <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
             </ul>

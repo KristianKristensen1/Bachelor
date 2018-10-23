@@ -4,7 +4,6 @@ using System.Linq;
 using NUnit.Framework;
 using BachelorBackEnd;
 using Microsoft.EntityFrameworkCore;
-using StudyManagementSystem.Models;
 using Moq;
 
 namespace Tests
@@ -45,10 +44,6 @@ namespace Tests
 
             mockContext = new Mock<BachelorBackEnd.bachelordbContext>();
             mockContext.Setup(c => c.Participant).Returns(mockSet.Object);
-
-
-
-
         }
 
         [Test]
@@ -69,8 +64,6 @@ namespace Tests
 
             //Assert - Checking Loginstatus.ErrorMessage.
             Assert.AreEqual(actual.LoginStatus.ErrorMessage, "Wrong password");
-
-
         }
 
         [Test]
