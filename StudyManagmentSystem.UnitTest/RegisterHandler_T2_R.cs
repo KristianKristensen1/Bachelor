@@ -24,7 +24,6 @@ namespace Tests
             {
                 Email = "test@register.com",
                 Password = "123456"
-
             };
 
             researchers = new List<Researcher>
@@ -40,56 +39,36 @@ namespace Tests
 
             mockContext = new Mock<BachelorBackEnd.bachelordbContext>();
             mockContext.Setup(c => c.Researcher).Returns(mockSet.Object);
-        }
-
-        
+        }        
 
         [Test]
         public void RegisterResearcherDB_AddingResearcher_WithValidInputInDB()
         {
-            //Setup
-
-           
+            //Setup           
 
             //Act - Add the participant
-
             uut = new RegisterHandler(mockContext.Object);
-            uut.RegisterResearcherDB(researcher, out string ErrorMessage);
-
+            uut.RegisterResearcherDB(researcher);
 
             //Assert - Checking and see if we saved our changes. 
             mockSet.Verify(m => m.Add(It.IsAny<Researcher>()), Times.Once);
             mockContext.Verify(m => m.SaveChanges(), Times.Once);
-
-
-        }
-
-        
+        }        
 
         [Test]
         public void RegisterResearcherDB_AddingResearcher_WithValidInputErrorMessage()
         {
-            //Setup
-
-            
+            //Setup            
 
             //Act - Add the participant
-
             uut = new RegisterHandler(mockContext.Object);
-            uut.RegisterResearcherDB(researcher, out string ErrorMessage);
-
+            uut.RegisterResearcherDB(researcher);
 
             //Assert - Checking and see if we saved our changes. 
             mockSet.Verify(m => m.Add(It.IsAny<Researcher>()), Times.Once);
             mockContext.Verify(m => m.SaveChanges(), Times.Once);
 
-            Assert.AreEqual(ErrorMessage, "No problems");
-
-
+            //Assert.AreEqual(ErrorMessage, "No problems");
         }
-
-
-
-
     }
 }

@@ -7,7 +7,7 @@ using StudyManagementSystem.Models;
 
 namespace BachelorBackEnd
 {
-    interface IManageStudyHandler
+    public interface IManageStudyHandler
     {
         void AddParticipantDB(string email, Study study);
 
