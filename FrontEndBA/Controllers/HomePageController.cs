@@ -7,7 +7,11 @@ using BachelorBackEnd;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Models;
-using StudyManagementSystem.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
+using System.Security.Claims;
 
 
 namespace FrontEndBA.Controllers
@@ -16,8 +20,16 @@ namespace FrontEndBA.Controllers
     {
         // GET: HomePage
         [HttpGet]
-        public ActionResult Participant(Participant participant)
+        [Authorize]
+        public ActionResult Participant()
         {
+            //Gets the id from JWT. The id is used to retrieve user from database. 
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int id = Convert.ToInt32(claims.ElementAt(3).Value);
+            
+
+            Participant participant = getParticipant(id);
             ManageStudyHandler mst = new ManageStudyHandler();
             Studies studiesCollection = new Studies();            
             studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
@@ -29,12 +41,10 @@ namespace FrontEndBA.Controllers
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
-            
             fakestudy.Isdraft = true;
             fakestudy.Name = "This is a name of study1";
             Study fakestudy2 = new Study();
             fakestudy2.Description = "2Test";
-           
             fakestudy2.Isdraft = false;
             fakestudy2.Name = "This is a name of study2";
             fakelist.Add(fakestudy2);
@@ -47,8 +57,14 @@ namespace FrontEndBA.Controllers
 
         [Authorize]
         //[Authorize(Policy = "RequiresVerified")]
-        public ActionResult Researcher(Researcher researcher)
+        public ActionResult Researcher()
         {
+            //Gets the id from JWT. The id is used to retrieve user from database. 
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int id = Convert.ToInt32(claims.ElementAt(3).Value);
+
+            Researcher researcher = getResearcher(id);
             ManageStudyHandler mst = new ManageStudyHandler();
             Studies studiesCollection = new Studies();
             studiesCollection.allStudies = mst.GetAllStudiesDB();
@@ -59,10 +75,22 @@ namespace FrontEndBA.Controllers
         [Authorize]
         public ActionResult AddStudyView()
         {
-            return RedirectToAction("Index", "CreateStudy");
+           return RedirectToAction("Index", "CreateStudy");
         }
 
-        // GET: HomePage/Details/5
+        public Participant getParticipant(int id)
+        {
+            UserHandler userHandler = new UserHandler();
+            Participant participant = userHandler.getParticipant(id);
+            return participant;
+        }
+
+        public Researcher getResearcher(int id)
+        {
+            UserHandler userHandler = new UserHandler();
+            Researcher researcher = userHandler.getResearcher(id);
+            return researcher;
+        }
     
     }
 }

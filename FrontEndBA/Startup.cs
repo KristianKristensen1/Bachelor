@@ -49,6 +49,7 @@ namespace FrontEndBA
 
             });
 
+            services.AddMemoryCache();
             services.AddMvc();
         }
 

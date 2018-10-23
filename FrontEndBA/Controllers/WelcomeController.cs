@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using StudyManagementSystem.Models;
+using System.Xml.Linq;
 
 namespace FrontEndBA.Controllers
 {
@@ -19,6 +21,7 @@ namespace FrontEndBA.Controllers
         {
             this.tokenGenerator = tokenGenerator;
         }
+
         public ActionResult Participant()
         {
             return View();
@@ -45,7 +48,8 @@ namespace FrontEndBA.Controllers
                     {
                         hasAdminRights = false,
                         hasParticipantRights = true,
-                        hasResearcherRights = false
+                        hasResearcherRights = false,
+                        userID = "" + status.LoginStatus.participant.IdParticipant
                     };
 
                     //Generates token with claims defined from the userinfo object.
@@ -56,7 +60,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the participant homepage
-                    return RedirectToAction("Participant", "Homepage", status.LoginStatus.participant);
+                    return RedirectToAction("Participant", "Homepage");
                 }
                 else
                 {
@@ -98,7 +102,8 @@ namespace FrontEndBA.Controllers
                     {
                         hasAdminRights = status.LoginStatus.researcher.Isadmin,
                         hasResearcherRights = status.LoginStatus.researcher.Isverified,
-                        hasParticipantRights = false
+                        hasParticipantRights = false,
+                        userID = ""+status.LoginStatus.researcher.IdResearcher,
                     };
 
                    
@@ -110,7 +115,7 @@ namespace FrontEndBA.Controllers
                         accessTokenResult.AuthProperties);
 
                     //Redirects to the researcher homepage
-                    return RedirectToAction("Researcher", "Homepage", status.LoginStatus.researcher);
+                    return RedirectToAction("Researcher", "Homepage");
                 }
                 else
                 {
@@ -134,18 +139,25 @@ namespace FrontEndBA.Controllers
 
         public ActionResult Researcher()
         {
-            return View();
+            return View(); //Jacob, hva' gør'n?
+                            //Bare return view i ovenstående metode? (Samme for participant)
         }
 
-
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Participant", "Welcome");
+        }
 
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
         {
-            var myClaims = new List<Claim>
+            var myClaims = new List<Claim> //Hvorfor Y/N i stedet for en bool? Skal det være string?
             {
                 new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
                 new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),
-                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N"),
+                new Claim("HasParticipantRights", userInfo.hasParticipantRights ? "Y" : "N"),     
+                new Claim("userID", userInfo.userID)
             };
 
             return myClaims;

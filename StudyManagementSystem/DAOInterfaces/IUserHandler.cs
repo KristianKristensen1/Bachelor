@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    interface IProfileHandler
+    public interface IUserHandler
     {
-        void UpdateProfile(Participant participant);
+        Participant getParticipant(int id);
+
+        Researcher getResearcher(int id);
     }
 }

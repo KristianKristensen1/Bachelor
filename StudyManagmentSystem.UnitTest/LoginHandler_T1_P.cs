@@ -4,7 +4,6 @@ using System.Linq;
 using NUnit.Framework;
 using BachelorBackEnd;
 using Microsoft.EntityFrameworkCore;
-using StudyManagementSystem.Models;
 using Moq;
 
 namespace Tests
@@ -18,10 +17,7 @@ namespace Tests
         [SetUp]
         public void Setup()
         {
-
             // Participant Setup
-            
-
             participants = new List<Participant>
             {
                 new Participant
@@ -32,7 +28,6 @@ namespace Tests
                     Gender = true,
                     IdParticipant = 0,
                     Password = "123456"
-
                 }
             }.AsQueryable();
 
@@ -45,10 +40,6 @@ namespace Tests
 
             mockContext = new Mock<BachelorBackEnd.bachelordbContext>();
             mockContext.Setup(c => c.Participant).Returns(mockSet.Object);
-
-
-
-
         }
 
         [Test]
@@ -66,62 +57,47 @@ namespace Tests
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginParticipantDB("test@testo.com", "bla");
 
-
             //Assert - Checking Loginstatus.ErrorMessage.
             Assert.AreEqual(actual.LoginStatus.ErrorMessage, "Wrong password");
-
-
         }
 
         [Test]
         public void LoginParticipantDB_Login_WithInvalidEmail()
         {
-            //Setup
-           
+            //Setup           
 
             //Act - trying to log in 
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginParticipantDB("bla", "123456");
 
-
             //Assert - Checking Loginstatus.ErrorMessage.
             Assert.AreEqual(actual.LoginStatus.ErrorMessage, "No participant with this email exists");
-
-
         }
 
         [Test]
         public void LoginParticipantDB_Login_WithValidUser()
         {
-            //Setup
-            
+            //Setup            
 
             //Act - trying to log in 
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginParticipantDB("test@testo.com", "123456");
 
-
             //Assert - Checking Loginstatus.IsSuccess.
             Assert.IsTrue(actual.LoginStatus.IsSuccess);
-            
-
         }
 
         [Test]
         public void LoginParticipantDB_Login_WithInValidUser()
         {
-            //Setup
-            
+            //Setup            
 
             //Act - trying to log in 
             uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginParticipantDB("bla", "bla");
 
-
             //Assert - Checking Loginstatus.IsSuccess.
             Assert.IsFalse(actual.LoginStatus.IsSuccess);
-
-
         }
     }
 }

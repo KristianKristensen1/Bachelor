@@ -4,7 +4,6 @@ using System.Linq;
 using NUnit.Framework;
 using BachelorBackEnd;
 using Microsoft.EntityFrameworkCore;
-using StudyManagementSystem.Models;
 using Moq;
 
 namespace Tests
@@ -44,11 +43,7 @@ namespace Tests
             mockSet.As<IQueryable<Participant>>().Setup(m => m.GetEnumerator()).Returns((IEnumerator<Participant>)participants.GetEnumerator());
 
             mockContext = new Mock<BachelorBackEnd.bachelordbContext>();
-            mockContext.Setup(c => c.Participant).Returns(mockSet.Object);
-
-
-
-           
+            mockContext.Setup(c => c.Participant).Returns(mockSet.Object);           
         }
 
         [Test]
@@ -56,28 +51,20 @@ namespace Tests
         {
             //Setup
 
-
-
             //Act - Add the participant
 
             uut = new RegisterHandler(mockContext.Object);
-            uut.RegisterParticipantDB(particpant, out string ErrorMessage);
-
+            uut.RegisterParticipantDB(particpant);
 
             //Assert - Checking and see if we saved our changes. 
             mockSet.Verify(m=>m.Add(It.IsAny<Participant>()),Times.Once);
             mockContext.Verify(m=>m.SaveChanges(),Times.Once);
-
-
-        }
-
-        
+        }        
 
         [Test]
         public void RegisterParticipantDB_AddingParticipant_WithValidInputErrorMessage()
         {
             //Setup
-
             var participant = new Participant
             {
                 Email = "test@register.com",
@@ -103,22 +90,14 @@ namespace Tests
             mockContext.Setup(c => c.Participant).Returns(mockSet.Object);
 
             //Act - Add the participant
-
             uut = new RegisterHandler(mockContext.Object);
-            uut.RegisterParticipantDB(participant, out string ErrorMessage);
-
+            uut.RegisterParticipantDB(participant);
 
             //Assert - Checking and see if we saved our changes. 
             mockSet.Verify(m => m.Add(It.IsAny<Participant>()), Times.Once);
             mockContext.Verify(m => m.SaveChanges(), Times.Once);
 
-            Assert.AreEqual(ErrorMessage, "No problems");
-
-
+            //Assert.AreEqual(ErrorMessage, "No problems");
         }
-
-
-
-
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using StudyManagementSystem.Models;
+
 
 namespace BachelorBackEnd
 {
@@ -186,8 +186,6 @@ namespace BachelorBackEnd
                 entity.Property(e => e.Isdraft)
                     .HasColumnName("isdraft")
                     .HasColumnType("tinyint(4)");
-
-       
 
                 entity.HasOne(d => d.IdResearcherNavigation)
                     .WithMany(p => p.Study)

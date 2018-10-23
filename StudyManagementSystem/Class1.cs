@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StudyManagementSystem.Models;
+
 
 namespace BachelorBackEnd
 {
@@ -25,7 +25,7 @@ namespace BachelorBackEnd
                 part.Email = Console.ReadLine();
                 Console.WriteLine("Input password: ");
                 part.Password = Console.ReadLine();
-                rh.RegisterParticipantDB(part, out string ErrorMessage);
+                rh.RegisterParticipantDB(part);
             }
             if (x == "r")
             {

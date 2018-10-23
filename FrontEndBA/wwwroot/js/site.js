@@ -14,3 +14,12 @@ function redirectViewToCreateStudy() {
     var url = document.URL;
     window.location.replace(url + "/CreateStudy/Index");
 }
+
+function redirectToLogOut() {
+    var url = document.URL;
+    window.location.replace(url + "/Logout")
+}
+
+function myFuntion() {
+
+}
