@@ -11,6 +11,32 @@ namespace BachelorBackEnd
     {
         public static void Main(string[] args)
         {
+            /*
+            Study study = new Study();
+            study.Description = "This is another very nice study!";
+            study.Isdraft = false;
+            study.IdResearcher = 2;
+            study.Name = "Larsch";
+            study.Pay = 150;
+            study.Abstract = "This is a nice abstract!";
+            study.Duration = 60;
+            study.DateCreated = DateTime.Now.Date; //Convert.ToDateTime("2018-10-23 00:00:00");
+            study.DirectStudyLink = "ThisIsALink";
+            study.Preparation = "Be prepared!";
+            study.EligibilityRequirements = "You are eligible!";
+            
+            Inclusioncriteria inc = new Inclusioncriteria();
+            inc.Male = 1;
+            inc.Female = 1;
+            inc.MinAge = 10;
+            inc.MaxAge = 50;
+            inc.English = 1;
+
+
+            ManageStudyHandler msh = new ManageStudyHandler();
+            msh.CreateStudyDB(study, inc);
+
+            
             Console.WriteLine("To register participant press p, to register researcher press r");
             string x = Console.ReadLine();
             if(x == "p")
@@ -40,6 +66,7 @@ namespace BachelorBackEnd
                 res.Password = Console.ReadLine();
                 //rh.RegisterResearcherDB(res);
             }
+            */
         }
     }
 }

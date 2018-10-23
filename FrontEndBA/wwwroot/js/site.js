@@ -21,5 +21,12 @@ function redirectToLogOut() {
 }
 
 function myFuntion() {
+    var url = document.URL;
+    window.location.replace(url + "/participant")
+}
 
+function clearBrowser() {
+    var url = window.location.href;
+    window.history.go(-window.history.length);
+    window.location.href = url;
 }

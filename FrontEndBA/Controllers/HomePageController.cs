@@ -18,8 +18,7 @@ namespace FrontEndBA.Controllers
 {
     public class HomepageController : Controller
     {
-        // GET: HomePage
-        [HttpGet]
+
         [Authorize]
         public ActionResult Participant()
         {
