@@ -8,31 +8,95 @@
 
 <h4>Study</h4>
 <hr />
-<div class="container">
+<div class="container" style="width:80%;">
     <div class="row">
         <div class="col-md-5" id="right" style="background-color: white; width: 100%;">
             <h3 class="tableTitle">Create a Study</h3>
             <table class="table">
                 <thead>
-                    <tr>
-                        <th class="col-md-2">
-                            Study Name
-                        </th>
-                        <th>
-                            Test Study
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col-md-1">
+                <tr>
+                    <th class="col-md-2">
+                        Study Name
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="currentStudy.Name" class="form-control" />
+                            <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col-md-2">
+                        Abstract
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="currentStudy.Abstract" class="form-control" />
+                            <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="biggerinput">
+                    <th class="col-md-1" >
+                        <div style="margin-top: -100px">
                             Study Description
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <input asp-for="currentStudy.Description" class="form-control" />
-                                <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="form-group" >
+                            <input asp-for="currentStudy.Description" class="form-control" style="height:100px"/>
+                            <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col-md-2">
+                        Pay
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="currentStudy.Pay" class="form-control" />
+                            <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col-md-2">
+                        Duration given in minutes
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="currentStudy.Duration" class="form-control" />
+                            <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th class="col-md-2">
+                        Preparation
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="currentStudy.Preparation" class="form-control" />
+                            <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+                <tr class="biggerinput">
+                    <th class="col-md-1">
+                        <div style="margin-top: -100px">
+                            Eligibility Requirements
+                        </div>
+                        
+                    </th>
+                    <th>
+                        <div class="form-group">
+                            <input asp-for="currentStudy.EligibilityRequirements" class="form-control" style="height:100px" />
+                            <span asp-validation-for="currentStudy.EligibilityRequirements" class="text-danger"></span>
+                        </div>
+                    </th>
+                </tr>
+
                     <tr>
                         <th class="col-md-1">
                             Include Male
@@ -67,26 +131,29 @@
                             </div>
                         </th>
                     </tr>
-                <tr>
+                <tr action="" class="form-horizontal">
                     <th class="col-md-1">
-                        Participants minimum age
+                        Participants age
                     </th>
                     <th>
                         <div class="form-group">
-                            <input asp-for="inclusioncriteria.MinAge" class="form-control" />
-                            <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                            <div class="col-md-2">
+                                <div style="color: lightblue;">
+                                    MinimumAge
+                                </div>
+                                <input asp-for="inclusioncriteria.MinAge" class="form-control"/>
+                                <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                            </div>
+                            <div class="col-md-2">
+                                <div style="color: lightblue;">
+                                    MaximumAge
+                                </div>
+                                <input asp-for="inclusioncriteria.MinAge" class="form-control" />
+                                <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                            </div>
+
                         </div>
-                    </th>
-                </tr>
-                <tr>
-                    <th class="col-md-1">
-                        Participants maximum age
-                    </th>
-                    <th>
-                        <div class="form-group">
-                            <input asp-for="inclusioncriteria.MaxAge" class="form-control" />
-                            <span asp-validation-for="inclusioncriteria.MaxAge" class="text-danger"></span>
-                        </div>
+
                     </th>
                 </tr>
                 <tr>
@@ -138,32 +205,5 @@
 
 
 
-    @*<div class="row">
-        <div class="col-md-4">
-            <form asp-action="Index">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
-                    <span asp-validation-for="Description" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label>
-                            <input asp-for="Isdraft" /> @Html.DisplayNameFor(model => model.Isdraft)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Tag" class="control-label"></label>
-                    <input asp-for="Tag" class="form-control" />
-                    <span asp-validation-for="Tag" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
-                </div>
-            </form>
-        </div>
-    </div>*@
-
+   
 

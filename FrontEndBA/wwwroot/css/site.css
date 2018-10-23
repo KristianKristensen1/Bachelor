@@ -17,8 +17,11 @@
     color: lightblue;
     border-width: 1px;
 }
-.btn-default{
-    background-color: lightgray; 
+.biggerinput {
+    height: 100px;
+}
+.btn-default {
+    background-color: lightgray;
     border: none;
     color: white;
     padding: 15px 32px;

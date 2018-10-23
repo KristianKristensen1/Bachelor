@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BachelorBackEnd;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,6 +12,7 @@ namespace FrontEndBA.Controllers
     public class CreateStudyController : Controller
     {
         // GET: CreateStudy
+        [Authorize]
         public ActionResult Index()
         {
             return View();
@@ -25,6 +27,7 @@ namespace FrontEndBA.Controllers
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel,
                                    [Bind("Male,Female,MinAge,MaxAge,English,IdReseacher")] Inclusioncriteria criteriamodel)
         {
