@@ -19,3 +19,7 @@ function redirectToLogOut() {
     var url = document.URL;
     window.location.replace(url + "/Logout")
 }
+
+function myFuntion() {
+
+}

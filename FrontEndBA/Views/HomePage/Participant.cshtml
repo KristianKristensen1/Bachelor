@@ -6,17 +6,23 @@
 
 <body style="background-color:whitesmoke">
     @*<ul class="menu">
-        <li style="float:left"><a href="#Home">Home</a></li>
-        <li style="float:right"><a href="#LogOut">Log Out</a></li>
-        <li style="float:right"><a href="#Profile">My Profile</a></li>
-    </ul>*@
+            <li style="float:left"><a href="#Home">Home</a></li>
+            <li style="float:right"><a href="#LogOut">Log Out</a></li>
+            <li style="float:right"><a href="#Profile">My Profile</a></li>
+        </ul>*@
 
     <div class="container">
         <div class="row">
-
-            <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+            <style>
+                tr:hover {
+                    background-color: lightgrey;
+                    color: white;
+                    cursor: pointer;
+                }
+            </style>
+            <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 300px; width:100%; margin-bottom:20px">
                 <h3 class="tableTitle">My studies</h3>
-                <table class="table">
+                <table class="table" id="MyStudies">
                     <thead>
                         <tr>
                             <th class="col-md-1">
@@ -28,16 +34,16 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var item in Model.myParticipantStudies)
+                        @foreach (var study in Model.myParticipantStudies)
                         {
-                        <tr>
+                        <tr onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
                             <td>
-                                @Html.DisplayFor(modelItem => item.IdStudy)
+                                @Html.DisplayFor(modelItem => study.IdStudy)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Name)
+                                @Html.DisplayFor(modelItem => study.Name)
                                 <br />
-                                @Html.DisplayFor(modelItem => item.Description)
+                                @Html.DisplayFor(modelItem => study.Description)
                             </td>
                         </tr>
                         }
@@ -51,37 +57,35 @@
                 <h3 class="tableTitle">Relevant studies</h3>
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th class="col-md-1">
-                            ID
-                        </th>
-                        <th>
-                            @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
-                        </th>
-                    </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                ID
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
-                    @foreach (var item in Model.relevantStudies)
-                    {
-                        <tr>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.IdStudy)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Name)
-                                <br />
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                        </tr>
-                    }
+                        @foreach (var study in Model.relevantStudies)
+                        {
+                            <tr onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
+                                <td>
+                                    @Html.DisplayFor(modelItem => study.IdStudy)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => study.Name)
+                                    <br />
+                                    @Html.DisplayFor(modelItem => study.Description)
+                                </td>
+                            </tr>
+                        }
 
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
-
-
-</body>
+</body >
 
 

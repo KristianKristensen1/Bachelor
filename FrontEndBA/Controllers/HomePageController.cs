@@ -10,6 +10,8 @@ using FrontEndBA.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using StudyManagementSystem.Models;
+using Microsoft.AspNetCore.Identity;
+using Newtonsoft.Json;
 
 
 namespace FrontEndBA.Controllers
@@ -19,8 +21,9 @@ namespace FrontEndBA.Controllers
         // GET: HomePage
         [HttpGet]
         [Authorize]
-        public ActionResult Participant(Participant participant)
+        public ActionResult Participant(int id)
         {
+            Participant participant = getParticipant(id);
             ManageStudyHandler mst = new ManageStudyHandler();
             Studies studiesCollection = new Studies();            
             studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
@@ -50,8 +53,9 @@ namespace FrontEndBA.Controllers
 
         [Authorize]
         //[Authorize(Policy = "RequiresVerified")]
-        public ActionResult Researcher(Researcher researcher)
+        public ActionResult Researcher(int id)
         {
+            Researcher researcher = getResearcher(id);
             ManageStudyHandler mst = new ManageStudyHandler();
             Studies studiesCollection = new Studies();
             studiesCollection.allStudies = mst.GetAllStudiesDB();
@@ -65,7 +69,19 @@ namespace FrontEndBA.Controllers
            return RedirectToAction("Index", "CreateStudy");
         }
 
-        // GET: HomePage/Details/5
+        public Participant getParticipant(int id)
+        {
+            UserHandler userHandler = new UserHandler();
+            Participant participant = userHandler.getParticipant(id);
+            return participant;
+        }
+
+        public Researcher getResearcher(int id)
+        {
+            UserHandler userHandler = new UserHandler();
+            Researcher researcher = userHandler.getResearcher(id);
+            return researcher;
+        }
     
     }
 }
