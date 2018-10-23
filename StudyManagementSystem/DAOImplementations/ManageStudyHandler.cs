@@ -27,7 +27,15 @@ namespace BachelorBackEnd
         {
             using (bachelordbContext DBmodel = new bachelordbContext())
             {
+                //Adds the study to the database and saves
                 DBmodel.Study.Add(study);
+                DBmodel.SaveChanges();
+
+                //Retrieves the id from the study just saved and sets the study_id in the inclusioncriteria.
+                int id = (DBmodel.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
+                inclusioncriteria.IdStudy = id;
+
+                //Saves the inclusioncriteria 
                 DBmodel.Inclusioncriteria.Add(inclusioncriteria);
                 DBmodel.SaveChanges();
             }

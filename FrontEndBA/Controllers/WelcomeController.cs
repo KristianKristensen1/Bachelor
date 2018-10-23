@@ -24,8 +24,22 @@ namespace FrontEndBA.Controllers
 
         public ActionResult Participant()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Participant", "Homepage");
+            }
             return View();
         }
+
+        public ActionResult Researcher()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Researcher", "Homepage");
+            }
+            return View();
+        }
+
 
         // POST: Welcome/LoginParticipant
         [HttpPost]
@@ -137,17 +151,18 @@ namespace FrontEndBA.Controllers
             }
         }
 
-        public ActionResult Researcher()
-        {
-            return View(); //Jacob, hva' gør'n?
-                            //Bare return view i ovenstående metode? (Samme for participant)
-        }
-
-        [Route("Logout")]
-        public async Task<IActionResult> Logout()
+        [Route("LogoutParticipant")]
+        public async Task<IActionResult> LogoutParticipant()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Participant", "Welcome");
+        }
+
+        [Route("LogoutResearcher")]
+        public async Task<IActionResult> LogoutResearcher()
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Researcher", "Welcome");
         }
 
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
