@@ -9,17 +9,17 @@ using Moq;
 
 namespace Tests
 {
-    public class RegisterHandler_T2_P
+    public class T2_RegisterHandler_P
     {
         public IRegisterHandler uut;
         public Participant particpant;
         public IQueryable participants;
         public Mock<DbSet<Participant>> mockSet;
         public Mock<BachelorBackEnd.bachelordbContext> mockContext;
+
         [SetUp]
         public void Setup()
         {
-
             // Participant Setup
             particpant = new Participant
             {
