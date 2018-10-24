@@ -31,7 +31,7 @@ namespace BachelorBackEnd
                 DBmodel.Study.Add(study);
                 DBmodel.SaveChanges();
 
-                //Retrieves the id from the study just saved and sets the study_id in the inclusioncriteria.
+                //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
                 int id = (DBmodel.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
                 inclusioncriteria.IdStudy = id;
 

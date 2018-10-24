@@ -96,6 +96,7 @@ namespace JwtAuthenticationHelper.Extensions
                     new PathString(authUrlOptions.LogoutPath)
                     : new PathString("/Welcome/Participant");
                 options.AccessDeniedPath = options.LoginPath;
+                
                 options.ReturnUrlParameter = authUrlOptions?.ReturnUrlParameter ?? "returnUrl";
             });
 
