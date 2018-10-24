@@ -8,7 +8,7 @@ using FrontEndBA.Models.SharedModels;
 
 namespace FrontEndBA.Models.CreateStudy
 {
-    public class CreateStudy
+    public class CreateStudyModel
     {
         public StudyModel currentStudy { get; set; }
         public InclusioncriteriaModel inclusioncriteria { get; set; }

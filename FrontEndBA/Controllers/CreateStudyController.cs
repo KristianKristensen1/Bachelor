@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BachelorBackEnd;
+using FrontEndBA.Models.CreateStudy;
+using FrontEndBA.Models.ResearcherModel.CreateStudyModel;
+using FrontEndBA.Models.SharedModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,9 +15,15 @@ namespace FrontEndBA.Controllers
     public class CreateStudyController : Controller
     {
         // GET: CreateStudy
-        [Authorize]
+        //[Authorize]
         public ActionResult Index()
         {
+            CreateStudyModel cs = new CreateStudyModel();
+            cs.inclusioncriteria = new InclusioncriteriaModel();
+            cs.currentStudy = new StudyModel();
+            cs.inclusioncriteria.English = false;
+            cs.inclusioncriteria.IsFemale = false;
+            cs.inclusioncriteria.IsMale = false;
             return View();
         }
 
@@ -27,14 +36,18 @@ namespace FrontEndBA.Controllers
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
-        public ActionResult Create([Bind("Description,Isdraft,Tag,IdResearcher")] Study studymodel,
-                                   [Bind("Male,Female,MinAge,MaxAge,English,IdReseacher")] Inclusioncriteria criteriamodel)
+        //[Authorize]
+        public ActionResult Create([Bind("Description,Isdraft,Name,Abstract,Pay,Duration,Preparation,EligibilityRequirements")] StudyModel studymodel,
+            [Bind("IsMale,IsFemale,MinAge,MaxAge,English,IdReseacher")] InclusioncriteriaModel criteriamodel,CreateStudyModel cs)
         {
-            try
+            if (!ModelState.IsValid)
             {
+                try
+            {
+                var curStudy = new Study();
+                var curCriteria = new Inclusioncriteria();
                 ManageStudyHandler manageStudyHandler = new ManageStudyHandler();
-                manageStudyHandler.CreateStudyDB(studymodel,criteriamodel);
+                manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
 
                 return View("../Homepage/Participant");
             }
@@ -42,6 +55,9 @@ namespace FrontEndBA.Controllers
             {
                 return View("./Index");
             }
+            }
+            return View("./Index");
+
         }       
     }
 }
