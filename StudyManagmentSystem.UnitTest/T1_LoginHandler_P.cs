@@ -4,7 +4,6 @@ using System.Linq;
 using NUnit.Framework;
 using BachelorBackEnd;
 using Microsoft.EntityFrameworkCore;
-using StudyManagementSystem.Models;
 using Moq;
 
 namespace Tests

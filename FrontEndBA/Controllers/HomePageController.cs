@@ -9,9 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using StudyManagementSystem.Models;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
+using System.Security.Claims;
 
 
 namespace FrontEndBA.Controllers
@@ -21,8 +21,14 @@ namespace FrontEndBA.Controllers
         // GET: HomePage
         [HttpGet]
         [Authorize]
-        public ActionResult Participant(int id)
+        public ActionResult Participant()
         {
+            //Gets the id from JWT. The id is used to retrieve user from database. 
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int id = Convert.ToInt32(claims.ElementAt(3).Value);
+            
+
             Participant participant = getParticipant(id);
             ManageStudyHandler mst = new ManageStudyHandler();
             Studies studiesCollection = new Studies();            
@@ -35,12 +41,10 @@ namespace FrontEndBA.Controllers
             List<Study> fakelist = new List<Study>();
             Study fakestudy = new Study();
             fakestudy.Description = "Test";
-            fakestudy.Tag = "Tag";
             fakestudy.Isdraft = true;
             fakestudy.Name = "This is a name of study1";
             Study fakestudy2 = new Study();
             fakestudy2.Description = "2Test";
-            fakestudy2.Tag = "2Tag";
             fakestudy2.Isdraft = false;
             fakestudy2.Name = "This is a name of study2";
             fakelist.Add(fakestudy2);
@@ -53,8 +57,13 @@ namespace FrontEndBA.Controllers
 
         [Authorize]
         //[Authorize(Policy = "RequiresVerified")]
-        public ActionResult Researcher(int id)
+        public ActionResult Researcher()
         {
+            //Gets the id from JWT. The id is used to retrieve user from database. 
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int id = Convert.ToInt32(claims.ElementAt(3).Value);
+
             Researcher researcher = getResearcher(id);
             ManageStudyHandler mst = new ManageStudyHandler();
             Studies studiesCollection = new Studies();
