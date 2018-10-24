@@ -62,21 +62,25 @@ namespace BachelorBackEnd
         //OBS! Change diagrams to match changes.
         public List<Study> GetAllStudiesDB()
         {
-            List<Study> allStudies;
-
-            using (bachelordbContext DBmodel = new bachelordbContext())
+            List<Study> allStudies = new List<Study>();
             {
-                if (_context != null)
+                if (_context.Study != null)
                 {
                     allStudies = _context.Study.ToList();
                 }
-                else
-                {
-                    allStudies = DBmodel.Study.ToList();
-                }
-
                 return allStudies;
             }
+        }
+
+        //OBS! Change diagrams to match changes.
+        public List<Study> GetMyResearcherStudiesDB(int reseacherID)
+        {
+            List<Study> myStudies = new List<Study>();
+            if (_context.Study != null)
+            {
+                myStudies = _context.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
+            }
+            return myStudies;
         }
 
         //OBS! Change diagrams to match changes.
@@ -98,53 +102,35 @@ namespace BachelorBackEnd
         }
 
         //OBS! Change diagrams to match changes.
-        public List<Study> GetMyResearcherStudiesDB(int reseacherID)
-        {
-            using (bachelordbContext DBmodel = new bachelordbContext())
-            {
-                List<Study> myStudies;
-                if (_context != null)
-                {
-                    myStudies = _context.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
-                }
-                else
-                {
-                    myStudies = DBmodel.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
-                }                
-                return myStudies;
-            }
-        }
-
-        //OBS! Change diagrams to match changes.
         public List<Study> GetRelevantStudiesDB(Participant participant)
         {
-            using (bachelordbContext DBmodel = new bachelordbContext())
+            List<Study> relevantStudies = new List<Study>();
+
+            if (_context.Study != null && _context.Inclusioncriteria != null)
             {
-                List<Study> relevantStudies = new List<Study>();
-                int participantAge = participant.Age.Year - DateTime.Now.Year;
+                int participantAge = DateTime.Now.Year - participant.Age.Year;
 
                 //BEHOLD! The Sorterings-Algorithm!
-                List<int> relevantStudyIDs = DBmodel.Inclusioncriteria.Where(crit =>
+                List<int> relevantStudyIDs = _context.Inclusioncriteria.Where(crit =>
                     //Sorts by age
-                    (crit.MinAge >= participantAge &&
-                    participantAge <= crit.MaxAge) &&
+                    Enumerable.Range(crit.MinAge, crit.MaxAge - crit.MinAge).Contains(participantAge) &&
                     //Sorts by gender
-                    (crit.Male == Convert.ToSByte(participant.Gender) ||
-                    crit.Female != Convert.ToSByte(participant.Gender)) &&
+                    (crit.Male == participant.Gender ||
+                    crit.Female != participant.Gender) &&
                     //Sorts by english language
                     ((participant.English == true) ?
-                    crit.English == Convert.ToSByte(participant.English) ||
-                    crit.English != Convert.ToSByte(participant.English) :
-                    crit.English != Convert.ToSByte(participant.English)))
+                    crit.English == participant.English ||
+                    crit.English != participant.English :
+                    crit.English == participant.English))
                     //Saves the relevant IDs to a list
                     .ToList().Select(studID => studID.IdStudy).ToList();
 
                 foreach (var id in relevantStudyIDs)
                 {
-                    relevantStudies.Add(DBmodel.Study.FirstOrDefault(stud => stud.IdStudy == id));
+                    relevantStudies.Add(_context.Study.FirstOrDefault(stud => stud.IdStudy == id));
                 }
-                return relevantStudies;
             }
+            return relevantStudies;
         }
     }
 }

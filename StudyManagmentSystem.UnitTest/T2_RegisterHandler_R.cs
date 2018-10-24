@@ -9,13 +9,14 @@ using Moq;
 namespace Tests
 {
     // Inspiration: https://entityframework.net/how-to-mock-data, https://medium.com/@metse/entity-framework-core-unit-testing-3c412a0a997c
-    public class RegisterHandler_T2_R
+    public class T2_RegisterHandler_R
     {
         public IRegisterHandler uut;
         public Researcher researcher;
         public IQueryable researchers;
         public Mock<DbSet<Researcher>> mockSet;
         public Mock<BachelorBackEnd.bachelordbContext> mockContext;
+
         [SetUp]
         public void Setup()
         {
