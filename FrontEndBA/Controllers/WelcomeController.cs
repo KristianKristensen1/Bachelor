@@ -3,11 +3,13 @@ using JwtAuthenticationHelper.Abstractions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -24,18 +26,36 @@ namespace FrontEndBA.Controllers
 
         public ActionResult Participant()
         {
-            if (User.Identity.IsAuthenticated)
+            if (User.Claims.Count() != 0)
             {
-                return RedirectToAction("Participant", "Homepage");
+                if (User.Claims.ElementAt(2).Value == "Y")
+                {
+                    return RedirectToAction("Participant", "Homepage");
+                }
+
+                if (User.Claims.ElementAt(1).Value == "Y")
+                {
+                    return RedirectToAction("Researcher", "Homepage");
+                }
             }
+
             return View();
         }
 
         public ActionResult Researcher()
         {
-            if (User.Identity.IsAuthenticated)
+            
+            if (User.Claims.Count() != 0)
             {
-                return RedirectToAction("Researcher", "Homepage");
+                if (User.Claims.ElementAt(2).Value == "Y")
+                {
+                    return RedirectToAction("Participant", "Homepage");
+                }
+
+                if (User.Claims.ElementAt(1).Value == "Y")
+                {
+                    return RedirectToAction("Researcher", "Homepage");
+                }
             }
             return View();
         }

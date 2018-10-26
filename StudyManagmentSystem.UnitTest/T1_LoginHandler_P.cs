@@ -8,7 +8,7 @@ using Moq;
 
 namespace Tests
 {
-    public class LoginHandler_T1_P
+    public class T1_LoginHandler_P
     {
         public ILoginHandler uut;
         public IQueryable participants;

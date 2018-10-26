@@ -19,7 +19,7 @@ namespace FrontEndBA.Controllers
     public class HomepageController : Controller
     {
 
-        [Authorize]
+        [Authorize(Policy = "RequiresParticipant")]
         public ActionResult Participant()
         {
             //Gets the id from JWT. The id is used to retrieve user from database. 
@@ -54,8 +54,7 @@ namespace FrontEndBA.Controllers
             return View(studiesCollection);
         }
 
-        [Authorize]
-        //[Authorize(Policy = "RequiresVerified")]
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult Researcher()
         {
             //Gets the id from JWT. The id is used to retrieve user from database. 

@@ -8,13 +8,14 @@ using Moq;
 
 namespace Tests
 {
-    public class LoginHandler_T1_R
+    public class T1_LoginHandler_R
     {
         public ILoginHandler uut;
         public Researcher researcher;
         public IQueryable researchers;
         public Mock<DbSet<Researcher>> mockSet;
         public Mock<BachelorBackEnd.bachelordbContext> mockContext;
+
         [SetUp]
         public void Setup()
         {
