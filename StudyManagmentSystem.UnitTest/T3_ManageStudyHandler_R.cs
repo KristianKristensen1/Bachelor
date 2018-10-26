@@ -14,13 +14,16 @@ namespace Tests
         public IManageStudyHandler uut;
         public Study study;
         public IQueryable studies;
+        public IQueryable inclusionCriteria;
         public Mock<DbSet<Study>> mockStudySet;
         public Mock<bachelordbContext> mockContext;
+
+        public Mock<DbSet<Study>> mockStudySet2;
+
 
         [SetUp]
         public void SetUp()
         {
-
             //A list of studies
             studies = new List<Study>
             {
@@ -31,6 +34,7 @@ namespace Tests
                     Description = "Ladies and gentlemen, this is study no. 5",
                     Isdraft = false,
                     IdResearcher = 1,
+                    DateCreated = DateTime.Now.Date,
                 },
                 new Study
                 {
@@ -39,6 +43,7 @@ namespace Tests
                     Description = "Not as great as study no. 5",
                     Isdraft = true,
                     IdResearcher = 1,
+
                 },
                 new Study
                 {
@@ -49,6 +54,23 @@ namespace Tests
                     IdResearcher = 3,
                 }
             }.AsQueryable();
+
+            //A list of inclusion criteria
+            inclusionCriteria = new List<Inclusioncriteria>
+            {
+                new Inclusioncriteria
+                {
+                    Male = true,
+                    Female = false,
+                    MinAge = 10,
+                    MaxAge = 60,
+                    English = true,
+                    IdStudy = 5,
+                },
+
+            }.AsQueryable();
+
+            var listen = new List<Study>().AsQueryable();
 
             // Required to do this. If not the "mock" does not recognize "part" in uut.RegisterParticipantDB
             mockContext = new Mock<bachelordbContext>();
@@ -111,6 +133,51 @@ namespace Tests
 
             //Assert -
             Assert.AreEqual(listOfStudies.Count, 0);
+        }
+
+        [Test]
+        public void CreateStudyDB()
+        {
+            //Arrange
+            uut = new ManageStudyHandler(mockContext.Object);
+
+
+            Inclusioncriteria inc = new Inclusioncriteria()
+            {
+                Male = true,
+                Female = false,
+                MinAge = 10,
+                MaxAge = 60,
+                English = true,
+            };
+
+            Study study = new Study()
+            {
+                Name = "New Study for people! This is real",
+                IdStudy = 13,
+                Description = "Ladies and gentlemen, this is study no. 5",
+                Isdraft = false,
+                IdResearcher = 1,
+                Abstract = "Here is a nice abstract!",
+                DirectStudyLink = "ThisIsADirectStudyLink",
+                Duration = 60,
+                DateCreated = DateTime.Now.Date,
+                Preparation = "Please come prepared",
+                EligibilityRequirements = "You must be nice to participate",
+                Pay = 150,
+            };
+
+           
+            //Act
+            uut.CreateStudyDB(study, inc);
+
+            //Assert
+            //Assert.AreEqual(mockContext.Object.Study.Count(), 4);
+
+            /*
+            mockStudySet.Verify(m => m.Add(It.IsAny<Study>()), Times.Once);
+            mockContext.Verify(m => m.SaveChanges(), Times.Once);
+            */
         }
     }
 }

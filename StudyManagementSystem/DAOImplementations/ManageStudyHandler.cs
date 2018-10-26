@@ -25,20 +25,21 @@ namespace BachelorBackEnd
 
         public void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria)
         {
-            using (bachelordbContext DBmodel = new bachelordbContext())
+            if (_context.Study != null)
             {
                 //Adds the study to the database and saves
-                DBmodel.Study.Add(study);
-                DBmodel.SaveChanges();
+                _context.Study.Add(study);
+                _context.SaveChanges();
 
                 //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
-                int id = (DBmodel.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
+                int id = (_context.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
                 inclusioncriteria.IdStudy = id;
 
                 //Saves the inclusioncriteria 
-                DBmodel.Inclusioncriteria.Add(inclusioncriteria);
-                DBmodel.SaveChanges();
+                _context.Inclusioncriteria.Add(inclusioncriteria);
+                _context.SaveChanges();
             }
+           
         }
 
         public void DeleteStudyDB(Study study)
