@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BachelorBackEnd;
 using Microsoft.AspNetCore.Authorization;
+using FrontEndBA.Models.CreateStudy;
+using FrontEndBA.Models;
 
 namespace FrontEndBA.Controllers
 {
@@ -16,11 +18,6 @@ namespace FrontEndBA.Controllers
             return "Hallo";
         }
 
-        [Authorize]
-        public ActionResult ShowStudyParticipant(Study study)
-        {
-            return View("ViewStudy");
-        }
 
         public string Participant(int? id)
         {
@@ -28,9 +25,30 @@ namespace FrontEndBA.Controllers
             return "Id is " + id;
         }
 
-        public ActionResult ShowStudyResearcher(Study study)
+        [Authorize]
+        public ActionResult ViewStudy(int studyID)
         {
-            return View("ViewStudy");
+            
+            Study studyToShow = GetStudy(studyID);
+            Inclusioncriteria incToShow = GetInclusioncriteria(studyID);
+
+            ViewStudyModel vm = new ViewStudyModel();
+            vm.study = studyToShow;
+            vm.inclusioncriteria = incToShow;
+            
+            return View(vm);
+        }
+
+        public Study GetStudy(int id)
+        {
+            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            return msh.getStudyDB(id);
+        }
+
+        public Inclusioncriteria GetInclusioncriteria(int id)
+        {
+            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            return msh.getInclusioncriteriaDB(id);
         }
     }
 }

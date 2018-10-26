@@ -10,9 +10,7 @@ namespace BachelorBackEnd
     public class ManageStudyHandler : IManageStudyHandler
     {
         private bachelordbContext _context;
-        public ManageStudyHandler()
-        {
-        }
+
         public ManageStudyHandler(bachelordbContext context)
         {
             _context = context;
@@ -132,6 +130,20 @@ namespace BachelorBackEnd
                 }
             }
             return relevantStudies;
+        }
+
+        public Study getStudyDB(int id)
+        {
+            Study study = _context.Study.FirstOrDefault(stud => stud.IdStudy == id);
+
+            return study;
+        }
+
+        public Inclusioncriteria getInclusioncriteriaDB(int id)
+        {
+            Inclusioncriteria incCrit = _context.Inclusioncriteria.FirstOrDefault(inc => inc.IdStudy == id);
+
+            return incCrit;
         }
     }
 }

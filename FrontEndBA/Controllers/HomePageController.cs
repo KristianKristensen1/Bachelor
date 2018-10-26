@@ -29,7 +29,7 @@ namespace FrontEndBA.Controllers
             
 
             Participant participant = getParticipant(id);
-            ManageStudyHandler mst = new ManageStudyHandler();
+            ManageStudyHandler mst = new ManageStudyHandler(new bachelordbContext());
             Studies studiesCollection = new Studies();            
             studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
 

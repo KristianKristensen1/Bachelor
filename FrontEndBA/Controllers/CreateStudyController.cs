@@ -56,7 +56,7 @@ namespace FrontEndBA.Controllers
 
                    
 
-                ManageStudyHandler manageStudyHandler = new ManageStudyHandler();
+                ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
 
            

@@ -1,9 +1,206 @@
-﻿
+﻿@model FrontEndBA.Models.ViewStudyModel;
+@using FrontEndBA.Models.ResearcherModel.CreateStudyModel;
+
 @{
     ViewData["Title"] = "ViewStudy";
 }
 
+<hr />
+<div class="container" style="width: 80%;">
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-5" id="right" style="background-color: white; width: 100%;">
+                <h3 class="tableTitle">Study details</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Name of study</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="study.Name" class="form-control" readonly="@(true)">
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Abstract</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="study.Abstract" class="form-control" name="Abstract" readonly="@(true)" />
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="biggerinput">
+                            <th class="col-md-1">
+                                <div style="margin-top: -100px">
+                                    <text class="control-label">Study description</text>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <textarea asp-for="study.Description" class="form-control" style="height: 100px" name="Description" readonly="@(true)"></textarea>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Pay pr time</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="study.Pay" class="form-control" name="Pay" readonly="@(true)" />
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Duration of study</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="study.Duration" class="form-control" name="Duration" readonly="@(true)" />
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Preparation</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="study.Preparation" class="form-control" name="Preparation" readonly="@(true)" />
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="biggerinput">
+                            <th class="col-md-1">
+                                <div style="margin-top: -100px">
+                                    <text class="control-label">Eligibility requirements</text>
+                                </div>
+
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <textarea asp-for="study.EligibilityRequirements" class="form-control" style="height: 100px" name="EligibilityRequirements" readonly="@(true)"></textarea>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th class="col-md-1">
+                                <text class="control-label">Can males participate in study?</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        @if (Model.inclusioncriteria.Male)
+                                        {
+                                            <label>Yes</label>
+                                        }
+                                        else
+                                        {
+                                            <label>No</label>
+                                        }
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                <text class="control-label">Can females participate in study?</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        @if (Model.inclusioncriteria.Female)
+                                        {
+                                            <label>
+                                                Yes
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label>
+                                                No
+                                            </label>
+                                        }
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                <text class="control-label">Age requirements</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        <div style="color: lightblue;">
+                                            <text class="control-label">Minimum age to participate</text>
+                                        </div>
+                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" name="MinAge" readonly="@(true)" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div style="color: lightblue;">
+                                            <text class="control-label">Maximum age to participate</text>
+                                        </div>
+                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" name="MaxAge" readonly="@(true)" />
+                                    </div>
+
+                                </div>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                <text class="control-label"> Does the participant have to speak english?</text>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        @if (Model.inclusioncriteria.English)
+                                        {
+                                            <label>
+                                                Yes
+                                            </label>
+                                        }
+                                        else
+                                        {
+                                            <label>
+                                                No
+                                            </label>
+                                        }
+
+                                        <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+
+                    </thead>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
+                        @if (Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
+                        {
+                            <input type="submit" value="Edit study" class="btn btn-default" formaction="ReturnToHomePage" />
+                        }
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
 
 
-<h2>ViewStudy</h2>
+
+
+
+
+
 
