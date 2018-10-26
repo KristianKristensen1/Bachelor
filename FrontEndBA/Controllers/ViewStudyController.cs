@@ -24,6 +24,7 @@ namespace FrontEndBA.Controllers
 
         public string Participant(int? id)
         {
+
             return "Id is " + id;
         }
 

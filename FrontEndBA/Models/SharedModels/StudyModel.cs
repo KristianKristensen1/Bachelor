@@ -8,24 +8,29 @@ namespace FrontEndBA.Models.SharedModels
 {
     public class StudyModel
     {
-        //[Required(ErrorMessage = "Missing Description")]
+        [Display(Name = "Description")]
+        [Required(ErrorMessage = "Missing Description")]
         public string Description { get; set; }
-    
-        public Boolean Isdraft { get; set; }
+
+        [Display(Name = "Create as a draft")]
+        public bool Isdraft { get; set; }
 
 
         public int IdResearcher { get; set; }
-        //[Required(ErrorMessage = "Missing Study Name")]
+        [Display(Name = "Name*")]
+        [Required(ErrorMessage = "Missing Study Name")]
         public string Name { get; set; }
-        //[Required(ErrorMessage = "Must input payment amount")]
-        public int Pay { get; set; }
-        //[Required(ErrorMessage = "Missing Abstract")]
+        [Display(Name = "Pay")]
+        public int? Pay { get; set; }
+        [Display(Name = "Abstract*")]
+        [Required(ErrorMessage = "Missing Abstract")]
         public string Abstract { get; set; }
-        //[Required(ErrorMessage = "Missing Duration")]
-        public int Duration { get; set; }
-
+        [Display(Name = "Duration*")]
+        public int? Duration { get; set; }
+        [Display(Name = "Preparation*")]
         public string Preparation { get; set; }
-
+        [Display(Name = "Eligibility Requirements*")]
+        [Required(ErrorMessage = "Missing Eligibility Requirements")]
         public string EligibilityRequirements { get; set; }
 
         public DateTime DateCreated { get; set; }

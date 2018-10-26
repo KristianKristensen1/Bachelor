@@ -19,18 +19,18 @@
                     <thead>
                         <tr>
                             <th class="col-md-2">
-                                Study Name
+                                <label asp-for="currentStudy.Name" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Name" class="form-control" name="Name" />
+                                    <input asp-for="currentStudy.Name" class="form-control" />
                                     <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
                                 </div>
                             </th>
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                Abstract
+                                <label asp-for="currentStudy.Abstract" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -42,7 +42,7 @@
                         <tr class="biggerinput">
                             <th class="col-md-1">
                                 <div style="margin-top: -100px">
-                                    Study Description
+                                    <label asp-for="currentStudy.Description" class="control-label"></label>
                                 </div>
                             </th>
                             <th>
@@ -54,7 +54,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                Pay
+                                <label asp-for="currentStudy.Pay" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -65,7 +65,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                Duration given in minutes
+                                <label asp-for="currentStudy.Duration" class="control-label"></label> 
                             </th>
                             <th>
                                 <div class="form-group">
@@ -76,7 +76,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                Preparation
+                                <label asp-for="currentStudy.Preparation" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -88,7 +88,7 @@
                         <tr class="biggerinput">
                             <th class="col-md-1">
                                 <div style="margin-top: -100px">
-                                    Eligibility Requirements
+                                    <label asp-for="currentStudy.EligibilityRequirements" class="control-label"></label>
                                 </div>
 
                             </th>
@@ -102,7 +102,7 @@
 
                         <tr>
                             <th class="col-md-1">
-                                Include Male
+                                 <label asp-for="inclusioncriteria.IsMale" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -120,11 +120,10 @@
                         </tr>
                         <tr>
                             <th class="col-md-1">
-                                Include Female
+                                <label asp-for="inclusioncriteria.IsFemale" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <label asp-for="inclusioncriteria.IsFemale" class="control-label"></label>
                                     <div class="checkbox">
 
                                         <label class="control-label">
@@ -139,20 +138,20 @@
                         </tr>
                         <tr action="" class="form-horizontal">
                             <th class="col-md-1">
-                                Participants age
+                                <label class="control-label"> Participants age*</label>
                             </th>
                             <th>
                                 <div class="form-group">
                                     <div class="col-md-2">
                                         <div style="color: lightblue;">
-                                            MinimumAge
+                                            <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
                                         </div>
                                         <input asp-for="inclusioncriteria.MinAge" class="form-control" name="MinAge" />
                                         <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-2">
                                         <div style="color: lightblue;">
-                                            MaximumAge
+                                            <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
                                         </div>
                                         <input asp-for="inclusioncriteria.MinAge" class="form-control" name="MaxAge" />
                                         <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
@@ -164,7 +163,8 @@
                         </tr>
                         <tr>
                             <th class="col-md-1">
-                                Does the participant have to speak english?
+                                <label class="control-label"> Does the participant have to speak english?</label>
+                                
                             </th>
                             <th>
                                 <div class="form-group">
@@ -175,12 +175,6 @@
                                             @Html.RadioButtonFor(model => model.inclusioncriteria.English, true) Yes
                                             @Html.RadioButtonFor(model => model.inclusioncriteria.English, true) No
                                         </label>
-                                        @*<label>
-                                            Yes
-                                            @Html.RadioButtonFor(model => model.inclusioncriteria.English, "True", Model.inclusioncriteria.English == true ? new { Checked = "checked" } : null)
-                                            No
-                                            @Html.RadioButtonFor(model => model.inclusioncriteria.English, "False", Model.inclusioncriteria.English == false ? new { Checked = "checked" } : null)
-                                        </label>*@
                                         <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -188,7 +182,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-1">
-                                Create as Draft
+                                <label asp-for="currentStudy.Isdraft" class="control-label"></label>
                             </th>
                             <th>
                                 <div class="form-group">

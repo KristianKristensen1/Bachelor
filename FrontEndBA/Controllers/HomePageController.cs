@@ -63,7 +63,8 @@ namespace FrontEndBA.Controllers
             int id = Convert.ToInt32(claims.ElementAt(3).Value);
 
             Researcher researcher = getResearcher(id);
-            ManageStudyHandler mst = new ManageStudyHandler();
+            var db = new bachelordbContext();
+            ManageStudyHandler mst = new ManageStudyHandler(db);
             Studies studiesCollection = new Studies();
             studiesCollection.allStudies = mst.GetAllStudiesDB();
             studiesCollection.myResearcherStudies = mst.GetMyResearcherStudiesDB(researcher.IdResearcher);
