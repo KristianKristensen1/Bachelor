@@ -20,6 +20,13 @@
 .biggerinput {
     height: 100px;
 }
+
+.parantHover:hover {
+    background-color: lightgrey;
+    color: white;
+    cursor: pointer;
+}
+}
 .btn-default {
     background-color: lightgray;
     border: none;

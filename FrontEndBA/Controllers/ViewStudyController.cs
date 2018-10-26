@@ -11,15 +11,21 @@ namespace FrontEndBA.Controllers
 
     public class ViewStudyController : Controller
     {
-        public IActionResult Index()
+        public string Index()
         {
-            return View();
+            return "Hallo";
         }
 
         [Authorize]
         public ActionResult ShowStudyParticipant(Study study)
         {
             return View("ViewStudy");
+        }
+
+        public string Participant(int? id)
+        {
+
+            return "Id is " + id;
         }
 
         public ActionResult ShowStudyResearcher(Study study)
