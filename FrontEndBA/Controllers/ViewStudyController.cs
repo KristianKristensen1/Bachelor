@@ -7,10 +7,13 @@ using BachelorBackEnd;
 using Microsoft.AspNetCore.Authorization;
 using FrontEndBA.Models.CreateStudy;
 using FrontEndBA.Models;
+using FrontEndBA.Utility;
 
 namespace FrontEndBA.Controllers
 {
-
+    /// <summary>
+    /// The ViewStudyController handles the 
+    /// </summary>
     public class ViewStudyController : Controller
     {
         public string Index()
@@ -28,27 +31,17 @@ namespace FrontEndBA.Controllers
         [Authorize]
         public ActionResult ViewStudy(int studyID)
         {
-            
-            Study studyToShow = GetStudy(studyID);
-            Inclusioncriteria incToShow = GetInclusioncriteria(studyID);
+            //Creates a ViewStudyModel containing a Study and InclusionCriteria.
+            ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
 
-            ViewStudyModel vm = new ViewStudyModel();
-            vm.study = studyToShow;
-            vm.inclusioncriteria = incToShow;
-            
-            return View(vm);
+            return View(viewStudyModelHelper.createViewStudyModel(studyID));
         }
 
-        public Study GetStudy(int id)
+        public ActionResult ReturnToHomepage()
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-            return msh.getStudyDB(id);
+            //redirects to the welcome page, and from there to the Homepage if the user is authorized. 
+            return RedirectToAction("Participant", "Welcome");
         }
 
-        public Inclusioncriteria GetInclusioncriteria(int id)
-        {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-            return msh.getInclusioncriteriaDB(id);
-        }
     }
 }

@@ -185,14 +185,20 @@
                     </thead>
                 </table>
                 <div class="form-group">
-                    <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
-                        @if (Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
-                        {
-                            <input type="submit" value="Edit study" class="btn btn-default" formaction="ReturnToHomePage" />
-                        }
+                    @if (Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
+                    {
+                        <input type="submit" value="Edit study" class="btn btn-default" formaction="ReturnToHomePage" />
+                        <input type="submit" value="Manage participants" class="btn btn-default" formaction="ReturnToHomePage" />
+                        <input type="submit" value="Delete Study" class="btn btn-default" formaction="ReturnToHomePage" />
+                        <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
+                    }
                 </div>
             </div>
-
+                
         </div>
     </form>
 </div>

@@ -8,8 +8,8 @@ namespace FrontEndBA.Models
 {
     public class ViewStudyModel
     {
-        public Study study;
+        public Study study { get; set; }
 
-        public Inclusioncriteria inclusioncriteria;
+        public Inclusioncriteria inclusioncriteria { get; set; }
     }
 }
