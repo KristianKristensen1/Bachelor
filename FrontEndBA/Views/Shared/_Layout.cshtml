@@ -17,6 +17,12 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     </environment>
+
+    <style>
+        body{
+            background-color:lightgray;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,12 +52,13 @@
         }
 
     </nav>
-    <div class="container body-content">
+    <div class="container body-content" style="background-color:whitesmoke; border-radius:10px">
         @if (User.Identity.IsAuthenticated)
         {
             <div>
-                <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100">
+                <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100" style="border-radius:10px; padding:5px">
             </div>
+            //Checks if the user has admin rights
             if (User.Claims.ElementAt(0).Value == "Y")
             {
                 <ul class="menu">
