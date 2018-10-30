@@ -5,10 +5,15 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using BachelorBackEnd;
 using Microsoft.AspNetCore.Authorization;
+using FrontEndBA.Models.CreateStudy;
+using FrontEndBA.Models;
+using FrontEndBA.Utility;
 
 namespace FrontEndBA.Controllers
 {
-
+    /// <summary>
+    /// The ViewStudyController handles the 
+    /// </summary>
     public class ViewStudyController : Controller
     {
         public string Index()
@@ -16,11 +21,6 @@ namespace FrontEndBA.Controllers
             return "Hallo";
         }
 
-        [Authorize]
-        public ActionResult ShowStudyParticipant(Study study)
-        {
-            return View("ViewStudy");
-        }
 
         public string Participant(int? id)
         {
@@ -28,9 +28,20 @@ namespace FrontEndBA.Controllers
             return "Id is " + id;
         }
 
-        public ActionResult ShowStudyResearcher(Study study)
+        [Authorize]
+        public ActionResult ViewStudy(int studyID)
         {
-            return View("ViewStudy");
+            //Creates a ViewStudyModel containing a Study and InclusionCriteria.
+            ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
+
+            return View(viewStudyModelHelper.createViewStudyModel(studyID));
         }
+
+        public ActionResult ReturnToHomepage()
+        {
+            //redirects to the welcome page, and from there to the Homepage if the user is authorized. 
+            return RedirectToAction("Participant", "Welcome");
+        }
+
     }
 }

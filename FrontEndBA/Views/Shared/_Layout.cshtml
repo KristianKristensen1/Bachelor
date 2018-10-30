@@ -17,6 +17,12 @@
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     </environment>
+
+    <style>
+        body{
+            background-color:lightgray;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -46,43 +52,62 @@
         }
 
     </nav>
-<div class="container body-content">
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div>
-            <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100">
-        </div>
-        //Checks if the user has researcher rights
-        if (User.Claims.ElementAt(1).Value == "Y")
+    <div class="container body-content" style="background-color:whitesmoke; border-radius:10px">
+        @if (User.Identity.IsAuthenticated)
         {
-            <ul class="menu">
-                @{
-                    var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
-                    var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
-                }
-                <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
-                <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
-                <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
-                <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
-            </ul>
+            <div>
+                <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100" style="border-radius:10px; padding:5px">
+            </div>
+            //Checks if the user has admin rights
+            if (User.Claims.ElementAt(0).Value == "Y")
+            {
+                <ul class="menu">
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
+                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
+                    <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
+                </ul>
+                <div>
+                    <label style="float:right">@User.Identity.Name (Admin)</label>
+                </div>
+            }
+            //Checks if the user has researcher rights
+            else if (User.Claims.ElementAt(1).Value == "Y")
+            {
+                <ul class="menu">
+                    @{
+                        var controller = ViewContext.RouteData.Values["controller"].ToString().ToLower();
+                        var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
+                    }
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
+                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
+                    <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
+                </ul>
+                <div>
+                    <label style="float:right">@User.Identity.Name (Researcher)</label>
+                </div>
+            }
+            //Checks if the user has participant rights
+            else if (User.Claims.ElementAt(2).Value == "Y")
+            {
+                <ul class="menu">
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Participant","Homepage")">Home</a></li>
+                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutParticipant","welcome")">Log Out</a></li>
+                    <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
+                </ul>
+                <div>
+                    <label style="float:right">@User.Identity.Name (Participant)</label>
+                </div>
+            }
         }
-        //Checks if the user has participant rights
-        else if (User.Claims.ElementAt(2).Value == "Y")
-        {
-            <ul class="menu">
-                <li style="float: left"><a class="menuItems" href="@Url.Action("Participant","Homepage")">Home</a></li>
-                <li style="float: right"><a class="menuItems" href="@Url.Action("logoutParticipant","welcome")">Log Out</a></li>
-                <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
-            </ul>
-        }
-    }
-  
-    @RenderBody()
-    <hr/>
-    @*<footer>
+
+        @RenderBody()
+        <hr />
+        @*<footer>
             <p>&copy; 2018 - TandlægeHøjskolen</p>
         </footer>*@
-</div>
+    </div>
 
     <environment include="Development">
         <script src="~/lib/jquery/dist/jquery.js"></script>

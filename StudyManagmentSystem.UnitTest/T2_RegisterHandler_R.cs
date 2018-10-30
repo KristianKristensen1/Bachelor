@@ -26,6 +26,8 @@ namespace Tests
                 Password = "123456"
             };
 
+      
+
             researchers = new List<Researcher>
             {
             }.AsQueryable();
@@ -49,7 +51,7 @@ namespace Tests
             //Act - Add the participant
             uut = new RegisterHandler(mockContext.Object);
             uut.RegisterResearcherDB(researcher);
-
+          
             //Assert - Checking and see if we saved our changes. 
             mockSet.Verify(m => m.Add(It.IsAny<Researcher>()), Times.Once);
             mockContext.Verify(m => m.SaveChanges(), Times.Once);

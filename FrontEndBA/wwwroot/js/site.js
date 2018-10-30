@@ -15,18 +15,11 @@ function redirectViewToCreateStudy() {
     window.location.replace(url + "/CreateStudy/Index");
 }
 
-function redirectToLogOut() {
-    var url = document.URL;
-    window.location.replace(url + "/Logout")
-}
-
 function myFuntion() {
     var url = document.URL;
     window.location.replace(url + "/participant")
 }
 
-function clearBrowser() {
-    var url = window.location.href;
-    window.history.go(-window.history.length);
-    window.location.href = url;
+function Logout() {
+    window.location.replace("google.com")
 }

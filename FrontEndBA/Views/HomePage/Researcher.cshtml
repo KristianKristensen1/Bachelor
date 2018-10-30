@@ -3,19 +3,13 @@
 @{
     ViewData["Title"] = "Researcher";
 }
+<head>
 
-<h2>Researcher</h2>
-
+</head>
+<h2>Researcher homepage</h2>
 <div class="container">
     <div class="row">
-        @*<style>
-            tr:hover {
-                background-color: lightgrey;
-                color: white;
-                cursor: pointer;
-            }
-        </style>*@
-        <div class="col-md-5" id="right" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+        <div class="col-md-5" id="right"style="background-color:white; overflow-y:scroll; height: 300px; width:95%; margin-bottom:20px; border-radius:10px;">
             <h3 class="tableTitle">All studies</h3>
             <table class="table">
                 <thead>
@@ -34,7 +28,7 @@
                 <tbody>
                     @foreach (var study in Model.allStudies)
                     {
-                        <tr class="parantHover" onclick="location.href = '@(Url.Action("ShowStudyResearcher", "ViewStudy", study))'">
+                        <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
                             <td>
                                 @Html.DisplayFor(modelItem => study.IdStudy)
                             </td>
@@ -54,7 +48,7 @@
         </div>
 
 
-        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 200px; width:100%; margin-bottom:20px">
+        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 300px; width:95%; margin-bottom:20px; border-radius:10px">
             <h3 class="tableTitle">My studies</h3>
             <table class="table">
                 <thead>
@@ -73,7 +67,7 @@
                 <tbody>
                     @foreach (var study in Model.myResearcherStudies)
                     {
-                        <tr class="parantHover" onclick="location.href = '@(Url.Action("ShowStudyResearcher", "ViewStudy", study))'">
+                        <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
                             <td>
                                 @Html.DisplayFor(modelItem => study.IdStudy)
                             </td>

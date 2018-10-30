@@ -30,7 +30,7 @@
                     <tbody>
                         @foreach (var study in Model.myParticipantStudies)
                         {
-                        <tr class="parantHover" id="" onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
+                        <tr class="parantHover" id="" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
                             <td >
                                 @Html.DisplayFor(modelItem => study.IdStudy)
                             </td>
@@ -63,7 +63,7 @@
                     <tbody>
                         @foreach (var study in Model.relevantStudies)
                         {
-                            <tr class="parantHover" onclick="location.href = '@(Url.Action("ShowStudyParticipant", "ViewStudy", study))'">
+                            <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
                                 <td>
                                     @Html.DisplayFor(modelItem => study.IdStudy)
                                 </td>
