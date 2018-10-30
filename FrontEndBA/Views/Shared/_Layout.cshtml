@@ -63,7 +63,7 @@
             {
                 <ul class="menu">
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
-                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
                     <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
                     <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
                 </ul>
@@ -80,7 +80,7 @@
                         var action = ViewContext.RouteData.Values["action"].ToString().ToLower();
                     }
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
-                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">AddStudy</a></li>
+                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
                     <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
                     <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
                 </ul>

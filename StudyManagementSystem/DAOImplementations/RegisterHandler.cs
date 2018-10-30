@@ -11,10 +11,6 @@ namespace BachelorBackEnd
     {
         private bachelordbContext _context;
 
-        public RegisterHandler()
-        {
-
-        }
 
         public RegisterHandler(bachelordbContext context)
         {

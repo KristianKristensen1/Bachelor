@@ -23,3 +23,25 @@ function myFuntion() {
 function Logout() {
     window.location.replace("google.com")
 }
+
+function AllStudies() {
+    $('#AllStudies').show();
+    $('#MyStudies').hide();
+    $('#CreateButton').hide();
+}
+
+function MyStudiesResearcher() {
+    $('#AllStudies').hide();
+    $('#MyStudies').show();
+    $('#CreateButton').show();
+}
+
+function RelevantStudies() {
+    $('#RelevantStudies').show();
+    $('#MyStudies').hide();
+}
+
+function MyStudiesParticipant() {
+    $('#RelevantStudies').hide();
+    $('#MyStudies').show();
+}

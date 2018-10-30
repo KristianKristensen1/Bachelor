@@ -24,7 +24,6 @@ namespace FrontEndBA.Controllers
 
         public string Participant(int? id)
         {
-
             return "Id is " + id;
         }
 
@@ -37,11 +36,12 @@ namespace FrontEndBA.Controllers
             return View(viewStudyModelHelper.createViewStudyModel(studyID));
         }
 
-        public ActionResult ReturnToHomepage()
+        [Authorize]
+        public ActionResult ViewStudyDraft(int studyID)
         {
-            //redirects to the welcome page, and from there to the Homepage if the user is authorized. 
-            return RedirectToAction("Participant", "Welcome");
-        }
+            EditStudyHelper editStudyHelper = new EditStudyHelper();
 
+            return View(editStudyHelper.CreateEditStudyModel(studyID));
+        }
     }
 }

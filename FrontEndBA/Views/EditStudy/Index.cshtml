@@ -1,0 +1,215 @@
+﻿@model FrontEndBA.Models.CreateStudy.CreateStudyModel
+@using FrontEndBA.Models.ResearcherModel.CreateStudyModel;
+
+@{
+    ViewData["Title"] = "EditStudy";
+}
+
+
+<h2>Edit study</h2>
+<div class="container" style="width: 80%;">
+
+    <form asp-action="Create">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-5" id="right" style="background-color: white; width: 100%; border-radius:10px">
+                <h3 class="tableTitle">Please input study information</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Name" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Name" class="form-control" name="Name" />
+                                    <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Abstract" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Abstract" class="form-control" name="Abstract" />
+                                    <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="biggerinput">
+                            <th class="col-md-1">
+                                <div style="margin-top: -100px">
+                                    <label asp-for="currentStudy.Description" class="control-label"></label>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px" name="Description"></textarea>
+                                    <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Pay" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Pay" class="form-control" name="Pay" />
+                                    <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Duration" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Duration" class="form-control" name="Duration" />
+                                    <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Preparation" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Preparation" class="form-control" name="Preparation" />
+                                    <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="biggerinput">
+                            <th class="col-md-1">
+                                <div style="margin-top: -100px">
+                                    <label asp-for="currentStudy.EligibilityRequirements" class="control-label"></label>
+                                </div>
+
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <textarea asp-for="currentStudy.EligibilityRequirements" class="form-control" style="height: 100px" name="EligibilityRequirements"></textarea>
+                                    <span asp-validation-for="currentStudy.EligibilityRequirements" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+
+                        <tr>
+                            <th class="col-md-1">
+                                <label asp-for="inclusioncriteria.IsMale" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+
+                                        <label class="control-label">
+                                            <input asp-for="inclusioncriteria.IsMale" value="true" type="radio" id="myFirstId" />Yes
+                                            <input asp-for="inclusioncriteria.IsMale" value="false" type="radio" id="mySecondId" />No
+                                        </label>
+                                        <span asp-validation-for="inclusioncriteria.IsMale" class="text-danger" name="IsMale"></span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                <label asp-for="inclusioncriteria.IsFemale" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="checkbox">
+
+                                        <label class="control-label">
+                                            <input asp-for="inclusioncriteria.IsFemale" value="true" type="radio" id="myFirstId" name="IsFemale" />Yes
+                                            <input asp-for="inclusioncriteria.IsFemale" value="false" type="radio" id="mySecondId" name="IsFemale" />No
+                                        </label>
+                                        <span asp-validation-for="inclusioncriteria.IsFemale" class="text-danger" name="isFemale"></span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr action="" class="form-horizontal">
+                            <th class="col-md-1">
+                                <label class="control-label"> Participants age*</label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        <div style="color: lightblue;">
+                                            <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
+                                        </div>
+                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" name="MinAge" />
+                                        <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div style="color: lightblue;">
+                                            <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
+                                        </div>
+                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" name="MaxAge" />
+                                        <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                                    </div>
+
+                                </div>
+
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                <label class="control-label"> Does the participant have to speak english?</label>
+
+                            </th>
+                            <th>
+                                <div class="form-group">
+
+                                    <div class="checkbox">
+
+                                        <label class="control-label">
+                                            <input asp-for="inclusioncriteria.English" value="true" type="radio" id="myFirstId" name="Englis" />Yes
+                                            <input asp-for="inclusioncriteria.English" value="false" type="radio" id="mySecondId" name="English" />No
+                                        </label>
+                                        <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-1">
+                                <label asp-for="currentStudy.Isdraft" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <div class="checkbox">
+                                        <label class="control-label">
+                                            @Html.RadioButtonFor(model => model.currentStudy.Isdraft, true, new { id = "currentStudy.Isdraft_true" }) Yes
+
+                                        </label>
+                                    </div>
+                                </div>
+                            </th>
+                        </tr>
+
+                    </thead>
+                </table>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" formaction="Edit" />
+                    <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = Model.currentStudy.IdStudy }))'" />
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>
+
+
+
+
+
+
+
+

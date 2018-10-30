@@ -10,7 +10,7 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
-            <div class="col-md-5" id="right" style="background-color: white; width: 100%;">
+            <div class="col-md-5" id="right" style="background-color: white; width: 100%; border-radius:10px;">
                 <h3 class="tableTitle">Study details</h3>
                 <table class="table">
                     <thead>
@@ -19,9 +19,7 @@
                                 <text class="control-label">Name of study</text>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <input asp-for="study.Name" class="form-control" readonly="@(true)">
-                                </div>
+                                <label>@Html.DisplayFor(item => item.study.Name)</label>
                             </th>
                         </tr>
                         <tr>
@@ -29,9 +27,7 @@
                                 <text class="control-label">Abstract</text>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <input asp-for="study.Abstract" class="form-control" name="Abstract" readonly="@(true)" />
-                                </div>
+                               <label>@Html.DisplayFor(item => item.study.Abstract)</label>
                             </th>
                         </tr>
                         <tr class="biggerinput">
@@ -41,9 +37,7 @@
                                 </div>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <textarea asp-for="study.Description" class="form-control" style="height: 100px" name="Description" readonly="@(true)"></textarea>
-                                </div>
+                                    <label style="height: 100px">@Html.DisplayFor(item => item.study.Description)</label>
                             </th>
                         </tr>
                         <tr>
@@ -51,9 +45,7 @@
                                 <text class="control-label">Pay pr time</text>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <input asp-for="study.Pay" class="form-control" name="Pay" readonly="@(true)" />
-                                </div>
+                                    <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
                             </th>
                         </tr>
                         <tr>
@@ -61,9 +53,7 @@
                                 <text class="control-label">Duration of study</text>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <input asp-for="study.Duration" class="form-control" name="Duration" readonly="@(true)" />
-                                </div>
+                                    <label>@Html.DisplayFor(item => item.study.Duration) min.</label>
                             </th>
                         </tr>
                         <tr>
@@ -71,9 +61,7 @@
                                 <text class="control-label">Preparation</text>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <input asp-for="study.Preparation" class="form-control" name="Preparation" readonly="@(true)" />
-                                </div>
+                                    <label>@Html.DisplayFor(item => item.study.Preparation)</label>
                             </th>
                         </tr>
                         <tr class="biggerinput">
@@ -84,9 +72,7 @@
 
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <textarea asp-for="study.EligibilityRequirements" class="form-control" style="height: 100px" name="EligibilityRequirements" readonly="@(true)"></textarea>
-                                </div>
+                                    <label style="height: 100px">@Html.DisplayFor(item => item.study.EligibilityRequirements)</label>
                             </th>
                         </tr>
 
@@ -95,8 +81,7 @@
                                 <text class="control-label">Can males participate in study?</text>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <div class="checkbox">
+                                <div>
                                         @if (Model.inclusioncriteria.Male)
                                         {
                                             <label>Yes</label>
@@ -105,7 +90,6 @@
                                         {
                                             <label>No</label>
                                         }
-                                    </div>
                                 </div>
                             </th>
                         </tr>
@@ -115,20 +99,14 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <div class="checkbox">
                                         @if (Model.inclusioncriteria.Female)
                                         {
-                                            <label>
-                                                Yes
-                                            </label>
+                                            <label>Yes</label>
                                         }
                                         else
                                         {
-                                            <label>
-                                                No
-                                            </label>
+                                            <label>No</label>
                                         }
-                                    </div>
                                 </div>
                             </th>
                         </tr>
@@ -142,13 +120,13 @@
                                         <div style="color: lightblue;">
                                             <text class="control-label">Minimum age to participate</text>
                                         </div>
-                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" name="MinAge" readonly="@(true)" />
+                                        <label>@Html.DisplayFor(item => item.inclusioncriteria.MinAge) years</label>
                                     </div>
                                     <div class="col-md-2">
                                         <div style="color: lightblue;">
                                             <text class="control-label">Maximum age to participate</text>
                                         </div>
-                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" name="MaxAge" readonly="@(true)" />
+                                        <label>@Html.DisplayFor(item => item.inclusioncriteria.MaxAge) years</label>
                                     </div>
 
                                 </div>
@@ -161,43 +139,39 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <div class="checkbox">
                                         @if (Model.inclusioncriteria.English)
                                         {
-                                            <label>
-                                                Yes
-                                            </label>
+                                            <label>Yes</label>
                                         }
                                         else
                                         {
-                                            <label>
-                                                No
-                                            </label>
+                                            <label>No</label>
                                         }
-
                                         <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
-                                    </div>
                                 </div>
                             </th>
+                        </tr>
+                        <tr>
+                            <th class=""></th>
                         </tr>
 
                     </thead>
                 </table>
-                <div class="form-group">
-                    @if (Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
-                    {
-                        <input type="submit" value="Edit study" class="btn btn-default" formaction="ReturnToHomePage" />
-                        <input type="submit" value="Manage participants" class="btn btn-default" formaction="ReturnToHomePage" />
-                        <input type="submit" value="Delete Study" class="btn btn-default" formaction="ReturnToHomePage" />
-                        <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
-                    }
-                    else
-                    {
-                        <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
-                    }
-                </div>
             </div>
-                
+            <div class="form-group">
+                @if (Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
+                {
+                    <input value="Edit study" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "EditStudy", new { studyID = Model.study.IdStudy }))'" />
+                    <input type="submit" value="Manage participants" class="btn btn-default" formaction="ReturnToHomePage" />
+                    <input type="submit" value="Delete Study" class="btn btn-default" formaction="ReturnToHomePage" />
+                    <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'" />
+                }
+                else
+                {
+                    <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'" />
+                }
+            </div>
+
         </div>
     </form>
 </div>

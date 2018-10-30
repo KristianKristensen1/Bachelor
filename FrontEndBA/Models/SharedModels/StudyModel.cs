@@ -15,20 +15,27 @@ namespace FrontEndBA.Models.SharedModels
         [Display(Name = "Create as a draft")]
         public bool Isdraft { get; set; }
 
-
         public int IdResearcher { get; set; }
+
+        public int IdStudy { get; set; }
+
         [Display(Name = "Name*")]
         [Required(ErrorMessage = "Missing Study Name")]
         public string Name { get; set; }
+
         [Display(Name = "Pay")]
-        public int? Pay { get; set; }
+        public double Pay { get; set; }
+
         [Display(Name = "Abstract*")]
         [Required(ErrorMessage = "Missing Abstract")]
         public string Abstract { get; set; }
+
         [Display(Name = "Duration*")]
         public int? Duration { get; set; }
+
         [Display(Name = "Preparation*")]
         public string Preparation { get; set; }
+
         [Display(Name = "Eligibility Requirements*")]
         [Required(ErrorMessage = "Missing Eligibility Requirements")]
         public string EligibilityRequirements { get; set; }

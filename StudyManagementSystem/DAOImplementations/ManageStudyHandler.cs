@@ -37,7 +37,17 @@ namespace BachelorBackEnd
                 _context.Inclusioncriteria.Add(inclusioncriteria);
                 _context.SaveChanges();
             }
-           
+
+        }
+
+        public void EditStudy(Study study, Inclusioncriteria inclusioncriteria)
+        {
+            Study oldStudy = _context.Study.FirstOrDefault(stud => stud.IdStudy == study.IdStudy);
+            if (oldStudy != null)
+            {
+                oldStudy = study;
+                _context.SaveChanges();
+            }
         }
 
         public void DeleteStudyDB(Study study)
@@ -65,7 +75,7 @@ namespace BachelorBackEnd
             {
                 if (_context.Study != null)
                 {
-                    allStudies = _context.Study.ToList();
+                    allStudies = _context.Study.Where(stud => stud.Isdraft != true).ToList();
                 }
                 return allStudies;
             }
@@ -85,19 +95,17 @@ namespace BachelorBackEnd
         //OBS! Change diagrams to match changes.
         public List<Study> GetMyParticipantStudiesDB(int participantID)
         {
-            using (bachelordbContext DBmodel = new bachelordbContext())
-            {
-                List<Study> myStudies = new List<Study>();
-                List<int> myStudyIDs = DBmodel.Studyparticipant.Where
-                    (studpart => studpart.IdParticipant == participantID).ToList()
-                    .Select(partID => partID.IdStudy).ToList();
+            List<Study> myStudies = new List<Study>();
+            List<int> myStudyIDs = _context.Studyparticipant.Where
+                (studpart => studpart.IdParticipant == participantID).ToList()
+                .Select(partID => partID.IdStudy).ToList();
 
-                foreach (var id in myStudyIDs)
-                {
-                    myStudies.Add(DBmodel.Study.FirstOrDefault(stud => stud.IdStudy == id));
-                }
-                return myStudies;
+            foreach (var id in myStudyIDs)
+            {
+                myStudies.Add(_context.Study.FirstOrDefault(stud => stud.IdStudy == id));
             }
+            return myStudies;
+
         }
 
         //OBS! Change diagrams to match changes.
@@ -112,7 +120,7 @@ namespace BachelorBackEnd
                 //BEHOLD! The Sorterings-Algorithm!
                 List<int> relevantStudyIDs = _context.Inclusioncriteria.Where(crit =>
                     //Sorts by age
-                    Enumerable.Range(crit.MinAge, crit.MaxAge - crit.MinAge).Contains(participantAge) &&
+                    crit.MinAge < participantAge && crit.MaxAge > participantAge &&
                     //Sorts by gender
                     (crit.Male == participant.Gender ||
                     crit.Female != participant.Gender) &&

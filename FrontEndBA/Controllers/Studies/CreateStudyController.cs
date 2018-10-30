@@ -49,7 +49,6 @@ namespace FrontEndBA.Controllers
                     int id = Convert.ToInt32(claims.ElementAt(3).Value);
 
                 // Convert to create format
-                 
                 CreateStudyHelper cshelper = new CreateStudyHelper();
                 curStudy = cshelper.ConvertStudy(curStudy, cs, id);
                 curCriteria = cshelper.ConvertInclusioncriteria(curCriteria, cs);
@@ -58,6 +57,7 @@ namespace FrontEndBA.Controllers
 
                 ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
+                    
 
            
                     return RedirectToAction("Researcher", "Homepage");

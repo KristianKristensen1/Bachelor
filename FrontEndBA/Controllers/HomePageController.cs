@@ -30,26 +30,13 @@ namespace FrontEndBA.Controllers
 
             Participant participant = getParticipant(id);
             ManageStudyHandler mst = new ManageStudyHandler(new bachelordbContext());
-            Studies studiesCollection = new Studies();            
+            Models.Studies studiesCollection = new Models.Studies();
+            
+            //Gets the relevant studies
             studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
 
-            //NOT YET IMPLEMENTED
-            //studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
-
-            //INSTEAD FAKE
-            List<Study> fakelist = new List<Study>();
-            Study fakestudy = new Study();
-            fakestudy.Description = "Test";
-            fakestudy.Isdraft = true;
-            fakestudy.Name = "This is a name of study1";
-            Study fakestudy2 = new Study();
-            fakestudy2.Description = "2Test";
-            fakestudy2.Isdraft = false;
-            fakestudy2.Name = "This is a name of study2";
-            fakelist.Add(fakestudy2);
-            fakelist.Add(fakestudy);
-
-            studiesCollection.myParticipantStudies = fakelist;
+            //Gets the studies that the participant is enrolled in. 
+            studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
 
             return View(studiesCollection);
         }
@@ -64,7 +51,7 @@ namespace FrontEndBA.Controllers
 
             Researcher researcher = getResearcher(id);
             ManageStudyHandler mst = new ManageStudyHandler(new bachelordbContext());
-            Studies studiesCollection = new Studies();
+            Models.Studies studiesCollection = new Models.Studies();
             studiesCollection.allStudies = mst.GetAllStudiesDB();
             studiesCollection.myResearcherStudies = mst.GetMyResearcherStudiesDB(researcher.IdResearcher);
             return View(studiesCollection);
