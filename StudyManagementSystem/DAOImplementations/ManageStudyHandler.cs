@@ -23,15 +23,20 @@ namespace BachelorBackEnd
 
         public void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria)
         {
-            if (_context.Study != null)
-            {
-                //Adds the study to the database and saves
-                _context.Study.Add(study);
-                _context.SaveChanges();
-
-                //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
-                int id = (_context.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
-                inclusioncriteria.IdStudy = id;
+            //Adds the study to the database and saves
+            _context.Study.Add(study);
+            var t= Task.Run(()=> _context.SaveChanges()) ;
+            t.Wait();
+            
+            
+            //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
+        
+            
+           
+            
+            var dbStudy = (_context.Study.FirstOrDefault(stud =>
+                stud.Name == study.Name && stud.DateCreated == study.DateCreated)) ?? _context.Study.Local.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated);
+            inclusioncriteria.IdStudy = dbStudy.IdStudy;
 
                 //Saves the inclusioncriteria 
                 _context.Inclusioncriteria.Add(inclusioncriteria);
@@ -77,6 +82,7 @@ namespace BachelorBackEnd
                 {
                     allStudies = _context.Study.Where(stud => stud.Isdraft != true).ToList();
                 }
+
                 return allStudies;
             }
         }
@@ -89,6 +95,7 @@ namespace BachelorBackEnd
             {
                 myStudies = _context.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
             }
+
             return myStudies;
         }
 
@@ -137,6 +144,7 @@ namespace BachelorBackEnd
                     relevantStudies.Add(_context.Study.FirstOrDefault(stud => stud.IdStudy == id));
                 }
             }
+
             return relevantStudies;
         }
 

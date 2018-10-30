@@ -17,8 +17,8 @@ namespace FrontEndBA.Controllers
     public class CreateStudyController : Controller
     {
         // GET: CreateStudy
-        //[Authorize]
         private CreateStudyHelper cshelper;
+        [Authorize]
         public ActionResult Index()
         {
            cshelper = new CreateStudyHelper();
@@ -30,13 +30,11 @@ namespace FrontEndBA.Controllers
         {
             return RedirectToAction("Researcher", "Homepage");
         }
-
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize]
-        public ActionResult Create([Bind("Description,Isdraft,Name,Abstract,Pay,Duration,Preparation,EligibilityRequirements")] Study curStudy,
-            [Bind("IsMale,IsFemale,MinAge,MaxAge,English,IdReseacher")] Inclusioncriteria curCriteria, CreateStudyModel cs)
+        [Authorize]
+        public ActionResult Create(CreateStudyModel csModel)
         {
           //modelstate?
             if (ModelState.IsValid)
@@ -50,16 +48,16 @@ namespace FrontEndBA.Controllers
 
                 // Convert to create format
                 CreateStudyHelper cshelper = new CreateStudyHelper();
-                curStudy = cshelper.ConvertStudy(curStudy, cs, id);
-                curCriteria = cshelper.ConvertInclusioncriteria(curCriteria, cs);
+                    var curStudy = cshelper.ConvertStudy(csModel,id);
+                    var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
 
-                   
 
-                ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
+                    bachelordbContext db = new bachelordbContext();
+                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
                     
 
-           
+
                     return RedirectToAction("Researcher", "Homepage");
                 }
             catch(Exception e)
