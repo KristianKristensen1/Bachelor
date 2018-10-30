@@ -43,8 +43,6 @@ namespace BachelorBackEnd
                 _context.SaveChanges();
             }
 
-        }
-
         public void EditStudy(Study study, Inclusioncriteria inclusioncriteria)
         {
             Study oldStudy = _context.Study.FirstOrDefault(stud => stud.IdStudy == study.IdStudy);
@@ -161,5 +159,9 @@ namespace BachelorBackEnd
 
             return incCrit;
         }
+
     }
-}
+
+        
+        
+    }

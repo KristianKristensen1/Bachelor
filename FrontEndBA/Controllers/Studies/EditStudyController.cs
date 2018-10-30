@@ -44,8 +44,8 @@ namespace FrontEndBA.Controllers.Studies
 
                     // Convert to create format
                     CreateStudyHelper cshelper = new CreateStudyHelper();
-                    curStudy = cshelper.ConvertStudy(curStudy, cs, id);
-                    curCriteria = cshelper.ConvertInclusioncriteria(curCriteria, cs);
+                    curStudy = cshelper.ConvertStudy(cs, id);
+                    curCriteria = cshelper.ConvertInclusioncriteria( cs);
 
 
 

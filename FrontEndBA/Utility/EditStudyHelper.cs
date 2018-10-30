@@ -19,7 +19,7 @@ namespace FrontEndBA.Utility
             Study study = msh.getStudyDB(StudyID);
             Inclusioncriteria inc = msh.getInclusioncriteriaDB(StudyID);
             cs.currentStudy = new StudyModel() { Name = study.Name, Abstract = study.Abstract, Description = study.Description, Duration = study.Duration, DateCreated = study.DateCreated,
-                Isdraft = study.Isdraft, Pay = study.Pay, EligibilityRequirements = study.EligibilityRequirements, Preparation = study.Preparation, DirecetStudyLink = study.DirectStudyLink, IdStudy = study.IdStudy };
+                Isdraft = study.Isdraft, Pay = (int?)study.Pay, EligibilityRequirements = study.EligibilityRequirements, Preparation = study.Preparation, DirecetStudyLink = study.DirectStudyLink, IdStudy = study.IdStudy };
             cs.inclusioncriteria = new InclusioncriteriaModel() { IsMale = inc.Male, IsFemale = inc.Female, English = inc.English, MaxAge = inc.MaxAge, MinAge = inc.MinAge,
                 IdInclusionCriteria = inc.IdInclusionCriteria, IdStudy = inc.IdStudy };
 
