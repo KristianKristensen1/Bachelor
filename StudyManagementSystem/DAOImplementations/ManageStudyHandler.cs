@@ -10,9 +10,11 @@ namespace BachelorBackEnd
     public class ManageStudyHandler : IManageStudyHandler
     {
         private bachelordbContext _context;
+
         public ManageStudyHandler()
         {
         }
+
         public ManageStudyHandler(bachelordbContext context)
         {
             _context = context;
@@ -25,21 +27,28 @@ namespace BachelorBackEnd
 
         public void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria)
         {
-            using (bachelordbContext DBmodel = new bachelordbContext())
-            {
-                //Adds the study to the database and saves
-                DBmodel.Study.Add(study);
-                DBmodel.SaveChanges();
+            //Adds the study to the database and saves
+            _context.Study.Add(study);
+            var t= Task.Run(()=> _context.SaveChanges()) ;
+            t.Wait();
+            
+            
+            //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
+        
+            
+           
+            
+            var dbStudy = (_context.Study.FirstOrDefault(stud =>
+                stud.Name == study.Name && stud.DateCreated == study.DateCreated)) ?? _context.Study.Local.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated);
+            inclusioncriteria.IdStudy = dbStudy.IdStudy;
 
-                //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
-                int id = (DBmodel.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
-                inclusioncriteria.IdStudy = id;
-
-                //Saves the inclusioncriteria 
-                DBmodel.Inclusioncriteria.Add(inclusioncriteria);
-                DBmodel.SaveChanges();
-            }
+            //Saves the inclusioncriteria 
+            _context.Inclusioncriteria.Add(inclusioncriteria);
+            _context.SaveChanges();
         }
+
+       
+        
 
         public void DeleteStudyDB(Study study)
         {
@@ -68,6 +77,7 @@ namespace BachelorBackEnd
                 {
                     allStudies = _context.Study.ToList();
                 }
+
                 return allStudies;
             }
         }
@@ -80,6 +90,7 @@ namespace BachelorBackEnd
             {
                 myStudies = _context.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
             }
+
             return myStudies;
         }
 
@@ -90,13 +101,14 @@ namespace BachelorBackEnd
             {
                 List<Study> myStudies = new List<Study>();
                 List<int> myStudyIDs = DBmodel.Studyparticipant.Where
-                    (studpart => studpart.IdParticipant == participantID).ToList()
+                        (studpart => studpart.IdParticipant == participantID).ToList()
                     .Select(partID => partID.IdStudy).ToList();
 
                 foreach (var id in myStudyIDs)
                 {
                     myStudies.Add(DBmodel.Study.FirstOrDefault(stud => stud.IdStudy == id));
                 }
+
                 return myStudies;
             }
         }
@@ -112,16 +124,16 @@ namespace BachelorBackEnd
 
                 //BEHOLD! The Sorterings-Algorithm!
                 List<int> relevantStudyIDs = _context.Inclusioncriteria.Where(crit =>
-                    //Sorts by age
-                    Enumerable.Range(crit.MinAge, crit.MaxAge - crit.MinAge).Contains(participantAge) &&
-                    //Sorts by gender
-                    (crit.Male == participant.Gender ||
-                    crit.Female != participant.Gender) &&
-                    //Sorts by english language
-                    ((participant.English == true) ?
-                    crit.English == participant.English ||
-                    crit.English != participant.English :
-                    crit.English == participant.English))
+                        //Sorts by age
+                            Enumerable.Range(crit.MinAge, crit.MaxAge - crit.MinAge).Contains(participantAge) &&
+                            //Sorts by gender
+                            (crit.Male == participant.Gender ||
+                             crit.Female != participant.Gender) &&
+                            //Sorts by english language
+                            ((participant.English == true)
+                                ? crit.English == participant.English ||
+                                  crit.English != participant.English
+                                : crit.English == participant.English))
                     //Saves the relevant IDs to a list
                     .ToList().Select(studID => studID.IdStudy).ToList();
 
@@ -130,6 +142,7 @@ namespace BachelorBackEnd
                     relevantStudies.Add(_context.Study.FirstOrDefault(stud => stud.IdStudy == id));
                 }
             }
+
             return relevantStudies;
         }
     }

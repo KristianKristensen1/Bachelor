@@ -27,9 +27,9 @@ namespace FrontEndBA.Controllers
             IEnumerable<Claim> claims = identity.Claims;
             int id = Convert.ToInt32(claims.ElementAt(3).Value);
             
-
+            bachelordbContext db = new bachelordbContext();
             Participant participant = getParticipant(id);
-            ManageStudyHandler mst = new ManageStudyHandler();
+            ManageStudyHandler mst = new ManageStudyHandler(db);
             Studies studiesCollection = new Studies();            
             studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
 

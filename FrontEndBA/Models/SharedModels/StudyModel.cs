@@ -21,13 +21,16 @@ namespace FrontEndBA.Models.SharedModels
         [Required(ErrorMessage = "Missing Study Name")]
         public string Name { get; set; }
         [Display(Name = "Pay")]
+        [Required(ErrorMessage = "Missing payment amount")]
         public int? Pay { get; set; }
         [Display(Name = "Abstract*")]
         [Required(ErrorMessage = "Missing Abstract")]
         public string Abstract { get; set; }
         [Display(Name = "Duration*")]
+        [Required(ErrorMessage = "Missing duration input")]
         public int? Duration { get; set; }
         [Display(Name = "Preparation*")]
+        [Required(ErrorMessage = "Missing Preparation input")]
         public string Preparation { get; set; }
         [Display(Name = "Eligibility Requirements*")]
         [Required(ErrorMessage = "Missing Eligibility Requirements")]
