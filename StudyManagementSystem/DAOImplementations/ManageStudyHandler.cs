@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,9 +30,10 @@ namespace BachelorBackEnd
                 _context.Study.Add(study);
                 _context.SaveChanges();
 
+
                 //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
-                int id = (_context.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated)).IdStudy;
-                inclusioncriteria.IdStudy = id;
+                Study Test = _context.Study.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated) ?? _context.Study.Local.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated);
+                inclusioncriteria.IdStudy = Test.IdStudy;
 
                 //Saves the inclusioncriteria 
                 _context.Inclusioncriteria.Add(inclusioncriteria);
@@ -152,6 +154,12 @@ namespace BachelorBackEnd
             Inclusioncriteria incCrit = _context.Inclusioncriteria.FirstOrDefault(inc => inc.IdStudy == id);
 
             return incCrit;
+        }
+
+        public Researcher getResearcherDB(int id)
+        {
+            Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == id);
+            return researcher;
         }
     }
 }

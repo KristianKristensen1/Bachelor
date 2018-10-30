@@ -16,8 +16,11 @@ namespace FrontEndBA.Utility
         public ViewStudyModel createViewStudyModel(int id)
         {
             ViewStudyModel viewStudyModel = new ViewStudyModel();
-            viewStudyModel.study = GetStudy(id);
+            Study study = GetStudy(id);
+            viewStudyModel.study = study;
             viewStudyModel.inclusioncriteria = GetInclusioncriteria(id);
+            viewStudyModel.researcher =  GetResearcherEmail(study.IdResearcher);
+
             return viewStudyModel;
         }
         public Study GetStudy(int id)
@@ -30,6 +33,13 @@ namespace FrontEndBA.Utility
         {
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
             return msh.getInclusioncriteriaDB(id);
+        }
+
+        public Researcher GetResearcherEmail(int id)
+        {
+            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            return msh.getResearcherDB(id);
+            
         }
     }
 }

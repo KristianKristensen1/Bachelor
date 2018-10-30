@@ -16,64 +16,63 @@
             <button class="btn-default" onclick="AllStudies()">All Studies</button>
         </div>
 
-        <div class="col-md-5" id="AllStudies" style="background-color:white; overflow-y:scroll; height: 500px; width:95%; margin-bottom:20px; border-radius:10px;" hidden>
-            <h3 class="tableTitle">All studies</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th class="col-md-1">
-                            ID
-                        </th>
-                        <th>
-                            <label>Name and description</label>
-                        </th>
-                        <th>
-                            <label>Pay</label>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var study in Model.allStudies)
-                    {
-                        <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
-                            @if (study.Isdraft)
-                            {
-                                <td style="background-color:lightgrey">
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td style="background-color:lightgrey">
-                                    <text> @Html.DisplayFor(modelItem => study.Name) (Draft)</text>
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Description)
-                                <td style="background-color:lightgrey">
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Pay) kr
-                                    </text>
-                                </td>
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.Name)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Description)
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Pay) kr
-                                    </text>
-                                </td>
-                            }
+            <div class="col-md-5" id="AllStudies" style="background-color:white; overflow-y:scroll; height: 500px; width:95%; margin-bottom:20px; border-radius:10px" hidden>
+                <h3 class="tableTitle">All studies</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                ID
+                            </th>
+                            <th>
+                                <label>Name and description</label>
+                            </th>
+                            <th>
+                                <label>Pay</label>
+                            </th>
                         </tr>
-                    }
-
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                    <tbody>
+                        @foreach (var study in Model.allStudies)
+                        {
+                            <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
+                                @if (study.Isdraft)
+                                {
+                                    <td style="background-color:lightgrey">
+                                        @Html.DisplayFor(modelItem => study.IdStudy)
+                                    </td>
+                                    <td style="background-color:lightgrey">
+                                        <text> @Html.DisplayFor(modelItem => study.Name) (Draft)</text>
+                                        <br />
+                                        @Html.DisplayFor(modelItem => study.Description)
+                                    <td style="background-color:lightgrey">
+                                        <text>
+                                            @Html.DisplayFor(modelItem => study.Pay) kr
+                                        </text>
+                                    </td>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => study.IdStudy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => study.Name)
+                                        <br />
+                                        @Html.DisplayFor(modelItem => study.Description)
+                                    </td>
+                                    <td>
+                                        <text>
+                                            @Html.DisplayFor(modelItem => study.Pay) kr
+                                        </text>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
 
 
         <div class="col-md-5" id="MyStudies" style="background-color:white; overflow-y:scroll; height: 500px; width:95%; margin-bottom:20px; border-radius:10px">
@@ -139,7 +138,6 @@
     </div>
     <form method="GET" id="CreateButton">
         <button asp-route-data="Homepage" asp-action="AddStudyView" class="btn-default">Create study</button>
-
     </form>
 </div>
 
