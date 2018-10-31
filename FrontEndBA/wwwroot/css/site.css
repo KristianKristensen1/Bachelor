@@ -28,14 +28,14 @@
 }
 
 .btn-default {
-    background-color: lightgray;
+    background-color: lightgrey;
     border: none;
-    color: white;
-    padding: 15px 32px;
+    color: black;
+    padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
+    font-size: 16px;
 }
 /* Carousel */
 .carousel-caption p {
@@ -99,11 +99,11 @@ td, th {
 }
 .menu {
     list-style-type: none;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
     padding: 0px;
     overflow: hidden;
-    background-color: #333;
+    background-color: #002546;
 }
 .menuItems {
     display: block;

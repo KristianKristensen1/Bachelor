@@ -43,5 +43,12 @@ namespace FrontEndBA.Controllers
 
             return View(editStudyHelper.CreateEditStudyModel(studyID));
         }
+
+        public ActionResult DeleteStudy(int studyID)
+        {
+            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            msh.DeleteStudyDB(studyID);
+            return RedirectToAction("Researcher", "Homepage");
+        }
     }
 }

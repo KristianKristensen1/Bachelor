@@ -50,8 +50,8 @@
                     </tr>
                     <tr style=" border-collapse: collapse; border-spacing: 0;">
                         <th class="col-md-1">
-                            <div style="position:relative;">
-                                <text class="control-label">Location</text>
+                            <div>
+                                <label style="margin-top:-500px">Location</label>
                             </div>
                         </th>
                         <th >
@@ -66,14 +66,13 @@
                             }
                             else
                             {
-                            
+                            <div>
                                 <text>
                                     @Html.DisplayFor(item => item.study.Location)
                                 </text>
-                            
+                            </div>                     
                              }
                          </th>
-
                      </tr>
                         <tr>
                             <th class="col-md-2">
@@ -203,7 +202,7 @@
                 {
                     <input value="Edit study" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "EditStudy", new { studyID = Model.study.IdStudy }))'" />
                     <input type="submit" value="Manage participants" class="btn btn-default" formaction="ReturnToHomePage" />
-                    <input type="submit" value="Delete Study" class="btn btn-default" formaction="ReturnToHomePage" />
+                    <input value="Delete Study" class="btn btn-default" onclick="location.href = '@(Url.Action("DeleteStudy", "ViewStudy", new { studyID = Model.study.IdStudy }))'" />
                     <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'" />
                 }
                 else

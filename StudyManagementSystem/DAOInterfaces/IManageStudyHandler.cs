@@ -11,7 +11,7 @@ namespace BachelorBackEnd
     {
         void AddParticipantDB(string email, Study study);
 
-        void DeleteStudyDB(Study study);
+        void DeleteStudyDB(int studyID);
 
         void RemoveParticipantDB(Participant participant, Study study);        
 

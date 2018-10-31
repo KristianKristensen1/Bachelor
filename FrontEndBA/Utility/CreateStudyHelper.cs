@@ -26,7 +26,8 @@ namespace FrontEndBA.Utility
                 Description = csmodel.currentStudy.Description,
                 Duration = csmodel.currentStudy.Duration,
                 EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements,
-                IdStudy = id_study
+                IdStudy = id_study,
+                Location = csmodel.currentStudy.Location
             };
             return study;
         }
@@ -46,6 +47,7 @@ namespace FrontEndBA.Utility
                 Description = csmodel.currentStudy.Description,
                 Duration = csmodel.currentStudy.Duration,
                 EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements,
+                Location = csmodel.currentStudy.Location
             };
             return study;
         }

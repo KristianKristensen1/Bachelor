@@ -17,7 +17,6 @@ namespace FrontEndBA.Controllers.Studies
         public IActionResult Index(int studyID)
         {
             EditStudyHelper editStudyHelper = new EditStudyHelper();
-
             return View(editStudyHelper.CreateEditStudyModel(studyID));
         }
         public ActionResult ReturnToHomepage()
@@ -47,7 +46,6 @@ namespace FrontEndBA.Controllers.Studies
                     int id_study = csModel.currentStudy.IdStudy;
                     var curStudy = cshelper.ConvertStudy(csModel, id_researcher, id_study);
                     var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
-                    curStudy.Location = "Your house";
 
                     ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
                     manageStudyHandler.EditStudy(curStudy, curCriteria);

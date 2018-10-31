@@ -59,12 +59,11 @@ namespace BachelorBackEnd
             }
         }
 
-        public void DeleteStudyDB(Study study)
+        public void DeleteStudyDB(int studyID)
         {
-            using (bachelordbContext DBmodel = new bachelordbContext())
-            {
-                DBmodel.Study.First(stud => stud.IdStudy == study.IdStudy);
-            }
+            Study study = _context.Study.FirstOrDefault(stud => stud.IdStudy == studyID);
+            _context.Study.Remove(study);
+            _context.SaveChanges();
         }
 
         public void RemoveParticipantDB(Participant participant, Study study)
