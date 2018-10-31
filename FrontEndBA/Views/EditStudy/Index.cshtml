@@ -1,4 +1,5 @@
 ﻿@model FrontEndBA.Models.CreateStudy.CreateStudyModel
+@using FrontEndBA.Models.SharedModels;
 @using FrontEndBA.Models.ResearcherModel.CreateStudyModel;
 
 @{
@@ -22,8 +23,11 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Name" class="form-control" name="Name" />
+                                    <input asp-for="currentStudy.Name" class="form-control" />
                                     <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
+
+                                    <input asp-for="currentStudy.IdStudy" class="form-control" />
+                                    <span asp-validation-for="currentStudy.IdStudy" class="text-danger"></span>
                                 </div>
                             </th>
                         </tr>
@@ -33,7 +37,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Abstract" class="form-control" name="Abstract" />
+                                    <input asp-for="currentStudy.Abstract" class="form-control" />
                                     <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
                                 </div>
                             </th>
@@ -46,7 +50,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px" name="Description"></textarea>
+                                    <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px"></textarea>
                                     <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
                                 </div>
                             </th>
@@ -57,7 +61,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Pay" class="form-control" name="Pay" />
+                                    <input asp-for="currentStudy.Pay" class="form-control" />
                                     <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
                                 </div>
                             </th>
@@ -68,7 +72,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Duration" class="form-control" name="Duration" />
+                                    <input asp-for="currentStudy.Duration" class="form-control" />
                                     <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
                                 </div>
                             </th>
@@ -79,7 +83,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Preparation" class="form-control" name="Preparation" />
+                                    <input asp-for="currentStudy.Preparation" class="form-control" />
                                     <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
                                 </div>
                             </th>
@@ -93,7 +97,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <textarea asp-for="currentStudy.EligibilityRequirements" class="form-control" style="height: 100px" name="EligibilityRequirements"></textarea>
+                                    <textarea asp-for="currentStudy.EligibilityRequirements" class="form-control" style="height: 100px"></textarea>
                                     <span asp-validation-for="currentStudy.EligibilityRequirements" class="text-danger"></span>
                                 </div>
                             </th>
@@ -112,7 +116,7 @@
                                             <input asp-for="inclusioncriteria.IsMale" value="true" type="radio" id="myFirstId" />Yes
                                             <input asp-for="inclusioncriteria.IsMale" value="false" type="radio" id="mySecondId" />No
                                         </label>
-                                        <span asp-validation-for="inclusioncriteria.IsMale" class="text-danger" name="IsMale"></span>
+                                        <span asp-validation-for="inclusioncriteria.IsMale" class="text-danger"></span>
                                     </div>
                                 </div>
                             </th>
@@ -126,10 +130,10 @@
                                     <div class="checkbox">
 
                                         <label class="control-label">
-                                            <input asp-for="inclusioncriteria.IsFemale" value="true" type="radio" id="myFirstId" name="IsFemale" />Yes
-                                            <input asp-for="inclusioncriteria.IsFemale" value="false" type="radio" id="mySecondId" name="IsFemale" />No
+                                            <input asp-for="inclusioncriteria.IsFemale" value="true" type="radio" id="myFirstId"/>Yes
+                                            <input asp-for="inclusioncriteria.IsFemale" value="false" type="radio" id="mySecondId"/>No
                                         </label>
-                                        <span asp-validation-for="inclusioncriteria.IsFemale" class="text-danger" name="isFemale"></span>
+                                        <span asp-validation-for="inclusioncriteria.IsFemale" class="text-danger"></span>
                                     </div>
                                 </div>
                             </th>
@@ -144,14 +148,14 @@
                                         <div style="color: lightblue;">
                                             <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
                                         </div>
-                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" name="MinAge" />
+                                        <input asp-for="inclusioncriteria.MinAge" class="form-control"/>
                                         <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-2">
                                         <div style="color: lightblue;">
                                             <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
                                         </div>
-                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" name="MaxAge" />
+                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control"/>
                                         <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
                                     </div>
 
@@ -170,8 +174,8 @@
                                     <div class="checkbox">
 
                                         <label class="control-label">
-                                            <input asp-for="inclusioncriteria.English" value="true" type="radio" id="myFirstId" name="Englis" />Yes
-                                            <input asp-for="inclusioncriteria.English" value="false" type="radio" id="mySecondId" name="English" />No
+                                            <input asp-for="inclusioncriteria.English" value="true" type="radio" id="myFirstId"/>Yes
+                                            <input asp-for="inclusioncriteria.English" value="false" type="radio" id="mySecondId"/>No
                                         </label>
                                         <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
                                     </div>
@@ -197,7 +201,7 @@
                     </thead>
                 </table>
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-default" formaction="Edit" />
+                    <input type="submit" value="Save" class="btn btn-default" formaction="Edit"/>
                     <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = Model.currentStudy.IdStudy }))'" />
                 </div>
             </div>

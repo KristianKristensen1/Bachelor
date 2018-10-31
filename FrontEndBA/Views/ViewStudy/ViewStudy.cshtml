@@ -27,7 +27,7 @@
                                 <text class="control-label">Abstract</text>
                             </th>
                             <th>
-                               <label>@Html.DisplayFor(item => item.study.Abstract)</label>
+                                <label>@Html.DisplayFor(item => item.study.Abstract)</label>
                             </th>
                         </tr>
                         <tr class="biggerinput">
@@ -37,7 +37,7 @@
                                 </div>
                             </th>
                             <th>
-                                    <label style="height: 100px">@Html.DisplayFor(item => item.study.Description)</label>
+                                <label style="height: 100px">@Html.DisplayFor(item => item.study.Description)</label>
                             </th>
                         </tr>
                         <tr>
@@ -45,7 +45,7 @@
                                 <text class="control-label">Pay pr time</text>
                             </th>
                             <th>
-                                    <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
+                                <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
                             </th>
                         </tr>
                         <tr>
@@ -53,7 +53,7 @@
                                 <text class="control-label">Duration of study</text>
                             </th>
                             <th>
-                                    <label>@Html.DisplayFor(item => item.study.Duration) min.</label>
+                                <label>@Html.DisplayFor(item => item.study.Duration) min.</label>
                             </th>
                         </tr>
                         <tr>
@@ -61,7 +61,7 @@
                                 <text class="control-label">Preparation</text>
                             </th>
                             <th>
-                                    <label>@Html.DisplayFor(item => item.study.Preparation)</label>
+                                <label>@Html.DisplayFor(item => item.study.Preparation)</label>
                             </th>
                         </tr>
                         <tr class="biggerinput">
@@ -72,7 +72,7 @@
 
                             </th>
                             <th>
-                                    <label style="height: 100px">@Html.DisplayFor(item => item.study.EligibilityRequirements)</label>
+                                <label style="height: 100px">@Html.DisplayFor(item => item.study.EligibilityRequirements)</label>
                             </th>
                         </tr>
 
@@ -82,14 +82,14 @@
                             </th>
                             <th>
                                 <div>
-                                        @if (Model.inclusioncriteria.Male)
-                                        {
-                                            <label>Yes</label>
-                                        }
-                                        else
-                                        {
-                                            <label>No</label>
-                                        }
+                                    @if (Model.inclusioncriteria.Male)
+                                    {
+                                        <label>Yes</label>
+                                    }
+                                    else
+                                    {
+                                        <label>No</label>
+                                    }
                                 </div>
                             </th>
                         </tr>
@@ -99,14 +99,14 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                        @if (Model.inclusioncriteria.Female)
-                                        {
-                                            <label>Yes</label>
-                                        }
-                                        else
-                                        {
-                                            <label>No</label>
-                                        }
+                                    @if (Model.inclusioncriteria.Female)
+                                    {
+                                        <label>Yes</label>
+                                    }
+                                    else
+                                    {
+                                        <label>No</label>
+                                    }
                                 </div>
                             </th>
                         </tr>
@@ -139,20 +139,33 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                        @if (Model.inclusioncriteria.English)
-                                        {
-                                            <label>Yes</label>
-                                        }
-                                        else
-                                        {
-                                            <label>No</label>
-                                        }
-                                        <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
+                                    @if (Model.inclusioncriteria.English)
+                                    {
+                                        <label>Yes</label>
+                                    }
+                                    else
+                                    {
+                                        <label>No</label>
+                                    }
+                                    <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
                                 </div>
                             </th>
                         </tr>
                         <tr>
-                            <th class=""></th>
+                            <th class="col-md-2">
+                                <text class="control-label">Study created</text>
+                            </th>
+                            <th>
+                                @Html.DisplayFor(item => item.study.DateCreated)
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Contact information</text>
+                            </th>
+                            <th>
+                                @Html.DisplayFor(item => item.researcher.Email)
+                            </th>
                         </tr>
 
                     </thead>

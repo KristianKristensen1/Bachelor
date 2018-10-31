@@ -11,5 +11,7 @@ namespace FrontEndBA.Models
         public Study study { get; set; }
 
         public Inclusioncriteria inclusioncriteria { get; set; }
+
+        public Researcher researcher { get; set; }
     }
 }

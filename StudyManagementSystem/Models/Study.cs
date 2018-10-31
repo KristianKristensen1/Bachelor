@@ -18,11 +18,13 @@ namespace BachelorBackEnd
         public string Name { get; set; }
         public double Pay { get; set; }
         public string Abstract { get; set; }
-        public int Duration { get; set; }
+        public string Duration { get; set; }
         public DateTime DateCreated { get; set; }
         public string DirectStudyLink { get; set; }
         public string Preparation { get; set; }
         public string EligibilityRequirements { get; set; }
+
+        public string Location { get; set; }
 
         public Researcher IdResearcherNavigation { get; set; }
         public ICollection<Inclusioncriteria> Inclusioncriteria { get; set; }

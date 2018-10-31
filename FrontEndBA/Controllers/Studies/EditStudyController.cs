@@ -7,6 +7,7 @@ using BachelorBackEnd;
 using FrontEndBA.Utility;
 using FrontEndBA.Models.CreateStudy;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEndBA.Controllers.Studies
 {
@@ -28,9 +29,8 @@ namespace FrontEndBA.Controllers.Studies
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize]
-        public ActionResult Edit([Bind("Description,Isdraft,Name,Abstract,Pay,Duration,Preparation,EligibilityRequirements")] Study curStudy,
-            [Bind("IsMale,IsFemale,MinAge,MaxAge,English,IdReseacher")] Inclusioncriteria curCriteria, CreateStudyModel cs)
+        [Authorize]
+        public ActionResult Edit(CreateStudyModel csModel)
         {
             //modelstate?
             if (ModelState.IsValid)
@@ -44,13 +44,15 @@ namespace FrontEndBA.Controllers.Studies
 
                     // Convert to create format
                     CreateStudyHelper cshelper = new CreateStudyHelper();
-                    curStudy = cshelper.ConvertStudy(cs, id);
-                    curCriteria = cshelper.ConvertInclusioncriteria( cs);
+                    var curStudy = cshelper.ConvertStudy(csModel, id);
+                    var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
+                    curStudy.IdStudy = csModel.currentStudy.IdStudy;
 
 
-
-                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
+                    bachelordbContext db = new bachelordbContext();
+                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
                     manageStudyHandler.EditStudy(curStudy, curCriteria);
+
 
 
                     return RedirectToAction("Researcher", "Homepage");
@@ -62,6 +64,8 @@ namespace FrontEndBA.Controllers.Studies
                     return View("Index");
                 }
             }
+
+
             return View("./Index");
 
         }
