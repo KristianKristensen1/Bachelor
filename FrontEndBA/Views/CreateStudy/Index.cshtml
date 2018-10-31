@@ -65,6 +65,18 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
+                                <label asp-for="currentStudy.Location" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Location" class="form-control" />
+                                    <span asp-validation-for="currentStudy.Location" class="text-danger"></span>
+                                </div>
+                               
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
                                 <label asp-for="currentStudy.Duration" class="control-label"></label>
                             </th>
                             <th>
@@ -137,8 +149,8 @@
                             </th>
                         </tr>
                         <tr action="" class="form-horizontal">
-                            <th class="col-md-1"  style="vertical-align: text-top">
-                                <label style="color: lightblue;"> Participants age*</label>
+                            <th class="col-md-1" style="vertical-align: text-top">
+                                <label style="color: black;"> Participants age*</label>
                             </th>
                             <th>
                                 <div class="col-md-2">
@@ -176,25 +188,13 @@
                                 </div>
                             </th>
                         </tr>
-                        <tr>
-                            <th class="col-md-1">
-                                <label asp-for="currentStudy.Isdraft" class="control-label"></label>
-                            </th>
-                            <th>
-                                <div class="form-group">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input asp-for="currentStudy.Isdraft" /> 
-                                        </label>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
+
 
                     </thead>
                 </table>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
+                    <input type="submit" value="Create as Draft" class="btn btn-default" formaction="CreateAsDraft" />
                     <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
 
                 </div>

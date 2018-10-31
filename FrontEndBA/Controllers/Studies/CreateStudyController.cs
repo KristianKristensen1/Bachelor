@@ -72,5 +72,48 @@ namespace FrontEndBA.Controllers
             return View("./Index");
 
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[Authorize]
+        public ActionResult CreateAsDraft(CreateStudyModel csModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //Gets the id from JWT. The id is used to retrieve user from database. 
+                    var identity = (ClaimsIdentity)User.Identity;
+                    IEnumerable<Claim> claims = identity.Claims;
+                    int id = Convert.ToInt32(claims.ElementAt(3).Value);
+
+                    // Convert to create format
+                    CreateStudyHelper cshelper = new CreateStudyHelper();
+                    var curStudy = cshelper.ConvertStudy(csModel, id);
+                    var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
+
+                    //Creating as a Draft
+                    curStudy.Isdraft = true;
+
+
+                    bachelordbContext db = new bachelordbContext();
+                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
+                    manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
+
+
+
+                    return RedirectToAction("Researcher", "Homepage");
+                }
+                catch (Exception e)
+                {
+                    cshelper = new CreateStudyHelper();
+                    ////cshelper.ErrorHandle(curCriteria,cs,curStudy
+                    return View("Index");
+                }
+            }
+
+
+            return View("./Index");
+        }
     }
 }

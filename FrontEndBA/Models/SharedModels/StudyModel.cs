@@ -35,15 +35,17 @@ namespace FrontEndBA.Models.SharedModels
         public string Duration { get; set; }
 
         [Display(Name = "Preparation")]
-        [Required(ErrorMessage = "Missing Preparation input")]
         public string Preparation { get; set; }
 
         [Display(Name = "Eligibility Requirements")]
-        [Required(ErrorMessage = "Missing Eligibility Requirements")]
         public string EligibilityRequirements { get; set; }
 
         public DateTime DateCreated { get; set; }
 
         public string DirecetStudyLink { get; set; }
+
+        [Display(Name = "Location*")]
+        [Required(ErrorMessage = "Missing location")]
+        public string Location { get; set; }
     }
 }

@@ -14,7 +14,7 @@
     width: 150px;
     display: block;
     margin-bottom: 10px;
-    color: lightblue;
+    color: black;
     border-width: 1px;
 }
 .biggerinput {
@@ -26,7 +26,7 @@
     color: white;
     cursor: pointer;
 }
-}
+
 .btn-default {
     background-color: lightgray;
     border: none;
@@ -42,11 +42,31 @@
     font-size: 20px;
     line-height: 1.4;
 }
-
-/* Make .svg files in the carousel display properly in older browsers */
-.carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+.maps {
+    overflow: hidden;
+    padding: 10px;
+    margin-top: 10px;
+    height: 50%;
+    width:50%;
+    
 }
+.iframe-container {
+    overflow: hidden;
+    padding-top: 40.25%;
+    position: relative;
+    
+}
+
+    .iframe-container iframe {
+        border: 5px;
+        height: 95%;
+        left: 0;
+        position: absolute;
+        top: 10px;
+        width: 95%;
+    }
+
+/* 4x3 Aspect Ratio */
 
 /* QR code generator */
 #qrCode {
