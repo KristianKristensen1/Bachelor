@@ -16,7 +16,6 @@ namespace BachelorBackEnd
         {
             _context = context;
         }
-
         public void AddParticipantDB(string email, Study study)
         {
             throw new NotImplementedException();
@@ -30,11 +29,7 @@ namespace BachelorBackEnd
             t.Wait();
             
             
-            //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.
-        
-            
-           
-            
+            //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.            
             var dbStudy = (_context.Study.FirstOrDefault(stud =>
                 stud.Name == study.Name && stud.DateCreated == study.DateCreated)) ?? _context.Study.Local.FirstOrDefault(stud => stud.Name == study.Name && stud.DateCreated == study.DateCreated);
             inclusioncriteria.IdStudy = dbStudy.IdStudy;
@@ -47,9 +42,16 @@ namespace BachelorBackEnd
         public void EditStudy(Study study, Inclusioncriteria inclusioncriteria)
         {
             Study oldStudy = _context.Study.FirstOrDefault(stud => stud.IdStudy == study.IdStudy);
-            if (oldStudy != null)
+            Inclusioncriteria oldInc = _context.Inclusioncriteria.FirstOrDefault(inc => inc.IdStudy == study.IdStudy);
+            if (oldStudy != null && oldInc != null)
             {
-                oldStudy = study;
+                oldStudy.Name = study.Name; oldStudy.Description = study.Description; oldStudy.Abstract = study.Abstract; oldStudy.Duration = study.Duration; oldStudy.EligibilityRequirements = study.EligibilityRequirements;
+                oldStudy.Inclusioncriteria = study.Inclusioncriteria; oldStudy.Isdraft = study.Isdraft; oldStudy.Pay = study.Pay; oldStudy.Preparation = study.Preparation;
+                _context.Study.Update(oldStudy);
+
+                oldInc.Male = inclusioncriteria.Male; oldInc.Female = inclusioncriteria.Female; oldInc.English = inclusioncriteria.English; oldInc.MinAge = inclusioncriteria.MinAge; oldInc.MaxAge = inclusioncriteria.MaxAge;
+
+
                 _context.SaveChanges();
             }
         }
