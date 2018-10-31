@@ -11,7 +11,7 @@ namespace FrontEndBA.Utility
 {
     public class CreateStudyHelper
     {
-        public Study ConvertStudy(CreateStudyModel csmodel, int id)
+        public Study ConvertStudy(CreateStudyModel csmodel, int id_researcher, int id_study)
         {
             var study = new Study
             {
@@ -20,17 +20,35 @@ namespace FrontEndBA.Utility
                 Preparation = csmodel.currentStudy.Preparation,
                 Isdraft = csmodel.currentStudy.Isdraft,
                 DirectStudyLink = "Test",
-                IdResearcher = id,
+                IdResearcher = id_researcher,
                 Abstract = csmodel.currentStudy.Abstract,
                 DateCreated = DateTime.Now,
                 Description = csmodel.currentStudy.Description,
-                Duration = (int)csmodel.currentStudy.Duration,
-                EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements
-
+                Duration = csmodel.currentStudy.Duration,
+                EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements,
+                IdStudy = id_study
             };
             return study;
         }
 
+        public Study ConvertStudy(CreateStudyModel csmodel, int id_researcher)
+        {
+            var study = new Study
+            {
+                Name = csmodel.currentStudy.Name,
+                Pay = (int)csmodel.currentStudy.Pay,
+                Preparation = csmodel.currentStudy.Preparation,
+                Isdraft = csmodel.currentStudy.Isdraft,
+                DirectStudyLink = "Test",
+                IdResearcher = id_researcher,
+                Abstract = csmodel.currentStudy.Abstract,
+                DateCreated = DateTime.Now,
+                Description = csmodel.currentStudy.Description,
+                Duration = csmodel.currentStudy.Duration,
+                EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements,
+            };
+            return study;
+        }
         public Inclusioncriteria ConvertInclusioncriteria(CreateStudyModel csmodel)
         {
             var inclusioncriteria = new Inclusioncriteria
@@ -38,11 +56,11 @@ namespace FrontEndBA.Utility
                 English = csmodel.inclusioncriteria.English,
                 Female = csmodel.inclusioncriteria.IsFemale,
                 Male = csmodel.inclusioncriteria.IsMale,
-                MaxAge =  (int)csmodel.inclusioncriteria.MaxAge,
+                MaxAge = (int)csmodel.inclusioncriteria.MaxAge,
                 MinAge = (int)csmodel.inclusioncriteria.MinAge
 
 
-        };
+            };
 
             return inclusioncriteria;
         }
@@ -72,7 +90,7 @@ namespace FrontEndBA.Utility
             csmodel.currentStudy.Duration = study.Duration;
             csmodel.currentStudy.EligibilityRequirements = study.EligibilityRequirements;
             csmodel.currentStudy.Name = study.Name;
-            csmodel.currentStudy.Pay = (int) study.Pay;
+            csmodel.currentStudy.Pay = (int)study.Pay;
             csmodel.currentStudy.Preparation = study.Preparation;
 
 

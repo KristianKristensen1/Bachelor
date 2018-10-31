@@ -70,8 +70,6 @@ namespace Tests
 
             }.AsQueryable();
 
-            var listen = new List<Study>().AsQueryable();
-
             // Required to do this. If not the "mock" does not recognize "part" in uut.RegisterParticipantDB
             mockContext = new Mock<bachelordbContext>();
             mockStudySet = new Mock<DbSet<Study>>();
@@ -92,7 +90,7 @@ namespace Tests
             var listOfStudies = uut.GetAllStudiesDB();
 
             //Assert -
-            Assert.AreEqual(listOfStudies.Count, 3);
+            Assert.AreEqual(listOfStudies.Count, 2);
         }
 
         [Test]
@@ -160,7 +158,7 @@ namespace Tests
                 IdResearcher = 1,
                 Abstract = "Here is a nice abstract!",
                 DirectStudyLink = "ThisIsADirectStudyLink",
-                Duration = 60,
+                Duration = "60",
                 DateCreated = DateTime.Now.Date,
                 Preparation = "Please come prepared",
                 EligibilityRequirements = "You must be nice to participate",
@@ -172,7 +170,7 @@ namespace Tests
             uut.CreateStudyDB(study, inc);
 
             //Assert
-            //Assert.AreEqual(mockContext.Object.Study.Count(), 4);
+            Assert.AreEqual(mockContext.Object.Study.Count(), 4);
 
             /*
             mockStudySet.Verify(m => m.Add(It.IsAny<Study>()), Times.Once);
