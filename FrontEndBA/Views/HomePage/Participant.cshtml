@@ -25,6 +25,9 @@
                                 @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().Duration)
+                            </th>
+                            <th>
                                 Pay
                             </th>
                         </tr>
@@ -39,7 +42,12 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => study.Name)
                                     <br />
-                                    @Html.DisplayFor(modelItem => study.Description)
+                                    @Html.DisplayFor(modelItem => study.Abstract)
+                                </td>
+                                <td>
+                                    <text>
+                                        @Html.DisplayFor(modelItem => study.Duration)
+                                    </text>
                                 </td>
                                 <td>
                                     <text>
@@ -66,6 +74,9 @@
                                 @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
                             </th>
                             <th>
+                                @Html.DisplayNameFor(model => model.relevantStudies.First().Duration)
+                            </th>
+                            <th>
                                 Pay
                             </th>
                         </tr>
@@ -80,7 +91,12 @@
                                 <td>
                                     @Html.DisplayFor(modelItem => study.Name)
                                     <br />
-                                    @Html.DisplayFor(modelItem => study.Description)
+                                    @Html.DisplayFor(modelItem => study.Abstract)
+                                </td>
+                                <td>
+                                    <text>
+                                        @Html.DisplayFor(modelItem => study.Duration)
+                                    </text>
                                 </td>
                                 <td>
                                     <text> @Html.DisplayFor(modelItem => study.Pay) kr</text>

@@ -34,12 +34,10 @@ namespace FrontEndBA.Models.SharedModels
         [Required(ErrorMessage = "Missing duration input")]
         public int? Duration { get; set; }
 
-        [Display(Name = "Preparation*")]
-        [Required(ErrorMessage = "Missing Preparation input")]
+        [Display(Name = "Preparation")]
         public string Preparation { get; set; }
 
-        [Display(Name = "Eligibility Requirements*")]
-        [Required(ErrorMessage = "Missing Eligibility Requirements")]
+        [Display(Name = "Eligibility Requirements")]
         public string EligibilityRequirements { get; set; }
 
         public DateTime DateCreated { get; set; }
