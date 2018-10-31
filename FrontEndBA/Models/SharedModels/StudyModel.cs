@@ -32,7 +32,7 @@ namespace FrontEndBA.Models.SharedModels
 
         [Display(Name = "Duration*")]
         [Required(ErrorMessage = "Missing duration input")]
-        public int? Duration { get; set; }
+        public string Duration { get; set; }
 
         [Display(Name = "Preparation")]
         public string Preparation { get; set; }
@@ -43,5 +43,9 @@ namespace FrontEndBA.Models.SharedModels
         public DateTime DateCreated { get; set; }
 
         public string DirecetStudyLink { get; set; }
+
+        [Display(Name = "Location*")]
+        [Required(ErrorMessage = "Missing location")]
+        public string Location { get; set; }
     }
 }

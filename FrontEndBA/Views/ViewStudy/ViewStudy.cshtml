@@ -40,14 +40,41 @@
                                 <label style="height: 100px">@Html.DisplayFor(item => item.study.Description)</label>
                             </th>
                         </tr>
-                        <tr>
-                            <th class="col-md-2">
-                                <text class="control-label">Pay pr time</text>
-                            </th>
-                            <th>
-                                <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
-                            </th>
-                        </tr>
+                    <tr>
+                        <th class="col-md-2">
+                            <text class="control-label">Pay pr time</text>
+                        </th>
+                        <th>
+                            <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
+                        </th>
+                    </tr>
+                    <tr style=" border-collapse: collapse; border-spacing: 0;">
+                        <th class="col-md-1">
+                            <div style="position:relative;">
+                                <text class="control-label">Location</text>
+                            </div>
+                        </th>
+                        <th >
+                            @if (Model.study.Location.Contains("<iframe"))
+                            {
+                          
+                            <div class="iframe-container">
+                                @Html.Raw(Model.study.Location)
+                            </div>
+                               
+                      
+                            }
+                            else
+                            {
+                            
+                                <text>
+                                    @Html.DisplayFor(item => item.study.Location)
+                                </text>
+                            
+                             }
+                         </th>
+
+                     </tr>
                         <tr>
                             <th class="col-md-2">
                                 <text class="control-label">Duration of study</text>

@@ -160,7 +160,7 @@ namespace Tests
                 IdResearcher = 1,
                 Abstract = "Here is a nice abstract!",
                 DirectStudyLink = "ThisIsADirectStudyLink",
-                Duration = 60,
+                Duration = "60",
                 DateCreated = DateTime.Now.Date,
                 Preparation = "Please come prepared",
                 EligibilityRequirements = "You must be nice to participate",

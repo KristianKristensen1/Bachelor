@@ -24,8 +24,10 @@ namespace FrontEndBA.Utility
                 Abstract = csmodel.currentStudy.Abstract,
                 DateCreated = DateTime.Now,
                 Description = csmodel.currentStudy.Description,
-                Duration = (int)csmodel.currentStudy.Duration,
-                EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements
+                Duration = csmodel.currentStudy.Duration,
+                EligibilityRequirements = csmodel.currentStudy.EligibilityRequirements,
+                Location = csmodel.currentStudy.Location
+                
 
             };
             return study;
