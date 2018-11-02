@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace BachelorBackEnd
 {
     public class ManageStudyHandler : IManageStudyHandler
@@ -106,6 +105,11 @@ namespace BachelorBackEnd
         public List<Study> GetMyParticipantStudiesDB(int participantID)
         {
             List<Study> myStudies = new List<Study>();
+
+            //We select the StudyIDs from the StudyParticipant table where the ParticipantIDs match our participant.
+            //Furthermore, after finding the studies, we convert the list of studies to select only the actual IDs -
+            //- and not the studies as a whole before converting it back to the list we use later.
+            //The same procedure is used in GetRelevantStudiesDB().
             List<int> myStudyIDs = _context.Studyparticipant.Where
                 (studpart => studpart.IdParticipant == participantID).ToList()
                 .Select(partID => partID.IdStudy).ToList();
@@ -125,7 +129,8 @@ namespace BachelorBackEnd
 
             if (_context.Study != null && _context.Inclusioncriteria != null)
             {
-                int participantAge = DateTime.Now.Year - participant.Age.Year;
+                TimeSpan ts = DateTime.Now.Subtract(participant.Age);
+                var participantAge = (int)Math.Floor(ts.TotalDays / 365.25);
 
                 //BEHOLD! The Sorterings-Algorithm!
                 List<int> relevantStudyIDs = _context.Inclusioncriteria.Where(crit =>
@@ -144,10 +149,17 @@ namespace BachelorBackEnd
 
                 foreach (var id in relevantStudyIDs)
                 {
-                    relevantStudies.Add(_context.Study.FirstOrDefault(stud => stud.IdStudy == id));
+                    //Sorts through the list of IDs to find matching studies that are NOT drafts (as drafts are only visible for their respective researcher)
+                    var relevantStudiesTemp = (from stud in _context.Study
+                                               where (stud.Isdraft == false && stud.IdStudy == id)
+                                               select stud).ToList();
+                    //In case of an ID match on a non-draft study, the Temp list contains an object that we add to the final Study List.
+                    if (relevantStudiesTemp.Count > 0)
+                    {
+                        relevantStudies.Add(relevantStudiesTemp[0]);
+                    }
                 }
             }
-
             return relevantStudies;
         }
 
