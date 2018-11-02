@@ -18,10 +18,10 @@ namespace FrontEndBA.Controllers
     {
         // GET: CreateStudy
         private CreateStudyHelper cshelper;
-        //[Authorize]
+        [Authorize]
         public ActionResult Index()
         {
-           cshelper = new CreateStudyHelper();
+            cshelper = new CreateStudyHelper();
             return View(cshelper.DefaultCreateStudyModel());
         }
 
@@ -33,42 +33,42 @@ namespace FrontEndBA.Controllers
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize]
+        [Authorize]
         public ActionResult Create(CreateStudyModel csModel)
         {
-          //modelstate?
+            //modelstate?
             if (ModelState.IsValid)
             {
-            try
+                try
                 {
                     //Gets the id from JWT. The id is used to retrieve user from database. 
                     var identity = (ClaimsIdentity)User.Identity;
                     IEnumerable<Claim> claims = identity.Claims;
                     int id = Convert.ToInt32(claims.ElementAt(3).Value);
 
-                // Convert to create format
-                CreateStudyHelper cshelper = new CreateStudyHelper();
-                    var curStudy = cshelper.ConvertStudy(csModel,id);
+                    // Convert to create format
+                    CreateStudyHelper cshelper = new CreateStudyHelper();
+                    var curStudy = cshelper.ConvertStudy(csModel, id);
                     var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
 
 
                     bachelordbContext db = new bachelordbContext();
                     ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
-                    
+
 
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
-            catch(Exception e)
-            {
-                cshelper = new CreateStudyHelper();
-                ////cshelper.ErrorHandle(curCriteria,cs,curStudy
-                return View("Index");
+                catch (Exception e)
+                {
+                    cshelper = new CreateStudyHelper();
+                    ////cshelper.ErrorHandle(curCriteria,cs,curStudy
+                    return View("Index");
+                }
             }
-            }
-               
-            
+
+
             return View("./Index");
 
         }

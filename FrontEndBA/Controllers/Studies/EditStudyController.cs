@@ -17,7 +17,6 @@ namespace FrontEndBA.Controllers.Studies
         public IActionResult Index(int studyID)
         {
             EditStudyHelper editStudyHelper = new EditStudyHelper();
-
             return View(editStudyHelper.CreateEditStudyModel(studyID));
         }
         public ActionResult ReturnToHomepage()
@@ -40,20 +39,16 @@ namespace FrontEndBA.Controllers.Studies
                     //Gets the id from JWT. The id is used to retrieve user from database. 
                     var identity = (ClaimsIdentity)User.Identity;
                     IEnumerable<Claim> claims = identity.Claims;
-                    int id = Convert.ToInt32(claims.ElementAt(3).Value);
+                    int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
 
-                    // Convert to create format
+                    // Convert to create the right format
                     CreateStudyHelper cshelper = new CreateStudyHelper();
-                    var curStudy = cshelper.ConvertStudy(csModel, id);
+                    int id_study = csModel.currentStudy.IdStudy;
+                    var curStudy = cshelper.ConvertStudy(csModel, id_researcher, id_study);
                     var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
-                    curStudy.IdStudy = csModel.currentStudy.IdStudy;
 
-
-                    bachelordbContext db = new bachelordbContext();
-                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
+                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
                     manageStudyHandler.EditStudy(curStudy, curCriteria);
-
-
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
@@ -65,9 +60,7 @@ namespace FrontEndBA.Controllers.Studies
                 }
             }
 
-
             return View("./Index");
-
         }
     }
 }

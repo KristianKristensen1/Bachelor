@@ -85,7 +85,10 @@ namespace FrontEndBA.Controllers
            
         }
 
-   
+        public ActionResult Cancel()
+        {
+            return RedirectToAction("Participant", "Welcome");
+        }
 
        
     }

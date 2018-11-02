@@ -18,7 +18,7 @@ namespace FrontEndBA.Utility
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
             Study study = msh.getStudyDB(StudyID);
             Inclusioncriteria inc = msh.getInclusioncriteriaDB(StudyID);
-            cs.currentStudy = new StudyModel() { Name = study.Name, Abstract = study.Abstract, Description = study.Description, Duration = study.Duration, DateCreated = study.DateCreated,
+            cs.currentStudy = new StudyModel() { Name = study.Name, Abstract = study.Abstract, Description = study.Description, Duration = study.Duration, DateCreated = study.DateCreated, Location = study.Location,
                 Isdraft = study.Isdraft, Pay = (int?)study.Pay, EligibilityRequirements = study.EligibilityRequirements, Preparation = study.Preparation, DirecetStudyLink = study.DirectStudyLink, IdStudy = study.IdStudy };
             cs.inclusioncriteria = new InclusioncriteriaModel() { IsMale = inc.Male, IsFemale = inc.Female, English = inc.English, MaxAge = inc.MaxAge, MinAge = inc.MinAge,
                 IdInclusionCriteria = inc.IdInclusionCriteria, IdStudy = inc.IdStudy };

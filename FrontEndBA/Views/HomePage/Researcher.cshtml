@@ -27,7 +27,10 @@
                         <th>
                             <label>Name and description</label>
                         </th>
-                        <th>
+                        <th class="col-md-2">
+                            <label>Duration</label>
+                        </th>
+                        <th class="col-md-1">
                             <label>Pay</label>
                         </th>
                     </tr>
@@ -35,43 +38,27 @@
                 <tbody>
                     @foreach (var study in Model.allStudies)
                     {
-                        <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
-                            @if (study.Isdraft)
-                            {
-                                <td style="background-color:lightgrey">
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td style="background-color:lightgrey">
-                                    <text> @Html.DisplayFor(modelItem => study.Name) (Draft)</text>
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Abstract)
-                                    <td style="background-color:lightgrey">
-                                        <text>
-                                            @Html.DisplayFor(modelItem => study.Pay) kr
-                                        </text>
-                                    </td>
-                                </td>
-                              
-                            }
-                            else
-                            {
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.Name)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Abstract)
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Pay) kr
-                                    </text>
-                                </td>
-                            }
+                        <tr class="parantHover" title="@study.Name" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
+                            <td>
+                                @Html.DisplayFor(modelItem => study.IdStudy)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => study.Name)
+                                <br />
+                                @Html.DisplayFor(modelItem => study.Abstract)
+                            </td>
+                            <td>
+                                <text>
+                                    @Html.DisplayFor(modelItem => study.Duration)
+                                </text>
+                            </td>
+                            <td>
+                                <text>
+                                    @Html.DisplayFor(modelItem => study.Pay) kr
+                                </text>
+                            </td>
                         </tr>
                     }
-
                 </tbody>
             </table>
         </div>
@@ -88,7 +75,10 @@
                         <th>
                             <label>Name and description</label>
                         </th>
-                        <th>
+                        <th class="col-md-2">
+                            <label>Duration</label>
+                        </th>
+                        <th class="col-md-1">
                             <label>Pay</label>
                         </th>
                     </tr>
@@ -98,39 +88,49 @@
                     {
                         @if (study.Isdraft)
                         {
-                            <tr class="parantHover" style="background-color:lightgrey" onclick="location.href = '@(Url.Action("Index", "EditStudy", new { studyID = study.IdStudy }))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td>
-                                    <text> @Html.DisplayFor(modelItem => study.Name) (Draft)</text>
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Abstract)
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Pay) kr
-                                    </text>
-                                </td>
-                            </tr>
+                    <tr class="parantHover" title="@study.Name" style="background-color:lightgrey" onclick="location.href = '@(Url.Action("Index", "EditStudy", new { studyID = study.IdStudy }))'">
+                        <td>
+                            @Html.DisplayFor(modelItem => study.IdStudy)
+                        </td>
+                        <td>
+                            <text> @Html.DisplayFor(modelItem => study.Name) (Draft)</text>
+                            <br />
+                            @Html.DisplayFor(modelItem => study.Abstract)
+                        </td>
+                        <td>
+                            <text>
+                                @Html.DisplayFor(modelItem => study.Duration)
+                            </text>
+                        </td>
+                        <td>
+                            <text>
+                                @Html.DisplayFor(modelItem => study.Pay) kr
+                            </text>
+                        </td>
+                    </tr>
                         }
                         else
                         {
-                            <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.Name)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Abstract)
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Pay) kr
-                                    </text>
-                                </td>
-                            </tr>
+                    <tr class="parantHover" title="@study.Name" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
+                        <td>
+                            @Html.DisplayFor(modelItem => study.IdStudy)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => study.Name)
+                            <br />
+                            @Html.DisplayFor(modelItem => study.Abstract)
+                        </td>
+                        <td>
+                            <text>
+                                @Html.DisplayFor(modelItem => study.Duration)
+                            </text>
+                        </td>
+                        <td>
+                            <text>
+                                @Html.DisplayFor(modelItem => study.Pay) kr
+                            </text>
+                        </td>
+                    </tr>
                         }
                     }
 

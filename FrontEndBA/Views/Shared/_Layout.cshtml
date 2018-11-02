@@ -25,38 +25,48 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container body-content" style="background-color:whitesmoke; border-radius:10px">
         @if (!User.Identity.IsAuthenticated)
         {
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-area="" asp-controller="Welcome" asp-action="Participant" class="navbar-brand">Welcome</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Welcome" asp-action="Participant">Login as a Participant</a></li>
-                    </ul>
-                    <ul class="nav navbar-nav">
-                        <li><a asp-area="" asp-controller="Welcome" asp-action="Researcher">Login as a Researcher</a></li>
-                    </ul>
-
-
-                </div>
+        <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#002546">
+            @*
+                            <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a asp-area="" asp-controller="Welcome" asp-action="Participant" class="navbar-brand">Welcome</a>
             </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Welcome" asp-action="Participant">Login as a Participant</a></li>
+                </ul>
+                <ul class="nav navbar-nav">
+                    <li><a asp-area="" asp-controller="Welcome" asp-action="Researcher">Login as a Researcher</a></li>
+                </ul>
+            </div>
+        </div>
+            *@
+        </nav>
+            <div>
+                <img src="~/images/AuLogo.PNG" alt="AU Logo" width="100%" height="100" padding:0px">
+            </div>
+            <ul class="menu">
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Participant","Welcome")">Welcome</a></li>
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Welcome")">Log in as researcher</a></li>
+            </ul>
         }
 
-    </nav>
-    <div class="container body-content" style="background-color:whitesmoke; border-radius:10px">
         @if (User.Identity.IsAuthenticated)
         {
+            <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#002546">
+
+            </nav>
             <div>
-                <img src="~/images/AU.jpg" alt="AU Logo" width="300" height="100" style="border-radius:10px; padding:5px">
+                <img src="~/images/AuLogo.PNG" alt="AU Logo" width="100%" height="100" padding:3px" onclick="">
             </div>
             //Checks if the user has admin rights
             if (User.Claims.ElementAt(0).Value == "Y")
@@ -64,7 +74,7 @@
                 <ul class="menu">
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
-                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
+                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")">Log Out</a></li>
                     <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
                 </ul>
                 <div>
@@ -81,7 +91,7 @@
                     }
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
-                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")" onclick="clearBrowser()">Log Out</a></li>
+                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")">Log Out</a></li>
                     <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
                 </ul>
                 <div>

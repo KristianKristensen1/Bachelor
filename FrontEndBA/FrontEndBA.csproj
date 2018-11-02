@@ -24,10 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\AU.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JwtAuthenticationHelper\JwtAuthenticationHelper.csproj" />
     <ProjectReference Include="..\StudyManagementSystem\BachelorBackEnd.csproj" />
   </ItemGroup>
