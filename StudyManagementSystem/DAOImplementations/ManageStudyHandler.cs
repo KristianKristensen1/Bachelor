@@ -24,8 +24,8 @@ namespace BachelorBackEnd
         {
             //Adds the study to the database and saves
             _context.Study.Add(study);
-            var t = Task.Run(() => _context.SaveChanges());
-            t.Wait();
+            _context.SaveChanges();
+        
 
 
             //Retrieves the id from the study just saved and sets the study_id in inclusioncriteria.            
@@ -66,11 +66,6 @@ namespace BachelorBackEnd
         }
 
         public void RemoveParticipantDB(Participant participant, Study study)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void SaveAsDraftDB(Study study)
         {
             throw new NotImplementedException();
         }
