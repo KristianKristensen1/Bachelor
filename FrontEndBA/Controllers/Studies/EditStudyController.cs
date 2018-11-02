@@ -59,8 +59,8 @@ namespace FrontEndBA.Controllers.Studies
                     return View("Index");
                 }
             }
-
-            return View("./Index");
+            EditStudyHelper editStudyHelper = new EditStudyHelper();
+            return View("Index", editStudyHelper.CreateEditStudyModel(csModel.currentStudy.IdStudy));
         }
     }
 }
