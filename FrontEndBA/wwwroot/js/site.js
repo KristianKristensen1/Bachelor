@@ -45,3 +45,4 @@ function MyStudiesParticipant() {
     $('#RelevantStudies').hide();
     $('#MyStudies').show();
 }
+

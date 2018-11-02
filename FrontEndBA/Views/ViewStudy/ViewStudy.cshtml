@@ -55,7 +55,7 @@
                             </div>
                         </th>
                         <th >
-                            @if (Model.study.Location.Contains("<iframe"))
+                            @if (Model.study.Location.Contains("www.google.com/maps/"))
                             {
                           
                             <div class="iframe-container">
@@ -204,7 +204,9 @@
                     <input value="Edit study" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "EditStudy", new { studyID = Model.study.IdStudy }))'" />
                     <input type="submit" value="Manage participants" class="btn btn-default" formaction="ReturnToHomePage" />
                     <input type="submit" value="Delete Study" class="btn btn-default" formaction="ReturnToHomePage" />
-                    <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'" />
+                    <input value="Cancel" class="btn btn-default" />
+                    <input value="Send study to Participants" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'" />                                                             
+                                                                                                                                                                           
                 }
                 else
                 {

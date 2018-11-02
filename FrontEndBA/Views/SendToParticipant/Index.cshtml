@@ -1,0 +1,30 @@
+﻿@model FrontEndBA.Models.ViewStudyModel
+@{
+    ViewData["Title"] = "Index";
+}
+<form method="post" asp-action="Create" asp-controller="SendToParticipant">
+    <div class="form-group">
+        <label for="Title">Title</label>
+        <input type="text" class="form-control" id="Title" placeholder="@Html.ViewData.Model.study.Name.ToString() "> 
+    </div>
+    <div class="form-group">
+        <label for="Content">Content</label>
+        <textarea cols='60' rows='8'>
+         Hallo! We are contacting you because we are in a need of new participants! @Html.Raw("<br>")
+        The Description is as follows: @Html.ViewData.Model.study.Description.ToString() .The pay will be as follows: @Html.ViewData.Model.study.Pay.ToString() @Html.Raw("<br>")
+        The duration will be as follows: @Html.ViewData.Model.study.Duration.ToString() @Html.Raw("<br>")
+
+        @Html.Raw("<br>")If you are interested please contact @Html.ViewData.Model.researcher.Name.ToString() at @Html.ViewData.Model.researcher.Email.ToString()
+ 
+        
+        </textarea>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>
+
+
+
+@section Scripts
+{
+    <script>tinymce.init({ selector:'textarea' });</script>
+}
