@@ -1,4 +1,5 @@
 ﻿@model FrontEndBA.Models.ViewStudyModel;
+@using BachelorBackEnd
 @using FrontEndBA.Models.ResearcherModel.CreateStudyModel;
 
 @{
@@ -55,7 +56,7 @@
                             </div>
                         </th>
                         <th >
-                            @if (Model.study.Location.Contains("<iframe"))
+                            @if (Model.study.Location.Contains("www.google.com/maps/"))
                             {
                           
                             <div class="iframe-container">
@@ -203,12 +204,13 @@
                     <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("Index", "EditStudy", new { studyID = Model.study.IdStudy }))'">Edit study</button>
                     <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("ManageParticipants", "ManageParticipants", new { studyID = Model.study.IdStudy, studyName = Model.study.Name }))'">Manage participants</button>
                     <button type="button" data-toggle="modal" data-target=".confirm" class="btn btn-default">Delete</button>
-                    <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
-
-                }
-                else
-                {
                     <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
+                    <input value="Send study to Participants" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'" />
+
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
                 }
             </div>
 

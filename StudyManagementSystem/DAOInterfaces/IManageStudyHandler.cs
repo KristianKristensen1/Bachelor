@@ -17,14 +17,13 @@ namespace BachelorBackEnd
 
         void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria);
 
-        void SaveAsDraftDB(Study study);
 
-        List<Study> GetRelevantStudiesDB(Participant participant);
+        //List<Study> GetRelevantStudiesDB(Participant participant);
 
-        List<Study> GetMyParticipantStudiesDB(int participantID);
+        //List<Study> GetMyParticipantStudiesDB(int participantID);
 
-        List<Study> GetMyResearcherStudiesDB(int reseacherID);
+        //List<Study> GetMyResearcherStudiesDB(int reseacherID);
 
-        List<Study> GetAllStudiesDB();
+        //List<Study> GetAllStudiesDB();
     }
 }

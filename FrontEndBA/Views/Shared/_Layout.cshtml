@@ -68,10 +68,10 @@
             <div>
                 <img src="~/images/AuLogo.PNG" alt="AU Logo" width="100%" height="90" padding:3px" style="border-top-right-radius:10px; border-top-left-radius:10px">
             </div>
-            //Checks if the user has admin rights
-            if (User.Claims.ElementAt(0).Value == "Y")
-            {
-                <ul class="menu" style="border-bottom-left-radius:10px; border-bottom-right-radius:10px">
+                //Checks if the user has admin rights
+                if (User.Claims.ElementAt(0).Value == "Y")
+                {
+                   <ul class="menu" style="border-bottom-left-radius:10px; border-bottom-right-radius:10px">
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
                     <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
                     <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")">Log Out</a></li>
@@ -123,6 +123,7 @@
         <script src="~/lib/jquery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
@@ -138,6 +139,7 @@
                 integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
         </script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
+     
     </environment>
 
     @RenderSection("Scripts", required: false)

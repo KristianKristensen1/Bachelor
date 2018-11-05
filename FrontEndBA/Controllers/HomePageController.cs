@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using StudyManagementSystem.DAOImplementations;
+using StudyManagementSystem.DAOInterfaces;
 
 
 namespace FrontEndBA.Controllers
@@ -29,14 +31,14 @@ namespace FrontEndBA.Controllers
             
             bachelordbContext db = new bachelordbContext();
             Participant participant = getParticipant(id);
-            ManageStudyHandler mst = new ManageStudyHandler(new bachelordbContext());
+            IViewStudyHandler vsh = new ViewStudyHandler(new bachelordbContext());
             Models.Studies studiesCollection = new Models.Studies();
             
             //Gets the relevant studies
-            studiesCollection.relevantStudies = mst.GetRelevantStudiesDB(participant);            
+            studiesCollection.relevantStudies = vsh.GetRelevantStudiesDB(participant);            
 
             //Gets the studies that the participant is enrolled in. 
-            studiesCollection.myParticipantStudies = mst.GetMyParticipantStudiesDB(participant.IdParticipant);
+            studiesCollection.myParticipantStudies = vsh.GetMyParticipantStudiesDB(participant.IdParticipant);
 
             return View(studiesCollection);
         }
@@ -50,10 +52,10 @@ namespace FrontEndBA.Controllers
             int id = Convert.ToInt32(claims.ElementAt(3).Value);
 
             Researcher researcher = getResearcher(id);
-            ManageStudyHandler mst = new ManageStudyHandler(new bachelordbContext());
+            IViewStudyHandler vsh = new ViewStudyHandler(new bachelordbContext());
             Models.Studies studiesCollection = new Models.Studies();
-            studiesCollection.allStudies = mst.GetAllStudiesDB();
-            studiesCollection.myResearcherStudies = mst.GetMyResearcherStudiesDB(researcher.IdResearcher);
+            studiesCollection.allStudies = vsh.GetAllStudiesDB();
+            studiesCollection.myResearcherStudies = vsh.GetMyResearcherStudiesDB(researcher.IdResearcher);
             return View(studiesCollection);
         }
 
