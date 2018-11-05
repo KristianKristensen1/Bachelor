@@ -46,3 +46,8 @@ function MyStudiesParticipant() {
     $('#MyStudies').show();
 }
 
+function ShowSelectedParticipant(ID) {
+    document.getElementById('<%= partID %>').textContent = 123;
+
+}
+

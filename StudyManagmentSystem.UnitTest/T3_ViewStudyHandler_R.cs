@@ -6,12 +6,14 @@ using NUnit.Framework;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using BachelorBackEnd;
+using StudyManagementSystem.DAOImplementations;
+using StudyManagementSystem.DAOInterfaces;
 
 namespace Tests
 {
-    public class T3_ManageStudyHandler_R
+    public class T3_ViewStudyHandler_R
     {
-        public IManageStudyHandler uut;
+        public IViewStudyHandler uut;
         public Study study;
         public IQueryable studies;
         public IQueryable inclusionCriteria;
@@ -84,7 +86,7 @@ namespace Tests
         public void GetAllStudiesDB_StudiesToShow()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
 
             //Act -
             var listOfStudies = uut.GetAllStudiesDB();
@@ -98,7 +100,7 @@ namespace Tests
         {
             mockContext = new Mock<bachelordbContext>();
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object); //Listen må ikke være null, så hvad gør jeg lige her? Hmm.
+            uut = new ViewStudyHandler(mockContext.Object); //Listen må ikke være null, så hvad gør jeg lige her? Hmm.
 
             //Act -
             var listOfStudies = uut.GetAllStudiesDB();
@@ -111,7 +113,7 @@ namespace Tests
         public void GetMyResearcherStudiesDB_StudiesToShow()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
 
             //Act -
             var listOfStudies = uut.GetMyResearcherStudiesDB(1);
@@ -124,7 +126,7 @@ namespace Tests
         public void GetMyResearcherStudiesDB_NoStudiesToShow()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
 
             //Act -
             var listOfStudies = uut.GetMyResearcherStudiesDB(2);
@@ -133,49 +135,49 @@ namespace Tests
             Assert.AreEqual(listOfStudies.Count, 0);
         }
 
-        [Test]
-        public void CreateStudyDB()
-        {
-            //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+        //[Test]
+        //public void CreateStudyDB()
+        //{
+        //    //Arrange
+        //    uut = new ViewStudyHandler(mockContext.Object);
 
 
-            Inclusioncriteria inc = new Inclusioncriteria()
-            {
-                Male = true,
-                Female = false,
-                MinAge = 10,
-                MaxAge = 60,
-                English = true,
-            };
+        //    Inclusioncriteria inc = new Inclusioncriteria()
+        //    {
+        //        Male = true,
+        //        Female = false,
+        //        MinAge = 10,
+        //        MaxAge = 60,
+        //        English = true,
+        //    };
 
-            Study study = new Study()
-            {
-                Name = "New Study for people! This is real",
-                IdStudy = 13,
-                Description = "Ladies and gentlemen, this is study no. 5",
-                Isdraft = false,
-                IdResearcher = 1,
-                Abstract = "Here is a nice abstract!",
-                DirectStudyLink = "ThisIsADirectStudyLink",
-                Duration = "60",
-                DateCreated = DateTime.Now.Date,
-                Preparation = "Please come prepared",
-                EligibilityRequirements = "You must be nice to participate",
-                Pay = 150,
-            };
+        //    Study study = new Study()
+        //    {
+        //        Name = "New Study for people! This is real",
+        //        IdStudy = 13,
+        //        Description = "Ladies and gentlemen, this is study no. 5",
+        //        Isdraft = false,
+        //        IdResearcher = 1,
+        //        Abstract = "Here is a nice abstract!",
+        //        DirectStudyLink = "ThisIsADirectStudyLink",
+        //        Duration = "60",
+        //        DateCreated = DateTime.Now.Date,
+        //        Preparation = "Please come prepared",
+        //        EligibilityRequirements = "You must be nice to participate",
+        //        Pay = 150,
+        //    };
 
            
-            //Act
-            uut.CreateStudyDB(study, inc);
+        //    //Act
+        //    uut.CreateStudyDB(study, inc);
 
-            //Assert
-            Assert.AreEqual(mockContext.Object.Study.Count(), 4);
+        //    //Assert
+        //    Assert.AreEqual(mockContext.Object.Study.Count(), 4);
 
-            /*
-            mockStudySet.Verify(m => m.Add(It.IsAny<Study>()), Times.Once);
-            mockContext.Verify(m => m.SaveChanges(), Times.Once);
-            */
-        }
+        //    /*
+        //    mockStudySet.Verify(m => m.Add(It.IsAny<Study>()), Times.Once);
+        //    mockContext.Verify(m => m.SaveChanges(), Times.Once);
+        //    */
+        //}
     }
 }
