@@ -5,12 +5,14 @@ using NUnit.Framework;
 using Microsoft.EntityFrameworkCore;
 using Moq;
 using BachelorBackEnd;
+using StudyManagementSystem.DAOImplementations;
+using StudyManagementSystem.DAOInterfaces;
 
 namespace Tests
 {
-    public class T3_ManageStudyHandler_P
+    public class T3_ViewStudyHandler_P
     {
-        public IManageStudyHandler uut;
+        public IViewStudyHandler uut;
         public Study study;
         public IQueryable studies;
         public Mock<DbSet<Study>> mockStudySet;
@@ -107,7 +109,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Male_23_English()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = true, //is male
@@ -129,7 +131,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Male_23_NoEnglish()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = true, //is male
@@ -151,7 +153,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Female_53_English()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = false, //is female
@@ -173,7 +175,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Female_53_NoEnglish()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = false, //is female
@@ -195,7 +197,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Male_83_English()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = true, //is male
@@ -217,7 +219,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Female_83_English()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = false, //is female
@@ -239,7 +241,7 @@ namespace Tests
         public void GetRelevantStudiesDB_Female_183_NoEnglish()
         {
             //Arrange
-            uut = new ManageStudyHandler(mockContext.Object);
+            uut = new ViewStudyHandler(mockContext.Object);
             Participant participant = new Participant
             {
                 Gender = false, //is female
