@@ -12,6 +12,7 @@ namespace FrontEndBA.Models.ResearcherModel.EmailModels
         [BindProperty]
         public EmailModel mails { get; set; }
 
+       
         public ViewStudyModel studies { get; set; }
 
 

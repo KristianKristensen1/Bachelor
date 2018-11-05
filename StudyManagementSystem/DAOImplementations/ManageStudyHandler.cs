@@ -123,8 +123,12 @@ namespace BachelorBackEnd
         public List<Participant> getListParticipants(int studyid)
         {
             List<Participant> listp = new List<Participant>();
-
-
+            List<int> particpantids = _context.Studyparticipant.Where(x => x.IdStudy == studyid).ToList()
+                .Select(partid => partid.IdParticipant).ToList();
+            foreach (var id in particpantids)
+            {
+               listp.Add(_context.Participant.FirstOrDefault(part => part.IdParticipant ==id));
+            }
             return listp;
         }
     }

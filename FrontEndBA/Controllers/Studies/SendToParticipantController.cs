@@ -22,7 +22,7 @@ namespace FrontEndBA.Controllers.Studies
             return View(sendToParticipantModel);
         }
 
-        public IActionResult Create(SendingModel sModel)
+        public IActionResult Create(SendingModel sModel,int studyID)
         {
             if (ModelState.IsValid)
             {
@@ -33,15 +33,20 @@ namespace FrontEndBA.Controllers.Studies
                     IEnumerable<Claim> claims = identity.Claims;
                     int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
 
-                    
+
+                    //
+                    ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
+                    sModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
+
                     ManageStudyHandler msh  = new ManageStudyHandler(new bachelordbContext());
-                    //msh.
+                   List<Participant> participants= msh.getListParticipants(sModel.studies.study.IdStudy);
 
                     // Convert to create the right format
                     EmailToParticipantHelper emailHelper = new EmailToParticipantHelper();
-                    emailHelper.SendMessge(sModel);
+                    
+                    emailHelper.SendMessages(sModel,participants);
 
-
+                    RedirectToAction("Researcher", "Homepage");
 
                 }
                 catch (Exception e)

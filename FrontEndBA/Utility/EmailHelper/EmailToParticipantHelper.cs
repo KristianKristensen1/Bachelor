@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using BachelorBackEnd;
 using FrontEndBA.Models.CreateStudy;
 using FrontEndBA.Models.ResearcherModel.EmailModels;
 using MimeKit;
@@ -14,15 +16,23 @@ namespace FrontEndBA.Utility.EmailHelper
     {
         // https://www.youtube.com/watch?v=C4O8vqg295o
 
-        public void SendMessge(SendingModel sModel)
+
+        public void SendMessages(SendingModel sModel, List<Participant> participants)
+        {
+            Thread t = new Thread(()=>SendMessge(sModel,participants));
+            t.Start();
+           
+        }
+
+        public void SendMessge(SendingModel sModel, List<Participant> participants)
         {
             
 
-            foreach (var participant in sModel.studies.study.Studyparticipant)
+            foreach (var participant in participants)
             {
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("Tandlaehoejskolen", "donotreplyTandlægeHøjskolen@gmail.com"));
-                message.To.Add(new MailboxAddress("test", "pandagud@gmail.com"));
+                message.To.Add(new MailboxAddress("Participant for TandlaegeHoejskolen", participant.Email));
                 message.Subject = sModel.mails.Subject;
                 var builder = new BodyBuilder();
                 builder.TextBody = sModel.mails.Body;
