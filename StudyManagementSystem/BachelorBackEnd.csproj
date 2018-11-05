@@ -155,6 +155,7 @@
   <ItemGroup>
     <Compile Include="Class1.cs" />
     <Compile Include="DAOImplementations\LoginHandler.cs" />
+    <Compile Include="DAOImplementations\ManageParticipantStatus.cs" />
     <Compile Include="DAOImplementations\ManageStudyHandler.cs" />
     <Compile Include="DAOImplementations\RegisterHandler.cs" />
     <Compile Include="DAOImplementations\LoginStatus.cs" />
