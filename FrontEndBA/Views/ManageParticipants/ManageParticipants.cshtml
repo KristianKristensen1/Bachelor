@@ -1,0 +1,80 @@
+﻿@model FrontEndBA.Models.ManageParticipantModel
+@{
+    ViewData["Title"] = "ManageParticipants";
+}
+
+<h2>Manage Participants</h2>
+<div class="container">
+    <div class="row">
+        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 500px; width:40%; margin-bottom:20px; border-radius:10px;">
+            <h3 class="tableTitle">Participants in study @Model.nameOfStudy</h3>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <label>ID</label>
+                        </th>
+                        <th class="col-md-4">
+                            <label>Email</label>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var participant in Model.participants)
+                    {
+                        <tr class="parantHover" title="Participants" onclick="ShowSelectedParticipant(@participant.Password)">
+                            <td>
+                                @Html.DisplayFor(modelItem => participant.IdParticipant)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => participant.Email)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 300px; width:40%; margin-bottom:20px; border-radius:10px;">
+            <form asp-action="AddParticipant">
+                <input asp-for="studyID" hidden />
+                <input asp-for="nameOfStudy" hidden />
+                <h3 class="tableTitle">Add or remove participant</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="col-md-1">
+                                <label>ID</label>
+                            </th>
+                            <th class="col-md-4">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <span asp-validation-for="participantID" class="text-danger"></span>
+                            <th class="col-md-1">
+                                <input asp-for="participantID" class="form-control" id="partID" />
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <label asp-for="participants[0].Email" class="control-label" id="email"></label>
+                                </div>
+                            </th>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-default" formaction="AddParticipant">Add participant</button>
+                    <button type="submit" class="btn btn-default" formaction="RemoveParticipant">Remove participant</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="button" class="btn btn-default">Cancel</button>
+    </div>
+</div>
+
