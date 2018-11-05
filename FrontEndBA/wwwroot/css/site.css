@@ -17,6 +17,7 @@
     color: black;
     border-width: 1px;
 }
+
 .biggerinput {
     height: 100px;
 }
@@ -44,19 +45,19 @@
     font-size: 20px;
     line-height: 1.4;
 }
+
 .maps {
     overflow: hidden;
     padding: 10px;
     margin-top: 10px;
     height: 50%;
-    width:50%;
-    
+    width: 50%;
 }
+
 .iframe-container {
     overflow: hidden;
     padding-top: 40.25%;
     position: relative;
-    
 }
 
     .iframe-container iframe {
@@ -75,12 +76,6 @@
     margin: 15px;
 }
 
-
-#footer {
-    position: fixed;
-    text-align: center;
-    width: 100%;
-}
 table {
     border: groove;
 }
@@ -95,10 +90,12 @@ td, th {
 .bottomdivwrapper {
     text-align: center;
 }
+
 .button {
     position: absolute;
-    bottom:0;
+    bottom: 0;
 }
+
 .menu {
     list-style-type: none;
     margin-top: 0px;
@@ -107,6 +104,7 @@ td, th {
     overflow: hidden;
     background-color: #002546;
 }
+
 .menuItems {
     display: block;
     color: white;
@@ -114,6 +112,7 @@ td, th {
     padding: 14px 16px;
     text-decoration: none;
 }
+
     .menuItems:hover {
         background-color: #111;
     }
@@ -127,6 +126,7 @@ td, th {
     text-align: center;
     text-transform: uppercase;
 }
+
 .table-study {
     text-align: left;
     overflow: hidden;
@@ -135,10 +135,11 @@ td, th {
     display: table;
     padding: 0 0 8em 0;
 }
+
 h1 {
-    font-size:3em; 
+    font-size: 3em;
     font-weight: 300;
-    line-height:1em;
+    line-height: 1em;
     text-align: center;
     color: #4DC3FA;
 }
@@ -157,11 +158,10 @@ h1 {
     height: 50px;
 }
 
-    /* Hide/rearrange for smaller screens */
-    @media screen and (max-width: 767px) {
-        /* Hide captions */
-        .carousel-caption {
-            display: none;
-        }
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
     }
-
+}
