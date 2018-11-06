@@ -37,7 +37,7 @@ namespace FrontEndBA.Controllers.Studies
                     ManageParticipantStatus manageParticipantStatus = msh.AddParticipantToStudyDB(mpModel.participantID, mpModel.studyID);
                     if (manageParticipantStatus.success)
                     {
-                        return RedirectToAction("ManageParticipants", "ManageParticipants", new { studyID = mpModel.studyID, studyName = mpModel.participantID });
+                        return RedirectToAction("ManageParticipants", "ManageParticipants", new { studyID = mpModel.studyID, studyName = mpModel.nameOfStudy});
                     }
                     else
                     {
@@ -52,6 +52,7 @@ namespace FrontEndBA.Controllers.Studies
                 }
             }
             mpModel.participants = msh.getParticipantsDB(mpModel.studyID);
+           
             return View("ManageParticipants", mpModel);
         }
 
@@ -65,7 +66,7 @@ namespace FrontEndBA.Controllers.Studies
                     ManageParticipantStatus manageParticipantStatus = msh.RemoveParticipantFromStudyDB(mpModel.participantID, mpModel.studyID);
                     if (manageParticipantStatus.success)
                     {
-                        return RedirectToAction("ManageParticipants", "ManageParticipants", new { studyID = mpModel.studyID, studyName = mpModel.participantID });
+                        return RedirectToAction("ManageParticipants", "ManageParticipants", new { studyID = mpModel.studyID, studyName = mpModel.nameOfStudy });
                     }
                     else
                     {
@@ -77,6 +78,32 @@ namespace FrontEndBA.Controllers.Studies
 
                     throw;
                 }
+            }
+            mpModel.participants = msh.getParticipantsDB(mpModel.studyID);
+            return View("ManageParticipants", mpModel);
+        }
+
+        
+        public ActionResult GetEmail(ManageParticipantModel mpModel)
+        {
+            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            try
+            {
+                ManageParticipantStatus manageParticipantStatus = msh.getParticipantEmailDB(mpModel.participantID);
+                if (manageParticipantStatus.success)
+                {
+                    mpModel.participantEmail = manageParticipantStatus.participantEmail;
+                }
+                else
+                {
+                    ModelState.AddModelError("ParticipantID", manageParticipantStatus.errormessage);
+                    mpModel.participantEmail = "";
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
             mpModel.participants = msh.getParticipantsDB(mpModel.studyID);
             return View("ManageParticipants", mpModel);

@@ -198,5 +198,25 @@ namespace BachelorBackEnd
 
             return listp;
         }
+
+        public ManageParticipantStatus getParticipantEmailDB(int partID)
+        {
+            ManageParticipantStatus manageParticipantStatus = new ManageParticipantStatus();
+            Participant participant = _context.Participant.FirstOrDefault(part => part.IdParticipant == partID);
+
+            if (participant != null)
+            {
+                manageParticipantStatus.success = true;
+                manageParticipantStatus.participantEmail = participant.Email;
+            }
+            else
+            {
+                manageParticipantStatus.success = false;
+                manageParticipantStatus.errormessage = "No participant with this ID exists";
+            }
+
+
+            return manageParticipantStatus;
+        }
     }
 }

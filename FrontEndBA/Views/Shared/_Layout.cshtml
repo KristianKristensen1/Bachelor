@@ -71,12 +71,13 @@
                 //Checks if the user has admin rights
                 if (User.Claims.ElementAt(0).Value == "Y")
                 {
-                   <ul class="menu" style="border-bottom-left-radius:10px; border-bottom-right-radius:10px">
-                    <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
-                    <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
-                    <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")">Log Out</a></li>
-                    <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
-                </ul>
+            <ul class="menu" style="border-bottom-left-radius:10px; border-bottom-right-radius:10px">
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Researcher","Homepage")">Home</a></li>
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Index","CreateStudy")">Create Study</a></li>
+                <li style="float: left"><a class="menuItems" href="@Url.Action("Index","VerifyResearcher")">Verify researcher</a></li>
+                <li style="float: right"><a class="menuItems" href="@Url.Action("logoutResearcher","welcome")">Log Out</a></li>
+                <li style="float: right"><a class="menuItems" href="#Profile">My Profile</a></li>
+            </ul>
                 <div>
                     <label style="float:right">@User.Identity.Name (Admin)</label>
                 </div>

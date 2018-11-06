@@ -16,6 +16,7 @@ namespace FrontEndBA.Utility
             ManageParticipantModel manageParticipantModel = new ManageParticipantModel();
             manageParticipantModel.participants = msh.getParticipantsDB(studyID);
             manageParticipantModel.nameOfStudy = studyName;
+            manageParticipantModel.studyID = studyID;
             return manageParticipantModel;
         }
     }

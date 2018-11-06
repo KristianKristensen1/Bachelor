@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using System.Security.Claims;
 using StudyManagementSystem.DAOImplementations;
 using StudyManagementSystem.DAOInterfaces;
+using FrontEndBA.Utility.HomepageHelpers;
 
 
 namespace FrontEndBA.Controllers
@@ -27,20 +28,12 @@ namespace FrontEndBA.Controllers
             //Gets the id from JWT. The id is used to retrieve user from database. 
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
-            int id = Convert.ToInt32(claims.ElementAt(3).Value);
-            
-            bachelordbContext db = new bachelordbContext();
-            Participant participant = getParticipant(id);
-            IViewStudyHandler vsh = new ViewStudyHandler(new bachelordbContext());
-            Models.Studies studiesCollection = new Models.Studies();
-            
-            //Gets the relevant studies
-            studiesCollection.relevantStudies = vsh.GetRelevantStudiesDB(participant);            
+            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
 
-            //Gets the studies that the participant is enrolled in. 
-            studiesCollection.myParticipantStudies = vsh.GetMyParticipantStudiesDB(participant.IdParticipant);
-
-            return View(studiesCollection);
+            //Creates a ParticipantHomepageModel
+            ParticipantHomepageHelper participantHomepageHelper = new ParticipantHomepageHelper();
+            ParticipantHomepageModel participantHomepageModel = participantHomepageHelper.CreateParticipantHomepageModel(partID);
+            return View(participantHomepageModel);
         }
 
         [Authorize(Policy = "RequiresResearcher")]
@@ -49,14 +42,11 @@ namespace FrontEndBA.Controllers
             //Gets the id from JWT. The id is used to retrieve user from database. 
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
-            int id = Convert.ToInt32(claims.ElementAt(3).Value);
+            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
 
-            Researcher researcher = getResearcher(id);
-            IViewStudyHandler vsh = new ViewStudyHandler(new bachelordbContext());
-            Models.Studies studiesCollection = new Models.Studies();
-            studiesCollection.allStudies = vsh.GetAllStudiesDB();
-            studiesCollection.myResearcherStudies = vsh.GetMyResearcherStudiesDB(researcher.IdResearcher);
-            return View(studiesCollection);
+            ResearcherHomepageHelper researcherHomepageHelper = new ResearcherHomepageHelper();
+            ResearcherHomepageModel researcherHomepageModel = researcherHomepageHelper.CreateResearcherHompepageModel(resID);
+            return View(researcherHomepageModel);
         }
 
         [Authorize]
@@ -64,20 +54,5 @@ namespace FrontEndBA.Controllers
         {
            return RedirectToAction("Index", "CreateStudy");
         }
-
-        public Participant getParticipant(int id)
-        {
-            UserHandler userHandler = new UserHandler();
-            Participant participant = userHandler.getParticipant(id);
-            return participant;
-        }
-
-        public Researcher getResearcher(int id)
-        {
-            UserHandler userHandler = new UserHandler();
-            Researcher researcher = userHandler.getResearcher(id);
-            return researcher;
-        }
-    
     }
 }

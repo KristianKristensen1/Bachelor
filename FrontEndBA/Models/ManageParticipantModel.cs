@@ -18,5 +18,7 @@ namespace FrontEndBA.Models
         [Display(Name = "participantID")]
         public int participantID { get; set; }
 
+        public string participantEmail { get; set; }
+
     }
 }

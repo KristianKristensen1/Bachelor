@@ -46,8 +46,22 @@ function MyStudiesParticipant() {
     $('#MyStudies').show();
 }
 
-function ShowSelectedParticipant(ID) {
-    document.getElementById('<%= partID %>').textContent = 123;
-
+function ShowSelectedParticipant(ID, email) {
+    document.getElementById('partID').value = ID;
+    document.getElementById('email').value = email;
 }
 
+function ShowSelectedResearcher(ID, email) {
+    document.getElementById('resID').value = ID;
+    document.getElementById('email').value = email;
+}
+
+function AllResearchers() {
+    $('#UnverifiedResearchers').hide();
+    $('#AllResearchers').show();
+}
+
+function UnverifiedResearchers() {
+    $('#UnverifiedResearchers').show();
+    $('#AllResearchers').hide();
+}

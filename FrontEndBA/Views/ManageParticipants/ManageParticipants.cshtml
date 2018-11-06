@@ -6,13 +6,13 @@
 <h2>Manage Participants</h2>
 <div class="container">
     <div class="row">
-        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 500px; width:40%; margin-bottom:20px; border-radius:10px;">
-            <h3 class="tableTitle">Participants in study @Model.nameOfStudy</h3>
+        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 500px; width:50%; margin-bottom:20px; border-radius:10px; border-style:solid; border-color:#002546;">
+            <h3 class="tableTitle">Participants enrolled in @Model.nameOfStudy</h3>
             <table class="table">
                 <thead>
                     <tr>
                         <th class="col-md-1">
-                            <label>ID</label>
+                            <label>ID</label>s
                         </th>
                         <th class="col-md-4">
                             <label>Email</label>
@@ -22,7 +22,7 @@
                 <tbody>
                     @foreach (var participant in Model.participants)
                     {
-                        <tr class="parantHover" title="Participants" onclick="ShowSelectedParticipant(@participant.Password)">
+                        <tr class="parantHover" title="Participants" onclick="ShowSelectedParticipant(@participant.IdParticipant, '@participant.Email')">
                             <td>
                                 @Html.DisplayFor(modelItem => participant.IdParticipant)
                             </td>
@@ -34,11 +34,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-5" style="background-color:white; overflow-y:scroll; height: 300px; width:40%; margin-bottom:20px; border-radius:10px;">
+        <div class="col-md-5" style="background-color:white; height: 350px; width:40%; margin-bottom:20px; border-radius:10px; border-style:solid; border-color:#002546;">
             <form asp-action="AddParticipant">
                 <input asp-for="studyID" hidden />
                 <input asp-for="nameOfStudy" hidden />
-                <h3 class="tableTitle">Add or remove participant</h3>
+                <h3 class="tableTitle">Add or remove a participant</h3>
+                <h5>Choose a participant enrolled in study to remove, or enter the ID of a participant you wish to enroll in study</h5>
                 <table class="table">
                     <thead>
                         <tr>
@@ -55,26 +56,56 @@
                     <tbody>
                         <tr>
                             <span asp-validation-for="participantID" class="text-danger"></span>
-                            <th class="col-md-1">
+                            <th class="col-md-1" title="Enter ID of participant to add or remove">
                                 <input asp-for="participantID" class="form-control" id="partID" />
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <label asp-for="participants[0].Email" class="control-label" id="email"></label>
+                                    @if (Model.participantEmail == null)
+                                    {
+                                        <input asp-for="participantEmail" class="form-control" id="email" readonly="@true" value="No participant selected" />
+                                    }
+                                    else
+                                    {
+                                        <input asp-for="participantEmail" class="form-control" id="email" readonly="@true" value="@Model.participantEmail" />
+                                    }
                                 </div>
                             </th>
                         </tr>
                     </tbody>
                 </table>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-default" formaction="AddParticipant">Add participant</button>
-                    <button type="submit" class="btn btn-default" formaction="RemoveParticipant">Remove participant</button>
+                <div class="form-group" style="padding-bottom:20px">
+                    <button type="submit" class="btn btn-default" formaction="GetEmail" title="Get the email address corresponding to the entered ID">Get email</button>
                 </div>
-            </form>
+                <div>
+                    <button type="submit" class="btn btn-default" formaction="AddParticipant">Add participant</button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".confirm">Remove participant</button>
+                </div>
         </div>
+        <div class="modal fade confirm">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                        <div class="modal-title"><h2>Remove participant from study?</h2></div>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure that you want to remove participant from the study?</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default" formaction="RemoveParticipant">Remove</button>
+                        <button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </form>
+
     </div>
     <div class="form-group">
-        <button type="button" class="btn btn-default">Cancel</button>
+        <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = Model.studyID }))'">Back</button>
     </div>
 </div>
+
+
 
