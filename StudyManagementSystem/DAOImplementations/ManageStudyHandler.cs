@@ -35,9 +35,16 @@ namespace BachelorBackEnd
                               stud.Name == study.Name && stud.DateCreated == study.DateCreated);
             inclusioncriteria.IdStudy = dbStudy.IdStudy;
 
-            //Saves the inclusioncriteria 
+            //Sets the direct study link with the generated ID
+            if (dbStudy != null)
+            {
+                dbStudy.DirectStudyLink = "http://localhost:61728/ViewStudy/ViewStudy?studyID=" + dbStudy.IdStudy;
+                _context.Study.Update(dbStudy);
+            }
+
+            //Saves the inclusioncriteria and the study link
             _context.Inclusioncriteria.Add(inclusioncriteria);
-            _context.SaveChanges();
+            _context.SaveChanges();    
         }
 
         public void EditStudy(Study study, Inclusioncriteria inclusioncriteria)
