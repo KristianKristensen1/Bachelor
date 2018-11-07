@@ -13,19 +13,26 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Microsoft.Extensions.Configuration;
+using StudyManagementSystem.Configs;
 
 namespace FrontEndBA.Controllers
 {
     public class WelcomeController : Controller
     {
+        private readonly IConfiguration configuration;
         private readonly IJwtTokenGenerator tokenGenerator;
-        public WelcomeController(IJwtTokenGenerator tokenGenerator)
+
+      
+        public WelcomeController(IJwtTokenGenerator tokenGenerator, IConfiguration configuration)
         {
             this.tokenGenerator = tokenGenerator;
+            this.configuration = configuration;
         }
 
         public ActionResult Participant()
         {
+           ConfigStrings.Connectionstring = configuration.GetConnectionString("DbConnectionstring");
             if (User.Claims.Count() != 0)
             {
                 if (User.Claims.ElementAt(2).Value == "Y")
