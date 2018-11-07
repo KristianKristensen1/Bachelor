@@ -6,6 +6,7 @@ using FrontEndBA.Models;
 using FrontEndBA.Utility;
 using Microsoft.AspNetCore.Mvc;
 using BachelorBackEnd;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEndBA.Controllers.Studies
 {
@@ -15,7 +16,7 @@ namespace FrontEndBA.Controllers.Studies
         {
             return View();
         }
-
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult ManageParticipants(int studyID, string studyName)
         {
             ManageParticipantsHelper manageParticipantsHelper = new ManageParticipantsHelper();
@@ -25,7 +26,7 @@ namespace FrontEndBA.Controllers.Studies
             return View(manageParticipantModel);
         }
 
-
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult AddParticipant(ManageParticipantModel mpModel)
         {
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
@@ -56,6 +57,7 @@ namespace FrontEndBA.Controllers.Studies
             return View("ManageParticipants", mpModel);
         }
 
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult RemoveParticipant(ManageParticipantModel mpModel)
         {
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());

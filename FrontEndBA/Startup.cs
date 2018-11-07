@@ -7,9 +7,14 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Text;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Rewrite;
 
 namespace FrontEndBA
 {
+    // Setup local environment using this guide https://neelbhatt.com/2018/02/04/enforce-ssl-and-use-hsts-in-net-core2-0-net-core-security-part-i/
+    // Followed documentation https://docs.microsoft.com/en-us/aspnet/core/security/enforcing-ssl?view=aspnetcore-2.1&tabs=visual-studio
     public class Startup
     {
         public Startup(IConfiguration configuration, IHostingEnvironment environment)
@@ -24,6 +29,8 @@ namespace FrontEndBA
         {
             // retrieve the configured token params and establish a TokenValidationParameters object,
             // we are going to need this later.
+
+
             var validationParams = new TokenValidationParameters
             {
                 ClockSkew = TimeSpan.Zero,
@@ -51,7 +58,15 @@ namespace FrontEndBA
             });
 
             services.AddMemoryCache();
+
             services.AddMvc();
+            //Use Https 
+            services.Configure<MvcOptions>(options =>
+            {
+                options.Filters.Add(new RequireHttpsAttribute());
+            });
+            services.AddSingleton<IConfiguration>(Configuration);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +84,12 @@ namespace FrontEndBA
 
             app.UseStaticFiles();
             app.UseAuthentication();
+
+            //Use Https 
+            var options = new RewriteOptions()
+                .AddRedirectToHttps();
+
+            app.UseRewriter(options);
 
             app.UseMvc(routes =>
             {

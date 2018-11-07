@@ -1,0 +1,31 @@
+﻿@model FrontEndBA.Models.SharedModels.RetrieveModel
+
+@{
+    ViewData["Title"] = "Participant";
+}
+
+<h2>Participant</h2>
+
+<h4>Enter your email and a password will be sent to you</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Participant">
+            <div class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button style="width: 51%" type="submit" asp-controller="RetrieveAccount" asp-action="RetrieveParticipant" class="btn btn-default">Send</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+<br/>
+<div>
+    <button  asp-controller="RetrieveAccount" asp-action="Back" class="btn btn-default">Back to login screen</button>
+</div>
+

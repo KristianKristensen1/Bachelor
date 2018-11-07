@@ -9,21 +9,30 @@ using FrontEndBA.Models.ResearcherModel.EmailModels;
 using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Utility;
 using FrontEndBA.Utility.EmailHelper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEndBA.Controllers.Studies
 {
     public class SendToParticipantController : Controller
     {
+        [Authorize(Policy = "RequiresResearcher")]
         public IActionResult Index(int studyID)
         {
             ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
            SendingModel sendToParticipantModel = new SendingModel();
             sendToParticipantModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
+
+            EmailHelper emailHelper = new EmailHelper();
+
+            emailHelper.PrefillTextArea(sendToParticipantModel);
+
             return View(sendToParticipantModel);
         }
-
-        public IActionResult Create(SendingModel sModel)
+        [Authorize(Policy = "RequiresResearcher")]
+        public IActionResult Create(SendingModel sModel,int studyID)
         {
+            ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
+            sModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
             if (ModelState.IsValid)
             {
                 try
@@ -33,25 +42,36 @@ namespace FrontEndBA.Controllers.Studies
                     IEnumerable<Claim> claims = identity.Claims;
                     int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
 
-                    
+
+                    //
+                    //ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
+                    //sModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
+
                     ManageStudyHandler msh  = new ManageStudyHandler(new bachelordbContext());
-                    //msh.
+                   List<Participant> participants= msh.getListParticipants(sModel.studies.study.IdStudy);
 
                     // Convert to create the right format
-                    EmailToParticipantHelper emailHelper = new EmailToParticipantHelper();
-                    emailHelper.SendMessge(sModel);
+                    EmailHelper emailHelper = new EmailHelper();
+                    
+                    emailHelper.SendMessages(sModel,participants);
 
-
+                    return RedirectToAction("Researcher", "Homepage");
 
                 }
                 catch (Exception e)
                 {
                    
-                    ////cshelper.ErrorHandle(curCriteria,cs,curStudy
+             
                     return View("Index");
                 }
             }
-            return View("index");
+            return View("index", sModel);
+        }
+        [Authorize(Policy = "RequiresResearcher")]
+        public IActionResult Back(int studyID)
+        {
+
+            return RedirectToAction("Researcher", "Homepage");
         }
     }
 }
