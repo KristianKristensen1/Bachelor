@@ -102,4 +102,5 @@ namespace BachelorBackEnd
             return manageParticipantStatus;
         }
     }
+
 }

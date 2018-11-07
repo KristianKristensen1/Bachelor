@@ -56,8 +56,6 @@ namespace FrontEndBA.Controllers
                     ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
 
-
-
                     return RedirectToAction("Researcher", "Homepage");
                 }
                 catch (Exception e)
