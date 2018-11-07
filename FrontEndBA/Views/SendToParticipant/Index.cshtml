@@ -2,34 +2,62 @@
 @{
     ViewData["Title"] = "Index";
 }
-<form method="post" asp-action="Create" asp-controller="SendToParticipant">
-    <div class="form-group">
-        <label>Title</label>
-        <label asp-for="mails.Subject">
-            <input type="text" class="form-control" placeholder="@Html.ViewData.Model.studies.study.Name.ToString() " asp-for="mails.Subject">
-        </label>
-    </div>
-    <div class="form-group">
-        <label>Content</label>
-        <label asp-for="mails.Body">
-            <textarea cols='60' rows='8' asp-for="mails.Body">
-         Hallo! We are contacting you because we are in a need of new participants! @Html.Raw("<br>")
-        The Description is as follows: @Html.ViewData.Model.studies.study.Description.ToString() .The pay will be as follows: @Html.ViewData.Model.studies.study.Pay.ToString() @Html.Raw("<br>")
-        The duration will be as follows: @Html.ViewData.Model.studies.study.Description.ToString() @Html.Raw("<br>")
+<div style="margin-left: 25px; margin-top: 15px">
+    <form method="post" asp-action="Create" asp-controller="SendToParticipant">
+        <div class="form-group">
+            <div>
+                <label>Title</label>
+            </div>
 
-        @Html.Raw("<br>")If you are interested please contact @Html.ViewData.Model.studies.researcher.Name.ToString() at @Html.ViewData.Model.studies.researcher.Email.ToString()
- 
+            <label asp-for="mails.Subject">
+                <input type="text" class="form-control" placeholder="@Html.ViewData.Model.studies.study.Name.ToString() " asp-for="mails.Subject">
+                <span asp-validation-for="mails.Subject" class="text-danger"></span>
+            </label>
+        </div>
+        <div class="form-group">
+            <div>
+                <label>Mail Content</label>
+            </div>
+            <label asp-for="mails.MailBody">
+                <textarea cols='124' rows='12' style="width: 120%" asp-for="mails.MailBody">
+   
+            </textarea>
+            </label>
+
+        </div>
+        <button type="button" data-toggle="modal" data-target=".confirm" class="btn btn-default">Send</button>
+        <button asp-controller="SendToParticipant" asp-action="Back" asp-route-studyID="@Model.studies.study.IdStudy" class="btn btn-default">Back</button>
         
-        </textarea>
-        </label>
-    </div>
-    @*<button asp-route-id= type="submit" >Submit</button>*@
-    <button asp-controller="SendToParticipant" asp-action="Create" asp-route-studyID="@Model.studies.study.IdStudy" type="submit" class="btn btn-default">Send</button>
-</form>
+        <div class="modal fade confirm">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button data-dismiss="modal" class="close"><span>&times;</span></button>
+                        <div class="modal-title"><h2>Want to Send this study?</h2></div>
+                    </div>
+                    <div class="modal-body">
+                        <h4>Are you sure you want to send</h4>
+                    </div>
+                    <div class="modal-footer">
+                        <button asp-controller="SendToParticipant" asp-action="Create" asp-route-studyID="@Model.studies.study.IdStudy" type="submit" class="btn btn-default">Send</button>
+                        <button data-dismiss="modal" class="btn btn-default">Cancel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+</div>
+
 
 
 
 @section Scripts
 {
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>tinymce.init({ selector:'textarea',force_p_newlines : false,
+    force_br_newlines : true,
+    convert_newlines_to_brs : true,
+    remove_linebreaks: false
+});</script>
 }

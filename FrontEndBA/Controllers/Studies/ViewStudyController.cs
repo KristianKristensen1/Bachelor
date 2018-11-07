@@ -16,10 +16,6 @@ namespace FrontEndBA.Controllers
     /// </summary>
     public class ViewStudyController : Controller
     {
-        public string Index()
-        {
-            return "Hallo";
-        }
 
 
         public string Participant(int? id)
