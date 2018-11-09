@@ -205,7 +205,6 @@
                     <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("ManageParticipants", "ManageParticipants", new { studyID = Model.study.IdStudy, studyName = Model.study.Name }))'">Manage participants</button>
                     <input value="Send study to Participants" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'" />
                     <button type="button" data-toggle="modal" data-target=".confirm" class="btn btn-default">Delete</button>
-                    <input value="Send study to Participants" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'" />
                     <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
                 }
                 else
