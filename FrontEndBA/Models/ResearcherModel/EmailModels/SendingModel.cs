@@ -10,10 +10,10 @@ namespace FrontEndBA.Models.ResearcherModel.EmailModels
     public class SendingModel
     {
         [BindProperty]
-        public EmailModel mails { get; set; }
+        public EmailModel Mail { get; set; }
 
        
-        public ViewStudyModel studies { get; set; }
+        public ViewStudyModel Study { get; set; }
 
 
     }

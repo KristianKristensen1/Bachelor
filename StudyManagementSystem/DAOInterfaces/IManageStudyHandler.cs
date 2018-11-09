@@ -17,7 +17,7 @@ namespace BachelorBackEnd
 
         void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria);
 
-        List<Participant> getListParticipants(int studyid);
+        List<Participant> getParticipantsListDB(int studyid);
 
 
         //List<Study> GetRelevantStudiesDB(Participant participant);

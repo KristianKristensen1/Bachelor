@@ -20,7 +20,7 @@ namespace FrontEndBA.Controllers.Studies
         {
             ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
            SendingModel sendToParticipantModel = new SendingModel();
-            sendToParticipantModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
+            sendToParticipantModel.Study = viewStudyModelHelper.createViewStudyModel(studyID);
 
             EmailHelper emailHelper = new EmailHelper();
 
@@ -32,7 +32,7 @@ namespace FrontEndBA.Controllers.Studies
         public IActionResult Create(SendingModel sModel,int studyID)
         {
             ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
-            sModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
+            sModel.Study = viewStudyModelHelper.createViewStudyModel(studyID);
             if (ModelState.IsValid)
             {
                 try
@@ -45,10 +45,10 @@ namespace FrontEndBA.Controllers.Studies
 
                     //
                     //ViewStudyModelHelper viewStudyModelHelper = new ViewStudyModelHelper();
-                    //sModel.studies = viewStudyModelHelper.createViewStudyModel(studyID);
+                    //sModel.Study = viewStudyModelHelper.createViewStudyModel(studyID);
 
                     ManageStudyHandler msh  = new ManageStudyHandler(new bachelordbContext());
-                   List<Participant> participants= msh.getListParticipants(sModel.studies.study.IdStudy);
+                   List<Participant> participants= msh.getParticipantsListDB(sModel.Study.study.IdStudy);
 
                     // Convert to create the right format
                     EmailHelper emailHelper = new EmailHelper();

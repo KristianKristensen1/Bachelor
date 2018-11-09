@@ -13,11 +13,11 @@ namespace FrontEndBA.Models.ResearcherModel.CreateStudyModel
         public int IdInclusionCriteria { get; set; }
 
         [Display(Name = "Include Male*")]
-        [Required(ErrorMessage = "Missing, must assign if study needs male")]
+        [Required(ErrorMessage = "Missing, must assign if Study needs male")]
         public bool IsMale { get; set; }
 
         [Display(Name = "Include Female*")]
-        [Required(ErrorMessage = "Missing, must assign if study needs female")]
+        [Required(ErrorMessage = "Missing, must assign if Study needs female")]
         public bool IsFemale { get; set; }
 
         [Required(ErrorMessage = "Missing, must assign Age*")]

@@ -13,7 +13,7 @@ namespace FrontEndBA.Utility
     {
         public CreateStudyModel CreateEditStudyModel(int StudyID)
         {
-            //Creates a CreateStudyModel containing information about the study that should be edited. 
+            //Creates a CreateStudyModel containing information about the Study that should be edited. 
             CreateStudyModel cs = new CreateStudyModel();
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
             Study study = msh.getStudyDB(StudyID);

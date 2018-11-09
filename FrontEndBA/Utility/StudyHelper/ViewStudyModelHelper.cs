@@ -8,7 +8,7 @@ using FrontEndBA.Models;
 namespace FrontEndBA.Utility
 {
     /// <summary>
-    /// Creates a ViewStudyModel from a study id. A ViewStudyModel is a model containing a study and the corresponding inclusioncriteria, and is used to show the datails of a study. 
+    /// Creates a ViewStudyModel from a Study id. A ViewStudyModel is a model containing a Study and the corresponding inclusioncriteria, and is used to show the datails of a Study. 
     /// </summary>
     public class ViewStudyModelHelper
     {

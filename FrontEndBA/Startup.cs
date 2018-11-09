@@ -72,6 +72,7 @@ namespace FrontEndBA
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseStatusCodePages();
             if (env.IsDevelopment())
             {
                 app.UseBrowserLink();
@@ -81,7 +82,7 @@ namespace FrontEndBA
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            
             app.UseStaticFiles();
             app.UseAuthentication();
 

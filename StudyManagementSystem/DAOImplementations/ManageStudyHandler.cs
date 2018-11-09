@@ -198,7 +198,7 @@ namespace BachelorBackEnd
 
         }
 
-        public List<Participant> getListParticipants(int studyid)
+        public List<Participant> getParticipantsListDB(int studyid)
         {
             List<Participant> listp = new List<Participant>();
             List<int> particpantids = _context.Studyparticipant.Where(x => x.IdStudy == studyid).ToList()

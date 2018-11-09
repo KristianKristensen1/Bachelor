@@ -11,8 +11,8 @@ namespace BachelorBackEnd
     {
         public static void Main(string[] args)
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
-            userHandler.generateStudies();
+            //UserHandler userHandler = new UserHandler(new bachelordbContext());
+            //userHandler.generateStudies();
             /*
             Study study = new Study();
             study.Description = "This is another very nice study!";

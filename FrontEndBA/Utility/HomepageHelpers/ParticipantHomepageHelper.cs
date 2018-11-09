@@ -19,10 +19,10 @@ namespace FrontEndBA.Utility.HomepageHelpers
             IViewStudyHandler vsh = new ViewStudyHandler(new bachelordbContext());
             ParticipantHomepageModel participantHomepageModel = new ParticipantHomepageModel();
 
-            //Gets the relevant studies
+            //Gets the relevant Study
             participantHomepageModel.relevantStudies = vsh.GetRelevantStudiesDB(participant);
 
-            //Gets the studies that the participant is enrolled in. 
+            //Gets the Study that the participant is enrolled in. 
             participantHomepageModel.myParticipantStudies = vsh.GetMyParticipantStudiesDB(participant.IdParticipant);
 
             return participantHomepageModel;

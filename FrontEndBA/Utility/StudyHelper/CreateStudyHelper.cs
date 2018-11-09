@@ -85,7 +85,7 @@ namespace FrontEndBA.Utility
             //Handle inclusioncriteria
             csmodel.inclusioncriteria.MaxAge = inclusioncriteria.MaxAge;
             csmodel.inclusioncriteria.MinAge = inclusioncriteria.MinAge;
-            //Handle study
+            //Handle Study
             csmodel.currentStudy.Abstract = study.Abstract;
             csmodel.currentStudy.Description = study.Description;
             csmodel.currentStudy.DirecetStudyLink = study.DirectStudyLink;
