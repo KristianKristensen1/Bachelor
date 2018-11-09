@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\NewFolder2\**" />
+    <Content Remove="Views\NewFolder2\**" />
+    <EmbeddedResource Remove="Views\NewFolder2\**" />
+    <None Remove="Views\NewFolder2\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FroalaEditor" Version="2.8.5" />
     <PackageReference Include="MailKit" Version="2.0.7" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />

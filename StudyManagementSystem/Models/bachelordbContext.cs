@@ -27,8 +27,8 @@ namespace BachelorBackEnd
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=10.192.72.207;Database=bachelordb;user=admin;pwd=admin1234;Convert Zero Datetime = true");
-              //  DESKTOP - 4G1FLIU
+                optionsBuilder.UseMySql("Server=35.228.116.222;Database=bachelordb;user=Admin;pwd=admin1234;Convert Zero Datetime = true");
+                //  DESKTOP - 4G1FLIU //10.192.75.180
             }
         }
 
