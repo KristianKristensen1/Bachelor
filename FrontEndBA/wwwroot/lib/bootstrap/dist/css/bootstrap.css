@@ -180,7 +180,7 @@ optgroup {
   font-weight: bold;
 }
 table {
-  border-spacing: 0;
+  border-spacing: 10px;
   border-collapse: collapse;
 }
 td,
@@ -2261,7 +2261,7 @@ th {
   text-align: left;
 }
 .table {
-  width: 100%;
+  width: 99%;
   max-width: 100%;
   margin-bottom: 20px;
 }

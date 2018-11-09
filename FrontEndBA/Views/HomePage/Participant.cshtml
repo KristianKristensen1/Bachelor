@@ -6,106 +6,111 @@
 
 
 <body onload="MyStudiesParticipant()">
+    <h2>Participant homepage</h2>
     <div class="container">
         <div class="row">
-            <div>
+            <div style="margin-bottom:10px">
                 <button class="btn-default" onclick="MyStudiesParticipant()">My Studies</button>
                 <button class="btn-default" onclick="RelevantStudies()">Relevant Studies</button>
             </div>
 
-            <div class="col-md-5" id="MyStudies" style="background-color:white; overflow-y:scroll; height: 500px; width:95%; margin-bottom:20px; border-radius:10px">
+            <div class="col-md-5 StudyContainerOuter" id="MyStudies">
                 <h3 class="tableTitle">My studies</h3>
-                <table class="table" id="MyStudies">
-                    <thead>
-                        <tr>
-                            <th class="col-md-1">
-                                ID
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.myParticipantStudies.First().Duration)
-                            </th>
-                            <th>
-                                Pay
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var study in Model.myParticipantStudies)
-                        {
-                            <tr class="parantHover" id="" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.Name)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Abstract)
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Duration)
-                                    </text>
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Pay) kr
-                                    </text>
-                                </td>
+                <div class="StudyContainerInner">
+                    <table class="table" id="MyStudies">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1">
+                                    ID
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.myParticipantStudies.First().Duration)
+                                </th>
+                                <th>
+                                    Pay
+                                </th>
                             </tr>
-                        }
+                        </thead>
+                        <tbody>
+                            @foreach (var study in Model.myParticipantStudies)
+                            {
+                                <tr class="parantHover" id="" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => study.IdStudy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => study.Name)
+                                        <br />
+                                        @Html.DisplayFor(modelItem => study.Abstract)
+                                    </td>
+                                    <td>
+                                        <text>
+                                            @Html.DisplayFor(modelItem => study.Duration)
+                                        </text>
+                                    </td>
+                                    <td>
+                                        <text>
+                                            @Html.DisplayFor(modelItem => study.Pay) kr
+                                        </text>
+                                    </td>
+                                </tr>
+                            }
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
 
-            <div class="col-md-5" id="RelevantStudies" style="background-color:white; overflow-y:scroll; height: 500px; width:95%; margin-bottom:20px; border-radius:10px" hidden>
+            <div class="col-md-5 StudyContainerOuter" id="RelevantStudies" hidden>
                 <h3 class="tableTitle">Relevant studies</h3>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th class="col-md-1">
-                                ID
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.relevantStudies.First().Duration)
-                            </th>
-                            <th>
-                                Pay
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var study in Model.relevantStudies)
-                        {
-                            <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.IdStudy)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => study.Name)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => study.Abstract)
-                                </td>
-                                <td>
-                                    <text>
-                                        @Html.DisplayFor(modelItem => study.Duration)
-                                    </text>
-                                </td>
-                                <td>
-                                    <text> @Html.DisplayFor(modelItem => study.Pay) kr</text>
-                                </td>
+                <div class="StudyContainerInner">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-md-1">
+                                    ID
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.relevantStudies.First().Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.relevantStudies.First().Duration)
+                                </th>
+                                <th>
+                                    Pay
+                                </th>
                             </tr>
-                        }
+                        </thead>
+                        <tbody>
+                            @foreach (var study in Model.relevantStudies)
+                            {
+                                <tr class="parantHover" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = study.IdStudy }))'">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => study.IdStudy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => study.Name)
+                                        <br />
+                                        @Html.DisplayFor(modelItem => study.Abstract)
+                                    </td>
+                                    <td>
+                                        <text>
+                                            @Html.DisplayFor(modelItem => study.Duration)
+                                        </text>
+                                    </td>
+                                    <td>
+                                        <text> @Html.DisplayFor(modelItem => study.Pay) kr</text>
+                                    </td>
+                                </tr>
+                            }
 
-                    </tbody>
-                </table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

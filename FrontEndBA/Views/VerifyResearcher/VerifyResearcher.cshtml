@@ -9,11 +9,11 @@
 <h2>VerifyResearcher</h2>
 <div class="container" style="height:600px">
     <div class="row">
-        <div>
+        <div style="margin-bottom:10px">
             <button class="btn-default" onclick="UnverifiedResearchers()">Unverified researchers</button>
             <button class="btn-default" onclick="AllResearchers()">All researchers</button>
         </div>
-        <div class="col-md-5" id="UnverifiedResearchers" style="background-color:white; overflow-y:scroll; height: 500px; width:50%; margin-bottom:20px; border-radius:10px; border-style:solid; border-color:black">
+        <div class="col-md-5 ParticipantContainer" id="UnverifiedResearchers">
             <h3 class="tableTitle">Researchers that is not yet verified</h3>
             <table class="table">
                 <thead>
@@ -50,7 +50,7 @@
             </table>
         </div>
 
-        <div class="col-md-5" id="AllResearchers" style="background-color:white; overflow-y:scroll; height: 500px; width:50%; margin-bottom:20px; border-radius:10px; border-style:solid; border-color:black" hidden>
+        <div class="col-md-5 ParticipantContainer" id="AllResearchers" hidden>
             <h3 class="tableTitle">All researchers</h3>
             <table class="table">
                 <thead>
@@ -87,7 +87,7 @@
             </table>
         </div>
 
-        <div class="col-md-5" style="background-color:white; height: 350px; width:40%; margin-bottom:20px; border-radius:10px; border-style:solid; border-color:#002546;">
+        <div class="col-md-5 ManageContainer">
             <form asp-action="VerifyResearcher">
                 <h3 class="tableTitle">Verify researcher</h3>
                 <h5>Choose a participant enrolled in study to remove, or enter the ID of a participant you wish to enroll in study</h5>

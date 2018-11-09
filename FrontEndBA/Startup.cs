@@ -60,12 +60,15 @@ namespace FrontEndBA
             services.AddMemoryCache();
 
             services.AddMvc();
-            //Use Https 
+
+            //Use Https
             services.Configure<MvcOptions>(options =>
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
             services.AddSingleton<IConfiguration>(Configuration);
+           
+            
 
         }
 
@@ -89,8 +92,9 @@ namespace FrontEndBA
             //Use Https 
             var options = new RewriteOptions()
                 .AddRedirectToHttps();
-
+                
             app.UseRewriter(options);
+
 
             app.UseMvc(routes =>
             {

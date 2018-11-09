@@ -51,7 +51,6 @@ namespace FrontEndBA.Controllers
                     var curStudy = cshelper.ConvertStudy(csModel, id);
                     var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
 
-
                     bachelordbContext db = new bachelordbContext();
                     ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
