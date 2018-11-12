@@ -33,35 +33,45 @@ namespace FrontEndBA.Controllers
         public ActionResult Participant()
         {
             ConfigStrings.Connectionstring = configuration.GetConnectionString("DbConnectionstring");
+            //Redirects the user to the right page based on their authentication status            
             if (User.Claims.Count() != 0)
             {
+                //Checks if the user is verified as a participant
                 if (User.Claims.ElementAt(2).Value == "Y")
                 {
                     return RedirectToAction("Participant", "Homepage");
                 }
-
+                //Checks if the user is verified as a researcher
                 if (User.Claims.ElementAt(1).Value == "Y")
                 {
                     return RedirectToAction("Researcher", "Homepage");
                 }
+                if (User.Claims.ElementAt(1).Value == "N")
+                {
+                    return View("../NotVerifiedResearcher/NotVerifiedResearcher");
+                }
             }
-
             return View();
         }
 
         public ActionResult Researcher()
         {
-            
+            //Redirects the user to the right page based on their authentication status            
             if (User.Claims.Count() != 0)
             {
+                //Checks if the user is verified as a participant
                 if (User.Claims.ElementAt(2).Value == "Y")
                 {
                     return RedirectToAction("Participant", "Homepage");
                 }
-
+                //Checks if the user is verified as a researcher
                 if (User.Claims.ElementAt(1).Value == "Y")
                 {
                     return RedirectToAction("Researcher", "Homepage");
+                }
+                if (User.Claims.ElementAt(1).Value == "N")
+                {
+                    return View("NotVerifiedResearcher");
                 }
             }
             return View();
