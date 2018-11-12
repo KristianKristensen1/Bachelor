@@ -17,15 +17,13 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <br/>
             <div class="form-group">
-                <button style="width: 51%" type="submit" asp-controller="RetrieveAccount" asp-action="RetrieveResearcher" class="btn btn-default">Send</button>
+                <button style="width: 40%"  type="submit" asp-controller="RetrieveAccount" asp-action="RetrieveResearcher" class="btn btn-default">Send</button>
 
+
+                <button asp-controller="RetrieveAccount" asp-action="BackResearcher" style="width: 40%" class="btn btn-default">Back</button>
             </div>
         </form>
     </div>
 </div>
-<br />
-<div>
-    <button asp-controller="RetrieveAccount" asp-action="Back" class="btn btn-default">Back to login screen</button>
-</div>
-

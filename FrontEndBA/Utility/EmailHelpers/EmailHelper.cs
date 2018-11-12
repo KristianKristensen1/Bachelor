@@ -38,12 +38,19 @@ namespace FrontEndBA.Utility.EmailHelper
 
             using (var client = new SmtpClient())
             {
-
+                // This should be removed or made more secure but is a work around if the server has a antivirus installed. More information here https://github.com/jstedfast/MailKit/blob/master/FAQ.md?fbclid=IwAR0Wr6J_q9qak5KM2ZvD-i5Sgg9ThvZIjEU2ndUXVMGOEXQyY482ARRWiq4#InvalidSslCertificate
+                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
                 client.Connect("smtp.gmail.com", 587, false);
                 client.Authenticate("noreplytandlaegehaejskolen@gmail.com", "Q2E4t6u8");
                 client.Send(message);
                 client.Disconnect(true);
             }
+        }
+        // not done, must be implemented to make generic footer.
+        public void SendingWithSmtpClient(BodyBuilder builder, MimeMessage message)
+        {
+            var image = builder.LinkedResources.Add(@"C:\Users\panda\source\repos\ReBachelor\Bachelor\FrontEndBA\wwwroot\images\AuLogo.PNG");
+            image.ContentId = MimeUtils.GenerateMessageId();
         }
 
         public void SendMessages(SendingModel sModel, List<Participant> participants)

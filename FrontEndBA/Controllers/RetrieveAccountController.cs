@@ -23,6 +23,10 @@ namespace FrontEndBA.Controllers
         {
             return View();
         }
+        public IActionResult Researcher()
+        {
+            return View();
+        }
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -68,7 +72,7 @@ namespace FrontEndBA.Controllers
                 {
                     EmailHelper emailh = new EmailHelper();
                     emailh.RetrieveAccount(status.LoginStatus.researcher.Email, status.LoginStatus.researcher.Password);
-                    return RedirectToAction("Participant", "Welcome");
+                    return RedirectToAction("Researcher", "Welcome");
                 }
                 else
                 {
@@ -78,18 +82,20 @@ namespace FrontEndBA.Controllers
                 }
             }
 
-            return View("Participant");
+            return View("Researcher");
 
         }
         
-        public IActionResult Researcher()
-        {
-            return View();
-        }
+  
 
-        public IActionResult Back()
+        public IActionResult BackParticipant()
         {
             return RedirectToAction("Participant", "Welcome");
+        }
+
+        public IActionResult BackResearcher()
+        {
+            return RedirectToAction("Researcher", "Welcome");
         }
     }
 }
