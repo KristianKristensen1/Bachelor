@@ -32,12 +32,12 @@
                 <tbody>
                     @foreach (var researcher in Model.UnverifiedResearchers)
                     {
-                        <tr class="parantHover" title="@researcher.Name" onclick="ShowSelectedResearcher(@researcher.IdResearcher, '@researcher.Email')">
+                        <tr class="parantHover" title="@researcher.FirstName" onclick="ShowSelectedResearcher(@researcher.IdResearcher, '@researcher.Email')">
                             <td>
                                 @Html.DisplayFor(modelItem => researcher.IdResearcher)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => researcher.Name)
+                                @Html.DisplayFor(modelItem => researcher.FirstName)
                             </td>
                             <td>
                                 <text>
@@ -69,12 +69,12 @@
                 <tbody>
                     @foreach (var researcher in Model.AllResearchers)
                     {
-                        <tr class="parantHover" title="@researcher.Name" onclick="ShowSelectedResearcher(@researcher.IdResearcher, '@researcher.Email')">
+                        <tr class="parantHover" title="@researcher.FirstName" onclick="ShowSelectedResearcher(@researcher.IdResearcher, '@researcher.Email')">
                             <td>
                                 @Html.DisplayFor(modelItem => researcher.IdResearcher)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => researcher.Name)
+                                @Html.DisplayFor(modelItem => researcher.FirstName)
                             </td>
                             <td>
                                 <text>

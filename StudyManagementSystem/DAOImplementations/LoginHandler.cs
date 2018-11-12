@@ -52,7 +52,7 @@ namespace BachelorBackEnd
         public LoginHandler LoginResearcherDB(string email, string password)
         {
             var ResearcherHandler = new LoginHandler();
-            Researcher researcher = _context.Researcher.FirstOrDefault(part => part.Email == email);
+            Researcher researcher = _context.Researcher.FirstOrDefault(res => res.Email == email);
             if (researcher != null)
                 {
                     if (researcher.Password == password)
