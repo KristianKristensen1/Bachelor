@@ -150,12 +150,12 @@ namespace BachelorBackEnd
 
                 entity.Property(e => e.FirstName)
                     .IsRequired()
-                    .HasColumnName("name")
+                    .HasColumnName("firstName")
                     .HasColumnType("varchar(45)");
 
                 entity.Property(e => e.LastName)
                     .IsRequired()
-                    .HasColumnName("name")
+                    .HasColumnName("lastName")
                     .HasColumnType("varchar(45)");
 
                 entity.Property(e => e.Password)
