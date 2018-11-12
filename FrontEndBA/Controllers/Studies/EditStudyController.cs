@@ -14,11 +14,13 @@ namespace FrontEndBA.Controllers.Studies
     public class EditStudyController : Controller
     {
         private CreateStudyHelper cshelper;
+
         public IActionResult Index(int studyID)
         {
             EditStudyHelper editStudyHelper = new EditStudyHelper();
             return View(editStudyHelper.CreateEditStudyModel(studyID));
         }
+
         public ActionResult ReturnToHomepage()
         {
             //redirects to the welcome page, and from there to the Homepage if the user is authorized. 
@@ -37,7 +39,7 @@ namespace FrontEndBA.Controllers.Studies
                 try
                 {
                     //Gets the id from JWT. The id is used to retrieve user from database. 
-                    var identity = (ClaimsIdentity)User.Identity;
+                    var identity = (ClaimsIdentity) User.Identity;
                     IEnumerable<Claim> claims = identity.Claims;
                     int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
 
@@ -59,6 +61,48 @@ namespace FrontEndBA.Controllers.Studies
                     return View("Index");
                 }
             }
+
+            EditStudyHelper editStudyHelper = new EditStudyHelper();
+            return View("Index", editStudyHelper.CreateEditStudyModel(csModel.currentStudy.IdStudy));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public ActionResult EditAsDraft(CreateStudyModel csModel)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    //Gets the id from JWT. The id is used to retrieve user from database. 
+                    var identity = (ClaimsIdentity) User.Identity;
+                    IEnumerable<Claim> claims = identity.Claims;
+                    int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
+
+                    // Convert to create the right format
+                    CreateStudyHelper cshelper = new CreateStudyHelper();
+                    int id_study = csModel.currentStudy.IdStudy;
+                    var curStudy = cshelper.ConvertStudy(csModel, id_researcher, id_study);
+                    var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
+
+                    //Storing as a draft
+                    curStudy.Isdraft = true;
+
+                    //Storing in the DB
+                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
+                    manageStudyHandler.EditStudy(curStudy, curCriteria);
+
+                    return RedirectToAction("Researcher", "Homepage");
+                }
+                catch (Exception e)
+                {
+                    cshelper = new CreateStudyHelper();
+
+                    return View("Index");
+                }
+            }
+
             EditStudyHelper editStudyHelper = new EditStudyHelper();
             return View("Index", editStudyHelper.CreateEditStudyModel(csModel.currentStudy.IdStudy));
         }

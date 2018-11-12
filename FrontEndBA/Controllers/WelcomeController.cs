@@ -176,8 +176,9 @@ namespace FrontEndBA.Controllers
                 }
                 return View("Researcher");
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                var test = e;
                 //Handle error
                 throw;
             }

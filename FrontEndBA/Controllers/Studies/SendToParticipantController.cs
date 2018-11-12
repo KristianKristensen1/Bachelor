@@ -59,7 +59,7 @@ namespace FrontEndBA.Controllers.Studies
         public IActionResult Back(int studyID)
         {
 
-            return RedirectToAction("Researcher", "Homepage");
+            return RedirectToAction("ViewStudy", "ViewStudy", new { studyID = studyID });
         }
     }
 }
