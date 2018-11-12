@@ -148,7 +148,12 @@ namespace BachelorBackEnd
                     .HasColumnName("isverified")
                     .HasColumnType("tinyint(4)");
 
-                entity.Property(e => e.Name)
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasColumnName("name")
+                    .HasColumnType("varchar(45)");
+
+                entity.Property(e => e.LastName)
                     .IsRequired()
                     .HasColumnName("name")
                     .HasColumnType("varchar(45)");

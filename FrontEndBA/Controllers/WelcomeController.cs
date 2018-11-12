@@ -32,7 +32,7 @@ namespace FrontEndBA.Controllers
 
         public ActionResult Participant()
         {
-           ConfigStrings.Connectionstring = configuration.GetConnectionString("DbConnectionstring");
+            ConfigStrings.Connectionstring = configuration.GetConnectionString("DbConnectionstring");
             if (User.Claims.Count() != 0)
             {
                 if (User.Claims.ElementAt(2).Value == "Y")
@@ -69,12 +69,9 @@ namespace FrontEndBA.Controllers
 
 
         // POST: Welcome/LoginParticipant
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AllowAnonymous]
         [Route("LoginParticipant")]
         [Route("Welcome/LoginParticipant")]
-        public async Task<IActionResult> LoginParticipant([Bind("Email,Password")] Participant participant)
+        public async Task<IActionResult> LoginParticipant(Participant participant)
         {
             try
             {
@@ -122,12 +119,10 @@ namespace FrontEndBA.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [AllowAnonymous]
+
         [Route("LoginResearcher")]
         [Route("Welcome/LoginResearcher")]
-        public async Task<IActionResult> LoginResearcher([Bind("Email,Password")] Researcher researcher)
+        public async Task<IActionResult> LoginResearcher(Researcher researcher)
         {
             try
             {

@@ -96,6 +96,10 @@ td, th {
     bottom: 0;
 }
 
+.button:active{
+    background-color:red;
+}
+
 .menu {
     list-style-type: none;
     margin-top: 0px;

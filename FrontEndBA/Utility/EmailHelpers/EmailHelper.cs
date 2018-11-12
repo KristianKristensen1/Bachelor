@@ -87,18 +87,13 @@ namespace FrontEndBA.Utility.EmailHelper
 
                 using (var client = new SmtpClient())
                 {
-
+                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
                     client.Connect("smtp.gmail.com", 587, false);
                     client.Authenticate("noreplytandlaegehaejskolen@gmail.com", "Q2E4t6u8");
                     client.Send(message);
                     client.Disconnect(true);
                 }
             }
-
-       
-            
-
-            
         }
 
         public void PrefillTextArea(SendingModel sModel)
@@ -109,9 +104,9 @@ namespace FrontEndBA.Utility.EmailHelper
             sModel.Mail.MailBody = "<p>Hallo!</p>\r\n<p>&nbsp;</p>" +
                                     " <p>We are contacting you because we are in a need of new participants!</p>\r\n" + Environment.NewLine +
                                     " <p>The Description is as follows:" + sModel.Study.study.Description.ToString() + "</p>\r\n" + System.Environment.NewLine +
-                                    "<p>The pay will be as follows: " + sModel.Study.study.Pay + "</p>\r\n" + System.Environment.NewLine +
+                                    "<p>The pay will be as follows: " + sModel.Study.study.Pay + "kr" + "</p>\r\n" + System.Environment.NewLine +
                                     "<p>The duration will be as follows:" + sModel.Study.study.Duration + "</p>\r\n" + System.Environment.NewLine +
-                                    "If you are interested please contact "+sModel.Study.researcher.Name+"  at " + sModel.Study.researcher.Email;
+                                    "If you are interested please contact "+sModel.Study.researcher.FirstName+ " " + sModel.Study.researcher.LastName + "  at " + sModel.Study.researcher.Email;
         }
     }
 }
