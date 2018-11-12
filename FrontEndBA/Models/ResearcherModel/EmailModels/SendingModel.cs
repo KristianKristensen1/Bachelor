@@ -15,6 +15,8 @@ namespace FrontEndBA.Models.ResearcherModel.EmailModels
        
         public ViewStudyModel Study { get; set; }
 
+        public int ParticipantCount { get; set; }
+
 
     }
 }
