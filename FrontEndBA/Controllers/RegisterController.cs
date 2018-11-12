@@ -32,13 +32,14 @@ namespace FrontEndBA.Controllers
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateResearcher([Bind("Email,Password")] ResearcherRegisterViewModel researcherRegisterModel)
+        public ActionResult CreateResearcher(ResearcherRegisterViewModel researcherRegisterModel)
         {
             IRegisterHandler registerHandler = new RegisterHandler(new bachelordbContext());
             Researcher currentr = new Researcher();
             currentr.Email = researcherRegisterModel.Email;
             currentr.Password = researcherRegisterModel.Password;
-            currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname; //TODO - First name og Last name i DB
+            currentr.FirstName = researcherRegisterModel.Firstname;
+            currentr.LastName = researcherRegisterModel.Lastname;
             bool success = registerHandler.RegisterResearcherDB(currentr); 
 
             if (!success)
@@ -47,16 +48,14 @@ namespace FrontEndBA.Controllers
                 return View("Researcher");
 
             }
-            return RedirectToAction("Researcher", "Homepage", currentr);
-         
-            
+            return RedirectToAction("LoginResearcher", "Welcome", currentr);
         }
 
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Route("CreateParticipant")]
-        public ActionResult CreateParticipant([Bind("Email,Password,GenderType,Language,Age")] ParticipantRegisterViewModel participantRegisterModel)
+        public ActionResult CreateParticipant(ParticipantRegisterViewModel participantRegisterModel)
         {
 
             IRegisterHandler registerHandler = new RegisterHandler(new bachelordbContext());
@@ -81,7 +80,7 @@ namespace FrontEndBA.Controllers
                  return View("Participant");
 
             }
-            return RedirectToAction("Participant", "Homepage", currentp);
+            return RedirectToAction("LoginParticipant", "Welcome", currentp);
            
         }
 
