@@ -7,31 +7,26 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BachelorBackEnd;
 using FrontEndBA.Models.ParticipantModel.AccountViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEndBA.Controllers
 {
     public class RegisterController : Controller
     {
-
-     
         public ActionResult Participant()
         {
-            
             return View("Participant");
         }
 
 
         public ActionResult Researcher()
         {
-         
             return View();
         }
 
-        
-
-        // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [AllowAnonymous]
         public ActionResult CreateResearcher(ResearcherRegisterViewModel researcherRegisterModel)
         {
             IRegisterHandler registerHandler = new RegisterHandler(new bachelordbContext());
@@ -54,7 +49,7 @@ namespace FrontEndBA.Controllers
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Route("CreateParticipant")]
+        [AllowAnonymous]
         public ActionResult CreateParticipant(ParticipantRegisterViewModel participantRegisterModel)
         {
 
@@ -84,6 +79,7 @@ namespace FrontEndBA.Controllers
            
         }
 
+        [AllowAnonymous]
         public ActionResult Cancel()
         {
             return RedirectToAction("Participant", "Welcome");

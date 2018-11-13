@@ -11,7 +11,7 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
-            <div class="col-md-5" id="right" style="background-color: white; width: 100%; border-radius:10px;">
+            <div class="col-md-5 CreateStudyContainer" id="right">
                 <h3 class="tableTitle">Study details</h3>
                 <table class="table">
                     <thead>
@@ -41,46 +41,51 @@
                                 <label style="height: 100px">@Html.DisplayFor(item => item.study.Description)</label>
                             </th>
                         </tr>
-                    <tr>
-                        <th class="col-md-2">
-                            <text class="control-label">Pay pr time</text>
-                        </th>
-                        <th>
-                            <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
-                        </th>
-                    </tr>
-                    <tr style=" border-collapse: collapse; border-spacing: 0;">
-                        <th class="col-md-1">
-                            <div>
-                                <label style="margin-top:-500px">Location</label>
-                            </div>
-                        </th>
-                        <th >
+                        <tr>
+                            <th class="col-md-2">
+                                <text class="control-label">Pay pr time</text>
+                            </th>
+                            <th>
+                                <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
+                            </th>
+                        </tr>
+                        <tr>
                             @if (Model.study.Location.Contains("www.google.com/maps/"))
                             {
-                          
-                            <div class="iframe-container">
-                                @Html.Raw(Model.study.Location)
-                            </div>
-                               
-                      
+                                <th class="col-md-1">
+                                    <div style="margin-top:-270px">
+                                        <text class="control-label">Location</text>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div class="iframe-container">
+                                        @Html.Raw(Model.study.Location)
+                                    </div>
+                                </th>
+
                             }
                             else
                             {
-                            <div>
-                                <text>
-                                    @Html.DisplayFor(item => item.study.Location)
-                                </text>
-                            </div>                     
-                             }
-                         </th>
-                     </tr>
+                                <th class="col-md-1">
+                                    <div>
+                                        <text class="control-label">Location</text>
+                                    </div>
+                                </th>
+                                <th>
+                                    <div>
+                                        <text>
+                                            @Html.DisplayFor(item => item.study.Location)
+                                        </text>
+                                    </div>
+                                </th>
+                            }
+                        </tr>
                         <tr>
                             <th class="col-md-2">
                                 <text class="control-label">Duration of study</text>
                             </th>
                             <th>
-                                <label>@Html.DisplayFor(item => item.study.Duration) min.</label>
+                                <label>@Html.DisplayFor(item => item.study.Duration)</label>
                             </th>
                         </tr>
                         <tr>
@@ -93,13 +98,12 @@
                         </tr>
                         <tr class="biggerinput">
                             <th class="col-md-1">
-                                <div style="margin-top: -100px">
+                                <div style="margin-top:-80px">
                                     <text class="control-label">Eligibility requirements</text>
                                 </div>
-
                             </th>
                             <th>
-                                <label style="height: 100px">@Html.DisplayFor(item => item.study.EligibilityRequirements)</label>
+                                <label style="height:80px">@Html.DisplayFor(item => item.study.EligibilityRequirements)</label>
                             </th>
                         </tr>
 
@@ -139,7 +143,9 @@
                         </tr>
                         <tr>
                             <th class="col-md-1">
-                                <text class="control-label">Age requirements</text>
+                                <div style="margin-top:-70px">
+                                    <text class="control-label">Age requirements</text>
+                                </div>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -191,20 +197,22 @@
                                 <text class="control-label">Contact information</text>
                             </th>
                             <th>
-                                @Html.DisplayFor(item => item.researcher.Email)
+                                <label> @Html.DisplayFor(item => item.researcher.Email)</label>
                             </th>
                         </tr>
 
                     </thead>
                 </table>
             </div>
-            <div class="form-group">
+        </div>
+        <div class="form-group">
+            @try
+            {
                 @if (Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
                 {
                     <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("Index", "EditStudy", new { studyID = Model.study.IdStudy }))'">Edit study</button>
                     <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("ManageParticipants", "ManageParticipants", new { studyID = Model.study.IdStudy, studyName = Model.study.Name }))'">Manage participants</button>
                     <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'">Send study to Participants</button>
-
                     <button type="button" data-toggle="modal" data-target=".confirm" class="btn btn-default">Delete</button>
                     <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
                 }
@@ -212,8 +220,11 @@
                 {
                     <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
                 }
-            </div>
+            }
+            catch (Exception)
+            {
 
+            }
         </div>
     </form>
 </div>

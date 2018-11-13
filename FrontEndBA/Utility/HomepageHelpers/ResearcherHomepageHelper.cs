@@ -24,8 +24,8 @@ namespace FrontEndBA.Utility.HomepageHelpers
 
         public Researcher getResearcher(int id)
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
-            Researcher researcher = userHandler.getResearcher(id);
+            IUserHandler ush = new UserHandler(new bachelordbContext());
+            Researcher researcher = ush.GetResearcherDB(id);
             return researcher;
         }
     }

@@ -28,6 +28,7 @@ namespace FrontEndBA.Controllers.Studies
 
             return View(sendToParticipantModel);
         }
+
         [Authorize(Policy = "RequiresResearcher")]
         public IActionResult Create(SendingModel sModel, int studyID)
         {
@@ -37,16 +38,14 @@ namespace FrontEndBA.Controllers.Studies
             {
                 try
                 {
-                    ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-                    List<Participant> participants = msh.getParticipantsListDB(sModel.Study.study.IdStudy);
+                    IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
+                    List<Participant> participants = mph.GetParticipantsInStudyDB(sModel.Study.study.IdStudy);
 
                     // Convert to create the right format
                     EmailHelper emailHelper = new EmailHelper();
-
                     emailHelper.SendMessages(sModel, participants);
 
                     return RedirectToAction("Researcher", "Homepage");
-
                 }
                 catch (Exception e)
                 {
@@ -55,10 +54,10 @@ namespace FrontEndBA.Controllers.Studies
             }
             return View("index", sModel);
         }
+
         [Authorize(Policy = "RequiresResearcher")]
         public IActionResult Back(int studyID)
         {
-
             return RedirectToAction("ViewStudy", "ViewStudy", new { studyID = studyID });
         }
     }

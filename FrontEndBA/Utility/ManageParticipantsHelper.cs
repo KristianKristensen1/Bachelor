@@ -12,9 +12,9 @@ namespace FrontEndBA.Utility
 
         public ManageParticipantModel CreateManageParticipantModel(int studyID, string studyName)
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            ManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
             ManageParticipantModel manageParticipantModel = new ManageParticipantModel();
-            manageParticipantModel.participants = msh.getParticipantsDB(studyID);
+            manageParticipantModel.participants = mph.GetParticipantsInStudyDB(studyID);
             manageParticipantModel.nameOfStudy = studyName;
             manageParticipantModel.studyID = studyID;
             return manageParticipantModel;

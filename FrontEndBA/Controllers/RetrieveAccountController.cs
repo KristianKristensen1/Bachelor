@@ -23,10 +23,12 @@ namespace FrontEndBA.Controllers
         {
             return View();
         }
+
         public IActionResult Researcher()
         {
             return View();
         }
+
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -85,8 +87,6 @@ namespace FrontEndBA.Controllers
             return View("Researcher");
 
         }
-        
-  
 
         public IActionResult BackParticipant()
         {

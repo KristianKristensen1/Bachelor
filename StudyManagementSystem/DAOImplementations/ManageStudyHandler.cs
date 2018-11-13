@@ -16,11 +16,6 @@ namespace BachelorBackEnd
             _context = context;
         }
 
-        public void AddParticipantDB(string email, Study study)
-        {
-            throw new NotImplementedException();
-        }
-
         public void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria)
         {
             //Adds the study to the database and saves
@@ -47,7 +42,7 @@ namespace BachelorBackEnd
             _context.SaveChanges();    
         }
 
-        public void EditStudy(Study study, Inclusioncriteria inclusioncriteria)
+        public void EditStudyDB(Study study, Inclusioncriteria inclusioncriteria)
         {
             Study oldStudy = _context.Study.FirstOrDefault(stud => stud.IdStudy == study.IdStudy);
             if (oldStudy != null)
@@ -86,12 +81,6 @@ namespace BachelorBackEnd
             _context.SaveChanges();
         }
 
-        public void RemoveParticipantDB(Participant participant, Study study)
-        {
-            throw new NotImplementedException();
-        }
-
-        //OBS! Change diagrams to match changes.
         public List<Study> GetAllStudiesDB()
         {
             List<Study> allStudies = new List<Study>();
@@ -105,129 +94,19 @@ namespace BachelorBackEnd
             }
         }
 
-      
-
-        public Study getStudyDB(int id)
+        public Study GetStudyDB(int id)
         {
             Study study = _context.Study.FirstOrDefault(stud => stud.IdStudy == id);
 
             return study;
         }
 
-        public Inclusioncriteria getInclusioncriteriaDB(int id)
+        public Inclusioncriteria GetInclusioncriteriaDB(int id)
         {
             Inclusioncriteria incCrit = _context.Inclusioncriteria.FirstOrDefault(inc => inc.IdStudy == id);
 
             return incCrit;
         }
 
-        public Researcher getResearcherDB(int id)
-        {
-            Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == id);
-            return researcher;
-        }
-
-        public List<Participant> getParticipantsDB(int studyID)
-        {
-            List<Participant> participants = new List<Participant>();
-
-            List<int> PartIDs = _context.Studyparticipant.Where(x => x.IdStudy == studyID).Select(partID => partID.IdParticipant).ToList();
-
-            foreach (var id in PartIDs)
-            {
-                participants.Add(_context.Participant.FirstOrDefault(part => part.IdParticipant == id));
-
-            }
-            return participants;
-
-        }
-
-        public ManageParticipantStatus AddParticipantToStudyDB(int partID, int studyID)
-        {
-            ManageParticipantStatus manageParticipantStatus = new ManageParticipantStatus();
-            Studyparticipant studpart = _context.Studyparticipant.FirstOrDefault(x => x.IdStudy == studyID && x.IdParticipant == partID);
-            if(studpart == null)
-            {
-                Participant participant = _context.Participant.FirstOrDefault(part => part.IdParticipant == partID);
-                if (participant != null)
-                {
-                    //Participant exists, but is not enrolled.
-                    studpart = new Studyparticipant();
-                    studpart.IdParticipant = partID;
-                    studpart.IdStudy = studyID;
-                    _context.Studyparticipant.Add(studpart);
-                    _context.SaveChanges();
-                    manageParticipantStatus.success = true;
-                }
-                else
-                {
-                    //Participant with this ID does not exists. 
-                    manageParticipantStatus.success = false;
-                    manageParticipantStatus.errormessage = "Participant with this ID does not exist in the system";
-                }
-
-
-            }
-            else
-            {
-                //Participant allready enrolled in study
-                manageParticipantStatus.success = false;
-                manageParticipantStatus.errormessage = "Participant is all ready enrolled in study";
-            }
-            return manageParticipantStatus;
-        }
-
-        public ManageParticipantStatus RemoveParticipantFromStudyDB(int partID, int studyID)
-        {
-            ManageParticipantStatus manageParticipantStatus = new ManageParticipantStatus();
-            Studyparticipant studPart = _context.Studyparticipant.FirstOrDefault(x => x.IdParticipant == partID && x.IdStudy == studyID);
-            if (studPart != null)
-            {
-                //Participant is enrolled in study
-                _context.Studyparticipant.Remove(studPart);
-                _context.SaveChanges();
-                manageParticipantStatus.success = true;
-            }
-            else
-            {
-                //Participant is not enrolled in study
-                manageParticipantStatus.errormessage = "Participant is not enrolled in study";
-                manageParticipantStatus.success = false;
-            }
-            return manageParticipantStatus;
-
-        }
-
-        public List<Participant> getParticipantsListDB(int studyid)
-        {
-            List<Participant> listp = new List<Participant>();
-            List<int> particpantids = _context.Studyparticipant.Where(x => x.IdStudy == studyid).ToList()
-                .Select(partid => partid.IdParticipant).ToList();
-            foreach (var id in particpantids)
-            {
-               listp.Add(_context.Participant.FirstOrDefault(part => part.IdParticipant ==id));
-            }
-            return listp;
-        }
-
-        public ManageParticipantStatus getParticipantEmailDB(int partID)
-        {
-            ManageParticipantStatus manageParticipantStatus = new ManageParticipantStatus();
-            Participant participant = _context.Participant.FirstOrDefault(part => part.IdParticipant == partID);
-
-            if (participant != null)
-            {
-                manageParticipantStatus.success = true;
-                manageParticipantStatus.participantEmail = participant.Email;
-            }
-            else
-            {
-                manageParticipantStatus.success = false;
-                manageParticipantStatus.errormessage = "No participant with this ID exists";
-            }
-
-
-            return manageParticipantStatus;
-        }
     }
 }

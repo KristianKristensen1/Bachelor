@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    public class ManageParticipantStatus
+    public class DbStatus
     {
         public bool success { get; set; }
 

@@ -30,6 +30,7 @@ namespace FrontEndBA.Controllers
             this.configuration = configuration;
         }
 
+        [AllowAnonymous]
         public ActionResult Participant()
         {
             ConfigStrings.Connectionstring = configuration.GetConnectionString("DbConnectionstring");
@@ -54,6 +55,7 @@ namespace FrontEndBA.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult Researcher()
         {
             //Redirects the user to the right page based on their authentication status            
@@ -79,6 +81,7 @@ namespace FrontEndBA.Controllers
 
 
         // POST: Welcome/LoginParticipant
+        [AllowAnonymous]
         [Route("LoginParticipant")]
         [Route("Welcome/LoginParticipant")]
         public async Task<IActionResult> LoginParticipant(Participant participant)
@@ -130,6 +133,7 @@ namespace FrontEndBA.Controllers
         }
 
 
+        [AllowAnonymous]
         [Route("LoginResearcher")]
         [Route("Welcome/LoginResearcher")]
         public async Task<IActionResult> LoginResearcher(Researcher researcher)
@@ -184,6 +188,7 @@ namespace FrontEndBA.Controllers
             }
         }
 
+        [AllowAnonymous]
         [Route("LogoutParticipant")]
         public async Task<IActionResult> LogoutParticipant()
         {
@@ -191,6 +196,7 @@ namespace FrontEndBA.Controllers
             return RedirectToAction("Participant", "Welcome");
         }
 
+        [AllowAnonymous]
         [Route("LogoutResearcher")]
         public async Task<IActionResult> LogoutResearcher()
         {

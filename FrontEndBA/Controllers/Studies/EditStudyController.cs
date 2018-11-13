@@ -15,6 +15,7 @@ namespace FrontEndBA.Controllers.Studies
     {
         private CreateStudyHelper cshelper;
 
+        [Authorize(Policy = "RequiresResearcher")]
         public IActionResult Index(int studyID)
         {
             EditStudyHelper editStudyHelper = new EditStudyHelper();
@@ -30,10 +31,9 @@ namespace FrontEndBA.Controllers.Studies
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize (Policy ="RequiresResearcher")]
         public ActionResult Edit(CreateStudyModel csModel)
         {
-            //modelstate?
             if (ModelState.IsValid)
             {
                 try
@@ -49,15 +49,14 @@ namespace FrontEndBA.Controllers.Studies
                     var curStudy = cshelper.ConvertStudy(csModel, id_researcher, id_study);
                     var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
 
-                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
-                    manageStudyHandler.EditStudy(curStudy, curCriteria);
+                    IManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+                    msh.EditStudyDB(curStudy, curCriteria);
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
                 catch (Exception e)
                 {
                     cshelper = new CreateStudyHelper();
-                    ////cshelper.ErrorHandle(curCriteria,cs,curStudy
                     return View("Index");
                 }
             }
@@ -68,7 +67,7 @@ namespace FrontEndBA.Controllers.Studies
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult EditAsDraft(CreateStudyModel csModel)
         {
             if (ModelState.IsValid)
@@ -90,15 +89,13 @@ namespace FrontEndBA.Controllers.Studies
                     curStudy.Isdraft = true;
 
                     //Storing in the DB
-                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
-                    manageStudyHandler.EditStudy(curStudy, curCriteria);
+                    IManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+                    msh.EditStudyDB(curStudy, curCriteria);
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
                 catch (Exception e)
                 {
-                    cshelper = new CreateStudyHelper();
-
                     return View("Index");
                 }
             }

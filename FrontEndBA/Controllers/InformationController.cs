@@ -8,6 +8,7 @@ namespace FrontEndBA.Controllers
 {
     public class InformationController : Controller
     {
+        
         public ActionResult Contact()
         {
             return View();

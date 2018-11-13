@@ -16,14 +16,6 @@ namespace FrontEndBA.Controllers
     /// </summary>
     public class ViewStudyController : Controller
     {
-
-
-        public string Participant(int? id)
-        {
-            return "Id is " + id;
-        }
-
-        [Authorize]
         public ActionResult ViewStudy(int studyID)
         {
             //Creates a ViewStudyModel containing a Study and InclusionCriteria.
@@ -32,17 +24,10 @@ namespace FrontEndBA.Controllers
             return View(viewStudyModelHelper.createViewStudyModel(studyID));
         }
 
-        [Authorize]
-        public ActionResult ViewStudyDraft(int studyID)
-        {
-            EditStudyHelper editStudyHelper = new EditStudyHelper();
-
-            return View(editStudyHelper.CreateEditStudyModel(studyID));
-        }
-
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult DeleteStudy(int studyID)
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            IManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
             msh.DeleteStudyDB(studyID);
             return RedirectToAction("Researcher", "Homepage");
         }
