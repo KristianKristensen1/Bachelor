@@ -10,7 +10,7 @@
 <h2>Create study</h2>
 <div class="container" style="width: 80%;">
     <div class="row">
-        <div class="col-md-5" id="right" style="background-color: white; width: 100%;">
+        <div class="col-md-5 CreateStudyContainer" id="right">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -34,7 +34,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Abstract" class="form-control" title="Input study abstract here"/>
+                                    <input asp-for="currentStudy.Abstract" class="form-control" title="Input study abstract here" />
                                     <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
                                 </div>
                             </th>
@@ -57,9 +57,14 @@
                                 <label asp-for="currentStudy.Pay" class="control-label"></label>
                             </th>
                             <th>
-                                <div class="form-group">
-                                    <input asp-for="currentStudy.Pay" class="form-control" title="Input study payment here"/>
-                                    <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <input asp-for="currentStudy.Pay" class="form-control" title="Input study payment here" style="width:90px;" />
+                                        <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
+                                        <div class="form-inline" style="float:right; padding-left:8px;">
+                                            <h5>kr.</h5>
+                                        </div>
+                                    </div>
                                 </div>
                             </th>
                         </tr>
@@ -72,7 +77,6 @@
                                     <input asp-for="currentStudy.Location" class="form-control" />
                                     <span asp-validation-for="currentStudy.Location" class="text-danger"></span>
                                 </div>
-                               
                             </th>
                         </tr>
                         <tr>
@@ -81,7 +85,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Duration" class="form-control" title="Input study duration here. Format should be XX sessions of XX minutes. Example: 5 sessions of 60 minutes"/>
+                                    <input asp-for="currentStudy.Duration" class="form-control" title="Input study duration here. Format should be XX sessions of XX minutes. Example: 5 sessions of 60 minutes" />
                                     <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
                                 </div>
                             </th>
@@ -92,7 +96,7 @@
                             </th>
                             <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Preparation" class="form-control" title="Input study preparation here"/>
+                                    <input asp-for="currentStudy.Preparation" class="form-control" title="Input study preparation here" />
                                     <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
                                 </div>
                             </th>
@@ -111,7 +115,6 @@
                                 </div>
                             </th>
                         </tr>
-
                         <tr>
                             <th class="col-md-1">
                                 <label asp-for="inclusioncriteria.IsMale" class="control-label"></label>
@@ -156,14 +159,14 @@
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
-                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" title="Input study minimum age here"/>
+                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" title="Input study minimum age here" />
                                         <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
                                     </div>
                                 </div>
                                 <div class="col-md-2">
                                     <div class="form-group">
                                         <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
-                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" title="Input study maximum age here"/>
+                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" title="Input study maximum age here" />
                                         <span asp-validation-for="inclusioncriteria.MaxAge" class="text-danger"></span>
                                     </div>
                                 </div>
@@ -192,15 +195,14 @@
 
                     </thead>
                 </table>
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
-                    <input type="submit" value="Create as Draft" class="btn btn-default" formaction="CreateAsDraft" />
-                    <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
-
-                </div>
-            </form>
         </div>
+        <div class="form-group">
+            <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
+            <input type="submit" value="Save as Draft" class="btn btn-default" formaction="CreateAsDraft" />
+            <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
 
+        </div>
+        </form>
     </div>
 
 </div>

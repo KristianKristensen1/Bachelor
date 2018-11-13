@@ -9,23 +9,17 @@ namespace BachelorBackEnd
 {
     public interface IManageStudyHandler
     {
-        void AddParticipantDB(string email, Study study);
+        void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria);
+
+        void EditStudyDB(Study study, Inclusioncriteria inclusioncriteria);
 
         void DeleteStudyDB(int studyID);
 
-        void RemoveParticipantDB(Participant participant, Study study);        
+        List<Study> GetAllStudiesDB();
 
-        void CreateStudyDB(Study study, Inclusioncriteria inclusioncriteria);
+        Study GetStudyDB(int id);
 
-        List<Participant> getParticipantsListDB(int studyid);
+        Inclusioncriteria GetInclusioncriteriaDB(int id);
 
-
-        //List<Study> GetRelevantStudiesDB(Participant participant);
-
-        //List<Study> GetMyParticipantStudiesDB(int participantID);
-
-        //List<Study> GetMyResearcherStudiesDB(int reseacherID);
-
-        //List<Study> GetAllStudiesDB();
     }
 }

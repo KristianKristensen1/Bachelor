@@ -49,7 +49,7 @@ namespace FrontEndBA.Controllers
             return View(researcherHomepageModel);
         }
 
-        [Authorize]
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult AddStudyView()
         {
            return RedirectToAction("Index", "CreateStudy");

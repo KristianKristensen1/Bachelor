@@ -26,19 +26,19 @@ namespace FrontEndBA.Utility
         public Study GetStudy(int id)
         {
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-            return msh.getStudyDB(id);
+            return msh.GetStudyDB(id);
         }
 
         public Inclusioncriteria GetInclusioncriteria(int id)
         {
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-            return msh.getInclusioncriteriaDB(id);
+            return msh.GetInclusioncriteriaDB(id);
         }
 
         public Researcher GetResearcherEmail(int id)
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-            return msh.getResearcherDB(id);
+            IUserHandler ush = new UserHandler(new bachelordbContext());
+            return ush.GetResearcherDB(id);
             
         }
     }

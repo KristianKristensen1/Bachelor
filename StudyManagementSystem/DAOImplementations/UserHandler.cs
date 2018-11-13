@@ -14,7 +14,7 @@ namespace BachelorBackEnd
         {
             _context = context;
         }
-        public Participant getParticipant(int id)
+        public Participant GetParticipantDB(int id)
         {
 
             Participant participant = _context.Participant.FirstOrDefault(part => part.IdParticipant == id);
@@ -22,7 +22,7 @@ namespace BachelorBackEnd
 
         }
 
-        public Researcher getResearcher(int id)
+        public Researcher GetResearcherDB(int id)
         {
 
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == id);
@@ -30,23 +30,23 @@ namespace BachelorBackEnd
 
         }
 
-        public List<Researcher> getUnverifiedResearchersDB()
+        public List<Researcher> GetUnverifiedResearchersDB()
         {
             List<Researcher> researchers = _context.Researcher.Where(res => res.Isverified == false).ToList();
             return researchers;
         }
 
 
-        public List<Researcher> getAllResearchersDB()
+        public List<Researcher> GetAllResearchersDB()
         {
             List<Researcher> researchers = _context.Researcher.Where(res => res.Isverified == true).ToList();
             return researchers;
         }
 
-        public ManageParticipantStatus VerifyResearcher(int resID)
+        public DbStatus VerifyResearcherDB(int resID)
         {
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == resID);
-            ManageParticipantStatus manageParticipantStatus = new ManageParticipantStatus();
+            DbStatus manageParticipantStatus = new DbStatus();
             if (researcher != null)
             {
                 if (researcher.Isverified == false)
@@ -73,10 +73,10 @@ namespace BachelorBackEnd
 
         }
 
-        public ManageParticipantStatus UnverifyResearcher(int resID)
+        public DbStatus UnverifyResearcherDB(int resID)
         {
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == resID);
-            ManageParticipantStatus manageParticipantStatus = new ManageParticipantStatus();
+            DbStatus manageParticipantStatus = new DbStatus();
             if (researcher != null)
             {
                 if (researcher.Isverified == true)

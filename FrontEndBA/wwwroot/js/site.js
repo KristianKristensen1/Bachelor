@@ -59,9 +59,13 @@ function ShowSelectedResearcher(ID, email) {
 function AllResearchers() {
     $('#UnverifiedResearchers').hide();
     $('#AllResearchers').show();
+    $('#unverify').show();
+    $('#verify').hide();
 }
 
 function UnverifiedResearchers() {
     $('#UnverifiedResearchers').show();
     $('#AllResearchers').hide();
+    $('#unverify').hide();
+    $('#verify').show();
 }

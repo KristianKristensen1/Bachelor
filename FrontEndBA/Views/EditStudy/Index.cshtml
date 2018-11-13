@@ -13,7 +13,7 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
-            <div class="col-md-5" id="right" style="background-color: white; width: 100%; border-radius:10px">
+            <div class="col-md-5 CreateStudyContainer" id="right">
                 <h3 class="tableTitle">Please input study information for study <text style="float:right">ID @Model.currentStudy.IdStudy</text></h3>
                 <table class="table">
                     <thead>
@@ -212,7 +212,7 @@
             <input type="submit" value="Save" class="btn btn-default" formaction="Edit" />
             @if (Model.currentStudy.Isdraft == true)
             {
-               <input type="submit" value="Save as draft" class="btn btn-default" formaction="EditAsDraft" />
+               <button type="submit" value="Save as draft" class="btn btn-default" formaction="EditAsDraft" />
             }
        
             @if (Model.currentStudy.Isdraft == true)
@@ -221,7 +221,7 @@
             }
             else
             {
-                <input value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = Model.currentStudy.IdStudy }))'" />
+                <button type="button" value="Cancel" class="btn btn-default" onclick="location.href = '@(Url.Action("ViewStudy", "ViewStudy", new { studyID = Model.currentStudy.IdStudy }))'">Cancel </button>
             }
             
         </div>

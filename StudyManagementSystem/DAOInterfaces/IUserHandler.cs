@@ -9,8 +9,16 @@ namespace BachelorBackEnd
 {
     public interface IUserHandler
     {
-        Participant getParticipant(int id);
+        Participant GetParticipantDB(int id);
 
-        Researcher getResearcher(int id);
+        Researcher GetResearcherDB(int id);
+
+        List<Researcher> GetUnverifiedResearchersDB();
+
+        List<Researcher> GetAllResearchersDB();
+
+        DbStatus VerifyResearcherDB(int resID);
+
+        DbStatus UnverifyResearcherDB(int resID);
     }
 }

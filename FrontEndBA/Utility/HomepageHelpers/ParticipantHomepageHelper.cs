@@ -30,8 +30,8 @@ namespace FrontEndBA.Utility.HomepageHelpers
 
         public Participant getParticipant(int id)
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
-            Participant participant = userHandler.getParticipant(id);
+            IUserHandler ush = new UserHandler(new bachelordbContext());
+            Participant participant = ush.GetParticipantDB(id);
             return participant;
         }
     }

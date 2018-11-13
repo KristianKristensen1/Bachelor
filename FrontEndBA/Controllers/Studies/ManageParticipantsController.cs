@@ -12,10 +12,12 @@ namespace FrontEndBA.Controllers.Studies
 {
     public class ManageParticipantsController : Controller
     {
+        [Authorize(Policy = "RequiresResearcher")]
         public IActionResult Index()
         {
             return View();
         }
+
         [Authorize(Policy = "RequiresResearcher")]
         public ActionResult ManageParticipants(int studyID, string studyName)
         {
@@ -29,13 +31,12 @@ namespace FrontEndBA.Controllers.Studies
         [Authorize(Policy = "RequiresResearcher")]
         public ActionResult AddParticipant(ManageParticipantModel mpModel)
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
-
+            IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ManageParticipantStatus manageParticipantStatus = msh.AddParticipantToStudyDB(mpModel.participantID, mpModel.studyID);
+                    DbStatus manageParticipantStatus = mph.AddParticipantToStudyDB(mpModel.participantID, mpModel.studyID);
                     if (manageParticipantStatus.success)
                     {
                         return RedirectToAction("ManageParticipants", "ManageParticipants", new { studyID = mpModel.studyID, studyName = mpModel.nameOfStudy});
@@ -44,7 +45,6 @@ namespace FrontEndBA.Controllers.Studies
                     {
                         ModelState.AddModelError("participantID", manageParticipantStatus.errormessage);
                     }
-
                 }
                 catch (Exception)
                 {
@@ -52,20 +52,19 @@ namespace FrontEndBA.Controllers.Studies
                     throw;
                 }
             }
-            mpModel.participants = msh.getParticipantsDB(mpModel.studyID);
-           
+            mpModel.participants = mph.GetParticipantsInStudyDB(mpModel.studyID);   
             return View("ManageParticipants", mpModel);
         }
 
         [Authorize(Policy = "RequiresResearcher")]
         public ActionResult RemoveParticipant(ManageParticipantModel mpModel)
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ManageParticipantStatus manageParticipantStatus = msh.RemoveParticipantFromStudyDB(mpModel.participantID, mpModel.studyID);
+                    DbStatus manageParticipantStatus = mph.RemoveParticipantFromStudyDB(mpModel.participantID, mpModel.studyID);
                     if (manageParticipantStatus.success)
                     {
                         return RedirectToAction("ManageParticipants", "ManageParticipants", new { studyID = mpModel.studyID, studyName = mpModel.nameOfStudy });
@@ -81,17 +80,17 @@ namespace FrontEndBA.Controllers.Studies
                     throw;
                 }
             }
-            mpModel.participants = msh.getParticipantsDB(mpModel.studyID);
+            mpModel.participants = mph.GetParticipantsInStudyDB(mpModel.studyID);
             return View("ManageParticipants", mpModel);
         }
 
-        
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult GetEmail(ManageParticipantModel mpModel)
         {
-            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
             try
             {
-                ManageParticipantStatus manageParticipantStatus = msh.getParticipantEmailDB(mpModel.participantID);
+                DbStatus manageParticipantStatus = mph.GetParticipantEmailDB(mpModel.participantID);
                 if (manageParticipantStatus.success)
                 {
                     mpModel.participantEmail = manageParticipantStatus.participantEmail;
@@ -104,10 +103,9 @@ namespace FrontEndBA.Controllers.Studies
             }
             catch (Exception)
             {
-
                 throw;
             }
-            mpModel.participants = msh.getParticipantsDB(mpModel.studyID);
+            mpModel.participants = mph.GetParticipantsInStudyDB(mpModel.studyID);
             return View("ManageParticipants", mpModel);
         }
     }

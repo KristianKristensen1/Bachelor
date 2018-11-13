@@ -18,25 +18,24 @@ namespace FrontEndBA.Controllers
     {
         // GET: CreateStudy
         private CreateStudyHelper cshelper;
-        [Authorize]
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult Index()
         {
             cshelper = new CreateStudyHelper();
             return View(cshelper.DefaultCreateStudyModel());
         }
 
-
         public ActionResult ReturnToHomePage()
         {
             return RedirectToAction("Researcher", "Homepage");
         }
+
         // POST: CreateStudy/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult Create(CreateStudyModel csModel)
         {
-            //modelstate?
             if (ModelState.IsValid)
             {
                 try
@@ -51,8 +50,7 @@ namespace FrontEndBA.Controllers
                     var curStudy = cshelper.ConvertStudy(csModel, id);
                     var curCriteria = cshelper.ConvertInclusioncriteria(csModel);
 
-                    bachelordbContext db = new bachelordbContext();
-                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
+                    IManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
 
                     return RedirectToAction("Researcher", "Homepage");
@@ -60,19 +58,15 @@ namespace FrontEndBA.Controllers
                 catch (Exception e)
                 {
                     cshelper = new CreateStudyHelper();
-                    ////cshelper.ErrorHandle(curCriteria,cs,curStudy
                     return View("Index");
                 }
             }
-
-
             return View("./Index");
-
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize]
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult CreateAsDraft(CreateStudyModel csModel)
         {
             if (ModelState.IsValid)
@@ -92,24 +86,17 @@ namespace FrontEndBA.Controllers
                     //Creating as a Draft
                     curStudy.Isdraft = true;
 
-
-                    bachelordbContext db = new bachelordbContext();
-                    ManageStudyHandler manageStudyHandler = new ManageStudyHandler(db);
+                    IManageStudyHandler manageStudyHandler = new ManageStudyHandler(new bachelordbContext());
                     manageStudyHandler.CreateStudyDB(curStudy, curCriteria);
-
-
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
                 catch (Exception e)
                 {
                     cshelper = new CreateStudyHelper();
-                    ////cshelper.ErrorHandle(curCriteria,cs,curStudy
                     return View("Index");
                 }
             }
-
-
             return View("./Index");
         }
     }

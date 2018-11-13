@@ -20,14 +20,14 @@ namespace FrontEndBA.Utility.VerifyResearcherHelper
 
         public List<Researcher> getUnverifiedResearchers()
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
-            return userHandler.getUnverifiedResearchersDB();
+            IUserHandler ush = new UserHandler(new bachelordbContext());
+            return ush.GetUnverifiedResearchersDB();
         }
 
         public List<Researcher> getAllResearchers()
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
-            return userHandler.getAllResearchersDB();
+            IUserHandler ush = new UserHandler(new bachelordbContext());
+            return ush.GetAllResearchersDB();
         }
     }
 }

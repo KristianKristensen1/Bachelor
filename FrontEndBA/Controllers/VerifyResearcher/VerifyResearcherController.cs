@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using BachelorBackEnd;
 using FrontEndBA.Models;
 using FrontEndBA.Utility.VerifyResearcherHelper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FrontEndBA.Controllers
 {
     public class VerifyResearcherController : Controller
     {
+        [Authorize(Policy = "RequiresAdmin")]
         public IActionResult Index()
         {
             VerifyResearcherHelper verifyResearcherHelper = new VerifyResearcherHelper();
@@ -19,15 +21,16 @@ namespace FrontEndBA.Controllers
             return View("VerifyResearcher", verifyResearcherModel);
         }
 
+        [Authorize(Policy = "RequiresAdmin")]
         public ActionResult VerifyReseracher(VerifyResearcherModel verifyResearcherModel)
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
+            IUserHandler ush = new UserHandler(new bachelordbContext());
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ManageParticipantStatus manageParticipantStatus = userHandler.VerifyResearcher(verifyResearcherModel.researcherID);
+                    DbStatus manageParticipantStatus = ush.VerifyResearcherDB(verifyResearcherModel.researcherID);
                     if (manageParticipantStatus.success)
                     {
                         return RedirectToAction("Index", "VerifyResearcher");
@@ -35,31 +38,27 @@ namespace FrontEndBA.Controllers
                     else
                     {
                         ModelState.AddModelError("researcherID", manageParticipantStatus.errormessage);
-
                     }
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
-
             }
-            verifyResearcherModel.UnverifiedResearchers = userHandler.getUnverifiedResearchersDB();
-            verifyResearcherModel.AllResearchers = userHandler.getAllResearchersDB();
+            verifyResearcherModel.UnverifiedResearchers = ush.GetUnverifiedResearchersDB();
+            verifyResearcherModel.AllResearchers = ush.GetAllResearchersDB();
             return View("VerifyResearcher", verifyResearcherModel);
-
-
         }
 
+        [Authorize(Policy = "RequiresAdmin")]
         public ActionResult UnverifyResearcher(VerifyResearcherModel verifyResearcherModel)
         {
-            UserHandler userHandler = new UserHandler(new bachelordbContext());
+            IUserHandler ush = new UserHandler(new bachelordbContext());
             if (ModelState.IsValid)
             {
                 try
                 {
-                    ManageParticipantStatus manageParticipantStatus = userHandler.UnverifyResearcher(verifyResearcherModel.researcherID);
+                    DbStatus manageParticipantStatus = ush.UnverifyResearcherDB(verifyResearcherModel.researcherID);
                     if (manageParticipantStatus.success)
                     {
                         return RedirectToAction("Index", "VerifyResearcher");
@@ -75,8 +74,8 @@ namespace FrontEndBA.Controllers
                     throw;
                 }
             }
-            verifyResearcherModel.UnverifiedResearchers = userHandler.getUnverifiedResearchersDB();
-            verifyResearcherModel.AllResearchers = userHandler.getAllResearchersDB();
+            verifyResearcherModel.UnverifiedResearchers = ush.GetUnverifiedResearchersDB();
+            verifyResearcherModel.AllResearchers = ush.GetAllResearchersDB();
             return View("VerifyResearcher", verifyResearcherModel);
         }
     }
