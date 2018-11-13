@@ -15,7 +15,7 @@ namespace BachelorBackEnd
 
         List<Researcher> GetUnverifiedResearchersDB();
 
-        List<Researcher> GetAllResearchersDB();
+        List<Researcher> GetAllVerifiedResearchersDB();
 
         DbStatus VerifyResearcherDB(int resID);
 

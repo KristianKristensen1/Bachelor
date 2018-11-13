@@ -27,7 +27,7 @@ namespace FrontEndBA.Utility.VerifyResearcherHelper
         public List<Researcher> getAllResearchers()
         {
             IUserHandler ush = new UserHandler(new bachelordbContext());
-            return ush.GetAllResearchersDB();
+            return ush.GetAllVerifiedResearchersDB();
         }
     }
 }

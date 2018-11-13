@@ -37,7 +37,7 @@ namespace BachelorBackEnd
         }
 
 
-        public List<Researcher> GetAllResearchersDB()
+        public List<Researcher> GetAllVerifiedResearchersDB()
         {
             List<Researcher> researchers = _context.Researcher.Where(res => res.Isverified == true).ToList();
             return researchers;
