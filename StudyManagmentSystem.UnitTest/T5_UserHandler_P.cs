@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using Moq;
 using NUnit.Framework;
 
-namespace StudyManagmentSystem.UnitTest
+namespace Tests
 {
     public class T5_UserHandler_P
     {
@@ -50,7 +50,7 @@ namespace StudyManagmentSystem.UnitTest
         {
             //Act
             uut = new UserHandler(mockContext.Object);
-            var curparticipant = uut.getParticipant(0);
+            var curparticipant = uut.GetParticipantDB(0);
 
             Assert.AreEqual(curparticipant.Email, "test@testo.com");
 
@@ -60,7 +60,7 @@ namespace StudyManagmentSystem.UnitTest
         {
             //Act
             uut = new UserHandler(mockContext.Object);
-            var curparticipant = uut.getParticipant(0);
+            var curparticipant = uut.GetParticipantDB(0);
 
             Assert.AreEqual(curparticipant.Password, "123456");
 
@@ -71,7 +71,7 @@ namespace StudyManagmentSystem.UnitTest
         {
             //Act
             uut = new UserHandler(mockContext.Object);
-            var curparticipant = uut.getParticipant(0);
+            var curparticipant = uut.GetParticipantDB(0);
 
             Assert.That(curparticipant!=null);
 
@@ -81,7 +81,7 @@ namespace StudyManagmentSystem.UnitTest
         {
             //Act
             uut = new UserHandler(mockContext.Object);
-            var curparticipant = uut.getParticipant(1);
+            var curparticipant = uut.GetParticipantDB(1);
 
            Assert.That(curparticipant==null);
 
