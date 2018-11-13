@@ -26,15 +26,29 @@ namespace FrontEndBA.Utility.EmailHelper
 
             var builder = new BodyBuilder();
 
-            var image = builder.LinkedResources.Add(@"C:\Users\panda\source\repos\ReBachelor\Bachelor\FrontEndBA\wwwroot\images\AuLogo.PNG");
+
+            builder.HtmlBody = "<p>Your password for Tandlægehøjskolen is " + password + "</p>\r\n<p>&nbsp;</p>\r\n" +
+                               System.Environment.NewLine + "" + System.Environment.NewLine;
+
+
+            SendingWithSmtpClient(builder,message,"Password Reset");
+     
+        }
+
+        public void SendingWithSmtpClient(BodyBuilder builder, MimeMessage message,string subject)
+        {
+            var logoPath = Directory.GetCurrentDirectory() + @"\wwwroot\images\AuLogo.PNG";
+
+            var image = builder.LinkedResources.Add(logoPath);
             image.ContentId = MimeUtils.GenerateMessageId();
 
-            builder.HtmlBody = "<p>Your password for Tandlægehøjskolen is "+password+"</p>\r\n<p>&nbsp;</p>\r\n"+ System.Environment.NewLine + "" + System.Environment.NewLine +
+
+            builder.HtmlBody += System.Environment.NewLine + "" + System.Environment.NewLine + "" + System.Environment.NewLine +
                                string.Format(@"
                 <div>Best regards TandlægeHøjskolen, Vennelyst Blvd. 9, 8000 Aarhus</div><center><img src=""cid:{0}""></center>", image.ContentId);
 
             message.Body = builder.ToMessageBody();
-            message.Subject = "Password Reset";
+            message.Subject = subject;
 
             using (var client = new SmtpClient())
             {
@@ -46,21 +60,15 @@ namespace FrontEndBA.Utility.EmailHelper
                 client.Disconnect(true);
             }
         }
-        // not done, must be implemented to make generic footer.
-        public void SendingWithSmtpClient(BodyBuilder builder, MimeMessage message)
-        {
-            var image = builder.LinkedResources.Add(@"C:\Users\panda\source\repos\ReBachelor\Bachelor\FrontEndBA\wwwroot\images\AuLogo.PNG");
-            image.ContentId = MimeUtils.GenerateMessageId();
-        }
 
         public void SendMessages(SendingModel sModel, List<Participant> participants)
         {
-            Thread t = new Thread(()=>SendMessge(sModel,participants));
+            Thread t = new Thread(()=>SendToParticipants(sModel,participants));
             t.Start();
            
         }
 
-        public void SendMessge(SendingModel sModel, List<Participant> participants)
+        public void SendToParticipants(SendingModel sModel, List<Participant> participants)
         {
             
 
@@ -69,30 +77,18 @@ namespace FrontEndBA.Utility.EmailHelper
                 var message = new MimeMessage();
                 message.From.Add(new MailboxAddress("Tandlægehøjskolen", "donotreplyTandlægeHøjskolen@gmail.com"));
                 message.To.Add(new MailboxAddress("Participant for Tandlægehøjskolen", participant.Email));
-                message.Subject = sModel.Mail.Subject;
+   
                 var builder = new BodyBuilder();
                 
-                var logoPath = Directory.GetCurrentDirectory() + @"\wwwroot\images\AuLogo.PNG";
 
-                var image = builder.LinkedResources.Add(logoPath);
-           
-               
-                image.ContentId = MimeUtils.GenerateMessageId();
-                
-                builder.HtmlBody = sModel.Mail.MailBody + System.Environment.NewLine+""+System.Environment.NewLine +"" + System.Environment.NewLine +
-                                    string.Format(@"
-                <div>Best regards TandlægeHøjskolen, Vennelyst Blvd. 9, 8000 Aarhus</div><center><img src=""cid:{0}""></center>", image.ContentId);
 
-                message.Body = builder.ToMessageBody();
+                builder.HtmlBody = sModel.Mail.MailBody + System.Environment.NewLine + "" + System.Environment.NewLine +
+                                   "" + System.Environment.NewLine;
 
-                using (var client = new SmtpClient())
-                {
-                    client.ServerCertificateValidationCallback = (s, c, h, e) => true;
-                    client.Connect("smtp.gmail.com", 587, false);
-                    client.Authenticate("noreplytandlaegehaejskolen@gmail.com", "Q2E4t6u8");
-                    client.Send(message);
-                    client.Disconnect(true);
-                }
+
+            SendingWithSmtpClient(builder,message,sModel.Mail.Subject);
+
+
             }
         }
 

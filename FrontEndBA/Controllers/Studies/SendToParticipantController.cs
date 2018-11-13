@@ -26,6 +26,10 @@ namespace FrontEndBA.Controllers.Studies
 
             emailHelper.PrefillTextArea(sendToParticipantModel);
 
+            ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());
+            List<Participant> participants = msh.getParticipantsListDB(sendToParticipantModel.Study.study.IdStudy);
+            sendToParticipantModel.ParticipantCount = participants.Count;
+            
             return View(sendToParticipantModel);
         }
 
@@ -52,6 +56,9 @@ namespace FrontEndBA.Controllers.Studies
                     return View("Index");
                 }
             }
+            ManageStudyHandler mshh = new ManageStudyHandler(new bachelordbContext());
+            List<Participant> participantss = mshh.getParticipantsListDB(sModel.Study.study.IdStudy);
+            sModel.ParticipantCount = participantss.Count;
             return View("index", sModel);
         }
 
