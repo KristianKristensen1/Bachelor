@@ -10,7 +10,7 @@
             </div>
 
             <label asp-for="Mail.Subject">
-                <input type="text" class="form-control" placeholder="@Html.ViewData.Model.Study.study.Name.ToString() " asp-for="Mail.Subject">
+                <input type="text" class="form-control" placeholder="@Html.ViewData.Model.Study.study.Name.ToString()" asp-for="Mail.Subject">
                 <span asp-validation-for="Mail.Subject" class="text-danger"></span>
             </label>
         </div>
