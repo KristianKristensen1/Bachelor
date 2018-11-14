@@ -1,6 +1,7 @@
 ﻿
-function redirectViewToHomePage() {
-  
+function ShowLabel() {
+
+    $('#inpass').show();
 }
 function redirectViewToPatientRegister() {
     var url = document.URL;
