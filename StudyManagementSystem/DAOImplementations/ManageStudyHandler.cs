@@ -81,19 +81,6 @@ namespace BachelorBackEnd
             _context.SaveChanges();
         }
 
-        public List<Study> GetAllStudiesDB()
-        {
-            List<Study> allStudies = new List<Study>();
-            {
-                if (_context.Study != null)
-                {
-                    allStudies = _context.Study.Where(stud => stud.Isdraft != true).ToList();
-                }
-
-                return allStudies;
-            }
-        }
-
         public Study GetStudyDB(int id)
         {
             Study study = _context.Study.FirstOrDefault(stud => stud.IdStudy == id);
@@ -104,7 +91,6 @@ namespace BachelorBackEnd
         public Inclusioncriteria GetInclusioncriteriaDB(int id)
         {
             Inclusioncriteria incCrit = _context.Inclusioncriteria.FirstOrDefault(inc => inc.IdStudy == id);
-
             return incCrit;
         }
 

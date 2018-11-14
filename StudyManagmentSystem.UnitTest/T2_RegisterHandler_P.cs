@@ -80,6 +80,7 @@ namespace Tests
             IQueryable participants = new List<Participant>
             {
             }.AsQueryable();
+
             var mockSet = new Mock<DbSet<Participant>>();
             mockSet.As<IQueryable<Participant>>().Setup(m => m.Provider).Returns(participants.Provider);
             mockSet.As<IQueryable<Participant>>().Setup(m => m.Expression).Returns(participants.Expression);

@@ -15,8 +15,6 @@ namespace BachelorBackEnd
 
         void DeleteStudyDB(int studyID);
 
-        List<Study> GetAllStudiesDB();
-
         Study GetStudyDB(int id);
 
         Inclusioncriteria GetInclusioncriteriaDB(int id);

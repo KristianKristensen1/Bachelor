@@ -8,7 +8,7 @@ using StudyManagementSystem.DAOInterfaces;
 
 namespace StudyManagementSystem.DAOImplementations
 {
-    public class ViewStudyHandler: IViewStudyHandler
+    public class ViewStudyHandler : IViewStudyHandler
     {
         private bachelordbContext _context;
 
@@ -30,8 +30,7 @@ namespace StudyManagementSystem.DAOImplementations
             }
         }
 
-       
-         //OBS! Change diagrams to match changes.
+        //OBS! Change diagrams to match changes.
         public List<Study> GetMyResearcherStudiesDB(int reseacherID)
         {
             List<Study> myStudies = new List<Study>();
@@ -65,44 +64,44 @@ namespace StudyManagementSystem.DAOImplementations
         }
 
         //OBS! Change diagrams to match changes.
-            public List<Study> GetRelevantStudiesDB(Participant participant)
+        public List<Study> GetRelevantStudiesDB(Participant participant)
+        {
+            List<Study> relevantStudies = new List<Study>();
+
+            if (_context.Study != null && _context.Inclusioncriteria != null)
             {
-                List<Study> relevantStudies = new List<Study>();
+                TimeSpan ts = DateTime.Now.Subtract(participant.Age);
+                var participantAge = (int)Math.Floor(ts.TotalDays / 365.25);
 
-                if (_context.Study != null && _context.Inclusioncriteria != null)
+                //BEHOLD! The Sorterings-Algorithm!
+                List<int> relevantStudyIDs = _context.Inclusioncriteria.Where(crit =>
+                    //Sorts by age
+                    crit.MinAge < participantAge && crit.MaxAge > participantAge &&
+                    //Sorts by gender
+                    (crit.Male == participant.Gender ||
+                    crit.Female != participant.Gender) &&
+                    //Sorts by english language
+                    ((participant.English == true) ?
+                    crit.English == participant.English ||
+                    crit.English != participant.English :
+                    crit.English == participant.English))
+                    //Saves the relevant IDs to a list
+                    .ToList().Select(studID => studID.IdStudy).ToList();
+
+                foreach (var id in relevantStudyIDs)
                 {
-                    TimeSpan ts = DateTime.Now.Subtract(participant.Age);
-                    var participantAge = (int)Math.Floor(ts.TotalDays / 365.25);
-
-                    //BEHOLD! The Sorterings-Algorithm!
-                    List<int> relevantStudyIDs = _context.Inclusioncriteria.Where(crit =>
-                        //Sorts by age
-                        crit.MinAge < participantAge && crit.MaxAge > participantAge &&
-                        //Sorts by gender
-                        (crit.Male == participant.Gender ||
-                        crit.Female != participant.Gender) &&
-                        //Sorts by english language
-                        ((participant.English == true) ?
-                        crit.English == participant.English ||
-                        crit.English != participant.English :
-                        crit.English == participant.English))
-                        //Saves the relevant IDs to a list
-                        .ToList().Select(studID => studID.IdStudy).ToList();
-
-                    foreach (var id in relevantStudyIDs)
+                    //Sorts through the list of IDs to find matching studies that are NOT drafts (as drafts are only visible for their respective researcher)
+                    var relevantStudiesTemp = (from stud in _context.Study
+                                               where (stud.Isdraft == false && stud.IdStudy == id)
+                                               select stud).ToList();
+                    //In case of an ID match on a non-draft study, the Temp list contains an object that we add to the final Study List.
+                    if (relevantStudiesTemp.Count > 0)
                     {
-                        //Sorts through the list of IDs to find matching studies that are NOT drafts (as drafts are only visible for their respective researcher)
-                        var relevantStudiesTemp = (from stud in _context.Study
-                                                   where (stud.Isdraft == false && stud.IdStudy == id)
-                                                   select stud).ToList();
-                        //In case of an ID match on a non-draft study, the Temp list contains an object that we add to the final Study List.
-                        if (relevantStudiesTemp.Count > 0)
-                        {
-                            relevantStudies.Add(relevantStudiesTemp[0]);
-                        }
+                        relevantStudies.Add(relevantStudiesTemp[0]);
                     }
                 }
-                return relevantStudies;
             }
+            return relevantStudies;
         }
+    }
 }
