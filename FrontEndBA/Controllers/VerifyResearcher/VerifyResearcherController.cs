@@ -46,7 +46,7 @@ namespace FrontEndBA.Controllers
                 }
             }
             verifyResearcherModel.UnverifiedResearchers = ush.GetUnverifiedResearchersDB();
-            verifyResearcherModel.AllResearchers = ush.GetAllResearchersDB();
+            verifyResearcherModel.AllResearchers = ush.GetAllVerifiedResearchersDB();
             return View("VerifyResearcher", verifyResearcherModel);
         }
 
@@ -75,7 +75,7 @@ namespace FrontEndBA.Controllers
                 }
             }
             verifyResearcherModel.UnverifiedResearchers = ush.GetUnverifiedResearchersDB();
-            verifyResearcherModel.AllResearchers = ush.GetAllResearchersDB();
+            verifyResearcherModel.AllResearchers = ush.GetAllVerifiedResearchersDB();
             return View("VerifyResearcher", verifyResearcherModel);
         }
     }

@@ -46,7 +46,7 @@ namespace Tests
         }
 
         [Test]
-        public void getParticipant_WithValidId_EmailsCorrect()
+        public void getParticipant_WithValidInput_EmailsCorrect()
         {
             //Act
             uut = new UserHandler(mockContext.Object);
@@ -56,7 +56,7 @@ namespace Tests
 
         }
         [Test]
-        public void getParticipant_WithValidId_PasswordIsCorrect()
+        public void getParticipant_WithValidInput_PasswordIsCorrect()
         {
             //Act
             uut = new UserHandler(mockContext.Object);
@@ -67,7 +67,7 @@ namespace Tests
         }
 
         [Test]
-        public void getParticipant_WithValidId_ParticipantIsNotNull()
+        public void getParticipant_WithValidInput_ParticipantIsNotNull()
         {
             //Act
             uut = new UserHandler(mockContext.Object);
@@ -77,7 +77,7 @@ namespace Tests
 
         }
         [Test]
-        public void getParticipant_WithInvalidId_ParticipantIsNull()
+        public void getParticipant_WithInvalidInput_ParticipantIsNull()
         {
             //Act
             uut = new UserHandler(mockContext.Object);

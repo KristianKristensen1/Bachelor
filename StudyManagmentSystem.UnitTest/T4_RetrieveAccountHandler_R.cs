@@ -48,7 +48,7 @@ namespace Tests
 
 
         [Test]
-        public void Check_VerifyResearcherDB_WithValidEmail_ResultIsCorrect()
+        public void Check_VerifyResearcherDB_WithValidInput_SuccesIsTrue()
         {
             //Act
             uut = new RetrieveAccountHandler(mockContext.Object);
@@ -61,7 +61,7 @@ namespace Tests
         }
 
         [Test]
-        public void Check_VerifyResearcherDB_WithInvalidEmail_ErrorMessage()
+        public void Check_VerifyResearcherDB_WithInvalidInput_NoResearcherWithEmailExsits()
         {
             //Act
             uut = new RetrieveAccountHandler(mockContext.Object);
@@ -73,7 +73,7 @@ namespace Tests
         }
 
         [Test]
-        public void Check_VerifyResearcherDB_WithInvalidEmail_FalseBool()
+        public void Check_VerifyResearcherDB_WithInvalidEmail_SuccesIsFalse()
         {
             //Act
             uut = new RetrieveAccountHandler(mockContext.Object);

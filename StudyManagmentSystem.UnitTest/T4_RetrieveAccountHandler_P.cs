@@ -49,7 +49,7 @@ namespace Tests
 
 
         [Test]
-        public void Check_VerifyParticipantDB_WithValidEmail_ResultIsCorrect()
+        public void Check_VerifyParticipantDB_WithValidInput_SuccesIsTrue()
         {
             uut = new RetrieveAccountHandler(mockContext.Object);
             var handler= uut.VerifyParticipantDB("test@testo.com");
@@ -59,7 +59,7 @@ namespace Tests
         }
 
         [Test]
-        public void Check_VerifyParticipant_WithInvalidEmail_ErrorMessage()
+        public void Check_VerifyParticipant_WithInvalidInput_NoParticipantWithThisEmailExists()
         {
             uut = new RetrieveAccountHandler(mockContext.Object);
             var handler = uut.VerifyParticipantDB("different@testo.com");
@@ -69,7 +69,7 @@ namespace Tests
         }
 
         [Test]
-        public void Check_VerifyParticipant_WithInvalidEmail_FalseBool()
+        public void Check_VerifyParticipant_WithInvalidInput_SuccesIsFalse()
         {
             //Act
             uut = new RetrieveAccountHandler(mockContext.Object);
