@@ -50,6 +50,7 @@ namespace FrontEndBA.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
+        [Route("/CreateParticipant")]
         public ActionResult CreateParticipant(ParticipantRegisterViewModel participantRegisterModel)
         {
 
