@@ -37,8 +37,6 @@ namespace BachelorBackEnd
                     manageParticipantStatus.success = false;
                     manageParticipantStatus.errormessage = "Participant with this ID does not exist in the system";
                 }
-
-
             }
             else
             {

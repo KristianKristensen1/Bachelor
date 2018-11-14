@@ -56,7 +56,7 @@ namespace Tests
 
 
             //Assert
-            Assert.IsTrue(handler.LoginStatus.IsSuccess);
+            Assert.IsTrue(handler.success);
 
         }
 
@@ -68,7 +68,7 @@ namespace Tests
             var handler = uut.VerifyResearcherDB("different@testo.com");
 
             //Assert
-            Assert.AreEqual(handler.LoginStatus.ErrorMessage, "No researcher with this email exists");
+            Assert.AreEqual(handler.errormessage, "No researcher with this email exists");
 
         }
 
@@ -80,7 +80,7 @@ namespace Tests
             var handler = uut.VerifyResearcherDB("different@testo.com");
 
             //Assert
-            Assert.IsFalse(handler.LoginStatus.IsSuccess);
+            Assert.IsFalse(handler.success);
 
         }
 

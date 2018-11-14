@@ -30,7 +30,6 @@ namespace StudyManagementSystem.DAOImplementations
             }
         }
 
-        //OBS! Change diagrams to match changes.
         public List<Study> GetMyResearcherStudiesDB(int reseacherID)
         {
             List<Study> myStudies = new List<Study>();
@@ -38,11 +37,9 @@ namespace StudyManagementSystem.DAOImplementations
             {
                 myStudies = _context.Study.Where(stud => stud.IdResearcher == reseacherID).ToList();
             }
-
             return myStudies;
         }
 
-        //OBS! Change diagrams to match changes.
         public List<Study> GetMyParticipantStudiesDB(int participantID)
         {
             List<Study> myStudies = new List<Study>();
@@ -63,7 +60,6 @@ namespace StudyManagementSystem.DAOImplementations
             return myStudies;
         }
 
-        //OBS! Change diagrams to match changes.
         public List<Study> GetRelevantStudiesDB(Participant participant)
         {
             List<Study> relevantStudies = new List<Study>();

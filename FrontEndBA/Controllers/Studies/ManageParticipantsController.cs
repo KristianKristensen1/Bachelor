@@ -48,7 +48,6 @@ namespace FrontEndBA.Controllers.Studies
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }
@@ -76,7 +75,6 @@ namespace FrontEndBA.Controllers.Studies
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }

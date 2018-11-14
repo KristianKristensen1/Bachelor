@@ -8,72 +8,67 @@ using System.Threading.Tasks;
 
 namespace BachelorBackEnd
 {
-    public class LoginHandler : LoginEntity, ILoginHandler
+    public class LoginHandler : ILoginHandler
     {
         private bachelordbContext _context;
-
-        public LoginHandler()
-        {
-
-        }
-
         public LoginHandler(bachelordbContext context)
         {
             _context = context;
         }
 
-        public LoginHandler LoginParticipantDB(string email, string password)
+        public DbStatus LoginParticipantDB(string email, string password)
         {
-            var ParticipantHandler = new LoginHandler();
+            DbStatus status = new DbStatus();
             Participant participant = _context.Participant.FirstOrDefault(part => part.Email == email);
             if (participant != null)
                 {
                     if (participant.Password == password)
                     {
-                        //Successfull login
-                        ParticipantHandler.LoginStatus.IsSuccess = true;
-                        ParticipantHandler.LoginStatus.participant = participant;
+                    //Successfull login
+                    status.success = true;
+                    status.participant = participant;
                     }
                     else
                     {
-                        //Wrong password
-                        ParticipantHandler.LoginStatus.ErrorMessage = "Wrong password";
+                    //Wrong password
+                    status.errormessage = "Wrong password";
                     }
                 }
                 else
                 {
-                    //No participant with this email exists in database
-                    ParticipantHandler.LoginStatus.ErrorMessage = "No participant with this email exists";
+                //No participant with this email exists in database
+                status.errormessage = "No participant with this email exists";
                 }
          
-            return ParticipantHandler;
+            return status;
         }
 
-        public LoginHandler LoginResearcherDB(string email, string password)
+        public DbStatus LoginResearcherDB(string email, string password)
         {
-            var ResearcherHandler = new LoginHandler();
+            DbStatus status = new DbStatus();
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.Email == email);
             if (researcher != null)
                 {
                     if (researcher.Password == password)
                     {
-                        //Successfull login
-                        ResearcherHandler.LoginStatus.IsSuccess = true;
-                        ResearcherHandler.LoginStatus.researcher = researcher;
+                    //Successfull login
+                    status.success = true;
+                    status.researcher = researcher;
                     }
                     else
                     {
-                        //Wrong password
-                        ResearcherHandler.LoginStatus.ErrorMessage = "Wrong password";
+                    //Wrong password
+                    status.success = false;
+                    status.errormessage = "Wrong password";
                     }
                 }
                 else
                 {
-                    //No researcher with this email exists in database
-                    ResearcherHandler.LoginStatus.ErrorMessage = "No researcher with this email exists";
+                //No researcher with this email exists in database
+                status.errormessage = "No researcher with this email exists";
                 }
             
-            return ResearcherHandler;
+            return status;
         }
     }
 }

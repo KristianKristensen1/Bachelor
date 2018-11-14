@@ -25,19 +25,18 @@ namespace FrontEndBA.Controllers
         public ActionResult VerifyReseracher(VerifyResearcherModel verifyResearcherModel)
         {
             IUserHandler ush = new UserHandler(new bachelordbContext());
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    DbStatus manageParticipantStatus = ush.VerifyResearcherDB(verifyResearcherModel.researcherID);
-                    if (manageParticipantStatus.success)
+                    DbStatus verifyResearcherStatus = ush.VerifyResearcherDB(verifyResearcherModel.researcherID);
+                    if (verifyResearcherStatus.success)
                     {
                         return RedirectToAction("Index", "VerifyResearcher");
                     }
                     else
                     {
-                        ModelState.AddModelError("researcherID", manageParticipantStatus.errormessage);
+                        ModelState.AddModelError("researcherID", verifyResearcherStatus.errormessage);
                     }
                 }
                 catch (Exception)
@@ -58,19 +57,18 @@ namespace FrontEndBA.Controllers
             {
                 try
                 {
-                    DbStatus manageParticipantStatus = ush.UnverifyResearcherDB(verifyResearcherModel.researcherID);
-                    if (manageParticipantStatus.success)
+                    DbStatus unverifyResearcherStatus = ush.UnverifyResearcherDB(verifyResearcherModel.researcherID);
+                    if (unverifyResearcherStatus.success)
                     {
                         return RedirectToAction("Index", "VerifyResearcher");
                     }
                     else
                     {
-                        ModelState.AddModelError("researcherID", manageParticipantStatus.errormessage);
+                        ModelState.AddModelError("researcherID", unverifyResearcherStatus.errormessage);
                     }
                 }
                 catch (Exception)
                 {
-
                     throw;
                 }
             }

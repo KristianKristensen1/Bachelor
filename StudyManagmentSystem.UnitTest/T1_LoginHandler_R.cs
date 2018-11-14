@@ -50,7 +50,7 @@ namespace Tests
             var actual = uut.LoginResearcherDB("test@testo.com", "bla");
 
             //Assert - Checking Loginstatus.ErrorMessage.
-            Assert.AreEqual(actual.LoginStatus.ErrorMessage, "Wrong password");
+            Assert.AreEqual(actual.errormessage, "Wrong password");
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Tests
             var actual = uut.LoginResearcherDB("bla", "123456");
 
             //Assert - Checking Loginstatus.ErrorMessage.
-            Assert.AreEqual(actual.LoginStatus.ErrorMessage, "No researcher with this email exists");
+            Assert.AreEqual(actual.errormessage, "No researcher with this email exists");
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Tests
             var actual = uut.LoginResearcherDB("test@testo.com", "123456");
 
             //Assert - Checking Loginstatus.IsSuccess.
-            Assert.IsTrue(actual.LoginStatus.IsSuccess);
+            Assert.IsTrue(actual.success);
         }
 
         [Test]
@@ -89,7 +89,7 @@ namespace Tests
             var actual = uut.LoginResearcherDB("bla", "bla");
 
             //Assert - Checking Loginstatus.IsSuccess.
-            Assert.IsFalse(actual.LoginStatus.IsSuccess);
+            Assert.IsFalse(actual.success);
         }
     }
 }

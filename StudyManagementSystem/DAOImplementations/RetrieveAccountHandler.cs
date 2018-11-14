@@ -8,58 +8,48 @@ using StudyManagementSystem.DAOInterfaces;
 
 namespace StudyManagementSystem.DAOImplementations
 {
-    public class RetrieveAccountHandler: LoginEntity, IRetrieveAccountHandler
+    public class RetrieveAccountHandler: IRetrieveAccountHandler
     {
         private bachelordbContext _context;
-
-        public RetrieveAccountHandler()
-        {
-
-        }
         public RetrieveAccountHandler(bachelordbContext context)
         {
             _context = context;
         }
-        public RetrieveAccountHandler VerifyResearcherDB(string email)
+
+        public DbStatus VerifyResearcherDB(string email)
         {
-            var retrieveAccountHandler = new RetrieveAccountHandler();
+            DbStatus status = new DbStatus();
             Researcher researcher = _context.Researcher.FirstOrDefault(part => part.Email == email);
             if (researcher != null)
             {
-
                 //Successfull Retrive
-                retrieveAccountHandler.LoginStatus.IsSuccess = true;
-                retrieveAccountHandler.LoginStatus.researcher = researcher;
-
+                status.success = true;
+                status.researcher = researcher;
             }
             else
             {
                 //No participant with this email exists in database
-                retrieveAccountHandler.LoginStatus.ErrorMessage = "No researcher with this email exists";
+                status.errormessage = "No researcher with this email exists";
             }
-
-            return retrieveAccountHandler;
+            return status;
         }
 
-        public RetrieveAccountHandler VerifyParticipantDB(string email)
+        public DbStatus VerifyParticipantDB(string email)
         {
-            var retrieveAccountHandler = new RetrieveAccountHandler();
+            DbStatus status = new DbStatus();
             Participant participant = _context.Participant.FirstOrDefault(part => part.Email == email);
             if (participant != null)
             {
-                
-                    //Successfull Retrive
-                    retrieveAccountHandler.LoginStatus.IsSuccess = true;
-                    retrieveAccountHandler.LoginStatus.participant = participant;
-              
+                //Successfull Retrive
+                status.success = true;
+                status.participant = participant;              
             }
             else
             {
                 //No participant with this email exists in database
-                retrieveAccountHandler.LoginStatus.ErrorMessage = "No participant with this email exists";
+                status.errormessage = "No participant with this email exists";
             }
-
-            return retrieveAccountHandler;
+            return status;
         }
     }
 }

@@ -10,8 +10,6 @@ namespace BachelorBackEnd
     public class RegisterHandler : IRegisterHandler
     {
         private bachelordbContext _context;
-
-
         public RegisterHandler(bachelordbContext context)
         {
             _context = context;
@@ -26,12 +24,12 @@ namespace BachelorBackEnd
             }
             else
             {
+                //Register participant
                 _context.Participant.Add(participant);
                 _context.SaveChanges();
                 return true;
             }
         }
-
 
         public bool RegisterResearcherDB(Researcher researcher)
         {
@@ -42,16 +40,11 @@ namespace BachelorBackEnd
             }
             else
             {
+                //Register researcher
                 _context.Researcher.Add(researcher);
                 _context.SaveChanges();
                 return true;
-
             }
-        }
-
-        public void VerifyResearcherDB(Researcher researcher)
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -161,7 +161,6 @@
     <Compile Include="DAOImplementations\ManageProfileHandler.cs" />
     <Compile Include="DAOImplementations\ManageStudyHandler.cs" />
     <Compile Include="DAOImplementations\RegisterHandler.cs" />
-    <Compile Include="DAOImplementations\LoginStatus.cs" />
     <Compile Include="DAOImplementations\RetrieveAccountHandler.cs" />
     <Compile Include="DAOImplementations\UserHandler.cs" />
     <Compile Include="DAOImplementations\ViewStudyHandler.cs" />
@@ -169,11 +168,9 @@
     <Compile Include="DAOInterfaces\IManageParticipantHandler.cs" />
     <Compile Include="DAOInterfaces\IManageProfileHandler.cs" />
     <Compile Include="DAOInterfaces\IManageStudyHandler.cs" />
-    <Compile Include="DAOInterfaces\IProfileHandler.cs" />
     <Compile Include="DAOInterfaces\IRegisterHandler.cs" />
     <Compile Include="DAOInterfaces\IRetrieveAccountHandler.cs" />
     <Compile Include="DAOInterfaces\IUserHandler.cs" />
-    <Compile Include="DAOInterfaces\IVerifyHandler.cs" />
     <Compile Include="DAOInterfaces\IViewStudyHandler.cs" />
     <Compile Include="Models\bachelordbContext.cs" />
     <Compile Include="Models\Inclusioncriteria.cs" />

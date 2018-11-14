@@ -13,5 +13,9 @@ namespace BachelorBackEnd
         public string errormessage { get; set; }
 
         public string participantEmail { get; set; }
+
+        public Participant participant { get; set; }
+
+        public Researcher researcher { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace BachelorBackEnd
 
             if (oldResearcher.Password == oldPassword)
             {
+                //The old password matches, and will be changed to new one
                 oldResearcher.Password = researcher.Password;
                 _context.Researcher.Update(oldResearcher);
                 _context.SaveChanges();
@@ -27,6 +28,7 @@ namespace BachelorBackEnd
             }
             else
             {
+                //Old password did not match. Password will not be changed
                 status.success = false;
                 status.errormessage = "The old password was incorrect. Please try again";
             }
@@ -40,6 +42,7 @@ namespace BachelorBackEnd
 
             if (oldParticipant.Password == oldPassword)
             {
+                //Old password matches and password will be changed.
                 oldParticipant.Password = participant.Password;
                 _context.Participant.Update(oldParticipant);
                 _context.SaveChanges();
@@ -47,6 +50,7 @@ namespace BachelorBackEnd
             }
             else
             {
+                //Old password did not match. Password will not be changed. 
                 status.success = false;
                 status.errormessage = "The old password was incorrect. Please try again";
             }
@@ -78,9 +82,11 @@ namespace BachelorBackEnd
             {
                 Participant oldParticipant = _context.Participant.FirstOrDefault(part => part.IdParticipant == participant.IdParticipant);
                 oldParticipant.Email = participant.Email;
+                oldParticipant.English = participant.English;
 
                 _context.Participant.Update(oldParticipant);
                 _context.SaveChanges();
+                
                 return true;
             }
             catch (Exception)
@@ -88,6 +94,20 @@ namespace BachelorBackEnd
                 return false;
                 throw;
             }
+        }
+
+        public void DeleteAccountParticipantDB(int partID)
+        {
+            Participant dbparticipant = _context.Participant.FirstOrDefault(part => part.IdParticipant == partID);
+            _context.Participant.Remove(dbparticipant);
+            _context.SaveChanges();
+        }
+
+        public void DeleteAcoountResearcherDB(Researcher researcher)
+        {
+            Researcher dbResearcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == researcher.IdResearcher);
+            _context.Researcher.Remove(dbResearcher);
+            _context.SaveChanges();
         }
     }
 }

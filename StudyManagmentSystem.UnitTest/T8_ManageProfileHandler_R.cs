@@ -12,15 +12,15 @@ namespace Tests
     public class T8_ManageProfileHandler_R
     {
         public IManageProfileHandler uut;
-        public IQueryable researchers;
         public Mock<DbSet<Researcher>> mockSetResearchers;
         public Mock<bachelordbContext> mockContext;
+        public List<Researcher> researcherCollection;
 
         [SetUp]
         public void SetUp()
         {
 
-            researchers = new List<Researcher>
+            researcherCollection = new List<Researcher>
             {
                 new Researcher
                 {
@@ -38,13 +38,17 @@ namespace Tests
                 Password = "789012",
                 IdResearcher = 1,
                 }
-            }.AsQueryable();
+            };
+
+            var QueryableResearchers = researcherCollection.AsQueryable();
 
             mockSetResearchers = new Mock<DbSet<Researcher>>();
-            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.Provider).Returns(researchers.Provider);
-            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.Expression).Returns(researchers.Expression);
-            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.ElementType).Returns(researchers.ElementType);
-            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.GetEnumerator()).Returns((IEnumerator<Researcher>)researchers.GetEnumerator());
+            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.Provider).Returns(QueryableResearchers.Provider);
+            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.Expression).Returns(QueryableResearchers.Expression);
+            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.ElementType).Returns(QueryableResearchers.ElementType);
+            mockSetResearchers.As<IQueryable<Researcher>>().Setup(m => m.GetEnumerator()).Returns((IEnumerator<Researcher>)QueryableResearchers.GetEnumerator());
+            mockSetResearchers.Setup(d => d.Remove(It.IsAny<Researcher>())).Callback<Researcher>((s) => researcherCollection.Remove(s));
+
 
             mockContext = new Mock<bachelordbContext>();
             mockContext.Setup(c => c.Researcher).Returns(mockSetResearchers.Object);
@@ -165,6 +169,27 @@ namespace Tests
             Assert.That(newResearcher.Password != researcher.Password);
             Assert.That(status.success == false);
             Assert.That(status.errormessage == "The old password was incorrect. Please try again");
+        }
+
+        [Test]
+        public void DeleteAccount()
+        {
+            //Arrange
+            uut = new ManageProfileHandler(mockContext.Object);
+            Researcher researcher = new Researcher
+            {
+                Email = "test@register.com",
+                FirstName = "Test1",
+                LastName = "Testesen",
+                Password = "123456",
+                IdResearcher = 0,
+            };
+
+            //Act
+            uut.DeleteAcoountResearcherDB(researcher);
+
+            //Assert
+            Assert.That(mockContext.Object.Researcher.Count() == 1);
         }
     }
 }

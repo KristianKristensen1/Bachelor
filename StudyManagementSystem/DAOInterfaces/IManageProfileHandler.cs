@@ -16,5 +16,8 @@ namespace BachelorBackEnd
 
         bool ChangeProfileParticipantDB(Participant participant);
 
+        void DeleteAccountParticipantDB(int partID);
+
+        void DeleteAcoountResearcherDB(Researcher researcher);
     }
 }

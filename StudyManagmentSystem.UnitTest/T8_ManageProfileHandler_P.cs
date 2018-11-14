@@ -12,14 +12,15 @@ namespace Tests
     public class T8_ManageProfileHandler_P
     {
         public IManageProfileHandler uut;
-        public IQueryable participants;
         public Mock<DbSet<Participant>> mockSetParticipants;
         public Mock<bachelordbContext> mockContext;
+        public List<Participant> participantCollection;
+
 
         [SetUp]
         public void SetUp()
         {
-            participants = new List<Participant>
+            participantCollection = new List<Participant>
             {
                 new Participant
                 {
@@ -39,13 +40,16 @@ namespace Tests
                 IdParticipant = 1,
                 Password = "789012"
                 }
-            }.AsQueryable();
+            };
+
+            var QueryableParticipants = participantCollection.AsQueryable();
 
             mockSetParticipants = new Mock<DbSet<Participant>>();
-            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.Provider).Returns(participants.Provider);
-            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.Expression).Returns(participants.Expression);
-            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.ElementType).Returns(participants.ElementType);
-            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.GetEnumerator()).Returns((IEnumerator<Participant>)participants.GetEnumerator());
+            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.Provider).Returns(QueryableParticipants.Provider);
+            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.Expression).Returns(QueryableParticipants.Expression);
+            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.ElementType).Returns(QueryableParticipants.ElementType);
+            mockSetParticipants.As<IQueryable<Participant>>().Setup(m => m.GetEnumerator()).Returns((IEnumerator<Participant>)QueryableParticipants.GetEnumerator());
+            mockSetParticipants.Setup(d => d.Remove(It.IsAny<Participant>())).Callback<Participant>((s) => participantCollection.Remove(s));
 
             mockContext = new Mock<bachelordbContext>();
             mockContext.Setup(c => c.Participant).Returns(mockSetParticipants.Object);
@@ -124,6 +128,19 @@ namespace Tests
             Assert.That(newParticipant.Password != participant.Password);
             Assert.That(status.success == false);
             Assert.That(status.errormessage == "The old password was incorrect. Please try again");
+        }
+
+        [Test]
+        public void DeleteAccount()
+        {
+            //Arrange
+            uut = new ManageProfileHandler(mockContext.Object);
+
+            //Act
+            uut.DeleteAccountParticipantDB(0);
+
+            //Assert
+            Assert.That(mockContext.Object.Participant.Count() == 1);
         }
 
     }
