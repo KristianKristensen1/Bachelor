@@ -38,7 +38,8 @@ namespace FrontEndBA.Controllers
             Researcher currentr = new Researcher();
             currentr.Email = researcherRegisterModel.Email;
             currentr.Password = researcherRegisterModel.Password;
-            currentr.Name = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname; //TODO - First name og Last name i DB
+            currentr.FirstName = researcherRegisterModel.Firstname + researcherRegisterModel.Lastname; //TODO - First name og Last name i DB
+            currentr.LastName = "Bobsen";
             bool success = registerHandler.RegisterResearcherDB(currentr); 
 
             if (!success)

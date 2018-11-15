@@ -1,61 +1,88 @@
 ﻿@model FrontEndBA.Models.ResearcherModel.AccountViewModels.ResearcherProfileViewModel
 
+@using FrontEndBA.Models.SharedModels;
+@using FrontEndBA.Models.ResearcherModel.CreateStudyModel;
+
+
 @{
-    ViewData["Title"] = "Researcher";
+    ViewData["Title"] = "My Researcher Profile";
 }
 
 <h2>My Profile</h2>
 <h3>Placeholder text for MyProfile - Figure dat shiet aut!</h3>
 
 <hr />
+
+@*<div class="row">
+    <div class="column">
+        <div class="row" style="width:40%">
+            <div class="med-column">EMAIL_ADRESS_LONG_STRING_FIELD</div>
+            <div class="small-column">ID</div>
+        </div>
+        <div class="row" style="width:40%">
+            <div class="med-column">FIRST_NAME</div>
+            <div class="med-column">LAST_NAME</div>
+        </div> 
+        <div class="row" style="width:40%">
+            <div class="small-column">IS_VERIFIED?</div>
+            <div class="med-column">IS_ADMINISTRATOR?</div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="row" style="width:50%">NEW_PASSWORD_FIELD</div>
+        <div class="row" style="width:50%">CONFIRM_PASSWORD_FIELD</div>
+        <div class="row" style="width:50%">OLD_PASSWORD_FIELD</div>
+    </div>
+</div>*@
+
+
+
+
 <div class="row">
-    <div class="row">
-        <div class="med-column">
-            <label asp-for="Email" class="control-label"></label>
-            <input asp-for="Email" class="form-control" />
-            <span asp-validation-for="Email" class="text-danger"></span>
-        </div>
-        <div class="med-column">
-            <label asp-for="Password" class="control-label"></label>
-            <input asp-for="Password" class="form-control" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-        </div>
-        <div class="med-column" style="visibility: collapse">
-            <label asp-for="ConfirmPassword" class="control-label"></label>
-            <input asp-for="ConfirmPassword" class="form-control" />
-            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="row">
 
-        <div class="small-column">
-            <label asp-for="ResID" class="control-label"></label>
-            <input asp-for="ResID" class="form-control" />
-            <span asp-validation-for="ResID" class="text-danger"></span>
-        </div>
-        <div class="small-column">
-            <label asp-for="ResName" class="control-label"></label>
-            <input asp-for="ResName" class="form-control" />
-            <span asp-validation-for="ResName" class="text-danger"></span>
-        </div>
-        <div class="small-column">
-            <label asp-for="Verified" class="control-label"></label>
-            <input asp-for="Verified" class="form-control" />
-            <span asp-validation-for="Verified" class="text-danger"></span>
-        </div>
-        <div class="small-column">
-            <label asp-for="AdminRights" class="control-label"></label>
-            <input asp-for="AdminRights" class="form-control" />
-            <span asp-validation-for="AdminRights" class="text-danger"></span>
-        </div>
-
+    <div class="small-column">
+        <label asp-for="CurrentResearcher.ResID" class="control-label"></label>
+        <input asp-for="CurrentResearcher.ResID" class="form-control" readonly />
+        <span asp-validation-for="CurrentResearcher.ResID" class="text-danger"></span>
     </div>
-    <div style="float: left; margin-left: 15px; width: 110px">
-        <input type="submit" value="Change Data" class="btn btn-default" formaction="CreateResearcher" />
+    <div class="small-column">
+        <label asp-for="CurrentResearcher.FirstName" class="control-label"></label>
+        <input asp-for="CurrentResearcher.FirstName" class="form-control" readonly />
+        <span asp-validation-for="CurrentResearcher.FirstName" class="text-danger"></span>
     </div>
-    <div style="float: left; margin-left: 35px; width: 110px">
-        <input type="submit" value="Cancel" class="btn btn-default" formaction="CreateResearcher" />
+    <div class="small-column">
+        <label asp-for="CurrentResearcher.Verified" class="control-label"></label>
+        <input asp-for="CurrentResearcher.Verified" class="form-control" readonly />
+        <span asp-validation-for="CurrentResearcher.Verified" class="text-danger"></span>
     </div>
-
+    <div class="small-column">
+        <label asp-for="CurrentResearcher.AdminRights" class="control-label"></label>
+        <input asp-for="CurrentResearcher.AdminRights" class="form-control" readonly />
+        <span asp-validation-for="CurrentResearcher.AdminRights" class="text-danger"></span>
+    </div>
 </div>
 
+<div class="row">
+    <div class="med-column">
+        <label asp-for="CurrentResearcher.NewPassword" class="control-label"></label>
+        <input asp-for="CurrentResearcher.NewPassword" class="form-control" />
+        <span asp-validation-for="CurrentResearcher.NewPassword" class="text-danger"></span>
+    </div>
+    <div class="med-column">
+        <label asp-for="CurrentResearcher.ConfirmPassword" class="control-label"></label>
+        <input asp-for="CurrentResearcher.ConfirmPassword" class="form-control" />
+        <span asp-validation-for="CurrentResearcher.ConfirmPassword" class="text-danger"></span>
+    </div>
+    <div class="med-column">
+        <label asp-for="CurrentResearcher.OldPassword" class="control-label"></label>
+        <input asp-for="CurrentResearcher.OldPassword" class="form-control" />
+        <span asp-validation-for="CurrentResearcher.OldPassword" class="text-danger"></span>
+    </div>
+</div>
+
+<div style="float: left; margin-left: 15px; width: 110px">
+    <input type="submit" value="Change Data" class="btn btn-default" formaction="CreateResearcher" />
+</div>
+<div style="float: left; margin-left: 35px; width: 110px">
+    <input type="submit" value="Cancel" class="btn btn-default" formaction="CreateResearcher" />
+</div>
