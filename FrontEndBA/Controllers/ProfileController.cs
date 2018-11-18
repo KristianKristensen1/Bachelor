@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using BachelorBackEnd;
 using FrontEndBA.Models;
 using FrontEndBA.Models.ProfileModel;
 using FrontEndBA.Utility.HomepageHelpers;
@@ -47,6 +48,7 @@ namespace FrontEndBA.Controllers.EditProfile
             var curParticipant = model.getParticipant(partID);
             ppm.Email = curParticipant.Email;
             ppm.Password = curParticipant.Password;
+            ppm.ValidInput = true;
             return View(ppm);
             
           
@@ -71,14 +73,33 @@ namespace FrontEndBA.Controllers.EditProfile
 
         public IActionResult SavePasswordParticipant(ParticipantProfileModel ppm)
         {
+            if (ModelState.IsValid)
+            {
+                //Check that old password is correct
+
+
+
+                return RedirectToAction("Participant");
+            }
+
+            ParticipantHomepageHelper model = new ParticipantHomepageHelper();
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+
+            ppm.Id = partID;
+            var curParticipant = model.getParticipant(partID);
+            ppm.Email = curParticipant.Email;
+            ppm.Password = curParticipant.Password;
+            ppm.ValidInput = false;
             
-            return RedirectToAction("Participant");
+            return View("Participant", ppm);
         }
 
         public IActionResult SavePasswordResearcher(ResearcherProfileModel ppm)
         {
 
-            return RedirectToAction("Researcher");
+            return View("Researcher");
         }
 
 
@@ -93,7 +114,8 @@ namespace FrontEndBA.Controllers.EditProfile
             rpm.Id = partID;
             rpm.Verify = curResearcher.Isverified;
             rpm.Admin = curResearcher.Isadmin;
-            rpm.Name = curResearcher.FirstName + curResearcher.LastName;
+            rpm.Firstname = curResearcher.FirstName;
+            rpm.Lastname = curResearcher.LastName;
             rpm.Email = curResearcher.Email;
             rpm.OldPassword = curResearcher.Password;
 
@@ -102,6 +124,15 @@ namespace FrontEndBA.Controllers.EditProfile
 
         public IActionResult SaveEmailResearcher(ResearcherProfileModel model)
         {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+
+            Researcher curResearcher = new Researcher();
+            curResearcher.Email = model.Email;
+            
+
+
             return RedirectToAction("Researcher");
         }
 
