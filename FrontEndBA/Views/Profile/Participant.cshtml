@@ -16,7 +16,7 @@
                     <label>My email address:</label>
                 </div>
                 <label asp-for="Email">
-                    <input class="form-control" placeholder="@Html.ViewData.Model.Email.ToString()" asp-for="Email" value="">
+                    <input class="form-control" placeholder="@Html.ViewData.Model.Email.ToString()" asp-for="Email" value="@Html.ViewData.Model.Email.ToString()">
                     <span asp-validation-for="Email" class="text-danger"></span>
                 </label>
             </div>
@@ -44,8 +44,8 @@
             </div>
         </form>
     </div>
-    @if (Model.ValidInput == true)
-    {
+        @if (Model.ValidInput == true)
+        {
         <div id="inpass"style="display: none;" class="col-md-4">
             <form asp-action="SavePasswordParticipant">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -72,7 +72,7 @@
             </form>
        
         </div>
-    }
+         }
     else
     {
         <div id="inpass" class="col-md-4">
@@ -93,12 +93,16 @@
                     <input asp-for="ConfirmPassword" class="form-control" />
                     <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
-
-            </div>
-        </form>
-        <div style="padding-top:10px">
-            <button type="submit" value="SavePasswordParticipant" class="btn btn-default">Change Password</button>
-        </div>
+                <div style="padding-top:10px">
+                    <button type="submit" value="SavePasswordParticipant" class="btn btn-default">Change Password</button>
+                </div>
+            </form>
+           </div>
+       }
+    
+    
+    <div style="text-align: right" class="col-md-4">
+        <img src="~/images/PatientIcon.png" alt="Error Logo" style="width: 50%; height: 50%">
     </div>
 </div>
 
@@ -121,4 +125,9 @@
     </div>
 </div>
 
+
+@if (Model.SuccesChangePassword)
+{
+    <script> alert("You have successfully changed your password");</script>
+}
 

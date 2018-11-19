@@ -8,12 +8,12 @@ namespace FrontEndBA.Models.ProfileModel
 {
     public class ResearcherProfileModel
     {
-        [Required(ErrorMessage = "Missing Email")]
+  
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -24,7 +24,6 @@ namespace FrontEndBA.Models.ProfileModel
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "OldPassword")]
@@ -41,6 +40,8 @@ namespace FrontEndBA.Models.ProfileModel
         public string Lastname { get; set; }
 
         public bool ValidInput { get; set; }
+
+        public bool SuccesChangePassword { get; set; }
 
 
     }

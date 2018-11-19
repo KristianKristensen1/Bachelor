@@ -9,7 +9,7 @@ namespace FrontEndBA.Models.ProfileModel
 {
     public class ParticipantProfileModel
     {
-        
+      
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
@@ -17,7 +17,7 @@ namespace FrontEndBA.Models.ProfileModel
         public bool ValidInput { get; set; }
 
 
-        [Required]
+        
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Password")]
@@ -37,6 +37,8 @@ namespace FrontEndBA.Models.ProfileModel
         public int Id { get; set; }
 
         public bool English { get; set; }
+
+        public bool SuccesChangePassword { get; set; }
 
 
 

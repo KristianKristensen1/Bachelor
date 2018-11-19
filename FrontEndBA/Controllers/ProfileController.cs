@@ -9,6 +9,7 @@ using FrontEndBA.Models.ProfileModel;
 using FrontEndBA.Utility.HomepageHelpers;
 using Microsoft.AspNetCore.Mvc;
 using BachelorBackEnd;
+using FrontEndBA.Utility.ProfileHelper;
 
 namespace FrontEndBA.Controllers.EditProfile
 {
@@ -39,115 +40,218 @@ namespace FrontEndBA.Controllers.EditProfile
 
         public IActionResult Participant()
         {
-            ParticipantProfileModel ppm = new ParticipantProfileModel();
-            ParticipantHomepageHelper helper = new ParticipantHomepageHelper();
+            
+      
+         
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int partID = Convert.ToInt32(claims.ElementAt(3).Value);
-           
-            ppm.Id = partID;
-            var curParticipant = helper.getParticipant(partID);
-            ppm.Email = curParticipant.Email;
-            ppm.Password = curParticipant.Password;
+
+            //Getting default participant model obj.
+            ParticipantProfileModel ppm = ParticipantHelper.getdefaultParticipant(partID);
             ppm.ValidInput = true;
+      
             return View(ppm);
-            
-          
 
-
-            
-           
         }
 
         public IActionResult SaveEmailParticipant(ParticipantProfileModel pmodel)
         {
-            if (ModelState.IsValid)
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            if (pmodel.Email == null)
             {
-                var identity = (ClaimsIdentity)User.Identity;
-                IEnumerable<Claim> claims = identity.Claims;
-                int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+                var err = "A Participant must have a Email";
 
-                Participant testpart = new Participant
-                {
-                    Email = pmodel.Email,
-                    IdParticipant = partID,
-                    English = pmodel.English,
-                };
-
-                // Call Db here
-                IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
-                mph.ChangeProfileParticipantDB(testpart);
-
-                return RedirectToAction("Participant");
+                this.ModelState.AddModelError("Email", err.ToString());
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+
+
+                    Participant testpart = new Participant
+                    {
+                        Email = pmodel.Email,
+                        IdParticipant = partID,
+                        English = pmodel.English,
+                    };
+
+                    // Call Db here
+                    IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                    mph.ChangeProfileParticipantDB(testpart);
+
+                    return RedirectToAction("Participant");
+                }
+            }
+           
 
             //Return view her i stedet for at få vist fejlmeddelelse
-            return RedirectToAction("Participant", "Profile");
+            ParticipantProfileModel ppm = ParticipantHelper.getdefaultParticipant(partID);
+          
+            ppm.ValidInput = true;
+
+            return View("Participant",ppm);
 
         }
 
         public IActionResult SavePasswordParticipant(ParticipantProfileModel ppm)
         {
-            if (ModelState.IsValid)
-            {
-                //Check that old password is correct
-
-
-
-                return RedirectToAction("Participant");
-            }
-
-            ParticipantHomepageHelper model = new ParticipantHomepageHelper();
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            ppm.SuccesChangePassword = false;
 
-            ppm.Id = partID;
-            var curParticipant = model.getParticipant(partID);
-            ppm.Email = curParticipant.Email;
-            ppm.Password = curParticipant.Password;
-            ppm.ValidInput = false;
+
+            if (ModelState.IsValid)
+            {
+
+
+                //Creating a local version with changes parametes of Participant obj.
+                IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                    Participant curpart = new Participant
+                    {
+                        Email = ppm.Email,
+                        IdParticipant = partID,
+                        Password = ppm.Password,
+                    };
+
+                var status = mph.ChangePasswordParticipantDB(curpart, ppm.OldPassword);
+                //Check that old password is correct    
+                if (status.success)
+                {
+                    ParticipantProfileModel sppm = new ParticipantProfileModel();
+                    ParticipantHomepageHelper helper = new ParticipantHomepageHelper();
+ 
+                    //Creates a new part obj. since SuccesChange has to be true to show dialog
+                    sppm.Id = partID;
+                    var curParticipants = helper.getParticipant(partID);
+                    sppm.Email = curParticipants.Email;
+                    sppm.Password = curParticipants.Password;
+                    sppm.ValidInput = true;
+                    sppm.SuccesChangePassword = true;
+                    return View("Participant",sppm);
+                }
+                else
+                {
+                    var err = status.errormessage;
+                
+                    this.ModelState.AddModelError("Password", err.ToString());
+                }
+                
+
+
+                
+            }
             
-            return View("Participant", ppm);
+            return View("Participant", ParticipantHelper.getdefaultParticipant(partID));
         }
 
-        public IActionResult SavePasswordResearcher(ResearcherProfileModel ppm)
+        public IActionResult SavePasswordResearcher(ResearcherProfileModel rpm)
         {
+            var identity = (ClaimsIdentity)User.Identity;
+            IEnumerable<Claim> claims = identity.Claims;
+            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
 
-            return View("Researcher");
+
+            if (ModelState.IsValid)
+            {
+
+
+                //Creating a local version with changes parametes of Participant obj.
+                IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                Researcher curResearcher = new Researcher
+                {
+                    Email = rpm.Email,
+                    IdResearcher = resID,
+                    Password = rpm.Password,
+                };
+
+                var status = mph.ChangePasswordResearcherDB(curResearcher, rpm.OldPassword);
+                //Check that old password is correct    
+                if (status.success)
+                {
+                    ResearcherProfileModel srpm = new ResearcherProfileModel();
+                    ResearcherHomepageHelper smodel = new ResearcherHomepageHelper();
+           
+                    var curSResearcher = smodel.getResearcher(resID);
+                    srpm.Id = resID;
+                    srpm.Verify = curSResearcher.Isverified;
+                    srpm.Admin = curSResearcher.Isadmin;
+                    srpm.Firstname = curSResearcher.FirstName;
+                    srpm.Lastname = curSResearcher.LastName;
+                    srpm.Email = curSResearcher.Email;
+                    srpm.OldPassword = curSResearcher.Password;
+                    srpm.SuccesChangePassword = status.success;
+                    srpm.ValidInput = true;
+                    return View("Researcher", srpm);
+                }
+                else
+                {
+                    var err = status.errormessage;
+
+                    this.ModelState.AddModelError("Password", err.ToString());
+                }
+
+            }
+
+            rpm = ResearcherHelper.getdefaultResearcher(resID);
+            return View("Researcher",rpm);
         }
 
         public IActionResult Researcher()
         {
-            ResearcherProfileModel rpm = new ResearcherProfileModel();
-            ResearcherHomepageHelper model = new ResearcherHomepageHelper();
+            
+          
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
-            var curResearcher = model.getResearcher(partID);
-            rpm.Id = partID;
-            rpm.Verify = curResearcher.Isverified;
-            rpm.Admin = curResearcher.Isadmin;
-            rpm.Firstname = curResearcher.FirstName;
-            rpm.Lastname = curResearcher.LastName;
-            rpm.Email = curResearcher.Email;
-            rpm.OldPassword = curResearcher.Password;
+            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
 
+            ResearcherProfileModel rpm = ResearcherHelper.getdefaultResearcher(resID);
+            rpm.ValidInput = true;
             return View(rpm);
         }
 
         public IActionResult SaveEmailResearcher(ResearcherProfileModel model)
         {
             var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
-
-            Researcher curResearcher = new Researcher();
-            curResearcher.Email = model.Email;
             
+            IEnumerable<Claim> claims = identity.Claims;
+            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            if (model.Email == null)
+            {
+                var err = "A Researcher must have a Email";
+
+                this.ModelState.AddModelError("Email", err.ToString());
+            }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    
+
+                    Researcher curResearcher = new Researcher
+                    {
+                        Email = model.Email,
+                        IdResearcher = resID,
+                        FirstName = model.Firstname,
+                        LastName = model.Lastname
+                    };
 
 
-            return RedirectToAction("Researcher");
+                    // Call Db here
+                    IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                    mph.ChangeProfileResearcherDB(curResearcher);
+                    
+                    return RedirectToAction("Researcher");
+                }
+            }
+
+            model = ResearcherHelper.getdefaultResearcher(resID);
+            model.ValidInput = true;
+            return View("Researcher", model);
         }
 
         public IActionResult Back()
