@@ -36,6 +36,8 @@ namespace FrontEndBA.Models.ProfileModel
 
         public int Id { get; set; }
 
+        public bool English { get; set; }
+
 
 
 

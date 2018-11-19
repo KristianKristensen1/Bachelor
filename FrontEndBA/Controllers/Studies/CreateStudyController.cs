@@ -55,7 +55,7 @@ namespace FrontEndBA.Controllers
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     cshelper = new CreateStudyHelper();
                     return View("Index");
@@ -91,7 +91,7 @@ namespace FrontEndBA.Controllers
 
                     return RedirectToAction("Researcher", "Homepage");
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     cshelper = new CreateStudyHelper();
                     return View("Index");

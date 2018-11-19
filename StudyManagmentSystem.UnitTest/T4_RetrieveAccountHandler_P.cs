@@ -54,7 +54,7 @@ namespace Tests
             uut = new RetrieveAccountHandler(mockContext.Object);
             var handler= uut.VerifyParticipantDB("test@testo.com");
 
-            Assert.IsTrue(handler.LoginStatus.IsSuccess);
+            Assert.IsTrue(handler.success);
 
         }
 
@@ -64,7 +64,7 @@ namespace Tests
             uut = new RetrieveAccountHandler(mockContext.Object);
             var handler = uut.VerifyParticipantDB("different@testo.com");
 
-            Assert.AreEqual(handler.LoginStatus.ErrorMessage, "No participant with this email exists");
+            Assert.AreEqual(handler.errormessage, "No participant with this email exists");
 
         }
 
@@ -76,7 +76,7 @@ namespace Tests
             var handler = uut.VerifyParticipantDB("different@testo.com");
 
             //Assert
-            Assert.IsFalse(handler.LoginStatus.IsSuccess);
+            Assert.IsFalse(handler.success);
 
         }
     }

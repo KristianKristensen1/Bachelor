@@ -16,18 +16,14 @@ namespace BachelorBackEnd
         }
         public Participant GetParticipantDB(int id)
         {
-
             Participant participant = _context.Participant.FirstOrDefault(part => part.IdParticipant == id);
             return participant;
-
         }
 
         public Researcher GetResearcherDB(int id)
         {
-
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == id);
             return researcher;
-
         }
 
         public List<Researcher> GetUnverifiedResearchersDB()
@@ -35,7 +31,6 @@ namespace BachelorBackEnd
             List<Researcher> researchers = _context.Researcher.Where(res => res.Isverified == false).ToList();
             return researchers;
         }
-
 
         public List<Researcher> GetAllVerifiedResearchersDB()
         {
@@ -46,60 +41,61 @@ namespace BachelorBackEnd
         public DbStatus VerifyResearcherDB(int resID)
         {
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == resID);
-            DbStatus manageParticipantStatus = new DbStatus();
+            DbStatus verifyResearcherStatus = new DbStatus();
             if (researcher != null)
             {
                 if (researcher.Isverified == false)
                 {
+                    //Verify researcher
                     researcher.Isverified = true;
                     _context.Update(researcher);
                     _context.SaveChanges();
-                    manageParticipantStatus.success = true;
+                    verifyResearcherStatus.success = true;
                 }
                 else
                 {
-                    manageParticipantStatus.success = false;
-                    manageParticipantStatus.errormessage = "Researcher is all ready verified";
                     //Researcher was all ready verified
+                    verifyResearcherStatus.success = false;
+                    verifyResearcherStatus.errormessage = "Researcher is all ready verified";
                 }
             }
             else
             {
                 //Researcher does not exists
-                manageParticipantStatus.success = false;
-                manageParticipantStatus.errormessage = "Researcher with this ID does not exists";
+                verifyResearcherStatus.success = false;
+                verifyResearcherStatus.errormessage = "Researcher with this ID does not exists";
             }
-            return manageParticipantStatus;
-
+            return verifyResearcherStatus;
         }
 
         public DbStatus UnverifyResearcherDB(int resID)
         {
             Researcher researcher = _context.Researcher.FirstOrDefault(res => res.IdResearcher == resID);
-            DbStatus manageParticipantStatus = new DbStatus();
+            DbStatus UnverifyResearcherStatus = new DbStatus();
             if (researcher != null)
             {
                 if (researcher.Isverified == true)
                 {
+                    //Unverify researcher
                     researcher.Isverified = false;
                     _context.Update(researcher);
                     _context.SaveChanges();
-                    manageParticipantStatus.success = true;
+                    UnverifyResearcherStatus.success = true;
                 }
                 else
                 {
                     //Researcher was not verified
-                    manageParticipantStatus.success = false;
-                    manageParticipantStatus.errormessage = "Researcher is not verified";
+                    UnverifyResearcherStatus.success = false;
+                    UnverifyResearcherStatus.errormessage = "Researcher is not verified";
                 }
             }
             else
             {
                 //Researcher does not exists
-                manageParticipantStatus.success = false;
-                manageParticipantStatus.errormessage = "Researcher with this ID does not exists";
+                UnverifyResearcherStatus.success = false;
+                UnverifyResearcherStatus.errormessage = "Researcher with this ID does not exists";
             }
-            return manageParticipantStatus;
+            return UnverifyResearcherStatus;
         }
     }
 

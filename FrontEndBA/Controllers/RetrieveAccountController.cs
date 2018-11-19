@@ -41,22 +41,19 @@ namespace FrontEndBA.Controllers
 
                 var status = retrieveAccountHandler.VerifyParticipantDB(loginModel.Email);
                
-                if (status.LoginStatus.IsSuccess)
+                if (status.success)
                 {
                     EmailHelper emailh = new EmailHelper();
-                    emailh.RetrieveAccount(status.LoginStatus.participant.Email,status.LoginStatus.participant.Password);
+                    emailh.RetrieveAccount(status.participant.Email,status.participant.Password);
                     return RedirectToAction("Participant", "Welcome");
                 }
                 else
                 {
-                    var err = status.LoginStatus.ErrorMessage;
+                    var err = status.errormessage;
                     this.ModelState.AddModelError("Email", err.ToString());
-                    
                 }
             }
-
             return View("Participant");
-
         }
 
         [HttpPost]
@@ -65,27 +62,22 @@ namespace FrontEndBA.Controllers
         {
             if (ModelState.IsValid)
             {
-                bachelordbContext db = new bachelordbContext();
-                IRetrieveAccountHandler retrieveAccountHandler = new RetrieveAccountHandler(db);
+                IRetrieveAccountHandler retrieveAccountHandler = new RetrieveAccountHandler(new bachelordbContext());
+                DbStatus status = retrieveAccountHandler.VerifyResearcherDB(loginModel.Email);
 
-                var status = retrieveAccountHandler.VerifyResearcherDB(loginModel.Email);
-
-                if (status.LoginStatus.IsSuccess)
+                if (status.success)
                 {
                     EmailHelper emailh = new EmailHelper();
-                    emailh.RetrieveAccount(status.LoginStatus.researcher.Email, status.LoginStatus.researcher.Password);
+                    emailh.RetrieveAccount(status.researcher.Email, status.researcher.Password);
                     return RedirectToAction("Researcher", "Welcome");
                 }
                 else
                 {
-                    var err = status.LoginStatus.ErrorMessage;
+                    var err = status.errormessage;
                     this.ModelState.AddModelError("Email", err.ToString());
-
                 }
             }
-
             return View("Researcher");
-
         }
 
         public IActionResult BackParticipant()

@@ -8,9 +8,9 @@ namespace BachelorBackEnd
 {
     public interface ILoginHandler
     {
-        LoginHandler LoginParticipantDB(string email, string password);
+        DbStatus LoginParticipantDB(string email, string password);
 
-        LoginHandler LoginResearcherDB(string email, string password);
+        DbStatus LoginResearcherDB(string email, string password);
 
     }
 }

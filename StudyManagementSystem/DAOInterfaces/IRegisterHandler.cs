@@ -11,7 +11,5 @@ namespace BachelorBackEnd
         bool RegisterParticipantDB(Participant participant);
 
         bool RegisterResearcherDB(Researcher researcher);
-
-        void VerifyResearcherDB(Researcher researcher);
     }
 }

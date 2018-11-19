@@ -8,6 +8,7 @@ using FrontEndBA.Models;
 using FrontEndBA.Models.ProfileModel;
 using FrontEndBA.Utility.HomepageHelpers;
 using Microsoft.AspNetCore.Mvc;
+using BachelorBackEnd;
 
 namespace FrontEndBA.Controllers.EditProfile
 {
@@ -39,13 +40,13 @@ namespace FrontEndBA.Controllers.EditProfile
         public IActionResult Participant()
         {
             ParticipantProfileModel ppm = new ParticipantProfileModel();
-            ParticipantHomepageHelper model = new ParticipantHomepageHelper();
+            ParticipantHomepageHelper helper = new ParticipantHomepageHelper();
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int partID = Convert.ToInt32(claims.ElementAt(3).Value);
            
             ppm.Id = partID;
-            var curParticipant = model.getParticipant(partID);
+            var curParticipant = helper.getParticipant(partID);
             ppm.Email = curParticipant.Email;
             ppm.Password = curParticipant.Password;
             ppm.ValidInput = true;
@@ -57,18 +58,32 @@ namespace FrontEndBA.Controllers.EditProfile
             
            
         }
+
         public IActionResult SaveEmailParticipant(ParticipantProfileModel pmodel)
         {
-            ParticipantHomepageHelper model = new ParticipantHomepageHelper();
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
-            pmodel.Id=partID;
-            var curParticipant = model.getParticipant(partID);
-            curParticipant.Email = pmodel.Email;
+            if (ModelState.IsValid)
+            {
+                var identity = (ClaimsIdentity)User.Identity;
+                IEnumerable<Claim> claims = identity.Claims;
+                int partID = Convert.ToInt32(claims.ElementAt(3).Value);
 
-            // Call Db here
-            return RedirectToAction("Participant");
+                Participant testpart = new Participant
+                {
+                    Email = pmodel.Email,
+                    IdParticipant = partID,
+                    English = pmodel.English,
+                };
+
+                // Call Db here
+                IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                mph.ChangeProfileParticipantDB(testpart);
+
+                return RedirectToAction("Participant");
+            }
+
+            //Return view her i stedet for at få vist fejlmeddelelse
+            return RedirectToAction("Participant", "Profile");
+
         }
 
         public IActionResult SavePasswordParticipant(ParticipantProfileModel ppm)
@@ -101,7 +116,6 @@ namespace FrontEndBA.Controllers.EditProfile
 
             return View("Researcher");
         }
-
 
         public IActionResult Researcher()
         {
@@ -157,6 +171,14 @@ namespace FrontEndBA.Controllers.EditProfile
             }
 
             return RedirectToAction("Participant", "Welcome");
+        }
+
+        public IActionResult DeleteAccountParticipant(int partID)
+        {
+            IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+            mph.DeleteAccountParticipantDB(partID);
+
+            return RedirectToAction("LogoutParticipant", "Welcome");
         }
     }
 }

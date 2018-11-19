@@ -88,11 +88,10 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                bachelordbContext db = new bachelordbContext();
-                ILoginHandler loginhandler = new LoginHandler(db);
+                ILoginHandler loginhandler = new LoginHandler(new bachelordbContext());
                 //Checks whether or not the participant is in the database
                 var status = loginhandler.LoginParticipantDB(participant.Email, participant.Password);
-                if (status.LoginStatus.IsSuccess)
+                if (status.success)
                 {
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
@@ -100,7 +99,7 @@ namespace FrontEndBA.Controllers
                         hasAdminRights = false,
                         hasParticipantRights = true,
                         hasResearcherRights = false,
-                        userID = "" + status.LoginStatus.participant.IdParticipant
+                        userID = "" + status.participant.IdParticipant
                     };
 
                     //Generates token with claims defined from the userinfo object.
@@ -115,7 +114,7 @@ namespace FrontEndBA.Controllers
                 }
                 else
                 {
-                    var err = status.LoginStatus.ErrorMessage;
+                    var err = status.errormessage;
                     if (err == "Wrong password")
                         this.ModelState.AddModelError("Password", err.ToString());
                     else
@@ -140,20 +139,19 @@ namespace FrontEndBA.Controllers
         {
             try
             {
-                bachelordbContext db = new bachelordbContext();
-                ILoginHandler loginhandler = new LoginHandler(db);
+                ILoginHandler loginhandler = new LoginHandler(new bachelordbContext());
                
                 //Checks whether or not the participant is in the database
                 var status = loginhandler.LoginResearcherDB(researcher.Email, researcher.Password);
-                if (status.LoginStatus.IsSuccess)
+                if (status.success)
                 {
                     //Create an object with userinfo about the participant.
                     var userInfo = new UserInfo
                     {
-                        hasAdminRights = status.LoginStatus.researcher.Isadmin,
-                        hasResearcherRights = status.LoginStatus.researcher.Isverified,
+                        hasAdminRights = status.researcher.Isadmin,
+                        hasResearcherRights = status.researcher.Isverified,
                         hasParticipantRights = false,
-                        userID = ""+status.LoginStatus.researcher.IdResearcher,
+                        userID = ""+status.researcher.IdResearcher,
                     };
 
                    
@@ -169,7 +167,7 @@ namespace FrontEndBA.Controllers
                 }
                 else
                 {
-                    var err = status.LoginStatus.ErrorMessage;
+                    var err = status.errormessage;
                     if (err == "Wrong password")
                         this.ModelState.AddModelError("Password", err.ToString());
                     else
@@ -206,7 +204,7 @@ namespace FrontEndBA.Controllers
 
         private static IEnumerable<Claim> AddMyClaims(UserInfo userInfo)
         {
-            var myClaims = new List<Claim> //Hvorfor Y/N i stedet for en bool? Skal det være string?
+            var myClaims = new List<Claim>
             {
                 new Claim("HasAdminRights", userInfo.hasAdminRights ? "Y" : "N"),
                 new Claim("HasResearcherRights", userInfo.hasResearcherRights ? "Y" : "N"),

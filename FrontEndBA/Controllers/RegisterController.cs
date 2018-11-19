@@ -18,7 +18,6 @@ namespace FrontEndBA.Controllers
             return View("Participant");
         }
 
-
         public ActionResult Researcher()
         {
             return View();
@@ -39,27 +38,25 @@ namespace FrontEndBA.Controllers
 
             if (!success)
             {
+                //User not saved in db
                 this.ModelState.AddModelError("Email", "Email already exists");
                 return View("Researcher");
-
             }
             return RedirectToAction("LoginResearcher", "Welcome", currentr);
         }
 
-        // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
         [Route("/CreateParticipant")]
         public ActionResult CreateParticipant(ParticipantRegisterViewModel participantRegisterModel)
         {
-
             IRegisterHandler registerHandler = new RegisterHandler(new bachelordbContext());
             Participant currentp = new Participant();
             currentp.Email = participantRegisterModel.Email;
             currentp.Password = participantRegisterModel.Password;
             currentp.Age = participantRegisterModel.Age;
-            currentp.English = participantRegisterModel.Language; //Lidt misvisende navn i databasen, men intet kritisk (lyder bare som om der er flere valgmuligheder)
+            currentp.English = participantRegisterModel.Language;
             if (participantRegisterModel.GenderType == Gender.Male)
                 currentp.Gender = true;
             else
@@ -68,16 +65,16 @@ namespace FrontEndBA.Controllers
             }
             
             
-            bool success = registerHandler.RegisterParticipantDB(currentp); //Samme som ved Researcher
+            bool success = registerHandler.RegisterParticipantDB(currentp);
 
             if (!success)
              {
+                //User not saved in db
                  this.ModelState.AddModelError("Email", "Email already exists");
                  return View("Participant");
 
             }
             return RedirectToAction("LoginParticipant", "Welcome", currentp);
-           
         }
 
         [AllowAnonymous]
@@ -85,7 +82,5 @@ namespace FrontEndBA.Controllers
         {
             return RedirectToAction("Participant", "Welcome");
         }
-
-       
     }
 }

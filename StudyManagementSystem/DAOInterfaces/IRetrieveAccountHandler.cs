@@ -10,9 +10,9 @@ namespace StudyManagementSystem.DAOInterfaces
 {
     public interface IRetrieveAccountHandler
     {
-        RetrieveAccountHandler VerifyResearcherDB(string email);
+        DbStatus VerifyResearcherDB(string email);
 
-        RetrieveAccountHandler VerifyParticipantDB(string email);
+        DbStatus VerifyParticipantDB(string email);
 
     }
 }
