@@ -23,8 +23,8 @@ namespace FrontEndBA.Models.SharedModels
         [Required(ErrorMessage = "Missing Study Name")]
         public string Name { get; set; }
 
-        [Display(Name = "Pay *")]
-        [Required(ErrorMessage = "Missing payment amount")]
+        [Display(Name = "Compensation *")]
+        [Required(ErrorMessage = "Missing compensation amount")]
         public int? Pay { get; set; }
         [Display(Name = "Abstract *")]
         [Required(ErrorMessage = "Missing Abstract")]
