@@ -29,8 +29,9 @@ namespace BachelorBackEnd
             {
                 
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql(ConfigStrings.Connectionstring);
-              //  DESKTOP - 4G1FLIU
+                optionsBuilder.UseMySql("Server = 35.228.116.222; Database = bachelordb; Uid = Admin; Pwd = admin1234");
+                //ConfigStrings.Connectionstring);
+                //  DESKTOP - 4G1FLIU
             }
         }
 
