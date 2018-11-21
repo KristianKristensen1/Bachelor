@@ -10,6 +10,7 @@ using FrontEndBA.Utility.HomepageHelpers;
 using Microsoft.AspNetCore.Mvc;
 using BachelorBackEnd;
 using FrontEndBA.Utility.ProfileHelper;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FrontEndBA.Controllers.EditProfile
 {
@@ -37,12 +38,12 @@ namespace FrontEndBA.Controllers.EditProfile
 
             return RedirectToAction("Participant", "Welcome");
         }
-
+        [Authorize(Policy = "RequiresParticipant")]
         public IActionResult Participant()
         {
             
       
-         
+            //Getting user ID
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int partID = Convert.ToInt32(claims.ElementAt(3).Value);
@@ -54,12 +55,14 @@ namespace FrontEndBA.Controllers.EditProfile
             return View(ppm);
 
         }
-
+        [Authorize(Policy = "RequiresParticipant")]
         public IActionResult SaveEmailParticipant(ParticipantProfileModel pmodel)
         {
+            //Getting user ID
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            //Checking if there is a valid Email
             if (pmodel.Email == null)
             {
                 var err = "A Participant must have a Email";
@@ -71,8 +74,8 @@ namespace FrontEndBA.Controllers.EditProfile
                 if (ModelState.IsValid)
                 {
 
-
-                    Participant testpart = new Participant
+                    //Creating local Participant obj.
+                    Participant part = new Participant
                     {
                         Email = pmodel.Email,
                         IdParticipant = partID,
@@ -81,14 +84,14 @@ namespace FrontEndBA.Controllers.EditProfile
 
                     // Call Db here
                     IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
-                    mph.ChangeProfileParticipantDB(testpart);
+                    mph.ChangeProfileParticipantDB(part);
 
                     return RedirectToAction("Participant");
                 }
             }
            
 
-            //Return view her i stedet for at få vist fejlmeddelelse
+            //Return view to show error message if something wrong happend. 
             ParticipantProfileModel ppm = ParticipantHelper.getdefaultParticipant(partID);
           
             ppm.ValidInput = true;
@@ -96,16 +99,17 @@ namespace FrontEndBA.Controllers.EditProfile
             return View("Participant",ppm);
 
         }
-
+        [Authorize(Policy = "RequiresParticipant")]
         public IActionResult SavePasswordParticipant(ParticipantProfileModel ppm)
         {
+            //Getting user ID
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int partID = Convert.ToInt32(claims.ElementAt(3).Value);
             ppm.SuccesChangePassword = false;
+            var err = "";
 
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && ppm.Password != null)
             {
 
 
@@ -136,27 +140,32 @@ namespace FrontEndBA.Controllers.EditProfile
                 }
                 else
                 {
-                    var err = status.errormessage;
+                    //Error message if Password did not match
+                    err = status.errormessage;
                 
-                    this.ModelState.AddModelError("Password", err.ToString());
+                    this.ModelState.AddModelError("OldPassword", err.ToString());
                 }
-                
-
-
-                
             }
-            
+            else
+            {
+                //Error message if Password was not put in.
+                err = "Must Assign a Password";
+                this.ModelState.AddModelError("Password", err.ToString());
+            }
+
             return View("Participant", ParticipantHelper.getdefaultParticipant(partID));
         }
 
+
+        [Authorize(Policy = "RequiresResearcher")]
         public IActionResult SavePasswordResearcher(ResearcherProfileModel rpm)
         {
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            var err = "";
 
-
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && rpm.Password!=null)
             {
 
 
@@ -190,48 +199,69 @@ namespace FrontEndBA.Controllers.EditProfile
                 }
                 else
                 {
-                    var err = status.errormessage;
+                    err = status.errormessage;
 
-                    this.ModelState.AddModelError("Password", err.ToString());
+                    this.ModelState.AddModelError("OldPassword", err.ToString());
                 }
 
             }
+            else
+            {
+                err = "Must Assign a Password";
+                this.ModelState.AddModelError("Password", err.ToString());
+            }
 
+        
             rpm = ResearcherHelper.getdefaultResearcher(resID);
             return View("Researcher",rpm);
         }
 
+        [Authorize(Policy = "RequiresResearcher")]
         public IActionResult Researcher()
         {
-            
-          
+
+            //Getting user ID
             var identity = (ClaimsIdentity)User.Identity;
             IEnumerable<Claim> claims = identity.Claims;
             int resID = Convert.ToInt32(claims.ElementAt(3).Value);
-
+            //Creating default Researhcer Model to view
             ResearcherProfileModel rpm = ResearcherHelper.getdefaultResearcher(resID);
             rpm.ValidInput = true;
             return View(rpm);
         }
 
+        [Authorize(Policy = "RequiresResearcher")]
         public IActionResult SaveEmailResearcher(ResearcherProfileModel model)
         {
+            //Getting user ID
             var identity = (ClaimsIdentity)User.Identity;
-            
             IEnumerable<Claim> claims = identity.Claims;
             int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            //Checking if user input a Email and Name
             if (model.Email == null)
             {
                 var err = "A Researcher must have a Email";
 
                 this.ModelState.AddModelError("Email", err.ToString());
             }
+            else if (model.Firstname == null)
+            {
+                var err = "A Researcher must have a Firstname";
+
+                this.ModelState.AddModelError("Firstname", err.ToString());
+            }
+            else if (model.Lastname == null)
+            {
+                var err = "A Researcher must have a Lastname";
+
+                this.ModelState.AddModelError("Lastname", err.ToString());
+            }
             else
             {
                 if (ModelState.IsValid)
                 {
-                    
 
+                    //Creating local researrhcer object with model parameters.
                     Researcher curResearcher = new Researcher
                     {
                         Email = model.Email,
@@ -254,29 +284,29 @@ namespace FrontEndBA.Controllers.EditProfile
             return View("Researcher", model);
         }
 
-        public IActionResult Back()
-        {
-            if (User.Claims.Count() != 0)
-            {
-                //Checks if the user is verified as a participant
-                if (User.Claims.ElementAt(2).Value == "Y")
-                {
-                    return RedirectToAction("Participant","Homepage");
-                }
-                //Checks if the user is verified as a researcher
-                if (User.Claims.ElementAt(1).Value == "Y")
-                {
-                    return RedirectToAction("Researcher", "Homepage");
-                }
-                if (User.Claims.ElementAt(1).Value == "N")
-                {
-                    return RedirectToAction("Researcher", "Homepage");
-                }
-            }
+        //public IActionResult Back()
+        //{
+        //    if (User.Claims.Count() != 0)
+        //    {
+        //        //Checks if the user is verified as a participant
+        //        if (User.Claims.ElementAt(2).Value == "Y")
+        //        {
+        //            return RedirectToAction("Participant","Homepage");
+        //        }
+        //        //Checks if the user is verified as a researcher
+        //        if (User.Claims.ElementAt(1).Value == "Y")
+        //        {
+        //            return RedirectToAction("Researcher", "Homepage");
+        //        }
+        //        if (User.Claims.ElementAt(1).Value == "N")
+        //        {
+        //            return RedirectToAction("Researcher", "Homepage");
+        //        }
+        //    }
 
-            return RedirectToAction("Participant", "Welcome");
-        }
-
+        //    return RedirectToAction("Participant", "Welcome");
+        //}
+        [Authorize(Policy = "RequiresParticipant")]
         public IActionResult DeleteAccountParticipant(int partID)
         {
             IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());

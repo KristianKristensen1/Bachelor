@@ -26,14 +26,14 @@
                 <div>
                     <label>Firstname</label>
                 </div>
-                <input asp-for="Firstname" class="form-control" />
+                <input asp-for="Firstname" class="form-control" placeholder="@Html.ViewData.Model.Firstname.ToString()" value="@Html.ViewData.Model.Firstname.ToString()"/>
                 <span asp-validation-for="Firstname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div>
                     <label>Lastname</label>
                 </div>
-                <input asp-for="Lastname" class="form-control" />
+                <input asp-for="Lastname" class="form-control" placeholder="@Html.ViewData.Model.Lastname.ToString()" value="@Html.ViewData.Model.Lastname.ToString()"/>
                 <span asp-validation-for="Lastname" class="text-danger"></span>
             </div>
 
@@ -70,7 +70,7 @@
             <div class="form-group">
                 <button type="submit" class="btn btn-default"> Save</button>
                 <button type="button" class="btn btn-default" OnClick="ShowLabel()">Change Password</button>
-                <button type="button" value="Cancel" class="btn btn-default">Back</button>
+                <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Homepage"))'">Back</button>
 
             </div>
 

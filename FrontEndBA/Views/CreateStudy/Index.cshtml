@@ -17,192 +17,193 @@
                 <h3 class="tableTitle">Create a Study</h3>
                 <table class="table">
                     <thead>
-                        <tr>
-                            <th class="col-md-2">
-                                <label asp-for="currentStudy.Name" class="control-label"></label>
-                            </th>
-                            <th>
+                    <tr>
+                        <th class="col-md-2">
+                            <label asp-for="currentStudy.Name" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input asp-for="currentStudy.Name" class="form-control" title="Input study name here" />
+                                <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-2">
+                            <label asp-for="currentStudy.Abstract" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input asp-for="currentStudy.Abstract" class="form-control" title="Input study abstract here" />
+                                <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr class="biggerinput">
+                        <th class="col-md-1">
+                            <div style="margin-top: -100px">
+                                <label asp-for="currentStudy.Description" class="control-label"></label>
+                            </div>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px" title="Input study description here"></textarea>
+                                <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-2">
+                            <label asp-for="currentStudy.Pay" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-inline">
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Name" class="form-control" title="Input study name here" />
-                                    <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-2">
-                                <label asp-for="currentStudy.Abstract" class="control-label"></label>
-                            </th>
-                            <th>
-                                <div class="form-group">
-                                    <input asp-for="currentStudy.Abstract" class="form-control" title="Input study abstract here" />
-                                    <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr class="biggerinput">
-                            <th class="col-md-1">
-                                <div style="margin-top: -100px">
-                                    <label asp-for="currentStudy.Description" class="control-label"></label>
-                                </div>
-                            </th>
-                            <th>
-                                <div class="form-group">
-                                    <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px" title="Input study description here"></textarea>
-                                    <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-2">
-                                <label asp-for="currentStudy.Pay" class="control-label"></label>
-                            </th>
-                            <th>
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <input asp-for="currentStudy.Pay" class="form-control" title="Input study payment here" style="width:90px;" />
-                                        <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
-                                        <div class="form-inline" style="float:right; padding-left:8px;">
-                                            <h5>kr.</h5>
-                                        </div>
+                                    <input asp-for="currentStudy.Pay" class="form-control" title="Input study payment here" style="width:90px;" />
+                                    <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
+                                    <div class="form-inline" style="float:right; padding-left:8px;">
+                                        <h5>kr.</h5>
                                     </div>
                                 </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-2">
-                                <label asp-for="currentStudy.Location" class="control-label"></label>
-                            </th>
-                            <th>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-2">
+                            <label asp-for="currentStudy.Location" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input asp-for="currentStudy.Location" class="form-control" />
+                                <span asp-validation-for="currentStudy.Location" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-2">
+                            <label asp-for="currentStudy.Duration" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input asp-for="currentStudy.Duration" class="form-control" title="Input study duration here. Format should be XX sessions of XX minutes. Example: 5 sessions of 60 minutes" />
+                                <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-2">
+                            <label asp-for="currentStudy.Preparation" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <input asp-for="currentStudy.Preparation" class="form-control" title="Input study preparation here" />
+                                <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr class="biggerinput">
+                        <th class="col-md-1">
+                            <div style="margin-top: -100px">
+                                <label asp-for="currentStudy.EligibilityRequirements" class="control-label"></label>
+                            </div>
+
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <textarea asp-for="currentStudy.EligibilityRequirements" class="form-control" style="height: 100px" title="Input study eligibility requirements here"></textarea>
+                                <span asp-validation-for="currentStudy.EligibilityRequirements" class="text-danger"></span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            <label asp-for="inclusioncriteria.IsMale" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+
+                                <div class="checkbox">
+
+                                    <label class="control-label">
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.IsMale, true) Yes
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.IsMale, false) No
+                                    </label>
+                                    <span asp-validation-for="inclusioncriteria.IsMale" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            <label asp-for="inclusioncriteria.IsFemale" class="control-label"></label>
+                        </th>
+                        <th>
+                            <div class="form-group">
+                                <div class="checkbox">
+
+                                    <label class="control-label">
+
+                                        <input asp-for="inclusioncriteria.IsFemale" value="true" type="radio" id="myFirstId" />Yes
+                                        <input asp-for="inclusioncriteria.IsFemale" value="false" type="radio" id="mySecondId" />No
+                                    </label>
+                                    <span asp-validation-for="inclusioncriteria.IsFemale" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr action="" class="form-horizontal">
+                        <th class="col-md-1" style="vertical-align: text-top">
+                            <label style="color: black;"> Participants age*</label>
+                        </th>
+                        <th>
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Location" class="form-control" />
-                                    <span asp-validation-for="currentStudy.Location" class="text-danger"></span>
+                                    <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
+                                    <input asp-for="inclusioncriteria.MinAge" class="form-control" title="Input study minimum age here" />
+                                    <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
                                 </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-2">
-                                <label asp-for="currentStudy.Duration" class="control-label"></label>
-                            </th>
-                            <th>
+                            </div>
+                            <div class="col-md-2">
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Duration" class="form-control" title="Input study duration here. Format should be XX sessions of XX minutes. Example: 5 sessions of 60 minutes" />
-                                    <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
+                                    <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
+                                    <input asp-for="inclusioncriteria.MaxAge" class="form-control" title="Input study maximum age here" />
+                                    <span asp-validation-for="inclusioncriteria.MaxAge" class="text-danger"></span>
                                 </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-2">
-                                <label asp-for="currentStudy.Preparation" class="control-label"></label>
-                            </th>
-                            <th>
-                                <div class="form-group">
-                                    <input asp-for="currentStudy.Preparation" class="form-control" title="Input study preparation here" />
-                                    <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr class="biggerinput">
-                            <th class="col-md-1">
-                                <div style="margin-top: -100px">
-                                    <label asp-for="currentStudy.EligibilityRequirements" class="control-label"></label>
-                                </div>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="col-md-1">
+                            <label class="control-label"> Does the participant have to speak english?</label>
 
-                            </th>
-                            <th>
-                                <div class="form-group">
-                                    <textarea asp-for="currentStudy.EligibilityRequirements" class="form-control" style="height: 100px" title="Input study eligibility requirements here"></textarea>
-                                    <span asp-validation-for="currentStudy.EligibilityRequirements" class="text-danger"></span>
+                        </th>
+                        <th>
+                            <div class="form-group">
+
+                                <div class="checkbox">
+
+                                    <label class="control-label">
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.English, true) Yes
+                                        @Html.RadioButtonFor(model => model.inclusioncriteria.English, false) No
+                                    </label>
+                                    <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
                                 </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-1">
-                                <label asp-for="inclusioncriteria.IsMale" class="control-label"></label>
-                            </th>
-                            <th>
-                                <div class="form-group">
-
-                                    <div class="checkbox">
-
-                                        <label class="control-label">
-                                            @Html.RadioButtonFor(model => model.inclusioncriteria.IsMale, true) Yes
-                                            @Html.RadioButtonFor(model => model.inclusioncriteria.IsMale, false) No
-                                        </label>
-                                        <span asp-validation-for="inclusioncriteria.IsMale" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-1">
-                                <label asp-for="inclusioncriteria.IsFemale" class="control-label"></label>
-                            </th>
-                            <th>
-                                <div class="form-group">
-                                    <div class="checkbox">
-
-                                        <label class="control-label">
-
-                                            <input asp-for="inclusioncriteria.IsFemale" value="true" type="radio" id="myFirstId" />Yes
-                                            <input asp-for="inclusioncriteria.IsFemale" value="false" type="radio" id="mySecondId" />No
-                                        </label>
-                                        <span asp-validation-for="inclusioncriteria.IsFemale" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr action="" class="form-horizontal">
-                            <th class="col-md-1" style="vertical-align: text-top">
-                                <label style="color: black;"> Participants age*</label>
-                            </th>
-                            <th>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
-                                        <input asp-for="inclusioncriteria.MinAge" class="form-control" title="Input study minimum age here" />
-                                        <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
-                                    </div>
-                                </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
-                                        <input asp-for="inclusioncriteria.MaxAge" class="form-control" title="Input study maximum age here" />
-                                        <span asp-validation-for="inclusioncriteria.MaxAge" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
-                        <tr>
-                            <th class="col-md-1">
-                                <label class="control-label"> Does the participant have to speak english?</label>
-
-                            </th>
-                            <th>
-                                <div class="form-group">
-
-                                    <div class="checkbox">
-
-                                        <label class="control-label">
-                                            @Html.RadioButtonFor(model => model.inclusioncriteria.English, true) Yes
-                                            @Html.RadioButtonFor(model => model.inclusioncriteria.English, false) No
-                                        </label>
-                                        <span asp-validation-for="inclusioncriteria.English" class="text-danger"></span>
-                                    </div>
-                                </div>
-                            </th>
-                        </tr>
+                            </div>
+                        </th>
+                    </tr>
 
 
                     </thead>
                 </table>
-        </div>
-        <div class="form-group">
-            <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
-            <input type="submit" value="Save as Draft" class="btn btn-default" formaction="CreateAsDraft" />
-            <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-default" formaction="Create" />
+                    <input type="submit" value="Save as Draft" class="btn btn-default" formaction="CreateAsDraft" />
+                    <input type="submit" value="Cancel" class="btn btn-default" formaction="ReturnToHomePage" />
 
+                </div>
+            </form>
         </div>
-        </form>
+        
     </div>
 
 </div>

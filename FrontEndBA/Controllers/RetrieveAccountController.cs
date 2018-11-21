@@ -14,10 +14,6 @@ namespace FrontEndBA.Controllers
 {
     public class RetrieveAccountController : Controller
     {
-        public IActionResult Index()
-        {
-            return View();
-        }
 
         public IActionResult Participant()
         {

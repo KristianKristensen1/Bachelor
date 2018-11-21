@@ -77,10 +77,5 @@ namespace FrontEndBA.Controllers
             return RedirectToAction("LoginParticipant", "Welcome", currentp);
         }
 
-        [AllowAnonymous]
-        public ActionResult Cancel()
-        {
-            return RedirectToAction("Participant", "Welcome");
-        }
     }
 }
