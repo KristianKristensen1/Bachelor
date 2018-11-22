@@ -17,95 +17,95 @@
                 <h3 class="tableTitle">Create a Study</h3>
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th class="col-md-2">
-                            <label asp-for="currentStudy.Name" class="control-label"></label>
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <input asp-for="currentStudy.Name" class="form-control" title="Input study name here" />
-                                <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col-md-2">
-                            <label asp-for="currentStudy.Abstract" class="control-label"></label>
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <input asp-for="currentStudy.Abstract" class="form-control" title="Input study abstract here" />
-                                <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr class="biggerinput">
-                        <th class="col-md-1">
-                            <div style="margin-top: -100px">
-                                <label asp-for="currentStudy.Description" class="control-label"></label>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px" title="Input study description here"></textarea>
-                                <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col-md-2">
-                            <label asp-for="currentStudy.Pay" class="control-label"></label>
-                        </th>
-                        <th>
-                            <div class="form-inline">
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Name" class="control-label"></label>
+                            </th>
+                            <th>
                                 <div class="form-group">
-                                    <input asp-for="currentStudy.Pay" class="form-control" title="Input study payment here" style="width:90px;" />
-                                    <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
-                                    <div class="form-inline" style="float:right; padding-left:8px;">
-                                        <h5>kr.</h5>
+                                    <input asp-for="currentStudy.Name" class="form-control" title="Input study name here" />
+                                    <span asp-validation-for="currentStudy.Name" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Abstract" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Abstract" class="form-control" title="Input study abstract here" />
+                                    <span asp-validation-for="currentStudy.Abstract" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="biggerinput">
+                            <th class="col-md-1">
+                                <div style="margin-top: -100px">
+                                    <label asp-for="currentStudy.Description" class="control-label"></label>
+                                </div>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <textarea asp-for="currentStudy.Description" class="form-control" style="height: 100px" title="Input study description here"></textarea>
+                                    <span asp-validation-for="currentStudy.Description" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Pay" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <input asp-for="currentStudy.Pay" class="form-control" title="Input study compensation here" style="width:90px;" />
+                                        <span asp-validation-for="currentStudy.Pay" class="text-danger"></span>
+                                        <div class="form-inline" style="float:right; padding-left:8px;">
+                                            <h5>kr.</h5>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col-md-2">
-                            <label asp-for="currentStudy.Location" class="control-label"></label>
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <input asp-for="currentStudy.Location" class="form-control" />
-                                <span asp-validation-for="currentStudy.Location" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col-md-2">
-                            <label asp-for="currentStudy.Duration" class="control-label"></label>
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <input asp-for="currentStudy.Duration" class="form-control" title="Input study duration here. Format should be XX sessions of XX minutes. Example: 5 sessions of 60 minutes" />
-                                <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="col-md-2">
-                            <label asp-for="currentStudy.Preparation" class="control-label"></label>
-                        </th>
-                        <th>
-                            <div class="form-group">
-                                <input asp-for="currentStudy.Preparation" class="form-control" title="Input study preparation here" />
-                                <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
-                            </div>
-                        </th>
-                    </tr>
-                    <tr class="biggerinput">
-                        <th class="col-md-1">
-                            <div style="margin-top: -100px">
-                                <label asp-for="currentStudy.EligibilityRequirements" class="control-label"></label>
-                            </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Location" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Location" class="form-control" />
+                                    <span asp-validation-for="currentStudy.Location" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Duration" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Duration" class="form-control" title="Input study duration here. Format should be XX sessions of XX minutes. Example: 5 sessions of 60 minutes" />
+                                    <span asp-validation-for="currentStudy.Duration" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="col-md-2">
+                                <label asp-for="currentStudy.Preparation" class="control-label"></label>
+                            </th>
+                            <th>
+                                <div class="form-group">
+                                    <input asp-for="currentStudy.Preparation" class="form-control" title="Input study preparation here" />
+                                    <span asp-validation-for="currentStudy.Preparation" class="text-danger"></span>
+                                </div>
+                            </th>
+                        </tr>
+                        <tr class="biggerinput">
+                            <th class="col-md-1">
+                                <div style="margin-top: -100px">
+                                    <label asp-for="currentStudy.EligibilityRequirements" class="control-label"></label>
+                                </div>
 
                         </th>
                         <th>

@@ -11,17 +11,17 @@
         <div class="row">
             <div style="margin-bottom:10px">
                 <button class="btn-default" onclick="MyStudiesParticipant()">My Studies</button>
-                <button class="btn-default" onclick="RelevantStudies()">Relevant Studies</button>
+                <button class="btn-default" onclick="RelevantStudies()">Suggested Studies</button>
             </div>
 
             <div class="col-md-5 StudyContainerOuter" id="MyStudies">
-                <h3 class="tableTitle">My studies</h3>
+                <h3 class="tableTitle">My Studies</h3>
                 <div class="StudyContainerInner">
                     <table class="table" id="MyStudies">
                         <thead>
                             <tr>
                                 <th class="col-md-1">
-                                    ID
+                                   Study ID
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.myParticipantStudies.First().Name)
@@ -66,13 +66,13 @@
 
 
             <div class="col-md-5 StudyContainerOuter" id="RelevantStudies" hidden>
-                <h3 class="tableTitle">Relevant studies</h3>
+                <h3 class="tableTitle">Suggested Studies</h3>
                 <div class="StudyContainerInner">
                     <table class="table">
                         <thead>
                             <tr>
                                 <th class="col-md-1">
-                                    ID
+                                    Study ID
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.relevantStudies.First().Name)

@@ -61,7 +61,6 @@ namespace StudyManagmentSystem.IntegrationTest
             //Asserts that the number of researchs in the database is 1 higher after adding one.
             //Not affected by the remove-call, as the counts have already been saved.
             Assert.AreEqual(noOfReseachersAfter, noOfReseachersBefore + 1);
-
         }
     }
 }
