@@ -6,6 +6,7 @@ using BachelorBackEnd;
 using FrontEndBA.Models.ParticipantModel.AccountViewModels;
 using FrontEndBA.Models.SharedModels;
 using FrontEndBA.Utility.EmailHelper;
+using FrontEndBA.Utility.EmailHelpers;
 using Microsoft.AspNetCore.Mvc;
 using StudyManagementSystem.DAOImplementations;
 using StudyManagementSystem.DAOInterfaces;
@@ -39,7 +40,17 @@ namespace FrontEndBA.Controllers
                
                 if (status.success)
                 {
+                    //ResetPassword. 
+                    IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                    var oldPassword = status.participant.Password;
+                    status.participant.Password = SecureString.RandomString(6);
+
+                    var changePasswordStatus = mph.ChangePasswordParticipantDB(status.participant, oldPassword);
+
+
+                    //Sending the mail
                     EmailHelper emailh = new EmailHelper();
+
                     emailh.RetrieveAccount(status.participant.Email,status.participant.Password);
                     return RedirectToAction("Participant", "Welcome");
                 }
@@ -63,6 +74,14 @@ namespace FrontEndBA.Controllers
 
                 if (status.success)
                 {
+                    //ResetPassword. 
+                    IManageProfileHandler mph = new ManageProfileHandler(new bachelordbContext());
+                    var oldPassword = status.researcher.Password;
+                    status.researcher.Password = SecureString.RandomString(6);
+
+                    var changePasswordStatus = mph.ChangePasswordResearcherDB(status.researcher, oldPassword);
+
+                    //Sending the email
                     EmailHelper emailh = new EmailHelper();
                     emailh.RetrieveAccount(status.researcher.Email, status.researcher.Password);
                     return RedirectToAction("Researcher", "Welcome");

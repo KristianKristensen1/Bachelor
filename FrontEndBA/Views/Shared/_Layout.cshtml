@@ -60,6 +60,9 @@
                 <div>
                     <label style="float:right">@User.Identity.Name (Admin)</label>
                 </div>
+                <div style="clear:both">
+                    <label style="float: right">Your Admin ID is @User.Claims.ElementAt(3).Value</label>
+                </div>
             }
             //Checks if the user has researcher rights
             else if (User.Claims.ElementAt(1).Value == "Y")
@@ -77,6 +80,9 @@
                 <div>
                     <label style="float:right">@User.Identity.Name (Researcher)</label>
                 </div>
+                <div style="clear:both">
+                    <label style="float: right">Your Researcher ID is @User.Claims.ElementAt(3).Value</label>
+                </div>
             }
             //Checks if the user has participant rights
             else if (User.Claims.ElementAt(2).Value == "Y")
@@ -88,6 +94,9 @@
                 </ul>
                 <div>
                     <label style="float:right">@User.Identity.Name (Participant)</label>
+                </div>
+                <div style="clear:both">
+                    <label style="float: right">Your Participant ID is @User.Claims.ElementAt(3).Value</label>
                 </div>
             }
             //Researcher is registered but not yet verified

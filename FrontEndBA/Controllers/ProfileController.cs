@@ -8,7 +8,6 @@ using FrontEndBA.Models;
 using FrontEndBA.Models.ProfileModel;
 using FrontEndBA.Utility.HomepageHelpers;
 using Microsoft.AspNetCore.Mvc;
-using BachelorBackEnd;
 using FrontEndBA.Utility.ProfileHelper;
 using Microsoft.AspNetCore.Authorization;
 
