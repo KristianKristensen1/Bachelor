@@ -25,6 +25,7 @@ namespace FrontEndBA.Controllers
             return View(cshelper.DefaultCreateStudyModel());
         }
 
+        [Authorize(Policy = "RequiresResearcher")]
         public ActionResult ReturnToHomePage()
         {
             return RedirectToAction("Researcher", "Homepage");

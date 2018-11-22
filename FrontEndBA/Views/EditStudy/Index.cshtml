@@ -212,12 +212,12 @@
             <input type="submit" value="Save" class="btn btn-default" formaction="Edit" />
             @if (Model.currentStudy.Isdraft == true)
             {
-               <button type="submit" value="Save as draft" class="btn btn-default" formaction="EditAsDraft" />
+                <button type="submit" value="Save as draft" class="btn btn-default" formaction="EditAsDraft">Save as draft</button>
             }
        
             @if (Model.currentStudy.Isdraft == true)
             {
-                <input value ="Cancel" class="btn btn-default" onclick="location.href='@(Url.Action("Researcher","Homepage"))'"/>
+                <button value ="Cancel" class="btn btn-default" onclick="location.href='@(Url.Action("Researcher","Homepage"))'">Cancel</button>
             }
             else
             {
