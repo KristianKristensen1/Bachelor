@@ -32,6 +32,7 @@ namespace BachelorBackEnd
             //Sets the direct study link with the generated ID
             if (dbStudy != null)
             {
+                //Todo OBS!!! Direct Study link currently hardcoded - fix or rewrite when published.
                 dbStudy.DirectStudyLink = "http://localhost:61728/ViewStudy/ViewStudy?studyID=" + dbStudy.IdStudy;
                 _context.Study.Update(dbStudy);
             }
