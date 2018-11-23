@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using BachelorBackEnd;
 using FrontEndBA.Models;
 using FrontEndBA.Models.ProfileModel;
+using FrontEndBA.Utility;
 using FrontEndBA.Utility.HomepageHelpers;
 using Microsoft.AspNetCore.Mvc;
 using FrontEndBA.Utility.ProfileHelper;
@@ -43,12 +44,10 @@ namespace FrontEndBA.Controllers.EditProfile
             
       
             //Getting user ID
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int partID = IdentityHelper.getUserID(User);
 
             //Getting default participant model obj.
-            ParticipantProfileModel ppm = ParticipantHelper.getdefaultParticipant(partID);
+            ParticipantProfileModel ppm = ProfileParticipantHelper.getdefaultParticipant(partID);
             ppm.ValidInput = true;
       
             return View(ppm);
@@ -58,9 +57,7 @@ namespace FrontEndBA.Controllers.EditProfile
         public IActionResult SaveEmailParticipant(ParticipantProfileModel pmodel)
         {
             //Getting user ID
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int partID = IdentityHelper.getUserID(User);
             //Checking if there is a valid Email
             if (pmodel.Email == null)
             {
@@ -91,7 +88,7 @@ namespace FrontEndBA.Controllers.EditProfile
            
 
             //Return view to show error message if something wrong happend. 
-            ParticipantProfileModel ppm = ParticipantHelper.getdefaultParticipant(partID);
+            ParticipantProfileModel ppm = ProfileParticipantHelper.getdefaultParticipant(partID);
           
             ppm.ValidInput = true;
 
@@ -102,9 +99,7 @@ namespace FrontEndBA.Controllers.EditProfile
         public IActionResult SavePasswordParticipant(ParticipantProfileModel ppm)
         {
             //Getting user ID
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int partID = IdentityHelper.getUserID(User);
             ppm.SuccesChangePassword = false;
             var err = "";
 
@@ -125,16 +120,13 @@ namespace FrontEndBA.Controllers.EditProfile
                 //Check that old password is correct    
                 if (status.success)
                 {
-                    ParticipantProfileModel sppm = new ParticipantProfileModel();
+                   
                     ParticipantHomepageHelper helper = new ParticipantHomepageHelper();
- 
-                    //Creates a new part obj. since SuccesChange has to be true to show dialog
-                    sppm.Id = partID;
                     var curParticipants = helper.getParticipant(partID);
-                    sppm.Email = curParticipants.Email;
-                    sppm.Password = curParticipants.Password;
-                    sppm.ValidInput = true;
-                    sppm.SuccesChangePassword = true;
+                    //Creates a new part obj. since SuccesChange has to be true to show dialog
+                    ParticipantProfileModel sppm =
+                        ProfileParticipantHelper.convertToModel(curParticipants, status.success, true);
+
                     return View("Participant",sppm);
                 }
                 else
@@ -152,16 +144,14 @@ namespace FrontEndBA.Controllers.EditProfile
                 this.ModelState.AddModelError("Password", err.ToString());
             }
 
-            return View("Participant", ParticipantHelper.getdefaultParticipant(partID));
+            return View("Participant", ProfileParticipantHelper.getdefaultParticipant(partID));
         }
 
 
         [Authorize(Policy = "RequiresResearcher")]
         public IActionResult SavePasswordResearcher(ResearcherProfileModel rpm)
         {
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int resID = IdentityHelper.getUserID(User);
             var err = "";
 
             if (ModelState.IsValid && rpm.Password!=null)
@@ -185,15 +175,7 @@ namespace FrontEndBA.Controllers.EditProfile
                     ResearcherHomepageHelper smodel = new ResearcherHomepageHelper();
            
                     var curSResearcher = smodel.getResearcher(resID);
-                    srpm.Id = resID;
-                    srpm.Verify = curSResearcher.Isverified;
-                    srpm.Admin = curSResearcher.Isadmin;
-                    srpm.Firstname = curSResearcher.FirstName;
-                    srpm.Lastname = curSResearcher.LastName;
-                    srpm.Email = curSResearcher.Email;
-                    srpm.OldPassword = curSResearcher.Password;
-                    srpm.SuccesChangePassword = status.success;
-                    srpm.ValidInput = true;
+                    srpm = ProfileResearcherHelper.convertToModel(curSResearcher,status.success,true);
                     return View("Researcher", srpm);
                 }
                 else
@@ -211,7 +193,7 @@ namespace FrontEndBA.Controllers.EditProfile
             }
 
         
-            rpm = ResearcherHelper.getdefaultResearcher(resID);
+            rpm = ProfileResearcherHelper.getdefaultResearcher(resID);
             return View("Researcher",rpm);
         }
 
@@ -220,11 +202,9 @@ namespace FrontEndBA.Controllers.EditProfile
         {
 
             //Getting user ID
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int resID = IdentityHelper.getUserID(User);
             //Creating default Researhcer Model to view
-            ResearcherProfileModel rpm = ResearcherHelper.getdefaultResearcher(resID);
+            ResearcherProfileModel rpm = ProfileResearcherHelper.getdefaultResearcher(resID);
             rpm.ValidInput = true;
             return View(rpm);
         }
@@ -233,9 +213,7 @@ namespace FrontEndBA.Controllers.EditProfile
         public IActionResult SaveEmailResearcher(ResearcherProfileModel model)
         {
             //Getting user ID
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int resID = IdentityHelper.getUserID(User);
             //Checking if user input a Email and Name
             if (model.Email == null)
             {
@@ -278,33 +256,12 @@ namespace FrontEndBA.Controllers.EditProfile
                 }
             }
 
-            model = ResearcherHelper.getdefaultResearcher(resID);
+            model = ProfileResearcherHelper.getdefaultResearcher(resID);
             model.ValidInput = true;
             return View("Researcher", model);
         }
 
-        //public IActionResult Back()
-        //{
-        //    if (User.Claims.Count() != 0)
-        //    {
-        //        //Checks if the user is verified as a participant
-        //        if (User.Claims.ElementAt(2).Value == "Y")
-        //        {
-        //            return RedirectToAction("Participant","Homepage");
-        //        }
-        //        //Checks if the user is verified as a researcher
-        //        if (User.Claims.ElementAt(1).Value == "Y")
-        //        {
-        //            return RedirectToAction("Researcher", "Homepage");
-        //        }
-        //        if (User.Claims.ElementAt(1).Value == "N")
-        //        {
-        //            return RedirectToAction("Researcher", "Homepage");
-        //        }
-        //    }
-
-        //    return RedirectToAction("Participant", "Welcome");
-        //}
+     
         [Authorize(Policy = "RequiresParticipant")]
         public IActionResult DeleteAccountParticipant(int partID)
         {

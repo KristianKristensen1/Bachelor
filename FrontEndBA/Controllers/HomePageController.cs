@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json;
 using System.Security.Claims;
+using FrontEndBA.Utility;
 using StudyManagementSystem.DAOImplementations;
 using StudyManagementSystem.DAOInterfaces;
 using FrontEndBA.Utility.HomepageHelpers;
@@ -26,23 +27,20 @@ namespace FrontEndBA.Controllers
         public ActionResult Participant()
         {
             //Gets the id from JWT. The id is used to retrieve user from database. 
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int partID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int partID = IdentityHelper.getUserID(User);
+
 
             //Creates a ParticipantHomepageModel
             ParticipantHomepageHelper participantHomepageHelper = new ParticipantHomepageHelper();
             ParticipantHomepageModel participantHomepageModel = participantHomepageHelper.CreateParticipantHomepageModel(partID);
-            return View(participantHomepageModel);
+            return View(participantHomepageModel );
         }
 
         [Authorize(Policy = "RequiresResearcher")]
         public ActionResult Researcher()
         {
             //Gets the id from JWT. The id is used to retrieve user from database. 
-            var identity = (ClaimsIdentity)User.Identity;
-            IEnumerable<Claim> claims = identity.Claims;
-            int resID = Convert.ToInt32(claims.ElementAt(3).Value);
+            int resID = IdentityHelper.getUserID(User);
 
             ResearcherHomepageHelper researcherHomepageHelper = new ResearcherHomepageHelper();
             ResearcherHomepageModel researcherHomepageModel = researcherHomepageHelper.CreateResearcherHompepageModel(resID);
