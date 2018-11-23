@@ -10,11 +10,11 @@
 <div class="container" style="height:600px">
     <div class="row">
         <div style="margin-bottom:10px">
-            <button class="btn-default" onclick="UnverifiedResearchers()">Unverified researchers</button>
-            <button class="btn-default" onclick="AllResearchers()">All researchers</button>
+            <button class="btn-default" onclick="UnverifiedResearchers()">Unverified Researchers</button>
+            <button class="btn-default" onclick="AllResearchers()">All Researchers</button>
         </div>
         <div class="col-md-5 ParticipantContainer" id="UnverifiedResearchers">
-            <h3 class="tableTitle">Researchers that is not yet verified</h3>
+            <h3 class="tableTitle">Researchers that are not yet verified</h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -25,7 +25,7 @@
                             <label>Name</label>
                         </th>
                         <th class="col-md-3">
-                            <label>email</label>
+                            <label>Email</label>
                         </th>
                     </tr>
                 </thead>
@@ -51,7 +51,7 @@
         </div>
 
         <div class="col-md-5 ParticipantContainer" id="AllResearchers" hidden>
-            <h3 class="tableTitle">All researchers</h3>
+            <h3 class="tableTitle">All Researchers</h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -89,8 +89,8 @@
 
         <div class="col-md-5 ManageContainer">
             <form asp-action="VerifyResearcher">
-                <h3 class="tableTitle">Verify researcher</h3>
-                <h5>Choose a participant enrolled in study to remove, or enter the ID of a participant you wish to enroll in study</h5>
+                <h3 class="tableTitle">Verify Researcher</h3>
+                <h5>Enter the ID of a researcher you wish to verify, or choose a verified researcher to remove them.</h5>
                 <table class="table">
                     <thead>
                         <tr>
@@ -107,7 +107,7 @@
                     <tbody>
                         <tr>
                             <span asp-validation-for="researcherID" class="text-danger"></span>
-                            <th class="col-md-1" title="Enter ID of participant to add or remove">
+                            <th class="col-md-1" title="Enter ID of researcher to verify or unverify">
                                 <input asp-for="researcherID" class="form-control" id="resID" readonly="@true" />
                             </th>
                             <th>
@@ -126,8 +126,8 @@
                     </tbody>
                 </table>
                 <div>
-                    <button type="button" class="btn btn-default" id="verify" data-toggle="modal" data-target=".confirmVerify">Verify researcher</button>
-                    <button type="button" class="btn btn-default" id="unverify" data-toggle="modal" data-target=".confirmDelete">Unverify researcher</button>
+                    <button type="button" class="btn btn-default" id="verify" data-toggle="modal" data-target=".confirmVerify">Verify Researcher</button>
+                    <button type="button" class="btn btn-default" id="unverify" data-toggle="modal" data-target=".confirmDelete">Unverify Researcher</button>
                 </div>
                 <div class="modal fade confirmVerify">
                     <div class="modal-dialog">

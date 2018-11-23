@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-5 ParticipantContainer">
-            <h3 class="tableTitle">Participants enrolled in @Model.nameOfStudy</h3>
+            <h3 class="tableTitle">Participants Enrolled in @Model.nameOfStudy</h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -38,8 +38,8 @@
             <form asp-action="AddParticipant">
                 <input asp-for="studyID" hidden />
                 <input asp-for="nameOfStudy" hidden />
-                <h3 class="tableTitle">Add or remove a participant</h3>
-                <h5>Choose a participant enrolled in study to remove, or enter the ID of a participant you wish to enroll in study</h5>
+                <h3 class="tableTitle">Add or Remove a Participant</h3>
+                <h5>Enter the ID of a participant you wish to enroll in this study, or choose an enrolled participant to remove them. </h5>
                 <table class="table">
                     <thead>
                         <tr>
@@ -75,11 +75,11 @@
                     </tbody>
                 </table>
                 <div class="form-group" style="padding-bottom:20px">
-                    <button type="submit" class="btn btn-default" formaction="GetEmail" title="Get the email address corresponding to the entered ID">Get email</button>
+                    <button type="submit" class="btn btn-default" formaction="GetEmail" title="Get the email address corresponding to the entered ID">Get Email</button>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-default" formaction="AddParticipant">Add participant</button>
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".confirm">Remove participant</button>
+                    <button type="submit" class="btn btn-default" formaction="AddParticipant">Add Participant</button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target=".confirm">Remove Participant</button>
                 </div>
         </div>
         <div class="modal fade confirm">

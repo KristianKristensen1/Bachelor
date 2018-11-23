@@ -12,20 +12,20 @@ namespace FrontEndBA.Models.ResearcherModel.CreateStudyModel
     {
         public int IdInclusionCriteria { get; set; }
 
-        [Display(Name = "Include Male*")]
+        [Display(Name = "Include Men*")]
         [Required(ErrorMessage = "Missing, must assign if Study needs male")]
         public bool IsMale { get; set; }
 
-        [Display(Name = "Include Female*")]
+        [Display(Name = "Include Women*")]
         [Required(ErrorMessage = "Missing, must assign if Study needs female")]
         public bool IsFemale { get; set; }
 
-        [Required(ErrorMessage = "Missing, must assign Age*")]
         [Display(Name = "Minimum Age")]
+        [Required(ErrorMessage = "Missing, must assign Age*")]
         public int? MinAge { get; set; }
 
-        [Display(Name = "Maximum Age")]
         [Required(ErrorMessage = "Missing, must assign Age")]
+        [Display(Name = "Maximum Age")]
         public int? MaxAge { get; set; }
 
         [Display(Name = "Must speak english*")]

@@ -6,18 +6,17 @@
     ViewData["Title"] = "ViewStudy";
 }
 
-<h2>View study</h2>
 <div class="container" style="width: 80%;">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-md-5 CreateStudyContainer" id="right">
-                <h3 class="tableTitle">Study details</h3>
+                <h3 class="tableTitle">Study Details</h3>
                 <table class="table">
                     <thead>
                         <tr>
                             <th class="col-md-2">
-                                <text class="control-label">Name of study</text>
+                                <text class="control-label">Name of Study</text>
                             </th>
                             <th>
                                 <label>@Html.DisplayFor(item => item.study.Name)</label>
@@ -34,7 +33,7 @@
                         <tr class="biggerinput">
                             <th class="col-md-1">
                                 <div style="margin-top: -100px">
-                                    <text class="control-label">Study description</text>
+                                    <text class="control-label">Study Description</text>
                                 </div>
                             </th>
                             <th>
@@ -43,7 +42,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                <text class="control-label">Compensation pr time</text>
+                                <text class="control-label">Compensation pr Session</text>
                             </th>
                             <th>
                                 <label>@Html.DisplayFor(item => item.study.Pay) kr</label>
@@ -82,7 +81,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                <text class="control-label">Duration of study</text>
+                                <text class="control-label">Duration of Study</text>
                             </th>
                             <th>
                                 <label>@Html.DisplayFor(item => item.study.Duration)</label>
@@ -90,7 +89,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                <text class="control-label">Preparation</text>
+                                <text class="control-label">Preparations</text>
                             </th>
                             <th>
                                 <label>@Html.DisplayFor(item => item.study.Preparation)</label>
@@ -99,7 +98,7 @@
                         <tr class="biggerinput">
                             <th class="col-md-1">
                                 <div style="margin-top:-80px">
-                                    <text class="control-label">Eligibility requirements</text>
+                                    <text class="control-label">Eligibility Requirements</text>
                                 </div>
                             </th>
                             <th>
@@ -109,7 +108,7 @@
 
                         <tr>
                             <th class="col-md-1">
-                                <text class="control-label">Can males participate in study?</text>
+                                <text class="control-label">Can men participate?</text>
                             </th>
                             <th>
                                 <div>
@@ -126,7 +125,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-1">
-                                <text class="control-label">Can females participate in study?</text>
+                                <text class="control-label">Can women participate?</text>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -144,7 +143,7 @@
                         <tr>
                             <th class="col-md-1">
                                 <div style="margin-top:-70px">
-                                    <text class="control-label">Age requirements</text>
+                                    <text class="control-label">Age Requirements</text>
                                 </div>
                             </th>
                             <th>
@@ -168,7 +167,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-1">
-                                <text class="control-label"> Does the participant have to speak english?</text>
+                                <text class="control-label"> Does the participant have to speak English?</text>
                             </th>
                             <th>
                                 <div class="form-group">
@@ -186,7 +185,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                <text class="control-label">Study created</text>
+                                <text class="control-label">Study Created</text>
                             </th>
                             <th>
                                 @Html.DisplayFor(item => item.study.DateCreated)
@@ -194,7 +193,7 @@
                         </tr>
                         <tr>
                             <th class="col-md-2">
-                                <text class="control-label">Contact information</text>
+                                <text class="control-label">Contact Information</text>
                             </th>
                             <th>
                                 <label> @Html.DisplayFor(item => item.researcher.Email)</label>
@@ -211,9 +210,9 @@
                 @if (User.Claims.ElementAt(1).Value == "Y" && Convert.ToInt32(User.Claims.ElementAt(3).Value) == Model.study.IdResearcher)
                 {
                     <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("Index", "EditStudy", new { studyID = Model.study.IdStudy }))'">Edit study</button>
-                    <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("ManageParticipants", "ManageParticipants", new { studyID = Model.study.IdStudy, studyName = Model.study.Name }))'">Manage participants</button>
-                    <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'">Send study to Participants</button>
-                    <button type="button" data-toggle="modal" data-target=".confirm" class="btn btn-default">Delete</button>
+                    <button type="button" class="btn btn-default" onclick="location.href ='@(Url.Action("ManageParticipants", "ManageParticipants", new { studyID = Model.study.IdStudy, studyName = Model.study.Name }))'">Manage Participants</button>
+                    <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Index", "SendToParticipant", new { studyID = Model.study.IdStudy }))'">Send Study to Enrolled Participants</button>
+                    <button type="button" data-toggle="modal" data-target=".confirm" class="btn btn-default">Delete Study</button>
                     <button type="button" class="btn btn-default" onclick="location.href = '@(Url.Action("Participant", "Welcome", new { studyID = Model.study.IdStudy }))'">Cancel</button>
                 }
                 else

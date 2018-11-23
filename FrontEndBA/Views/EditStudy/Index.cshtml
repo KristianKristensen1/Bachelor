@@ -5,16 +5,13 @@
 @{
     ViewData["Title"] = "EditStudy";
 }
-
-
-<h2>Edit study</h2>
 <div class="container" style="width: 80%;">
 
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-md-5 CreateStudyContainer" id="right">
-                <h3 class="tableTitle">Please input study information for study <text style="float:right">ID @Model.currentStudy.IdStudy</text></h3>
+                <h3 class="tableTitle">Edit Your Study <text style="float:right">ID @Model.currentStudy.IdStudy</text></h3>
                 <table class="table">
                     <thead>
                         <tr>
@@ -168,17 +165,17 @@
                                 <div class="form-group">
                                     <div class="col-md-2">
                                         <div style="color: lightblue;">
-                                            <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
+                                            <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
                                         </div>
                                         <input asp-for="inclusioncriteria.MinAge" class="form-control" title="Edit study minimum age here" />
                                         <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
                                     </div>
                                     <div class="col-md-2">
                                         <div style="color: lightblue;">
-                                            <label asp-for="inclusioncriteria.MinAge" class="control-label"></label>
+                                            <label asp-for="inclusioncriteria.MaxAge" class="control-label"></label>
                                         </div>
                                         <input asp-for="inclusioncriteria.MaxAge" class="form-control" title="Edit study maximum age here" />
-                                        <span asp-validation-for="inclusioncriteria.MinAge" class="text-danger"></span>
+                                        <span asp-validation-for="inclusioncriteria.MaxAge" class="text-danger"></span>
                                     </div>
 
                                 </div>
