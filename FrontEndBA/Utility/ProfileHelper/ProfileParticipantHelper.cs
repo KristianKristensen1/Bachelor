@@ -8,7 +8,7 @@ using FrontEndBA.Utility.HomepageHelpers;
 
 namespace FrontEndBA.Utility.ProfileHelper
 {
-    public static class ParticipantHelper
+    public static class ProfileParticipantHelper
     {
         public static ParticipantProfileModel getdefaultParticipant(int id)
         {
@@ -24,6 +24,18 @@ namespace FrontEndBA.Utility.ProfileHelper
 
             return ppm;
 
+        }
+
+        public static ParticipantProfileModel convertToModel(Participant participant,bool status,bool validInput)
+        {
+            ParticipantProfileModel ppm = new ParticipantProfileModel();
+            ppm.Id = participant.IdParticipant;
+            ppm.Email = participant.Email;
+            ppm.Password = participant.Password;
+            ppm.ValidInput = validInput;
+            ppm.SuccesChangePassword = status;
+
+            return ppm;
         }
     }
 }

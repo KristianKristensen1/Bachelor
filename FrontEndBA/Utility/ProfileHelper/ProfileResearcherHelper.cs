@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BachelorBackEnd;
 using FrontEndBA.Models.ProfileModel;
 using FrontEndBA.Utility.HomepageHelpers;
 
 namespace FrontEndBA.Utility.ProfileHelper
 {
-    public static class ResearcherHelper
+    public static class ProfileResearcherHelper
     {
         public static ResearcherProfileModel getdefaultResearcher(int id)
         {
@@ -21,6 +22,21 @@ namespace FrontEndBA.Utility.ProfileHelper
             rpm.Lastname = curResearcher.LastName;
             rpm.Email = curResearcher.Email;
             rpm.OldPassword = curResearcher.Password;
+            return rpm;
+        }
+
+        public static ResearcherProfileModel convertToModel(Researcher researcher, bool status,bool validInput)
+        {
+            ResearcherProfileModel rpm = new ResearcherProfileModel();
+            rpm.Id = researcher.IdResearcher;
+            rpm.Verify = researcher.Isverified;
+            rpm.Admin = researcher.Isadmin;
+            rpm.Firstname = researcher.FirstName;
+            rpm.Lastname = researcher.LastName;
+            rpm.Email = researcher.Email;
+            rpm.OldPassword = researcher.Password;
+            rpm.SuccesChangePassword = status;
+            rpm.ValidInput = validInput;
             return rpm;
         }
     }

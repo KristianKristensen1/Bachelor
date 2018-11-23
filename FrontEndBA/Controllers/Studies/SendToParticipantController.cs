@@ -53,6 +53,7 @@ namespace FrontEndBA.Controllers.Studies
                 }
                 catch (Exception e)
                 {
+                    //Should store error in a internal log. 
                     return View("Index");
                 }
             }

@@ -39,9 +39,7 @@ namespace FrontEndBA.Controllers.Studies
                 try
                 {
                     //Gets the id from JWT. The id is used to retrieve user from database. 
-                    var identity = (ClaimsIdentity) User.Identity;
-                    IEnumerable<Claim> claims = identity.Claims;
-                    int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
+                    int id_researcher = IdentityHelper.getUserID(User);
 
                     // Convert to create the right format
                     CreateStudyHelper cshelper = new CreateStudyHelper();
@@ -75,9 +73,7 @@ namespace FrontEndBA.Controllers.Studies
                 try
                 {
                     //Gets the id from JWT. The id is used to retrieve user from database. 
-                    var identity = (ClaimsIdentity) User.Identity;
-                    IEnumerable<Claim> claims = identity.Claims;
-                    int id_researcher = Convert.ToInt32(claims.ElementAt(3).Value);
+                    int id_researcher = IdentityHelper.getUserID(User);
 
                     // Convert to create the right format
                     CreateStudyHelper cshelper = new CreateStudyHelper();

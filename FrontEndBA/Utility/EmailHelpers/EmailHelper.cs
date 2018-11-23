@@ -18,7 +18,7 @@ namespace FrontEndBA.Utility.EmailHelper
     public class EmailHelper
     {
         // https://www.youtube.com/watch?v=C4O8vqg295o
-        public void RetrieveAccount(string email,string password)
+        public async Task RetrieveAccount(string email,string password)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Tandlægehøjskolen", "donotreplyTandlægeHøjskolen@gmail.com"));
@@ -45,7 +45,7 @@ namespace FrontEndBA.Utility.EmailHelper
 
             builder.HtmlBody += System.Environment.NewLine + "" + System.Environment.NewLine + "" + System.Environment.NewLine +
                                string.Format(@"
-                <div>Best regards TandlægeHøjskolen, Vennelyst Blvd. 9, 8000 Aarhus</div><center><img src=""cid:{0}""></center>", image.ContentId);
+                <div>Best regards Department of Dentistry and Oral Health, Vennelyst Blvd. 9, 8000 Aarhus</div><center><img src=""cid:{0}""></center>", image.ContentId);
 
             message.Body = builder.ToMessageBody();
             message.Subject = subject;

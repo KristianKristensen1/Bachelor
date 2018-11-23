@@ -29,7 +29,7 @@ namespace FrontEndBA.Controllers
         // POST: Register/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RetrieveParticipant(RetrieveModel loginModel)
+        public async Task<IActionResult> RetrieveParticipant(RetrieveModel loginModel)
         {
             if (ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace FrontEndBA.Controllers
                     //Sending the mail
                     EmailHelper emailh = new EmailHelper();
 
-                    emailh.RetrieveAccount(status.participant.Email,status.participant.Password);
+                    await emailh.RetrieveAccount(status.participant.Email,status.participant.Password);
                     return RedirectToAction("Participant", "Welcome");
                 }
                 else
@@ -65,7 +65,7 @@ namespace FrontEndBA.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult RetrieveResearcher(RetrieveModel loginModel)
+        public async Task<IActionResult> RetrieveResearcher(RetrieveModel loginModel)
         {
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace FrontEndBA.Controllers
 
                     //Sending the email
                     EmailHelper emailh = new EmailHelper();
-                    emailh.RetrieveAccount(status.researcher.Email, status.researcher.Password);
+                    await emailh.RetrieveAccount(status.researcher.Email, status.researcher.Password);
                     return RedirectToAction("Researcher", "Welcome");
                 }
                 else
