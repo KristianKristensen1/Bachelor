@@ -43,5 +43,7 @@ namespace FrontEndBA.Models.ProfileModel
 
         public bool ValidInput { get; set; }
 
+        public bool SuccesChangePassword { get; set; }
+
     }
 }
