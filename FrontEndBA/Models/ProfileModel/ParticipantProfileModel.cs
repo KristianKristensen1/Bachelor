@@ -15,12 +15,10 @@ namespace FrontEndBA.Models.ProfileModel
         public string Email { get; set; }
 
         public bool ValidInput { get; set; }
-
-
         
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "New Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
@@ -31,7 +29,7 @@ namespace FrontEndBA.Models.ProfileModel
 
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "OldPassword")]
+        [Display(Name = "Old Password")]
         public string OldPassword { get; set; }
 
         public int Id { get; set; }

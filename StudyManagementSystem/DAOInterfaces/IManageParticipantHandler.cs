@@ -15,5 +15,7 @@ namespace BachelorBackEnd
         List<Participant> GetParticipantsInStudyDB(int studyID);
 
         DbStatus GetParticipantEmailDB(int partID);
+
+        List<Participant> GetAllEligibalParticipants(Inclusioncriteria inclusioncriteria, int studyID);
     }
 }

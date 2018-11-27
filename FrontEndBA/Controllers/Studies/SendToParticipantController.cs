@@ -27,7 +27,7 @@ namespace FrontEndBA.Controllers.Studies
             emailHelper.PrefillTextArea(sendToParticipantModel);
 
             IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
-            List<Participant> participants = mph.GetParticipantsInStudyDB(sendToParticipantModel.Study.study.IdStudy);
+            List<Participant> participants = mph.GetAllEligibalParticipants(sendToParticipantModel.Study.inclusioncriteria,studyID);
             sendToParticipantModel.ParticipantCount = participants.Count;
             
             return View(sendToParticipantModel);
@@ -42,12 +42,15 @@ namespace FrontEndBA.Controllers.Studies
             {
                 try
                 {
-                    IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
-                    List<Participant> participants = mph.GetParticipantsInStudyDB(sModel.Study.study.IdStudy);
+                    //IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
+                    //List<Participant> participants =
+                    //    mph.GetAllEligibalParticipants(sModel.Study.inclusioncriteria, studyID);
+
+                    
 
                     // Convert to create the right format
                     EmailHelper emailHelper = new EmailHelper();
-                    emailHelper.SendMessages(sModel, participants);
+                    emailHelper.SendMessages(sModel, studyID);
 
                     return RedirectToAction("Researcher", "Homepage");
                 }

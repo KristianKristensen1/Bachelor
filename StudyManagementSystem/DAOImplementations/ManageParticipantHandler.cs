@@ -82,6 +82,76 @@ namespace BachelorBackEnd
             return participants;
         }
 
+        public List<Participant> GetAllEligibalParticipants(Inclusioncriteria criteria, int studyId)
+        {
+           
+            List<Participant> participants = new List<Participant>();
+            List<int> PartIDs;
+            if (_context.Study != null && _context.Inclusioncriteria != null)
+            {
+
+                if(criteria.English)
+                {
+                    //Sorterings-Algorithm!
+                    PartIDs = _context.Participant.Where(part =>
+                            //Sorts by age
+                            GetAge(part.Age) > criteria.MinAge && GetAge(part.Age) < criteria.MaxAge &&
+                            //Sorts by gender
+                            (criteria.Male == part.Gender ||
+                             criteria.Female != part.Gender) &&
+                        //Sort by languge         
+                        part.English == criteria.English).ToList().Select(partID => partID.IdParticipant).ToList();
+                }
+                else
+                { //Sorterings-Algorithm!
+                    PartIDs = _context.Participant.Where(part =>
+                            //Sorts by age
+                            GetAge(part.Age) > criteria.MinAge && GetAge(part.Age) < criteria.MaxAge &&
+                            //Sorts by gender
+                            (criteria.Male == part.Gender ||
+                             criteria.Female != part.Gender)).ToList().Select(partID => partID.IdParticipant).ToList();
+
+                }
+               
+
+
+                // Get all participant that are inrolled in this study
+                List<int> EnrolledPartIDs = _context.Studyparticipant.Where(x => x.IdStudy == studyId)
+                    .Select(partID => partID.IdParticipant).ToList();
+                foreach (var id in EnrolledPartIDs)
+                {
+                    try
+                    {
+                        PartIDs.Remove(id);
+                    }
+                    catch (Exception e)
+                    {
+
+                        throw;
+                    }
+                }
+
+                //List of participants to return
+             
+                foreach (var id in PartIDs)
+                {
+                    participants.Add(_context.Participant.FirstOrDefault(parts => parts.IdParticipant == id));
+
+                }
+
+                
+            }
+            return participants;
+        }
+        public static int GetAge(DateTime birthday)
+        {
+            DateTime now = DateTime.Today;
+            int age = now.Year - birthday.Year;
+            if (now < birthday.AddYears(age)) age--;
+
+            return age;
+        }
+
         public DbStatus GetParticipantEmailDB(int partID)
         {
             DbStatus manageParticipantStatus = new DbStatus();

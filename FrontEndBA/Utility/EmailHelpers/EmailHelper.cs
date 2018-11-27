@@ -61,16 +61,19 @@ namespace FrontEndBA.Utility.EmailHelper
             }
         }
 
-        public void SendMessages(SendingModel sModel, List<Participant> participants)
+        public void SendMessages(SendingModel sModel, int studyId)
         {
-            Thread t = new Thread(()=>SendToParticipants(sModel,participants));
+            Thread t = new Thread(()=>SendToParticipants(sModel,studyId));
             t.Start();
            
-        }
+        } 
 
-        public void SendToParticipants(SendingModel sModel, List<Participant> participants)
+        public void SendToParticipants(SendingModel sModel, int studyId)
         {
-            
+            //Getting participants from DB
+            IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
+            List<Participant> participants =
+                mph.GetAllEligibalParticipants(sModel.Study.inclusioncriteria, studyId);
 
             foreach (var participant in participants)
             {
@@ -102,6 +105,7 @@ namespace FrontEndBA.Utility.EmailHelper
                                     " <p>The Description is as follows:" + sModel.Study.study.Description.ToString() + "</p>\r\n" + System.Environment.NewLine +
                                     "<p>The pay will be as follows: " + sModel.Study.study.Pay + "kr" + "</p>\r\n" + System.Environment.NewLine +
                                     "<p>The duration will be as follows:" + sModel.Study.study.Duration + "</p>\r\n" + System.Environment.NewLine +
+                                    "<p>If you want more information you can read more about the study here " + sModel.Study.study.DirectStudyLink + "</p>\r\n" +
                                     "If you are interested please contact "+sModel.Study.researcher.FirstName+ " " + sModel.Study.researcher.LastName + "  at " + sModel.Study.researcher.Email;
         }
     }
