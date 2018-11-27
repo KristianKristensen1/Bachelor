@@ -59,8 +59,7 @@ namespace FrontEndBA.Controllers.Studies
                 }
             }
 
-            EditStudyHelper editStudyHelper = new EditStudyHelper();
-            return View("Index", editStudyHelper.CreateEditStudyModel(csModel.currentStudy.IdStudy));
+            return RedirectToAction("Index", new { studyID = csModel.currentStudy.IdStudy});
         }
 
         [HttpPost]
