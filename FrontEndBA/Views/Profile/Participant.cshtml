@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Id" class="control-label" style="font-size:20px">Your ID is: @Model.Id.ToString()</label>
+                <label asp-for="Id" class="control-label">Your ID is: @Model.Id.ToString()</label>
                 <span asp-validation-for="Id" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -44,9 +44,9 @@
             </div>
         </form>
     </div>
-        @if (Model.ValidInput == true)
-        {
-        <div id="inpass"style="display: none;" class="col-md-4">
+    @if (Model.ValidInput == true)
+    {
+        <div id="inpass" style="display: none;" class="col-md-4">
             <form asp-action="SavePasswordParticipant">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -55,24 +55,24 @@
                     <span asp-validation-for="OldPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="NewPassword" class="control-label"></label>
-                    <input asp-for="NewPassword" class="form-control" />
-                    <span asp-validation-for="NewPassword" class="text-danger"></span>
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ConfirmNewPassword" class="control-label"></label>
-                    <input asp-for="ConfirmNewPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
 
-          
+
                 <div>
                     <button type="submit" class="btn btn-default">Save Password</button>
                 </div>
             </form>
-       
+
         </div>
-         }
+    }
     else
     {
         <div id="inpass" class="col-md-4">
@@ -84,23 +84,23 @@
                     <span asp-validation-for="OldPassword" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="NewPassword" class="control-label"></label>
-                    <input asp-for="NewPassword" class="form-control" />
-                    <span asp-validation-for="NewPassword" class="text-danger"></span>
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="ConfirmNewPassword" class="control-label"></label>
-                    <input asp-for="ConfirmNewPassword" class="form-control" />
-                    <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+                    <label asp-for="ConfirmPassword" class="control-label"></label>
+                    <input asp-for="ConfirmPassword" class="form-control" />
+                    <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                 </div>
                 <div style="padding-top:10px">
                     <button type="submit" value="SavePasswordParticipant" class="btn btn-default">Change Password</button>
                 </div>
             </form>
-           </div>
-       }
-    
-    
+        </div>
+    }
+
+
     <div style="text-align: right" class="col-md-4">
         <img src="~/images/PatientIcon.png" alt="Error Logo" style="width: 50%; height: 50%">
     </div>
@@ -127,6 +127,5 @@
 
 @if (Model.SuccesChangePassword)
 {
-    <script> alert("You have successfully changed your password");</script>
+    <script>alert("You have successfully changed your password");</script>
 }
-
