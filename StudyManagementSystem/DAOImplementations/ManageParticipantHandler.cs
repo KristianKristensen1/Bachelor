@@ -42,7 +42,7 @@ namespace BachelorBackEnd
             {
                 //Participant allready enrolled in study
                 manageParticipantStatus.success = false;
-                manageParticipantStatus.errormessage = "Participant is all ready enrolled in study";
+                manageParticipantStatus.errormessage = "Participant is already enrolled instudy.";
             }
             return manageParticipantStatus;
         }
