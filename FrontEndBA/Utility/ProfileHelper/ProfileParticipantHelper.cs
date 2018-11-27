@@ -19,7 +19,6 @@ namespace FrontEndBA.Utility.ProfileHelper
             ppm.Email = participant.Email;
             ppm.Id = id;
             ppm.English = participant.English;
-            ppm.Password = participant.Password;
             ppm.ValidInput = false;
 
             return ppm;
@@ -31,7 +30,6 @@ namespace FrontEndBA.Utility.ProfileHelper
             ParticipantProfileModel ppm = new ParticipantProfileModel();
             ppm.Id = participant.IdParticipant;
             ppm.Email = participant.Email;
-            ppm.Password = participant.Password;
             ppm.ValidInput = validInput;
             ppm.SuccesChangePassword = status;
 
