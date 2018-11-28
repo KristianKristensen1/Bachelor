@@ -87,14 +87,10 @@ namespace BachelorBackEnd
            
             List<Participant> participants = new List<Participant>();
             List<int> PartIDs;
-            if (_context.Study != null && _context.Inclusioncriteria != null)
+            if (_context.Study != null && _context.Inclusioncriteria != null && !(criteria.Male==false && criteria.Female==false))
             {
-                if((criteria.Male == false && criteria.Female == false))
-                {
-                    // does nothing since there are not participants with no gender.
-                }
-                else
-                {
+
+             
                     if (criteria.English)
                     {
                         //Sorterings-Algorithm!
@@ -145,7 +141,7 @@ namespace BachelorBackEnd
                         participants.Add(_context.Participant.FirstOrDefault(parts => parts.IdParticipant == id));
 
                     }
-                }
+                
                
 
                 
