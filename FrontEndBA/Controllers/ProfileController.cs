@@ -38,6 +38,7 @@ namespace FrontEndBA.Controllers.EditProfile
 
             return RedirectToAction("Participant", "Welcome");
         }
+
         [Authorize(Policy = "RequiresParticipant")]
         public IActionResult Participant()
         {
@@ -53,6 +54,8 @@ namespace FrontEndBA.Controllers.EditProfile
             return View(ppm);
 
         }
+
+
         [Authorize(Policy = "RequiresParticipant")]
         public IActionResult SaveEmailParticipant(ParticipantProfileModel pmodel)
         {
@@ -95,6 +98,8 @@ namespace FrontEndBA.Controllers.EditProfile
             return View("Participant",ppm);
 
         }
+
+
         [Authorize(Policy = "RequiresParticipant")]
         public IActionResult SavePasswordParticipant(ParticipantProfileModel ppm)
         {

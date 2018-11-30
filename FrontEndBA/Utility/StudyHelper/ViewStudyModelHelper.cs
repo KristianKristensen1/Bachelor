@@ -23,6 +23,7 @@ namespace FrontEndBA.Utility
 
             return viewStudyModel;
         }
+
         public Study GetStudy(int id)
         {
             ManageStudyHandler msh = new ManageStudyHandler(new bachelordbContext());

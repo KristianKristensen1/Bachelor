@@ -44,8 +44,10 @@ namespace FrontEndBA.Controllers
                     throw;
                 }
             }
-            verifyResearcherModel.UnverifiedResearchers = ush.GetUnverifiedResearchersDB();
-            verifyResearcherModel.AllResearchers = ush.GetAllVerifiedResearchersDB();
+
+            VerifyResearcherHelper verifyResearcherHelper = new VerifyResearcherHelper();
+            verifyResearcherModel = verifyResearcherHelper.CreateVerifyResearcherModel();
+
             return View("VerifyResearcher", verifyResearcherModel);
         }
 

@@ -11,23 +11,13 @@ namespace FrontEndBA.Utility.VerifyResearcherHelper
     {
         public VerifyResearcherModel CreateVerifyResearcherModel()
         {
+            IUserHandler ush = new UserHandler(new bachelordbContext());
+
             VerifyResearcherModel verifyResearcherModel = new VerifyResearcherModel();
-            verifyResearcherModel.UnverifiedResearchers = getUnverifiedResearchers();
-            verifyResearcherModel.AllResearchers = getAllResearchers();
+            verifyResearcherModel.UnverifiedResearchers = ush.GetUnverifiedResearchersDB();
+            verifyResearcherModel.AllResearchers = ush.GetAllVerifiedResearchersDB(); 
             return verifyResearcherModel;
 
-        }
-
-        public List<Researcher> getUnverifiedResearchers()
-        {
-            IUserHandler ush = new UserHandler(new bachelordbContext());
-            return ush.GetUnverifiedResearchersDB();
-        }
-
-        public List<Researcher> getAllResearchers()
-        {
-            IUserHandler ush = new UserHandler(new bachelordbContext());
-            return ush.GetAllVerifiedResearchersDB();
         }
     }
 }
