@@ -42,11 +42,7 @@ namespace FrontEndBA.Controllers.Studies
             {
                 try
                 {
-                    //IManageParticipantHandler mph = new ManageParticipantHandler(new bachelordbContext());
-                    //List<Participant> participants =
-                    //    mph.GetAllEligibalParticipants(sModel.Study.inclusioncriteria, studyID);
 
-                    
 
                     // Convert to create the right format
                     EmailHelper emailHelper = new EmailHelper();
@@ -61,7 +57,7 @@ namespace FrontEndBA.Controllers.Studies
                 }
             }
             IManageParticipantHandler mph1 = new ManageParticipantHandler(new bachelordbContext());
-            List<Participant> participants1 = mph1.GetParticipantsInStudyDB(sModel.Study.study.IdStudy);
+            List<Participant> participants1 = mph1.GetAllEligibalParticipants(sModel.Study.inclusioncriteria,studyID);
             sModel.ParticipantCount = participants1.Count;
             return View("index", sModel);
         }
