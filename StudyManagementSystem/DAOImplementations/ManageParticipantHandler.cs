@@ -42,7 +42,7 @@ namespace BachelorBackEnd
             {
                 //Participant allready enrolled in study
                 manageParticipantStatus.success = false;
-                manageParticipantStatus.errormessage = "Participant is all ready enrolled in study";
+                manageParticipantStatus.errormessage = "Participant is already enrolled instudy.";
             }
             return manageParticipantStatus;
         }
@@ -87,60 +87,67 @@ namespace BachelorBackEnd
            
             List<Participant> participants = new List<Participant>();
             List<int> PartIDs;
-            if (_context.Study != null && _context.Inclusioncriteria != null)
+            if (_context.Study != null && _context.Inclusioncriteria != null && !(criteria.Male==false && criteria.Female==false))
             {
 
-                if(criteria.English)
-                {
-                    //Sorterings-Algorithm!
-                    PartIDs = _context.Participant.Where(part =>
-                            //Sorts by age
-                            GetAge(part.Age) > criteria.MinAge && GetAge(part.Age) < criteria.MaxAge &&
-                            //Sorts by gender
-                            (criteria.Male == part.Gender ||
-                             criteria.Female != part.Gender) &&
-                        //Sort by languge         
-                        part.English == criteria.English).ToList().Select(partID => partID.IdParticipant).ToList();
-                }
-                else
-                { //Sorterings-Algorithm!
-                    PartIDs = _context.Participant.Where(part =>
-                            //Sorts by age
-                            GetAge(part.Age) > criteria.MinAge && GetAge(part.Age) < criteria.MaxAge &&
-                            //Sorts by gender
-                            (criteria.Male == part.Gender ||
-                             criteria.Female != part.Gender)).ToList().Select(partID => partID.IdParticipant).ToList();
-
-                }
-               
-
-
-                // Get all participant that are inrolled in this study
-                List<int> EnrolledPartIDs = _context.Studyparticipant.Where(x => x.IdStudy == studyId)
-                    .Select(partID => partID.IdParticipant).ToList();
-                foreach (var id in EnrolledPartIDs)
-                {
-                    try
-                    {
-                        PartIDs.Remove(id);
-                    }
-                    catch (Exception e)
-                    {
-
-                        throw;
-                    }
-                }
-
-                //List of participants to return
              
-                foreach (var id in PartIDs)
-                {
-                    participants.Add(_context.Participant.FirstOrDefault(parts => parts.IdParticipant == id));
+                    if (criteria.English)
+                    {
+                        //Sorterings-Algorithm!
+                        PartIDs = _context.Participant.Where(part =>
+                                //Sorts by age
+                                GetAge(part.Age) > criteria.MinAge && GetAge(part.Age) < criteria.MaxAge &&
+                                //Sorts by gender
 
-                }
+
+                                (criteria.Male == part.Gender ||
+                                criteria.Female != part.Gender) &&
+                            //Sort by languge         
+                            part.English == criteria.English).ToList().Select(partID => partID.IdParticipant).ToList();
+                    }
+                    else
+                    { //Sorterings-Algorithm!
+                        PartIDs = _context.Participant.Where(part =>
+                                //Sorts by age
+                                GetAge(part.Age) > criteria.MinAge && GetAge(part.Age) < criteria.MaxAge &&
+                                //Sorts by gender
+                                (criteria.Male == part.Gender ||
+                                 criteria.Female != part.Gender)).ToList().Select(partID => partID.IdParticipant).ToList();
+
+                    }
+
+
+
+                    // Get all participant that are inrolled in this study
+                    List<int> EnrolledPartIDs = _context.Studyparticipant.Where(x => x.IdStudy == studyId)
+                        .Select(partID => partID.IdParticipant).ToList();
+                    foreach (var id in EnrolledPartIDs)
+                    {
+                        try
+                        {
+                            PartIDs.Remove(id);
+                        }
+                        catch (Exception e)
+                        {
+
+                            throw;
+                        }
+                    }
+
+                    //List of participants to return
+
+                    foreach (var id in PartIDs)
+                    {
+                        participants.Add(_context.Participant.FirstOrDefault(parts => parts.IdParticipant == id));
+
+                    }
+                
+               
 
                 
             }
+            if (participants == null)
+                participants = new List<Participant>();
             return participants;
         }
         public static int GetAge(DateTime birthday)

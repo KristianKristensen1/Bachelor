@@ -4,9 +4,10 @@
     ViewData["Title"] = "Participant";
 }
 
-<h2>Participant</h2>
+<h2>Welcome to your profile page</h2>
 
-<h4>ParticipantProfileModel</h4>
+<h4>On this page you can view information about your profile. If you wish you can change your email, name and your password.</h4>
+
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -24,14 +25,14 @@
             </div>
             <div class="form-group">
                 <div>
-                    <label>Firstname</label>
+                    <label>First name</label>
                 </div>
                 <input asp-for="Firstname" class="form-control" placeholder="@Html.ViewData.Model.Firstname.ToString()" value="@Html.ViewData.Model.Firstname.ToString()" />
                 <span asp-validation-for="Firstname" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <div>
-                    <label>Lastname</label>
+                    <label>Last name</label>
                 </div>
                 <input asp-for="Lastname" class="form-control" placeholder="@Html.ViewData.Model.Lastname.ToString()" value="@Html.ViewData.Model.Lastname.ToString()" />
                 <span asp-validation-for="Lastname" class="text-danger"></span>
