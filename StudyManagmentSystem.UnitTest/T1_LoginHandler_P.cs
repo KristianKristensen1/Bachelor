@@ -36,10 +36,12 @@ namespace Tests
             mockSet.As<IQueryable<Participant>>().Setup(m => m.Provider).Returns(participants.Provider);
             mockSet.As<IQueryable<Participant>>().Setup(m => m.Expression).Returns(participants.Expression);
             mockSet.As<IQueryable<Participant>>().Setup(m => m.ElementType).Returns(participants.ElementType);
-            mockSet.As<IQueryable<Participant>>().Setup(m => m.GetEnumerator()).Returns((IEnumerator<Participant>)participants.GetEnumerator());
+            mockSet.As<IQueryable<Participant>>().Setup(m => m.GetEnumerator()).
+            Returns((IEnumerator<Participant>)participants.GetEnumerator());
 
             mockContext = new Mock<BachelorBackEnd.bachelordbContext>();
             mockContext.Setup(c => c.Participant).Returns(mockSet.Object);
+            uut = new LoginHandler(mockContext.Object);
         }
 
         [Test]
@@ -64,10 +66,11 @@ namespace Tests
         [Test]
         public void LoginParticipantDB_Login_WithInvalidEmail()
         {
-            //Setup           
+
+            //Setup       
+
 
             //Act - trying to log in 
-            uut = new LoginHandler(mockContext.Object);
             var actual = uut.LoginParticipantDB("bla", "123456");
 
             //Assert - Checking Loginstatus.ErrorMessage.
