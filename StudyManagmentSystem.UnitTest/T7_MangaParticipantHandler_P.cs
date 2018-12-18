@@ -141,7 +141,7 @@ namespace Tests
             uut = new ManageParticipantHandler(mockContext.Object);
             var dbrecept = uut.AddParticipantToStudyDB(1, 1);
 
-            Assert.AreEqual(dbrecept.errormessage, "Participant is all ready enrolled in study");
+            Assert.AreEqual(dbrecept.errormessage, "Participant is already enrolled instudy.");
         }
 
         // RemoveParticipantFromStudyDB

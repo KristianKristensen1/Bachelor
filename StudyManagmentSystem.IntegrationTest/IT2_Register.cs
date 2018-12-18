@@ -1,16 +1,24 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using NUnit.Framework;
 using BachelorBackEnd;
 using Microsoft.EntityFrameworkCore;
 using FrontEndBA.Controllers;
 using FrontEndBA.Models.ResearcherModel.AccountViewModels;
 using System.Linq;
+using Castle.Core.Configuration;
+using FrontEndBA;
+using JwtAuthenticationHelper;
+using JwtAuthenticationHelper.Abstractions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Moq;
+using StudyManagementSystem.Configs;
 
 namespace StudyManagmentSystem.IntegrationTest
 {
     class IT2_Register
     {
-        //Connection string hardcoded (for now(?)), as there's some trouble reaching the config file.
-        readonly string connectionString = "Server = 35.228.116.222; Database = bachelordb; Uid = Admin; Pwd = admin1234";
+
         DbContextOptionsBuilder<bachelordbContext> builder = new DbContextOptionsBuilder<bachelordbContext>();
         ResearcherRegisterViewModel rrvm = new ResearcherRegisterViewModel();
         int noOfReseachersBefore = new int();
@@ -22,17 +30,21 @@ namespace StudyManagmentSystem.IntegrationTest
             //Creates a researcher model for testing            
             rrvm = new ResearcherRegisterViewModel()
             {
-                Email = "test@register.com",
+                Email = "inteegrationtest@register.com",
                 Firstname = "Nicola",
-                Lastname = "Testla",
+                Lastname = "integrationTestla",
                 Password = "test1234"
             };
+
+            // Initialize the Connectionstring.
+            ConfigStrings.Connectionstring =
+                "Server=35.228.116.222;Database=bachelordb;user=Admin;pwd=admin1234;";
         }
 
         [Test]
         public void RegisterResearcher_SuccesfulRegistration_ResearcherIsInDB()
         {
-            builder.UseMySql(connectionString);
+            builder.UseMySql(ConfigStrings.Connectionstring);
 
             //Retrieves the data from the database and saves in it a context
             bachelordbContext _dbContext = new bachelordbContext(builder.Options);
@@ -44,6 +56,9 @@ namespace StudyManagmentSystem.IntegrationTest
             noOfReseachersBefore = _dbContext.Researcher.Local.Count;
 
             //Executes the registration directly to the database through the controller and to the handler
+
+
+           
             RegisterController rc = new RegisterController();
             rc.CreateResearcher(rrvm);
             _dbContext.Researcher.Load();
@@ -55,7 +70,7 @@ namespace StudyManagmentSystem.IntegrationTest
             //Attaches the context to the database in order to be able to (in this instance) remove an entry directly.
             _dbContext.Database.EnsureCreated();
             //Removes researcher from database again to avoid clutter
-            _dbContext.Remove(_dbContext.Researcher.Single(a => a.LastName == "Testla"));
+            _dbContext.Remove(_dbContext.Researcher.Last(a => a.LastName == "integrationTestla"));
             _dbContext.SaveChanges();
 
             //Asserts that the number of researchs in the database is 1 higher after adding one.

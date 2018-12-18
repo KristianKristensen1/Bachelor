@@ -20,7 +20,7 @@
 //        readonly string connectionString = "Server = 35.228.116.222; Database = bachelordb; Uid = Admin; Pwd = admin1234";
 //        DbContextOptionsBuilder<bachelordbContext> builder = new DbContextOptionsBuilder<bachelordbContext>();
 //        private Researcher researcher = new Researcher();
-        
+
 //        private readonly Microsoft.Extensions.Configuration.IConfiguration configuration;
 //        private readonly IJwtTokenGenerator tokenGenerator;
 
